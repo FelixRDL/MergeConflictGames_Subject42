@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 42b78622b3442b7468980e5040ff87bd
-timeCreated: 1516532431
+guid: 33551bdceb7419e4bb0be5ec6a7d13c9
+timeCreated: 1516993304
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Floor_Krankenzimmer
-    2100002: Wall_Gang01
-    2100004: Wall_Kinderzimmer
-    2100006: Wall_Krankenzimmer
-    2100008: Floor_Gang01
-    2100010: Floor_Kinderzimmer
-    2100012: Floor_Garten
+    2100000: Default
+    2100002: Floor_hospitalroom
+    2100004: Wall_Corridor00
+    2100006: Wall_Childsroom
+    2100008: Wall_hospitalroom
+    2100010: Floor_Corridor00
+    2100012: Floor_Childsroom
+    2100014: Ceiling_Hospitalroom
+    2100016: Ceiling_Corridor00
+    2100018: Ceiling_Childsroom
     2300000: //RootNode
     3300000: //RootNode
     4300000: Plane
