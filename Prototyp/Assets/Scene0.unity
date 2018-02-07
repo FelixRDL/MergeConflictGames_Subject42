@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112000152, guid: 9f335f585cfc52840bc913418f52b5ba,
+  m_LightingDataAsset: {fileID: 112000154, guid: 9f335f585cfc52840bc913418f52b5ba,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -4405,7 +4405,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!23 &336592394
 MeshRenderer:
@@ -9783,6 +9783,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1779075021918900, guid: 8bcc7025d95c448499140f6841391c6a, type: 2}
       propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1779075021918900, guid: 8bcc7025d95c448499140f6841391c6a, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
