@@ -6,7 +6,14 @@ ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Camera
+    100004: Lamp
+    100006: Plane
     400000: //RootNode
+    400002: Camera
+    400004: Lamp
+    400006: Plane
+    2000000: Camera
     2100000: Default
     2100002: Floor_hospitalroom
     2100004: Wall_Corridor00
@@ -18,8 +25,11 @@ ModelImporter:
     2100016: Ceiling_Corridor00
     2100018: Ceiling_Childsroom
     2300000: //RootNode
+    2300002: Plane
     3300000: //RootNode
+    3300002: Plane
     4300000: Plane
+    10800000: Lamp
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -58,7 +68,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
