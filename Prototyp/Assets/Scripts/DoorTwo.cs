@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOne : Interactable
+public class DoorTwo: Interactable
 {
 
 	public AudioClip OpenDoorSound;
@@ -10,7 +10,7 @@ public class DoorOne : Interactable
 	public AudioClip DoorLockedSound;
 	public AudioClip DontGoBackWarning;
 
-	public AudioClip Dialogue_S_1_0;
+	public AudioClip Dialogue_S_1_1;
 
 	Animator animator;
 	bool doorOpen;
@@ -40,9 +40,6 @@ public class DoorOne : Interactable
 			print ("Not allowed to open door!");
 
 			SoundManager.instance.PlayEffect (DoorLockedSound);
-			if (!SoundManager.instance.GetDialoguePlaying ()) {
-				SoundManager.instance.PlayTestManagerDialogue (DontGoBackWarning, 0.5f);
-			}
 		}
 	}
 
@@ -62,7 +59,7 @@ public class DoorOne : Interactable
 			DoorControl ("Close");
 
 			SoundManager.instance.PlayEffect (CloseDoorSound, 0.5f);
-			SoundManager.instance.PlayCombinedDialogue (Dialogue_S_1_0, 1f);
+			SoundManager.instance.PlayCombinedDialogue (Dialogue_S_1_1, 1f);
 		}
 	}
 
