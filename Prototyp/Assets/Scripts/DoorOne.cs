@@ -38,8 +38,9 @@ public class DoorOne : Interactable
 			SoundManager.instance.PlayEffect (OpenDoorSound, 0.5f);
 		} else {
 			print ("Not allowed to open door!");
-
-			SoundManager.instance.PlayEffect (DoorLockedSound);
+			if (!doorOpen) {
+				SoundManager.instance.PlayEffect (DoorLockedSound);
+			}
 			if (!SoundManager.instance.GetDialoguePlaying ()) {
 				SoundManager.instance.PlayTestManagerDialogue (DontGoBackWarning, 0.5f);
 			}

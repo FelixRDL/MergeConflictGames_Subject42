@@ -37,8 +37,9 @@ public class DoorTwo: Interactable
 			SoundManager.instance.PlayEffect (OpenDoorSound, 0.5f);
 		} else {
 			print ("Not allowed to open door!");
-
-			SoundManager.instance.PlayEffect (DoorLockedSound);
+			if (!doorOpen) {
+				SoundManager.instance.PlayEffect (DoorLockedSound);
+			}
 		}
 	}
 
