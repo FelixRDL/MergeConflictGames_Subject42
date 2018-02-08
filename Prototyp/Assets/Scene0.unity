@@ -9876,6 +9876,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bdcbba9993a5845a7451073379056d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 1.5
+  OpenDoorSound: {fileID: 8300000, guid: 7f1a66b4138b4714284406c94931945f, type: 3}
+  CloseDoorSound: {fileID: 8300000, guid: cc7de1baeb16c2343a577500c39f614a, type: 3}
+  DoorLockedSound: {fileID: 8300000, guid: 87f1eee2d8311f44589b1aba99d92f1e, type: 3}
+  Dialogue_S_1_1: {fileID: 8300000, guid: 17b898bf7eb090844922c94b7126df85, type: 3}
 --- !u!65 &917387478
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9887,7 +9892,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 2.19, z: 1}
-  m_Center: {x: 0, y: 0.36, z: -0.06}
+  m_Center: {x: -0.24, y: 0.36, z: -0.06}
 --- !u!95 &917387479
 Animator:
   serializedVersion: 3
@@ -13769,6 +13774,7 @@ MonoBehaviour:
   radius: 1.5
   OpenDoorSound: {fileID: 8300000, guid: 7f1a66b4138b4714284406c94931945f, type: 3}
   CloseDoorSound: {fileID: 8300000, guid: cc7de1baeb16c2343a577500c39f614a, type: 3}
+  DoorLockedSound: {fileID: 8300000, guid: 87f1eee2d8311f44589b1aba99d92f1e, type: 3}
   DontGoBackWarning: {fileID: 8300000, guid: f9723562211f6b34286ca9b6e888009d, type: 3}
   Dialogue_S_1_0: {fileID: 8300000, guid: d1ede2cec6766f943b6a7b69233565ac, type: 3}
 --- !u!65 &1258378527
@@ -13782,7 +13788,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 2.19, z: 1}
-  m_Center: {x: 0, y: 0.36, z: -0.06}
+  m_Center: {x: -0.27, y: 0.36, z: -0.06}
 --- !u!95 &1258378528
 Animator:
   serializedVersion: 3
@@ -21160,7 +21166,7 @@ MonoBehaviour:
   OnOffSound: {fileID: 8300000, guid: 83f664b67c557314ab4e2f39fda5fab8, type: 3}
   BackgroundMusicDark: {fileID: 8300000, guid: 31ca8f081b4f5a24fba0260ef2dcd374, type: 3}
   Dialogue_S_1_2: {fileID: 8300000, guid: 4af6bede36b757f4f9fcdef9ce39c832, type: 3}
-  door1: {fileID: 0}
+  door: {fileID: 917387477}
 --- !u!4 &2092821076 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4859415988232000, guid: cb69e3f4e4572d247bac01b3917bf2d1,

@@ -8,7 +8,6 @@ public class DoorTwo: Interactable
 	public AudioClip OpenDoorSound;
 	public AudioClip CloseDoorSound;
 	public AudioClip DoorLockedSound;
-	public AudioClip DontGoBackWarning;
 
 	public AudioClip Dialogue_S_1_1;
 

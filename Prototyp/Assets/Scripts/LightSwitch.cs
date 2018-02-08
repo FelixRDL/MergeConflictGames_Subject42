@@ -8,7 +8,7 @@ public class LightSwitch : Interactable
 	public AudioClip Dialogue_S_1_2;
 
 	//temp
-	public Door1 door1;
+	public DoorTwo door;
 
 	bool alreadyPressed;
 
@@ -32,13 +32,13 @@ public class LightSwitch : Interactable
 			SoundManager.instance.PlayCombinedDialogue (Dialogue_S_1_2, 1f);
 	
 			//temp
-			//Invoke ("openDoor", 26);
+			Invoke ("openDoor", 26);
 		}
 
 	}
 
 	void openDoor ()
 	{
-		door1.OpenDoor ();
+		door.OpenDoor ();
 	}
 }
