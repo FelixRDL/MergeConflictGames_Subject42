@@ -41,9 +41,8 @@ public class Interactable : MonoBehaviour
 		Gizmos.DrawWireSphere (transform.position, radius);
 	}
 
-	//This method will probably later be overwritten by subclasses.
-	void OnInteraction ()
+
+	public virtual void OnInteraction ()
 	{
-		Destroy (gameObject);
 	}
 }
