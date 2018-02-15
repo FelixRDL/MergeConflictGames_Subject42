@@ -20,6 +20,7 @@ ModelImporter:
     100024: Plane_005
     100026: Plane_001
     100028: Plane
+    100030: Plane_002
     400000: //RootNode
     400002: Cylinder
     400004: Cylinder_001
@@ -35,6 +36,7 @@ ModelImporter:
     400024: Plane_005
     400026: Plane_001
     400028: Plane
+    400030: Plane_002
     2100000: Wall_Bricks__Wall_Bricks_tile_png
     2100002: Wall_Stucco__TexturesCom_3x3_Concrete6_1024_normal_tif
     2100004: Roof_metal__TexturesCom_3x3_Concrete6_1024_normal_tif
@@ -67,6 +69,7 @@ ModelImporter:
     2300022: Plane_005
     2300024: Plane_001
     2300026: Plane
+    2300028: Plane_002
     3300000: Cylinder
     3300002: Cylinder_001
     3300004: Floor
@@ -81,6 +84,7 @@ ModelImporter:
     3300022: Plane_005
     3300024: Plane_001
     3300026: Plane
+    3300028: Plane_002
     4300000: ModulesPlain_002
     4300002: ModulesPlain_001
     4300004: Plane_000
@@ -95,6 +99,7 @@ ModelImporter:
     4300022: Grundriss_Rough
     4300024: Plane_001
     4300026: Plane
+    4300028: Plane_002
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
