@@ -1,18 +1,23 @@
 fileFormatVersion: 2
-guid: 2c738771fc7c0664d9a33d4565d101ad
-timeCreated: 1519150929
+guid: 5ebcc5e6751be114e8d5acb6e879841f
+timeCreated: 1519150920
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Model_AllModifiers
+    100004: Model_Merged
     400000: //RootNode
-    2100000: LawnChairMetal__Untitled
-    2100002: LawnChairWood__Untitled
-    2100004: LawnChairTextile__Untitled
-    2300000: //RootNode
-    3300000: //RootNode
+    400002: Model_AllModifiers
+    400004: Model_Merged
+    2100000: LawnChairMetal
+    2300000: Model_AllModifiers
+    2300002: Model_Merged
+    3300000: Model_AllModifiers
+    3300002: Model_Merged
     4300000: Model_Merged
+    4300002: Model_AllModifiers
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
