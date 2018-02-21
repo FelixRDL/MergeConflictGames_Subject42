@@ -6,7 +6,11 @@ ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Plane_000
+    100004: Plane_001
     400000: //RootNode
+    400002: Plane_000
+    400004: Plane_001
     2100000: Wall_Grid_Metal__Untitled
     2100002: Wall_Bricks__Untitled
     2100004: Wall_Window_Wood__Untitled
@@ -28,8 +32,13 @@ ModelImporter:
     2100036: Wall_Stucco_001__Untitled
     2100038: Ceiling_Hospitalroom__Untitled
     2300000: //RootNode
+    2300002: Plane_000
+    2300004: Plane_001
     3300000: //RootNode
+    3300002: Plane_000
+    3300004: Plane_001
     4300000: Plane_000
+    4300002: Plane_001
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
