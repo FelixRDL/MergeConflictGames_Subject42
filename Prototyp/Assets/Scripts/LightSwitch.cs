@@ -8,7 +8,7 @@ public class LightSwitch : Interactable
 	public AudioClip Dialogue_S_1_2;
 
 	//temp
-	public DoorTwo door;
+	public DoorFloorChildrensRoom door;
 
 	bool alreadyPressed;
 

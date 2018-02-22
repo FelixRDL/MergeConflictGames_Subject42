@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightManager : MonoBehaviour {
+public class LightManager : MonoBehaviour
+{
 
 	public static LightManager instance = null;
 
@@ -18,7 +19,7 @@ public class LightManager : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 	}
 
-	public void ToggleLightsInNursery() 
+	public void ToggleLightsInNursery ()
 	{
 		GameObject ceilingParent = GameObject.Find ("CeilingLightGroup");
 		for (int i = 0; i < ceilingParent.transform.childCount; i++) {
@@ -50,10 +51,35 @@ public class LightManager : MonoBehaviour {
 			cube.gameObject.SetActive (!cube.gameObject.activeSelf);
 		}
 
+		GameObject happyTrainTracks = GameObject.Find ("HappyTrainTracks");
+		for (int i = 0; i < happyTrainTracks.transform.childCount; i++) {
+			Transform trainTrackPiece = happyTrainTracks.gameObject.transform.GetChild (i);
+			trainTrackPiece.gameObject.SetActive (!trainTrackPiece.gameObject.activeSelf);
+		}
 
+		GameObject sadTrainTracks = GameObject.Find ("SadTrainTracks");
+		for (int i = 0; i < sadTrainTracks.transform.childCount; i++) {
+			Transform trainTrackPiece = sadTrainTracks.gameObject.transform.GetChild (i);
+			trainTrackPiece.gameObject.SetActive (!trainTrackPiece.gameObject.activeSelf);
+		}
+
+		GameObject happyBottles = GameObject.Find ("HappyBottles");
+		for (int i = 0; i < happyBottles.transform.childCount; i++) {
+			Transform bottle = happyBottles.gameObject.transform.GetChild (i);
+			bottle.gameObject.SetActive (!bottle.gameObject.activeSelf);
+		}
+
+		GameObject sadBottles = GameObject.Find ("SadBottles");
+		for (int i = 0; i < sadBottles.transform.childCount; i++) {
+			Transform bottle = sadBottles.gameObject.transform.GetChild (i);
+			bottle.gameObject.SetActive (!bottle.gameObject.activeSelf);
+		}
+			
 	}
 
-	public void FlickerLightsInNursery()
+
+	//Temp
+	public void FlickerLightsInNursery ()
 	{
 		for (int i = 0; i < 5; i++) {
 			ToggleLightsInNursery ();
