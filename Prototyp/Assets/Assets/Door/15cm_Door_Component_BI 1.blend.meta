@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: f51fa79ebaa7fd5428ea9ecfadaf625a
+timeCreated: 1519280843
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Circle_002
+    100002: Circle_3
+    100004: Circle_4
+    100006: Circle_5
+    100008: Circle_6
+    100010: Circle_7
+    100012: //RootNode
+    100014: Plane
+    100016: Plane_001
+    100018: Plane_002
+    100020: Plane_003
+    100022: Plane_004
+    100024: Plane_10
+    100026: Plane_11
+    100028: Plane_12
+    100030: Plane_13
+    100032: Plane_14
+    100034: Plane_15
+    100036: Plane_16
+    100038: Plane_2
+    100040: Plane_3
+    100042: Plane_4
+    100044: Plane_5
+    100046: Plane_6
+    100048: Plane_7
+    100050: Plane_8
+    100052: Plane_9
+    400000: Circle_002
+    400002: Circle_3
+    400004: Circle_4
+    400006: Circle_5
+    400008: Circle_6
+    400010: Circle_7
+    400012: //RootNode
+    400014: Plane
+    400016: Plane_001
+    400018: Plane_002
+    400020: Plane_003
+    400022: Plane_004
+    400024: Plane_10
+    400026: Plane_11
+    400028: Plane_12
+    400030: Plane_13
+    400032: Plane_14
+    400034: Plane_15
+    400036: Plane_16
+    400038: Plane_2
+    400040: Plane_3
+    400042: Plane_4
+    400044: Plane_5
+    400046: Plane_6
+    400048: Plane_7
+    400050: Plane_8
+    400052: Plane_9
+    2100000: unnamed
+    2100002: Glossy__Door_C_jpg
+    2100004: Door__Door_C_jpg
+    2100006: Glossy__Reflexion_jpg
+    2300000: Circle_002
+    2300002: Circle_3
+    2300004: Circle_4
+    2300006: Circle_5
+    2300008: Circle_6
+    2300010: Circle_7
+    2300012: Plane
+    2300014: Plane_001
+    2300016: Plane_002
+    2300018: Plane_003
+    2300020: Plane_004
+    2300022: Plane_10
+    2300024: Plane_11
+    2300026: Plane_12
+    2300028: Plane_13
+    2300030: Plane_14
+    2300032: Plane_15
+    2300034: Plane_16
+    2300036: Plane_2
+    2300038: Plane_3
+    2300040: Plane_4
+    2300042: Plane_5
+    2300044: Plane_6
+    2300046: Plane_7
+    2300048: Plane_8
+    2300050: Plane_9
+    3300000: Circle_002
+    3300002: Circle_3
+    3300004: Circle_4
+    3300006: Circle_5
+    3300008: Circle_6
+    3300010: Circle_7
+    3300012: Plane
+    3300014: Plane_001
+    3300016: Plane_002
+    3300018: Plane_003
+    3300020: Plane_004
+    3300022: Plane_10
+    3300024: Plane_11
+    3300026: Plane_12
+    3300028: Plane_13
+    3300030: Plane_14
+    3300032: Plane_15
+    3300034: Plane_16
+    3300036: Plane_2
+    3300038: Plane_3
+    3300040: Plane_4
+    3300042: Plane_5
+    3300044: Plane_6
+    3300046: Plane_7
+    3300048: Plane_8
+    3300050: Plane_9
+    4300000: Plane
+    4300002: Plane_004
+    4300004: Plane_002
+    4300006: Plane_3
+    4300008: Plane_5
+    4300010: Plane_8
+    4300012: Plane_11
+    4300014: Plane_14
+    4300016: Plane_001
+    4300018: Plane_2
+    4300020: Plane_6
+    4300022: Plane_9
+    4300024: Plane_12
+    4300026: Plane_15
+    4300028: Plane_003
+    4300030: Circle_002
+    4300032: Plane_4
+    4300034: Circle_3
+    4300036: Plane_7
+    4300038: Circle_4
+    4300040: Plane_10
+    4300042: Circle_5
+    4300044: Plane_13
+    4300046: Circle_6
+    4300048: Plane_16
+    4300050: Circle_7
+    7400000: Default Take
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
