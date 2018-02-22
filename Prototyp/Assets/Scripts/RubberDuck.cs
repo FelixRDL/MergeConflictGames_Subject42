@@ -18,11 +18,13 @@ public class RubberDuck : Interactable
 
 	public override void OnInteraction ()
 	{
-		print ("On Interaction with Duck!");
+		print ("Duck is klicked!");
 
-		AudioClip randomQuack = quackArray[Random.Range(0, quackArray.Length)];
-
-		SoundManager.instance.PlayEffect (randomQuack);
-
+		if (!SoundManager.instance.GetEffectPlaying()) {
+			AudioClip randomQuack = quackArray[Random.Range(0, quackArray.Length)];
+			
+			SoundManager.instance.PlayEffect (randomQuack);	
+		}
+			
 	}
 }

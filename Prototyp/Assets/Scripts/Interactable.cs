@@ -20,6 +20,7 @@ public class Interactable : MonoBehaviour
 			if (distance <= radius) {
 				OnInteraction ();
 			}
+			OnDefocused ();
 		}
 	}
 

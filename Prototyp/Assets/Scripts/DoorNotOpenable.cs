@@ -10,7 +10,10 @@ public class DoorNotOpenable: Interactable
 
 	public override void OnInteraction ()
 	{
-		SoundManager.instance.PlayEffect (DoorLockedSound);
+		if (!SoundManager.instance.GetEffectPlaying()) {
+			print ("Door Locked!");
+			SoundManager.instance.PlayEffect (DoorLockedSound);
+		}
 	}
 
 

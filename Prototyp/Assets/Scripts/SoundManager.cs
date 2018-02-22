@@ -82,5 +82,14 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
+	public bool GetEffectPlaying ()
+	{
+		if (effectSource.isPlaying) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }
