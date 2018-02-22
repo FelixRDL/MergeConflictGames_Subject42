@@ -66,11 +66,4 @@ public class DoorHospitalFloor : Interactable
 			SoundManager.instance.PlayCombinedDialogue (Dialogue_S_1_0, 1f);
 		}
 	}
-
-	//temp
-	public void OpenDoor ()
-	{
-		DoorControl ("Open");
-	}
-
 }
