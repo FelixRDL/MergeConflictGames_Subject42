@@ -10,7 +10,12 @@ ModelImporter:
     3300000: //RootNode
     4300000: carpet_geo
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 2d30f51e28c35ba44954124a84724262, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -48,7 +53,7 @@ ModelImporter:
     importCameras: 0
     importLights: 0
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
