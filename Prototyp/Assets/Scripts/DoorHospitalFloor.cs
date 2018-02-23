@@ -40,7 +40,7 @@ public class DoorHospitalFloor : Interactable
 			SoundManager.instance.PlayEffect (OpenDoorSound, 0.5f);
 
 			GameObject blocker = GameObject.Find ("Blocker");
-			Vector3 temp = new Vector3 (0, 10f, 0);
+			Vector3 temp = new Vector3 (14.1f, 0, 0);
 			blocker.transform.position += temp;
 
 

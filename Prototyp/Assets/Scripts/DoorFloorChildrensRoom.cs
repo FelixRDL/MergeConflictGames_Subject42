@@ -14,11 +14,13 @@ public class DoorFloorChildrensRoom: Interactable
 	Animator animator;
 	bool doorOpen;
 	bool doorAllowedToOpen;
+	bool dialogueAlreadyPlayed;
 
 	void Start ()
 	{
 		doorOpen = false;
 		doorAllowedToOpen = false;
+		dialogueAlreadyPlayed = false;
 		animator = GetComponent<Animator> ();
 	}
 
@@ -52,13 +54,15 @@ public class DoorFloorChildrensRoom: Interactable
 	void OnTriggerExit (Collider col)
 	{
 
-		if (doorOpen) {
+		if (doorOpen && !dialogueAlreadyPlayed) {
 
 			doorOpen = false;
 			DoorControl ("Close");
 
 			SoundManager.instance.PlayEffect (CloseDoorSound, 0.5f);
+
 			SoundManager.instance.PlayCombinedDialogue (Dialogue_S_1_1, 1f);
+			dialogueAlreadyPlayed = true;
 		}
 	}
 
