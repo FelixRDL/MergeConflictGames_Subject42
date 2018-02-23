@@ -9,6 +9,7 @@ public class LightSwitch : Interactable
 
 	//temp
 	public DoorFloorChildrensRoom door;
+	public NeutralizerOne neutralizer;
 
 	bool alreadyPressed;
 
@@ -39,6 +40,7 @@ public class LightSwitch : Interactable
 
 	void openDoor ()
 	{
+		neutralizer.allowInteractionWithNeutralizer ();
 		door.OpenDoor ();
 	}
 }

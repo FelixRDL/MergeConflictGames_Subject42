@@ -11,9 +11,11 @@ public class PillOne : Interactable
 	public DoorFloorChildrensRoom door;
 
 	bool pillAlreadyEaten;
+	bool pillAlowedToEat;
 
 	void Start ()
 	{
+		pillAlowedToEat = false;
 		pillAlreadyEaten = false;
 	}
 
@@ -22,19 +24,25 @@ public class PillOne : Interactable
 	{
 		print ("On Interaction with Pill!");
 
-		if (!pillAlreadyEaten) {
+		if (!pillAlreadyEaten && pillAlowedToEat) {
 			SoundManager.instance.PlayEffect (EatSound);
 			SoundManager.instance.PlayBackgroundMusic (BackgroundMusicLight, 2f);
 			SoundManager.instance.PlayTestManagerDialogue(Dialogue_S_1_0_Proceed, 0.5f);
 			
 			//temp
-			Invoke ("openDoor", 4);
+			Invoke ("openDoor", 2);
 			
 			pillAlreadyEaten = true;
 		}
 
 		//Destroy (gameObject);
 
+	}
+
+	public void allowPlayerToEatPill()
+	{
+		print("Player ist now allowed to eat the Pill!");
+		pillAlowedToEat = true;
 	}
 
 	void openDoor ()

@@ -66,8 +66,10 @@ public class DoorFloorChildrensRoom: Interactable
 	public void OpenDoor ()
 	{
 		doorOpen = true;
-
+		doorAllowedToOpen = false;
 		DoorControl ("Open");
+
+		SoundManager.instance.PlayEffect (OpenDoorSound, 0.5f);
 	}
 
 
