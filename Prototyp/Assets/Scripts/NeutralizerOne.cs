@@ -1,36 +1,40 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class NeutralizerOne : Interactable
 {
 
-	public AudioClip DrinkSound;
-	public AudioClip Dialogue_S_1_3;
+ public AudioClip DrinkSound;
+ public AudioClip Dialogue_S_1_3;
 
-	bool allowInteraction;
+ public DoorChildrensRoomGarden door;
 
-	void Start ()
-	{
-		allowInteraction = false;
-	}
+ bool allowInteraction;
 
-
-	public override void OnInteraction ()
-	{
-		if (allowInteraction) {
-			
-			print ("On Interaction with Neutralizer!");
-			
-			SoundManager.instance.PlayEffect (DrinkSound);
-			SoundManager.instance.StopBackgroundMusic ();
-			SoundManager.instance.PlayCombinedDialogue (Dialogue_S_1_3, 1f);
-			
-			LightManager.instance.ToggleLightsInNursery ();
-		} 
-	}
+ void Start ()
+ {
+  allowInteraction = false;
+ }
 
 
-	public void allowInteractionWithNeutralizer()
-	{
-		allowInteraction = true;
-	}
+ public override void OnInteraction ()
+ {
+  if (allowInteraction) {
+
+   print ("On Interaction with Neutralizer!");
+
+   SoundManager.instance.PlayEffect (DrinkSound);
+   SoundManager.instance.StopBackgroundMusic ();
+   SoundManager.instance.PlayCombinedDialogue (Dialogue_S_1_3, 1f);
+
+   LightManager.instance.ToggleLightsInNursery ();
+
+   door.allowPlayerToGoToGarden ();
+  }
+ }
+
+
+ public void allowInteractionWithNeutralizer()
+ {
+  allowInteraction = true;
+ }
 }

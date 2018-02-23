@@ -828,6 +828,31 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 23156544279696334, guid: 9b854b4a42a3ae547b8e6497af32b7bc,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
+    - target: {fileID: 23034738860215872, guid: 9b854b4a42a3ae547b8e6497af32b7bc,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
+    - target: {fileID: 23076736797892644, guid: 9b854b4a42a3ae547b8e6497af32b7bc,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
+    - target: {fileID: 23975270367368060, guid: 9b854b4a42a3ae547b8e6497af32b7bc,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
+    - target: {fileID: 23917707201033152, guid: 9b854b4a42a3ae547b8e6497af32b7bc,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b854b4a42a3ae547b8e6497af32b7bc, type: 2}
   m_IsPrefabParent: 0
@@ -2913,6 +2938,10 @@ Prefab:
       propertyPath: m_Name
       value: ModuleStraight_Window (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: af9fee4178cb92d4b93327e567a5b66c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6701e19e98d7f794082366a46f13c6cd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af9fee4178cb92d4b93327e567a5b66c, type: 3}
   m_IsPrefabParent: 0
@@ -4240,6 +4269,16 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 23456145895202130, guid: 0c56019f7dfc72643b279637335518b9,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
+    - target: {fileID: 23554490517592074, guid: 0c56019f7dfc72643b279637335518b9,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c56019f7dfc72643b279637335518b9, type: 2}
   m_IsPrefabParent: 0
@@ -5709,6 +5748,16 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 23034738860215872, guid: 9b854b4a42a3ae547b8e6497af32b7bc,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
+    - target: {fileID: 23975270367368060, guid: 9b854b4a42a3ae547b8e6497af32b7bc,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b854b4a42a3ae547b8e6497af32b7bc, type: 2}
   m_IsPrefabParent: 0
@@ -6311,6 +6360,10 @@ Prefab:
       propertyPath: m_Name
       value: ModuleStraight_Window (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: af9fee4178cb92d4b93327e567a5b66c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6701e19e98d7f794082366a46f13c6cd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af9fee4178cb92d4b93327e567a5b66c, type: 3}
   m_IsPrefabParent: 0
@@ -8540,10 +8593,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 852785293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11eb904c6a5e28449bccc6c9ec9b538, type: 3}
+  m_Script: {fileID: 11500000, guid: dec1aa326592bff41be98c1bb1c33449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2
+  OpenDoorSound: {fileID: 8300000, guid: 7f1a66b4138b4714284406c94931945f, type: 3}
   DoorLockedSound: {fileID: 8300000, guid: 87f1eee2d8311f44589b1aba99d92f1e, type: 3}
 --- !u!95 &852785297
 Animator:
@@ -10982,6 +11036,7 @@ MonoBehaviour:
   radius: 1.5
   DrinkSound: {fileID: 8300000, guid: 0ed359e342ebdb94388b20c53bec9864, type: 3}
   Dialogue_S_1_3: {fileID: 8300000, guid: 20504bf40b49c7a40bc3765b68bf8991, type: 3}
+  door: {fileID: 852785296}
 --- !u!65 &1080923231
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15587,8 +15642,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1485683738}
   m_LocalRotation: {x: -0.50000006, y: 0.49999997, z: 0.49999997, w: 0.50000006}
-  m_LocalPosition: {x: -13.853, y: 0.17674929, z: -1.869}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -13.853, y: 0.17674929, z: -1.969}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2035657834}
   m_RootOrder: 3
@@ -15608,7 +15663,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100004, guid: 12725c601b46048428d2d0977779eb22, type: 3}
+  - {fileID: 2100000, guid: 5cd0bcecb828d7e408fcc960f976afec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20139,6 +20194,10 @@ Prefab:
       propertyPath: m_Name
       value: ModuleStraight_Window (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: af9fee4178cb92d4b93327e567a5b66c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6701e19e98d7f794082366a46f13c6cd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af9fee4178cb92d4b93327e567a5b66c, type: 3}
   m_IsPrefabParent: 0
