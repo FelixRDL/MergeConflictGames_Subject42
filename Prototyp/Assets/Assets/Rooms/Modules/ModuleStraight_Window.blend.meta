@@ -6,7 +6,11 @@ ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: WallModule
+    100004: Window
     400000: //RootNode
+    400002: WallModule
+    400004: Window
     2100000: Wall_Grid_Metal__Untitled
     2100002: Wall_Window_Glass__Untitled
     2100004: Wall_Window_Wood__Untitled
@@ -15,8 +19,14 @@ ModelImporter:
     2100010: Wall_hospitalroom__Untitled
     2100012: Wall_Bricks_001
     2300000: //RootNode
+    2300002: WallModule
+    2300004: Window
     3300000: //RootNode
+    3300002: WallModule
+    3300004: Window
     4300000: Plane_002
+    4300002: Window
+    4300004: WallModule
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
