@@ -102,9 +102,9 @@ public class Interactable : MonoBehaviour
 
 			//Draw text with 1px white offset.
 			GUI.contentColor = Color.black;
-			GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.25f - size.y + 1, size.x, size.y), "Press E to interact", subtitleStyle);
+			GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.5f - size.y + 1, size.x, size.y), "Press E to interact", subtitleStyle);
 			GUI.contentColor = Color.white;
-			GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.25f - size.y, size.x, size.y), "Press E to interact", subtitleStyle);
+			GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.5f - size.y, size.x, size.y), "Press E to interact", subtitleStyle);
 		}
 	}
 }
