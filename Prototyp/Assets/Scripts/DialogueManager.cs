@@ -49,7 +49,7 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	public void StartDialogue (AudioSource source, string clipName, float volume, float delay)
+	public void StartMonologue (AudioSource source, string clipName, float volume, float delay)
 	{
 	
 		//1. Reset data
@@ -64,6 +64,38 @@ public class DialogueManager : MonoBehaviour
 		nextSubtitle = 0;
 
 		//2. Load subtitles from file
+		initSubtitles(clipName);
+
+		//3. Play Audio
+		audioSource.PlayDelayed (delay);
+
+
+	}
+
+	public void StartDialogue(AudioSource s, AudioSource v, string clipName, float volume, float delay) {
+		//1. Reset data
+		audioSource = s;
+		audioSource.volume = volume;
+		audioSource.clip = audioClips [clipName + "_s"];
+
+		AudioSource additionalAudioSource = v;
+		additionalAudioSource.volume = volume;
+		additionalAudioSource.clip = audioClips [clipName + "_v"];
+
+		subtitleTimings = new List<float> ();
+		subtitleText = new List<string> ();
+
+		nextSubtitle = 0;
+
+		//2. Load subtitles from file
+		initSubtitles(clipName);
+
+		//3. Play Audio
+		audioSource.PlayDelayed (delay);
+		additionalAudioSource.PlayDelayed (delay);
+	}
+
+	private void initSubtitles (string clipName) {
 		TextAsset temp = Resources.Load ("Dialogues/" + clipName) as TextAsset;
 		string[] fileLines = temp.text.Split ('\n');
 
@@ -77,15 +109,11 @@ public class DialogueManager : MonoBehaviour
 			string[] splittedLine = currentLine.Split ('|');
 			subtitleTimings.Add (float.Parse (splittedLine [0]));
 			subtitleText.Add (splittedLine [1]);
-			print (subtitleTimings[i]);
 		}
-			
+
 
 		//Set first line of subtitles and play dialogue audio
 		currentSubtitle = subtitleText [0];
-		audioSource.PlayDelayed (delay);
-
-
 	}
 
 	//Catches all GUI Events, displays current subtitle line on screen.

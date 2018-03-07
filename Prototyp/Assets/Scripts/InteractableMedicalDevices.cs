@@ -15,5 +15,6 @@ public class InteractableMedicalDevices : Interactable {
 	public override void OnInteraction ()
 	{
 		eventManager.Start_0_Interactable_Medical_Devices ();
+		this.enabled = false;
 	}
 }

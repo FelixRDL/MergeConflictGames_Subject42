@@ -7,8 +7,11 @@ public class EventManager : MonoBehaviour {
 
 	public GameObject[] speakers;
 
+
 	private AudioSource playerAudioSource;
 	private AudioSource[] speakerAudioSources;
+
+	private int clickedObjectsInHospitalRoom;
 
 
 	void Start () {
@@ -19,54 +22,68 @@ public class EventManager : MonoBehaviour {
 			speakerAudioSources[i] = speakers[i].GetComponent<AudioSource>();
 		}
 
-		print ("Speaker: " + speakerAudioSources.Length);
+		clickedObjectsInHospitalRoom = 0;
 
 		Start_0_01 ();
 	}
+
+
 
 
 	//Act 0 Dialogues
 
 	void Start_0_01 ()
 	{
-		//DialogueManager.instance.StartDialogue(playerAudioSource, "S_0_beide", 1, 0);
+		DialogueManager.instance.StartMonologue(playerAudioSource, "0_01", 1, 0);
 	}
+
 
 	void Start_0_08()
 	{
-		
+		DialogueManager.instance.StartDialogue(playerAudioSource, speakerAudioSources[0], "0_08", 1, 0);
 	}
 
 	//Act 0 Interactables with Dialogue
 
 	public void Start_0_Interactable_Window() {
 		print ("Klicked on Window in Hospital");
-		DialogueManager.instance.StartDialogue(playerAudioSource, "0_02_s", 1, 0);
+		DialogueManager.instance.StartMonologue(playerAudioSource, "0_02", 1, 0);
+		countClickedObjectsInHospitalRoom ();
+		GameObject.Find ("Interactable_Window").GetComponent<InteractableWindowHospitalRoom> ().Disable ();
 	}
 
 	public void Start_0_Interactable_Medical_Devices() {
 		print ("Klicked on Medical Devices in Hospital");
-		DialogueManager.instance.StartDialogue(playerAudioSource, "0_03_s", 1, 0);
+		DialogueManager.instance.StartMonologue(playerAudioSource, "0_03", 1, 0);
+		countClickedObjectsInHospitalRoom ();
+		GameObject.Find ("Interactable_Medical_Devices").GetComponent<InteractableMedicalDevices> ().Disable ();
 	}
 
 	public void Start_0_Interactable_Picture_Frame () {
 		print ("Klicked on Picture Frame in Hospital");
-		DialogueManager.instance.StartDialogue(playerAudioSource, "0_04_s", 1, 0);
+		DialogueManager.instance.StartMonologue(playerAudioSource, "0_04", 1, 0);
+		countClickedObjectsInHospitalRoom ();
+		GameObject.Find ("Interactable_Picture_Frame_Hospital").GetComponent<InteractablePictureFrameHospital> ().Disable ();
 	}
 
 	public void Start_0_Interactable_Bath_Mirror() {
 		print ("Klicked on Mirror in Bath");
-		DialogueManager.instance.StartDialogue(playerAudioSource, "0_05_s", 1, 0);
+		DialogueManager.instance.StartMonologue(playerAudioSource, "0_05", 1, 0);
+		countClickedObjectsInHospitalRoom ();
+		GameObject.Find ("Interactable_Mirror_Bath").GetComponent<InteractableBathMirror> ().Disable ();
 	}
 
 	public void Start_0_Interactable_Contracts() {
 		print ("Klicked on Contracts in Hospital");
-		DialogueManager.instance.StartDialogue(playerAudioSource, "0_06_s", 1, 0);
+		DialogueManager.instance.StartMonologue(playerAudioSource, "0_06", 1, 0);
+		countClickedObjectsInHospitalRoom ();
+		GameObject.Find ("Interactable_Contracts").GetComponent<InteractableContracts> ().Disable ();
 	}
 		
 	public void Start_0_Interactable_Door_Floor() {
 		print ("Klicked on Door to Floor");
-		DialogueManager.instance.StartDialogue(playerAudioSource, "0_07_s", 1, 0);
+		DialogueManager.instance.StartMonologue(playerAudioSource, "0_07", 1, 0);
+		//countClickedObjectsInHospitalRoom ();
 	}
 
 
@@ -81,7 +98,13 @@ public class EventManager : MonoBehaviour {
 	}
 
 
-
+	private void countClickedObjectsInHospitalRoom() {
+		clickedObjectsInHospitalRoom++;
+		print (clickedObjectsInHospitalRoom);
+		if (clickedObjectsInHospitalRoom > 4) {
+			Invoke ("Start_0_08", 10);
+		}
+	}
 
 
 

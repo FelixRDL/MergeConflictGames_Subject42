@@ -16,7 +16,8 @@ public class Interactable : MonoBehaviour
 
 	private Crosshair crosshair;
 
-	bool showHint = false;
+	private bool showHint = false;
+	private bool enabled = true;
 
 	private GUIStyle subtitleStyle = new GUIStyle ();
 
@@ -28,28 +29,29 @@ public class Interactable : MonoBehaviour
 		//outline = Resources.Load ("Custom_Outline", typeof(Material)) as Material;
 		//outlineShader = Shader.Find ("Custom/Outline");
 
-		crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair> ();
+		crosshair = GameObject.Find ("Crosshair").GetComponent<Crosshair> ();
 
 	}
 
 	public void OnFocused (Transform player)
 	{
 		//Outline anzeigen
-
-		float distance = Vector3.Distance (player.position, transform.position);
-		if (distance <= radius) {
-			showHint = true;
-			crosshair.SetHighlight ();
-
-			//defaultMaterial = rend.material;
-			//rend.material = outline;
-			//rend.material.color = Color.blue; 
-
-			//rend.material.shader = outlineShader;
-		} else {
-			OnDefocused ();
-		}
+		if (enabled) {
 			
+			float distance = Vector3.Distance (player.position, transform.position);
+			if (distance <= radius) {
+				showHint = true;
+				crosshair.SetHighlight ();
+
+				//defaultMaterial = rend.material;
+				//rend.material = outline;
+				//rend.material.color = Color.blue; 
+
+				//rend.material.shader = outlineShader;
+			} else {
+				OnDefocused ();
+			}	
+		}
 	}
 
 	public void OnDefocused ()
@@ -65,15 +67,18 @@ public class Interactable : MonoBehaviour
 
 	public void OnClicked (Transform player)
 	{
-		print ("Interactable clicked");
-
-		float distance = Vector3.Distance (player.position, transform.position);
-		if (distance <= radius) {
-			print ("Interactable clicked and within reach");
-			OnInteraction ();
-		} else {
-			print ("Interactable clicked BUT not within reach");
+		if (enabled) {
+			float distance = Vector3.Distance (player.position, transform.position);
+			if (distance <= radius) {
+				OnInteraction ();
+			}
 		}
+	}
+
+	public void Disable ()
+	{
+		OnDefocused ();
+		enabled = false;
 	}
 
 	void OnDrawGizmosSelected ()

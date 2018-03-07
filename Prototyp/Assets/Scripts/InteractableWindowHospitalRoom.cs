@@ -17,4 +17,5 @@ public class InteractableWindowHospitalRoom : Interactable
 	{
 		eventManager.Start_0_Interactable_Window ();
 	}
+
 }

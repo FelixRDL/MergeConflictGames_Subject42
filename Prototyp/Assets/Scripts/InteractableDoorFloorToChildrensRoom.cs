@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableDoorHospitalToFloor : Interactable {
+public class InteractableDoorFloorToChildrensRoom : Interactable {
 
 	private EventManager eventManager;
 	private Animator animator;
@@ -16,8 +16,8 @@ public class InteractableDoorHospitalToFloor : Interactable {
 
 	public override void OnInteraction ()
 	{
-		eventManager.Start_0_Interactable_Door_Floor ();
-
+		//eventManager.Start_0_Interactable_Door_Floor ();
+		OpenDoor ();
 	}
 
 	public void OpenDoor() {
