@@ -16,7 +16,8 @@ public class InteractableDoorHospitalToFloor : Interactable {
 
 	public override void OnInteraction ()
 	{
-		OpenDoor ();
+		eventManager.Start_0_Interactable_Door_Floor ();
+		//OpenDoor ();
 	}
 
 	public void OpenDoor() {

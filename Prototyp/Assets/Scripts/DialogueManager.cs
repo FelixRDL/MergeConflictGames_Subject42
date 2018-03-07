@@ -69,12 +69,17 @@ public class DialogueManager : MonoBehaviour
 
 		for (int i = 0; i < fileLines.Length; i++) {
 			string currentLine = fileLines [i];
-
+			if (currentLine.Length == 0 || !currentLine.Contains("|")) {
+				print("Untertiteldatei " + clipName + " falsch formatiert in Zeile: " + i);
+				break;
+			}
 
 			string[] splittedLine = currentLine.Split ('|');
 			subtitleTimings.Add (float.Parse (splittedLine [0]));
 			subtitleText.Add (splittedLine [1]);
+			print (subtitleTimings[i]);
 		}
+			
 
 		//Set first line of subtitles and play dialogue audio
 		currentSubtitle = subtitleText [0];

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableMedicalDevices : Interactable {
+public class InteractableBathMirror : Interactable
+{
 
 	private EventManager eventManager;
 
@@ -14,6 +15,6 @@ public class InteractableMedicalDevices : Interactable {
 
 	public override void OnInteraction ()
 	{
-		eventManager.Start_0_Interactable_Medical_Devices ();
+		eventManager.Start_0_Interactable_Bath_Mirror ();
 	}
 }

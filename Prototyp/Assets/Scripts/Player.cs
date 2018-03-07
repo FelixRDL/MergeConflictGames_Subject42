@@ -8,7 +8,9 @@ public class Player : MonoBehaviour
 
 	Camera camera;
 
-	Interactable focusedObject;
+	private Interactable focusedObject;
+
+	private Animator animator;
 
 
 	float minFov = 15f;
@@ -23,6 +25,9 @@ public class Player : MonoBehaviour
 		//Cursor.lockState = CursorLockMode.Locked; 
 
 		focusedObject = null;
+
+		animator = GetComponent<Animator> ();
+		animator.enabled = false;
 	}
 
 
@@ -61,12 +66,18 @@ public class Player : MonoBehaviour
 
 	}
 
+	public void PlayAnimationWakeUp() {
+		DisablePlayerControls ();
+		animator.SetTrigger("wakeUp");
+		EnablePlayerControls ();
+	}
+
 	//Player will not be able to move at all. For Cutscenes.
-	public void disablePlayerControls () {
+	public void DisablePlayerControls () {
 		GameObject.FindGameObjectWithTag("Player").GetComponent<RigidbodyFirstPersonController>().enabled = false;
 	}
 
-	public void enablePlayerControls () {
+	public void EnablePlayerControls () {
 		GameObject.FindGameObjectWithTag("Player").GetComponent<RigidbodyFirstPersonController>().enabled = true;
 	}
 }

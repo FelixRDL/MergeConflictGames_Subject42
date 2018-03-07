@@ -4,27 +4,85 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour {
 
+
+	public GameObject[] speakers;
+
 	private AudioSource playerAudioSource;
-
-
+	private AudioSource[] speakerAudioSources;
 
 
 	void Start () {
 		playerAudioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
-		Lvl1_Scn_01_WakeUp ();
+
+		speakerAudioSources = new AudioSource[speakers.Length];
+		for (int i = 0; i < speakers.Length; i++) {
+			speakerAudioSources[i] = speakers[i].GetComponent<AudioSource>();
+		}
+
+		print ("Speaker: " + speakerAudioSources.Length);
+
+		Start_0_01 ();
 	}
 
-	void Lvl1_Scn_01_WakeUp ()
+
+	//Act 0 Dialogues
+
+	void Start_0_01 ()
 	{
-		//
-		DialogueManager.instance.StartDialogue(playerAudioSource, "S_0_beide", 1, 0);
+		//DialogueManager.instance.StartDialogue(playerAudioSource, "S_0_beide", 1, 0);
 	}
 
-	public void Lvl1_Interactable_OpenDoorBath() {
-		print ("Open Bath Door");
-
-		//DoorManager.instance.OpenBathroomDoor ();
+	void Start_0_08()
+	{
+		
 	}
+
+	//Act 0 Interactables with Dialogue
+
+	public void Start_0_Interactable_Window() {
+		print ("Klicked on Window in Hospital");
+		DialogueManager.instance.StartDialogue(playerAudioSource, "0_02_s", 1, 0);
+	}
+
+	public void Start_0_Interactable_Medical_Devices() {
+		print ("Klicked on Medical Devices in Hospital");
+		DialogueManager.instance.StartDialogue(playerAudioSource, "0_03_s", 1, 0);
+	}
+
+	public void Start_0_Interactable_Picture_Frame () {
+		print ("Klicked on Picture Frame in Hospital");
+		DialogueManager.instance.StartDialogue(playerAudioSource, "0_04_s", 1, 0);
+	}
+
+	public void Start_0_Interactable_Bath_Mirror() {
+		print ("Klicked on Mirror in Bath");
+		DialogueManager.instance.StartDialogue(playerAudioSource, "0_05_s", 1, 0);
+	}
+
+	public void Start_0_Interactable_Contracts() {
+		print ("Klicked on Contracts in Hospital");
+		DialogueManager.instance.StartDialogue(playerAudioSource, "0_06_s", 1, 0);
+	}
+		
+	public void Start_0_Interactable_Door_Floor() {
+		print ("Klicked on Door to Floor");
+		DialogueManager.instance.StartDialogue(playerAudioSource, "0_07_s", 1, 0);
+	}
+
+
+	//Act 0 Interactables without Dialogue
+
+	public void Start_0_Interactable_Door_Bath() {
+		print ("Klicked on Door to Bath");
+	}
+
+	public void Start_0_Interactable_Rubber_Duck() {
+		print ("Klicked on Rubber Duck");
+	}
+
+
+
+
 
 
 

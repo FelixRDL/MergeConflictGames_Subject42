@@ -16,8 +16,6 @@ public class Interactable : MonoBehaviour
 
 	private Crosshair crosshair;
 
-	bool isFocused = false;
-
 	bool showHint = false;
 
 	private GUIStyle subtitleStyle = new GUIStyle ();
@@ -48,6 +46,8 @@ public class Interactable : MonoBehaviour
 			//rend.material.color = Color.blue; 
 
 			//rend.material.shader = outlineShader;
+		} else {
+			OnDefocused ();
 		}
 			
 	}

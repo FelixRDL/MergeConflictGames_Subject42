@@ -15,7 +15,7 @@ public class InteractableDoorHospitalToBath : Interactable {
 
 	public override void OnInteraction ()
 	{
-		eventManager.Lvl1_Interactable_OpenDoorBath ();
+		eventManager.Start_0_Interactable_Door_Bath ();
 		OpenBathroomDoor ();
 	}
 
