@@ -24,13 +24,14 @@ public class Interactable : MonoBehaviour
 
 	void Awake ()
 	{
-		//rend = GetComponent<Renderer> ();
-		//rend.enabled = true;
+		rend = GetComponent<Renderer> ();
+		rend.enabled = true;
 
 		//outline = Resources.Load ("Custom_Outline", typeof(Material)) as Material;
 		//outlineShader = Shader.Find ("Custom/Outline");
 
 		crosshair = GameObject.Find("Crosshair").GetComponent<Crosshair> ();
+
 	}
 
 	public void OnFocused (Transform player)
@@ -42,10 +43,11 @@ public class Interactable : MonoBehaviour
 			showHint = true;
 			crosshair.SetHighlight ();
 
-			//rend.material.shader = outlineShader;
-
 			//defaultMaterial = rend.material;
 			//rend.material = outline;
+			//rend.material.color = Color.blue; 
+
+			//rend.material.shader = outlineShader;
 		}
 			
 	}

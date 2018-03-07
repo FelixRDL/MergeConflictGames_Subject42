@@ -62,7 +62,11 @@ public class Player : MonoBehaviour
 	}
 
 	//Player will not be able to move at all. For Cutscenes.
-	void disablePlayerControls () {
+	public void disablePlayerControls () {
 		GameObject.FindGameObjectWithTag("Player").GetComponent<RigidbodyFirstPersonController>().enabled = false;
+	}
+
+	public void enablePlayerControls () {
+		GameObject.FindGameObjectWithTag("Player").GetComponent<RigidbodyFirstPersonController>().enabled = true;
 	}
 }

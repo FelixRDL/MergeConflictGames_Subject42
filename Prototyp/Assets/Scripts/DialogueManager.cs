@@ -72,7 +72,6 @@ public class DialogueManager : MonoBehaviour
 
 
 			string[] splittedLine = currentLine.Split ('|');
-			print(splittedLine [0]);
 			subtitleTimings.Add (float.Parse (splittedLine [0]));
 			subtitleText.Add (splittedLine [1]);
 		}
