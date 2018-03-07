@@ -27,11 +27,13 @@ ModelImporter:
     2300004: Light2
     2300006: Rubber_Duck
     2300008: Rubber_Duck_Eyes
+    2300010: //RootNode
     3300000: Ground_Plane
     3300002: Light1
     3300004: Light2
     3300006: Rubber_Duck
     3300008: Rubber_Duck_Eyes
+    3300010: //RootNode
     4300000: Ground_Plane
     4300002: Light2
     4300004: Light1
