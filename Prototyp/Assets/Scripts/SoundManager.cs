@@ -5,7 +5,14 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour {
 
 	//Fixed AudioSource for Background Music
-	public AudioSource backgroundMusicSource;
+	private AudioSource backgroundMusicSource;
+
+	public AudioClip[] backgroundMusicSources;
+	public AudioClip[] soundeffectSources;
+
+
+	private Dictionary<string, AudioClip> backgroundMusicClips;
+	private Dictionary<string, AudioClip> soundeffectClips;
 
 	private const float BACKGROUND_MUSIC_VOLUME = 0.4f;
 
@@ -20,13 +27,36 @@ public class SoundManager : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad (gameObject);
+
+		backgroundMusicSource = GetComponent<AudioSource>();
+		createBackgroundMusicDictionary ();
+		createSoundeffectDictionary ();
 	}
 
-	public void PlayBackgroundMusic (AudioClip clip, float delay, float fadeInTime)
+	private void createBackgroundMusicDictionary ()
 	{
-		print ("Start Playing " + clip);
+		backgroundMusicClips = new Dictionary<string, AudioClip> ();
+
+		foreach (AudioClip clip in backgroundMusicSources) {
+			backgroundMusicClips.Add (clip.name, clip);
+		}
+	}
+
+	private void createSoundeffectDictionary ()
+	{
+		soundeffectClips = new Dictionary<string, AudioClip> ();
+
+		foreach (AudioClip clip in soundeffectSources) {
+			soundeffectClips.Add (clip.name, clip);
+		}
+	}
+
+
+	public void PlayBackgroundMusicLoop (string clipName, float delay, float fadeInTime)
+	{
+		print ("Start Playing " + clipName);
 		backgroundMusicSource.volume = BACKGROUND_MUSIC_VOLUME;
-		backgroundMusicSource.clip = clip;
+		backgroundMusicSource.clip = backgroundMusicClips[clipName];
 		backgroundMusicSource.PlayDelayed (delay);
 	}
 
@@ -44,7 +74,14 @@ public class SoundManager : MonoBehaviour {
 		}
 	}
 
-	public void PlayEffect(AudioSource effectSource, AudioClip clip, float volume) {
 
+
+	public void PlayEffect(AudioSource effectSource, string clipName, float volume, float delay) {
+		print ("Start Playing " + clipName);
+
+		AudioSource source = effectSource;
+		source.volume = BACKGROUND_MUSIC_VOLUME;
+		source.clip = soundeffectClips[clipName];
+		source.PlayDelayed (delay);
 	}
 }
