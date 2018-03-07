@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33424094000946718}
   - component: {fileID: 23479672490053262}
   - component: {fileID: 95811327161411812}
+  - component: {fileID: 65222613025566028}
   m_Layer: 0
   m_Name: tent_3
   m_TagString: Untagged
@@ -87,6 +88,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853653302034276}
   m_Mesh: {fileID: 4300000, guid: f14018e22895eb541aac3c2d2abd0b29, type: 3}
+--- !u!65 &65222613025566028
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853653302034276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.9958625, y: 4.0631914, z: 2.658134}
+  m_Center: {x: -0.8601194, y: 0.019968985, z: 1.344163}
 --- !u!95 &95811327161411812
 Animator:
   serializedVersion: 3
