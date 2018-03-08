@@ -1,2 +1,3 @@
 000.000|Great! We at Lazarus warmly appreciate your commitment!
 004.843|I have unlocked the door for you. Please step through the door, to begin the first reference test.
+010.200|

@@ -79,6 +79,17 @@ public class Interactable : MonoBehaviour
 	{
 		OnDefocused ();
 		enabled = false;
+
+		//If Box Collider is not only a trigger, but also used, e.g. a door, then don't disable it.
+		if (GetComponent<BoxCollider> ().isTrigger) {
+			GetComponent<BoxCollider> ().enabled = false;
+		}
+	}
+
+	public void Enable ()
+	{
+		enabled = true;
+		GetComponent<BoxCollider> ().enabled = true;
 	}
 
 	void OnDrawGizmosSelected ()

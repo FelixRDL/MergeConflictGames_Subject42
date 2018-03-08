@@ -59,11 +59,18 @@ public class Player : MonoBehaviour
 		}
 			
 		//Zoom test:
+		/*
 		float fov = camera.fieldOfView;
 		fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
 		fov = Mathf.Clamp(fov, minFov, maxFov);
 		Camera.main.fieldOfView = fov;
+		*/
+	}
 
+	public void CameraZoom () {
+
+		//Zoom 5 Units per frame
+		Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 5, Time.deltaTime * 5);
 	}
 
 	public void PlayAnimationWakeUp() {
