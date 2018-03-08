@@ -93,6 +93,7 @@ ModelImporter:
     4300016: Leg_IK_Shape
     4300018: Plane
     7400000: Default Take
+    7400002: ArmatureAction
     9500000: //RootNode
     13700000: Cube_000
     13700002: Cube_001

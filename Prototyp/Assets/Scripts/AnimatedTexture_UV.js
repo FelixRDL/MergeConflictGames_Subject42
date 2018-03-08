@@ -1,12 +1,12 @@
 //	Code used from http://wiki.unity3d.com/index.php?title=Animating_Tiled_texture", Courtesy to Joachim Ante (16.2.18)
 
 
-var uvAnimationTileX = 24; //Here you can place the number of columns of your sheet.
+var uvAnimationTileX = 2; //Here you can place the number of columns of your sheet.
                            //The above sheet has 24
 
-var uvAnimationTileY = 1; //Here you can place the number of rows of your sheet.
+var uvAnimationTileY = 2; //Here you can place the number of rows of your sheet.
                           //The above sheet has 1
-var framesPerSecond = 10.0;
+var framesPerSecond = 20.0;
 
 function Update () {
 

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33763719717041682}
   - component: {fileID: 23572966999774844}
   - component: {fileID: 95767060962237844}
+  - component: {fileID: 64062137792254982}
   m_Layer: 0
   m_Name: ssimpossible_tent_1
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1768356674057226}
+  m_Mesh: {fileID: 4300000, guid: 275ae80596aecfb4394bad3f2ee7bdda, type: 3}
+--- !u!64 &64062137792254982
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1768356674057226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 275ae80596aecfb4394bad3f2ee7bdda, type: 3}
 --- !u!95 &95767060962237844
 Animator:
