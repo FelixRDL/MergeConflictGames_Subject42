@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: be637e35642d0784cb4a6da4dc003e7b
-timeCreated: 1520374077
+guid: fce58c9092ad8d34eadb265d47347523
+timeCreated: 1520535746
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -30,14 +30,13 @@ ModelImporter:
     100044: Neck3
     100046: Neck4
     100048: //RootNode
-    100050: Plane
-    100052: Root
-    100054: Thigh_L
-    100056: Thigh_R
-    100058: Toe_Inner_L
-    100060: Toe_Inner_R
-    100062: Toe_Outer_L
-    100064: Toe_Outer_R
+    100050: Root
+    100052: Thigh_L
+    100054: Thigh_R
+    100056: Toe_Inner_L
+    100058: Toe_Inner_R
+    100060: Toe_Outer_L
+    100062: Toe_Outer_R
     400000: Armature
     400002: Beak_1
     400004: Beak_2
@@ -63,25 +62,21 @@ ModelImporter:
     400044: Neck3
     400046: Neck4
     400048: //RootNode
-    400050: Plane
-    400052: Root
-    400054: Thigh_L
-    400056: Thigh_R
-    400058: Toe_Inner_L
-    400060: Toe_Inner_R
-    400062: Toe_Outer_L
-    400064: Toe_Outer_R
+    400050: Root
+    400052: Thigh_L
+    400054: Thigh_R
+    400056: Toe_Inner_L
+    400058: Toe_Inner_R
+    400060: Toe_Outer_L
+    400062: Toe_Outer_R
     2100000: Glow_3
     2100002: Glow_4
     2100004: Glow_1
     2100006: Black
     2100008: Glow_2
     2100010: unnamed
-    2100012: Floor
     2300000: Leg_IK_Shape
-    2300002: Plane
     3300000: Leg_IK_Shape
-    3300002: Plane
     4300000: Cube_007
     4300002: Cube_005
     4300004: Cube_004
@@ -91,7 +86,6 @@ ModelImporter:
     4300012: Cube_002
     4300014: Cube_001
     4300016: Leg_IK_Shape
-    4300018: Plane
     7400000: Default Take
     7400002: ArmatureAction
     9500000: //RootNode
