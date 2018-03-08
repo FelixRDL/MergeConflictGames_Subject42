@@ -31,6 +31,8 @@ public class SurveillanceCamera : MonoBehaviour {
 
 		//Rotation
 		Quaternion lookRotation = Quaternion.LookRotation (directionToLookAt);
+
+		//If Camera is rotating and the sound is not playing yet, play the sound
 		if (lookRotation != lastLookRotation && !audioSource.isPlaying) {
 			audioSource.Play ();
 		}

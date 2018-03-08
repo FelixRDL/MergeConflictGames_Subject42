@@ -8,31 +8,47 @@ public class EventManager : MonoBehaviour
 
 	public GameObject[] speakers;
 
-
 	private AudioSource playerAudioSource;
 	private AudioSource[] speakerAudioSources;
+
+	private GameObject player;
 
 	private int clickedObjectsInHospitalRoom;
 
 
 	void Start ()
 	{
-		playerAudioSource = GameObject.FindGameObjectWithTag ("Player").GetComponent<AudioSource> ();
+		player = GameObject.FindGameObjectWithTag ("Player");
+		playerAudioSource = player.GetComponent<AudioSource> ();
 
 		speakerAudioSources = new AudioSource[speakers.Length];
 		for (int i = 0; i < speakers.Length; i++) {
 			speakerAudioSources [i] = speakers [i].GetComponent<AudioSource> ();
 		}
 
-		clickedObjectsInHospitalRoom = 0;
+		InitFlags ();
+		InitInteractables ();
 
 		Start_0_01 ();
 	}
 
+	void InitFlags () {
+		clickedObjectsInHospitalRoom = 0;
+	}
+
+	void InitInteractables () 
+	{
+		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableContractOne> ().Disable ();
+		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableContractTwo> ().Disable ();
+		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableContractThree> ().Disable ();
+		GameObject.Find ("Interactable_Pen").GetComponent<InteractablePen> ().Disable ();
+	}
 
 
 
-	//Act 0 Dialogues
+	//---------------------
+	//Act 0 Main Dialogues
+	//---------------------
 
 	void Start_0_01 ()
 	{
@@ -44,15 +60,21 @@ public class EventManager : MonoBehaviour
 	void Start_0_08 ()
 	{
 		DialogueManager.instance.StartDialogue (playerAudioSource, speakerAudioSources [0], "0_08", 1, 0);
+		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableContractOne> ().Enable ();
+		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableContractTwo> ().Enable ();
+		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableContractThree> ().Enable ();
+		GameObject.Find ("Interactable_Pen").GetComponent<InteractablePen> ().Enable ();
 	}
 
+	//---------------------
 	//Act 0 Interactables with Dialogue
+	//---------------------
 
 	public void Start_0_Interactable_Window ()
 	{
 		print ("Klicked on Window in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_02", 1, 0);
-		countClickedObjectsInHospitalRoom ();
+		countClickedObjectsLevel0 ();
 		GameObject.Find ("Interactable_Window").GetComponent<InteractableWindowHospitalRoom> ().Disable ();
 	}
 
@@ -60,7 +82,7 @@ public class EventManager : MonoBehaviour
 	{
 		print ("Klicked on Medical Devices in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_03", 1, 0);
-		countClickedObjectsInHospitalRoom ();
+		countClickedObjectsLevel0 ();
 		GameObject.Find ("Interactable_Medical_Devices").GetComponent<InteractableMedicalDevices> ().Disable ();
 	}
 
@@ -68,7 +90,7 @@ public class EventManager : MonoBehaviour
 	{
 		print ("Klicked on Picture Frame in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_04", 1, 0);
-		countClickedObjectsInHospitalRoom ();
+		countClickedObjectsLevel0 ();
 		GameObject.Find ("Interactable_Picture_Frame_Hospital").GetComponent<InteractablePictureFrameHospital> ().Disable ();
 	}
 
@@ -76,7 +98,7 @@ public class EventManager : MonoBehaviour
 	{
 		print ("Klicked on Mirror in Bath");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_05", 1, 0);
-		countClickedObjectsInHospitalRoom ();
+		countClickedObjectsLevel0 ();
 		GameObject.Find ("Interactable_Mirror_Bath").GetComponent<InteractableBathMirror> ().Disable ();
 	}
 
@@ -84,8 +106,44 @@ public class EventManager : MonoBehaviour
 	{
 		print ("Klicked on Contracts in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_06", 1, 0);
-		countClickedObjectsInHospitalRoom ();
+		countClickedObjectsLevel0 ();
 		GameObject.Find ("Interactable_Contracts").GetComponent<InteractableContracts> ().Disable ();
+
+
+		//player.GetComponent<Player> ().CameraZoom ();
+	}
+
+	public void Start_0_Interactable_Contract_One ()
+	{
+		print ("Klicked on Contract One");
+		DialogueManager.instance.StartMonologue (playerAudioSource, "0_13", 1, 0);
+		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableContractOne> ().Disable ();
+	}
+
+	public void Start_0_Interactable_Contract_Two ()
+	{
+		print ("Klicked on Contract One");
+		DialogueManager.instance.StartMonologue (playerAudioSource, "0_14", 1, 0);
+		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableContractTwo> ().Disable ();
+	}
+
+	public void Start_0_Interactable_Contract_Three ()
+	{
+		print ("Klicked on Contract One");
+		DialogueManager.instance.StartDialogue (playerAudioSource, speakerAudioSources [0], "0_15", 1, 0);
+		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableContractThree> ().Disable ();
+	}
+
+	public void Start_0_Interactable_Pen (AudioSource audioSource)
+	{
+		print ("Klicked on Pen");
+		GameObject.Find ("Interactable_Pen").GetComponent<InteractablePen> ().Disable ();
+		DialogueManager.instance.StartMonologue (playerAudioSource, "0_17", 1, 0);
+
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
 	}
 
 	public void Start_0_Interactable_Door_Floor (AudioSource audioSource)
@@ -93,13 +151,13 @@ public class EventManager : MonoBehaviour
 		print ("Klicked on Door to Floor");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_07", 1, 0);
 		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1, 0);
-		//GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
-		//GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
-		//countClickedObjectsInHospitalRoom ();
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
+		countClickedObjectsLevel0 ();
 	}
 
-
+	//------------------------------------
 	//Act 0 Interactables without Dialogue
+	//------------------------------------
 
 	public void Start_0_Interactable_Door_Bath (AudioSource audioSource)
 	{
@@ -118,11 +176,15 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	private void countClickedObjectsInHospitalRoom ()
+
+
+
+	//A certain number of Interactables in Level 0 need to be clicked in Order for the game to continue
+	private void countClickedObjectsLevel0 ()
 	{
 		clickedObjectsInHospitalRoom++;
 		print (clickedObjectsInHospitalRoom);
-		if (clickedObjectsInHospitalRoom > 4) {
+		if (clickedObjectsInHospitalRoom > 5) {
 			Invoke ("Start_0_08", 10);
 		}
 	}
@@ -131,7 +193,7 @@ public class EventManager : MonoBehaviour
 
 
 
-	void Lvl1_Scn_09_ToggleDarkness ()
+	void ToggleChildrensRoomDarkPhase ()
 	{
 		GameObject ceilingParent = GameObject.Find ("CeilingLightGroup");
 		for (int i = 0; i < ceilingParent.transform.childCount; i++) {
