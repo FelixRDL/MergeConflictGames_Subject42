@@ -14,7 +14,11 @@ public class EventManager : MonoBehaviour
 	private GameObject player;
 
 	private int clickedObjectsInHospitalRoom;
+	private bool floorEntered;
 
+	//---------------------
+	//EventManager Init
+	//---------------------
 
 	void Start ()
 	{
@@ -30,18 +34,48 @@ public class EventManager : MonoBehaviour
 		InitInteractables ();
 
 		Start_0_01 ();
+
+		TEST_OPEN_DOORS ();
 	}
 
-	void InitFlags () {
+	void InitFlags ()
+	{
 		clickedObjectsInHospitalRoom = 0;
+		floorEntered = false;
 	}
-
-	void InitInteractables () 
+		
+	void InitInteractables ()
 	{
 		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableContractOne> ().Disable ();
 		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableContractTwo> ().Disable ();
 		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableContractThree> ().Disable ();
 		GameObject.Find ("Interactable_Pen").GetComponent<InteractablePen> ().Disable ();
+	}
+
+
+	//ONLY FOR TESTING
+	void TEST_OPEN_DOORS() {
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
+	}
+
+	//---------------------
+	// Main Game Functions
+	//---------------------
+
+	public void OnTriggerZoneEntered (string nameOfTriggerZone)
+	{
+		switch (nameOfTriggerZone) {
+		case "Trigger_Zone_Floor":
+			print ("Reached Floor");
+			Start_1_01 ();
+			break;
+		case "Trigger_Zone_Childrens_Room":
+			print ("Reached Childrens Room");
+			Start_1_06 ();
+			break;
+		default:
+			break;
+		}
 	}
 
 
@@ -53,7 +87,6 @@ public class EventManager : MonoBehaviour
 	void Start_0_01 ()
 	{
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_01", 1, 0);
-		//SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 0, 0);
 	}
 
 
@@ -143,16 +176,22 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
 	}
 
 	public void Start_0_Interactable_Door_Floor (AudioSource audioSource)
 	{
 		print ("Klicked on Door to Floor");
-		DialogueManager.instance.StartMonologue (playerAudioSource, "0_07", 1, 0);
+
+		if (!floorEntered) {
+			DialogueManager.instance.StartMonologue (playerAudioSource, "0_07", 1, 0);
+			countClickedObjectsLevel0 ();
+		} else {
+			DialogueManager.instance.StartMonologue (playerAudioSource, "1_03", 1, 0);
+		}
+
 		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1, 0);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
-		countClickedObjectsLevel0 ();
+
 	}
 
 	//------------------------------------
@@ -175,8 +214,9 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (audioSource, clipName, 1, 0);
 	}
 
-
-
+	//---------------------
+	//Act 0 Control Variables
+	//---------------------
 
 
 	//A certain number of Interactables in Level 0 need to be clicked in Order for the game to continue
@@ -188,6 +228,58 @@ public class EventManager : MonoBehaviour
 			Invoke ("Start_0_08", 10);
 		}
 	}
+
+
+	//---------------------
+	//Act 1 Main Dialogues
+	//---------------------
+
+
+	void Start_1_01 ()
+	{
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Enable ();
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().CloseDoor ();
+		floorEntered = true;
+		DialogueManager.instance.StartMonologue (playerAudioSource, "1_01", 1, 0);
+	}
+
+
+	public void Start_1_05 (AudioSource audioSource)
+	{
+		//Retromodine F - Recall Enhancer. Fair enough… what could possibly go wrong?! 	
+		DialogueManager.instance.StartMonologue (playerAudioSource, "1_05", 1, 0);
+		//SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1, 0);
+		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 0, 0);
+
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1, 0);
+		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
+	}
+
+	public void Start_1_06 ()
+	{
+		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
+		DialogueManager.instance.StartDialogue (playerAudioSource, speakerAudioSources [0], "1_06", 1, 0);
+	}
+
+
+	//------------------------------------
+	//Act 1 Interactables with Dialogue
+	//------------------------------------
+
+
+	void Start_1_Interactable_Door_Hospital (AudioSource audioSource)
+	{
+		//The experiment procedure does not require you to return to the previous room at this moment. 
+		DialogueManager.instance.StartMonologue (playerAudioSource, "1_03", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1, 0);
+	}
+
+
+
+
+
+
+
 
 
 

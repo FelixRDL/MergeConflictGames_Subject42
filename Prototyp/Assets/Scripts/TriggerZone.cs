@@ -2,21 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractablePillFloor : Interactable {
+public class TriggerZone : MonoBehaviour {
 
 	private EventManager eventManager;
 
-	private AudioSource audioSource;
 
 	private void Start() {
 		GameObject go = GameObject.Find("EventManager");
 		eventManager = (EventManager) go.GetComponent(typeof(EventManager));
-		audioSource = GetComponent<AudioSource>();
 	}
 
-	public override void OnInteraction ()
+	void OnTriggerEnter ()
 	{
-		eventManager.Start_1_05 (audioSource);
+		eventManager.OnTriggerZoneEntered (gameObject.name);
+		Destroy (gameObject);
 	}
-
 }

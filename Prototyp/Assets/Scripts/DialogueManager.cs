@@ -8,10 +8,15 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
 
+	public GameObject[] speakers;
 	public AudioClip[] audioSources;
 	public Dictionary<string, AudioClip> audioClips;
 
 	private const float RATE = 44100.0f;
+
+	private AudioSource playerAudioSource;
+	private AudioSource testManagerAlterEgoAudioSource;
+	private AudioSource[] speakerAudioSources;
 
 	private AudioSource audioSource;
 
@@ -28,6 +33,13 @@ public class DialogueManager : MonoBehaviour
 
 	void Awake ()
 	{
+		InitSingleton ();
+		InitAudioSources ();
+		InitAudioClipDictionary ();
+	}
+
+	private void InitSingleton ()
+	{
 		if (instance == null) {
 			instance = this;
 		} else if (instance != this) {
@@ -35,12 +47,23 @@ public class DialogueManager : MonoBehaviour
 		}
 
 		DontDestroyOnLoad (gameObject);
-
-		createDictionary ();
-
 	}
 
-	private void createDictionary ()
+	private void InitAudioSources ()
+	{
+		playerAudioSource = GameObject.FindGameObjectWithTag ("Player").GetComponent<AudioSource> ();
+
+		if (speakers.Length > 0) {
+			speakerAudioSources = new AudioSource[speakers.Length];
+			for (int i = 0; i < speakers.Length; i++) {
+				speakerAudioSources [i] = speakers [i].GetComponent<AudioSource> ();
+			} 
+		} else {
+			print ("No speakers linked with the DialogueManager!");
+		}
+	}
+
+	private void InitAudioClipDictionary ()
 	{
 		audioClips = new Dictionary<string, AudioClip> ();
 
@@ -64,7 +87,7 @@ public class DialogueManager : MonoBehaviour
 		nextSubtitle = 0;
 
 		//2. Load subtitles from file
-		initSubtitles(clipName);
+		initSubtitles (clipName);
 
 		//3. Play Audio
 		audioSource.PlayDelayed (delay);
@@ -72,7 +95,8 @@ public class DialogueManager : MonoBehaviour
 
 	}
 
-	public void StartDialogue(AudioSource s, AudioSource v, string clipName, float volume, float delay) {
+	public void StartDialogue (AudioSource s, AudioSource v, string clipName, float volume, float delay)
+	{
 		//1. Reset data
 		audioSource = s;
 		audioSource.volume = volume;
@@ -88,21 +112,30 @@ public class DialogueManager : MonoBehaviour
 		nextSubtitle = 0;
 
 		//2. Load subtitles from file
-		initSubtitles(clipName);
+		initSubtitles (clipName);
 
 		//3. Play Audio
 		audioSource.PlayDelayed (delay);
 		additionalAudioSource.PlayDelayed (delay);
 	}
 
-	private void initSubtitles (string clipName) {
+	public void StartDialogueBetweenSAndA (string clipName, float volume, float delay)
+	{
+
+	}
+
+
+
+	private void initSubtitles (string clipName)
+	{
 		TextAsset temp = Resources.Load ("Dialogues/" + clipName) as TextAsset;
 		string[] fileLines = temp.text.Split ('\n');
 
+
 		for (int i = 0; i < fileLines.Length; i++) {
 			string currentLine = fileLines [i];
-			if (currentLine.Length == 0 || !currentLine.Contains("|")) {
-				print("Untertiteldatei " + clipName + " falsch formatiert in Zeile: " + i);
+			if (currentLine.Length == 0 || !currentLine.Contains ("|")) {
+				print ("Untertiteldatei " + clipName + " falsch formatiert in Zeile: " + i + ". Enthält Zeile ein '|' ? -> " + currentLine.Contains ("|"));
 				break;
 			}
 

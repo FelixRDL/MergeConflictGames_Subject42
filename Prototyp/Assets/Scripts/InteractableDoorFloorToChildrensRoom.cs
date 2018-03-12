@@ -16,8 +16,7 @@ public class InteractableDoorFloorToChildrensRoom : Interactable {
 
 	public override void OnInteraction ()
 	{
-		//eventManager.Start_0_Interactable_Door_Floor ();
-		OpenDoor ();
+		
 	}
 
 	public void OpenDoor() {
