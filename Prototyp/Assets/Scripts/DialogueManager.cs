@@ -10,7 +10,8 @@ public class DialogueManager : MonoBehaviour
 
 	public GameObject[] speakers;
 	public AudioClip[] audioSources;
-	public Dictionary<string, AudioClip> audioClips;
+
+	private Dictionary<string, AudioClip> audioClips;
 
 	private const float RATE = 44100.0f;
 
@@ -72,21 +73,39 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	public void StartMonologue (AudioSource source, string clipName, float volume, float delay)
+	public void StartSubjectMonologue (string clipName, float volume, float delay)
 	{
-	
-		//1. Prepare AudioSources
-		audioSource = source;
-		audioSource.volume = volume;
-		audioSource.clip = audioClips [clipName];
 
+		//1. Prepare AudioSources
+		playerAudioSource.volume = volume;
+		playerAudioSource.clip = audioClips [clipName];
+
+		audioSource = playerAudioSource;
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);
 
 		//3. Play Audio
-		audioSource.PlayDelayed (delay);
+		playerAudioSource.PlayDelayed (delay);
 
+	}
+
+	public void StartTestManagerMonologue (string clipName, float volume, float delay)
+	{
+		foreach (AudioSource source in speakerAudioSources) {
+			source.volume = volume;
+			source.clip = audioClips [clipName];
+		}
+
+		audioSource = speakerAudioSources[0];
+			
+		//2. Load subtitles from file
+		initSubtitles (clipName);
+
+		//3. Play Audio
+		foreach (AudioSource source in speakerAudioSources) {
+			source.PlayDelayed (delay);
+		}
 	}
 
 	public void StartDialogueBetweenSubjectAndTestManager (string clipName, float subjectVolume, float testManagerVolume, float delay)
@@ -99,6 +118,8 @@ public class DialogueManager : MonoBehaviour
 			source.volume = testManagerVolume;
 			source.clip = audioClips [clipName + "_v"];
 		}
+
+		audioSource = playerAudioSource;
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);
@@ -120,6 +141,8 @@ public class DialogueManager : MonoBehaviour
 			source.volume = testManagerAlterEgoVolume;
 			source.clip = audioClips [clipName + "_a"];
 		}
+
+		audioSource = playerAudioSource;
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);
