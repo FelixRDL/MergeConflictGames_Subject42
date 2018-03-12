@@ -20,7 +20,6 @@ public class InteractableDoorHospitalToFloor : Interactable {
 	public override void OnInteraction ()
 	{
 		eventManager.Start_0_Interactable_Door_Floor (audioSource);
-
 	}
 
 	public void OpenDoor() {

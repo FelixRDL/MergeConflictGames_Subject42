@@ -23,8 +23,8 @@ public class Interactable : MonoBehaviour
 
 	void Awake ()
 	{
-		rend = GetComponent<Renderer> ();
-		rend.enabled = true;
+		//rend = GetComponent<Renderer> ();
+		//rend.enabled = true;
 
 		//outline = Resources.Load ("Custom_Outline", typeof(Material)) as Material;
 		//outlineShader = Shader.Find ("Custom/Outline");
