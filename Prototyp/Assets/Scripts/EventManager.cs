@@ -46,10 +46,10 @@ public class EventManager : MonoBehaviour
 		
 	void InitInteractables ()
 	{
-		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableContractOne> ().Disable ();
-		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableContractTwo> ().Disable ();
-		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableContractThree> ().Disable ();
-		GameObject.Find ("Interactable_Pen").GetComponent<InteractablePen> ().Disable ();
+		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableObject> ().Disable ();
+		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableObject> ().Disable ();
+		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableObject> ().Disable ();
+		GameObject.Find ("Interactable_Pen").GetComponent<InteractableObject> ().Disable ();
 	}
 
 
@@ -78,6 +78,62 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	public void OnInteractableClicked (string nameOfInteractable, AudioSource audioSource, InteractableObject interactable)
+	{
+		switch (nameOfInteractable) {
+		case "Interactable_Window":
+			Start_0_Interactable_Window (interactable);
+			break;
+		case "Interactable_Medical_Devices":
+			Start_0_Interactable_Medical_Devices (interactable);
+			break;
+		case "Interactable_Picture_Frame_Hospital":
+			Start_0_Interactable_Picture_Frame (interactable);
+			break;
+		case "Interactable_Mirror_Bath":
+			Start_0_Interactable_Bath_Mirror (interactable);
+			break;
+		case "Interactable_Contracts":
+			Start_0_Interactable_Contracts (interactable);
+			break;
+		case "Interactable_Contract_01":
+			Start_0_Interactable_Contract_One (interactable);
+			break;
+		case "Interactable_Contract_02":
+			Start_0_Interactable_Contract_Two (interactable);
+			break;
+		case "Interactable_Contract_03":
+			Start_0_Interactable_Contract_Three (interactable);
+			break;
+		case "Interactable_Pen":
+			Start_0_Interactable_Pen (audioSource, interactable);
+			break;
+		case "Interactable_Rubber_Duck":
+			Start_0_Interactable_Rubber_Duck (audioSource);
+			break;
+		case "Interactable_Pill_Floor":
+			Start_1_05_Interactable_Pill_Floor (audioSource, interactable);
+			break;
+		case "Interactable_Wooden_Train_Happy":
+			Start_1_Interactable_Wooden_Train (interactable);
+			break;
+		case "Interactable_Frame_Family":
+			Start_1_Interactable_Frame_Family (interactable);
+			break;
+		case "Interactable_Frame_Dog":
+			Start_1_Interactable_Frame_Dog (interactable);
+			break;
+		case "Interactable_Frame_Teddy":
+			Start_1_Interactable_Frame_Teddy (interactable);
+			break;
+		case "Interactable_Light_Switch":
+			Start_1_Interactable_Light_Switch (audioSource, interactable);
+			break;
+		default:
+			break;
+		}
+	}
+
 
 
 	//---------------------
@@ -92,85 +148,85 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_08 ()
 	{
-		DialogueManager.instance.StartDialogue (playerAudioSource, speakerAudioSources [0], "0_08", 1, 0);
-		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableContractOne> ().Enable ();
-		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableContractTwo> ().Enable ();
-		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableContractThree> ().Enable ();
-		GameObject.Find ("Interactable_Pen").GetComponent<InteractablePen> ().Enable ();
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08", 1,1, 0);
+		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableObject> ().Enable ();
+		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableObject> ().Enable ();
+		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableObject> ().Enable ();
+		GameObject.Find ("Interactable_Pen").GetComponent<InteractableObject> ().Enable ();
 	}
 
 	//---------------------
 	//Act 0 Interactables with Dialogue
 	//---------------------
 
-	public void Start_0_Interactable_Window ()
+	void Start_0_Interactable_Window (InteractableObject interactable)
 	{
 		print ("Klicked on Window in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_02", 1, 0);
 		countClickedObjectsLevel0 ();
-		GameObject.Find ("Interactable_Window").GetComponent<InteractableWindowHospitalRoom> ().Disable ();
+		interactable.Disable ();
 	}
 
-	public void Start_0_Interactable_Medical_Devices ()
+	void Start_0_Interactable_Medical_Devices (InteractableObject interactable)
 	{
 		print ("Klicked on Medical Devices in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_03", 1, 0);
 		countClickedObjectsLevel0 ();
-		GameObject.Find ("Interactable_Medical_Devices").GetComponent<InteractableMedicalDevices> ().Disable ();
+		interactable.Disable ();
 	}
 
-	public void Start_0_Interactable_Picture_Frame ()
+	void Start_0_Interactable_Picture_Frame (InteractableObject interactable)
 	{
 		print ("Klicked on Picture Frame in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_04", 1, 0);
 		countClickedObjectsLevel0 ();
-		GameObject.Find ("Interactable_Picture_Frame_Hospital").GetComponent<InteractablePictureFrameHospital> ().Disable ();
+		interactable.Disable ();
 	}
 
-	public void Start_0_Interactable_Bath_Mirror ()
+	void Start_0_Interactable_Bath_Mirror (InteractableObject interactable)
 	{
 		print ("Klicked on Mirror in Bath");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_05", 1, 0);
 		countClickedObjectsLevel0 ();
-		GameObject.Find ("Interactable_Mirror_Bath").GetComponent<InteractableBathMirror> ().Disable ();
+		interactable.Disable ();
 	}
 
-	public void Start_0_Interactable_Contracts ()
+	void Start_0_Interactable_Contracts (InteractableObject interactable)
 	{
 		print ("Klicked on Contracts in Hospital");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_06", 1, 0);
 		countClickedObjectsLevel0 ();
-		GameObject.Find ("Interactable_Contracts").GetComponent<InteractableContracts> ().Disable ();
-
+		interactable.Disable ();
+		//GameObject.Find ("Interactable_Contracts").GetComponent<InteractableContracts> ().Disable ();
 
 		//player.GetComponent<Player> ().CameraZoom ();
 	}
 
-	public void Start_0_Interactable_Contract_One ()
+	void Start_0_Interactable_Contract_One (InteractableObject interactable)
 	{
 		print ("Klicked on Contract One");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_13", 1, 0);
-		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableContractOne> ().Disable ();
+		interactable.Disable ();
 	}
 
-	public void Start_0_Interactable_Contract_Two ()
+	void Start_0_Interactable_Contract_Two (InteractableObject interactable)
 	{
 		print ("Klicked on Contract One");
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_14", 1, 0);
-		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableContractTwo> ().Disable ();
+		interactable.Disable ();
 	}
 
-	public void Start_0_Interactable_Contract_Three ()
+	void Start_0_Interactable_Contract_Three (InteractableObject interactable)
 	{
 		print ("Klicked on Contract One");
-		DialogueManager.instance.StartDialogue (playerAudioSource, speakerAudioSources [0], "0_15", 1, 0);
-		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableContractThree> ().Disable ();
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
+		interactable.Disable ();
 	}
 
-	public void Start_0_Interactable_Pen (AudioSource audioSource)
+	void Start_0_Interactable_Pen (AudioSource audioSource, InteractableObject interactable)
 	{
 		print ("Klicked on Pen");
-		GameObject.Find ("Interactable_Pen").GetComponent<InteractablePen> ().Disable ();
+		interactable.Disable ();
 		DialogueManager.instance.StartMonologue (playerAudioSource, "0_17", 1, 0);
 
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
@@ -206,7 +262,7 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().Disable ();
 	}
 
-	public void Start_0_Interactable_Rubber_Duck (AudioSource audioSource)
+	void Start_0_Interactable_Rubber_Duck (AudioSource audioSource)
 	{
 		print ("Klicked on Rubber Duck");
 		System.Random random = new System.Random ();
@@ -220,7 +276,7 @@ public class EventManager : MonoBehaviour
 
 
 	//A certain number of Interactables in Level 0 need to be clicked in Order for the game to continue
-	private void countClickedObjectsLevel0 ()
+	void countClickedObjectsLevel0 ()
 	{
 		clickedObjectsInHospitalRoom++;
 		print (clickedObjectsInHospitalRoom);
@@ -244,21 +300,23 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	public void Start_1_05 (AudioSource audioSource)
+	void Start_1_05_Interactable_Pill_Floor (AudioSource audioSource, InteractableObject interactable)
 	{
 		//Retromodine F - Recall Enhancer. Fair enough… what could possibly go wrong?! 	
 		DialogueManager.instance.StartMonologue (playerAudioSource, "1_05", 1, 0);
 		//SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1, 0);
+		interactable.Disable ();
+
 		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 0, 0);
 
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1, 0);
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
 	}
 
-	public void Start_1_06 ()
+	void Start_1_06 ()
 	{
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
-		DialogueManager.instance.StartDialogue (playerAudioSource, speakerAudioSources [0], "1_06", 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_06", 1, 1, 0);
 	}
 
 
@@ -267,11 +325,40 @@ public class EventManager : MonoBehaviour
 	//------------------------------------
 
 
-	void Start_1_Interactable_Door_Hospital (AudioSource audioSource)
+	void Start_1_Interactable_Doors_On_Floor () {
+
+	}
+
+	void Start_1_Interactable_Wooden_Train (InteractableObject interactable) 
 	{
-		//The experiment procedure does not require you to return to the previous room at this moment. 
-		DialogueManager.instance.StartMonologue (playerAudioSource, "1_03", 1, 0);
-		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1, 0);
+		interactable.Disable ();
+		DialogueManager.instance.StartMonologue (playerAudioSource, "1_09", 1, 0);
+	}
+
+	void Start_1_Interactable_Frame_Family (InteractableObject interactable) 
+	{
+		interactable.Disable ();
+		DialogueManager.instance.StartMonologue (playerAudioSource, "1_10", 1, 0);
+	}
+
+	void Start_1_Interactable_Frame_Dog (InteractableObject interactable) 
+	{
+		interactable.Disable ();
+		DialogueManager.instance.StartMonologue (playerAudioSource, "1_11", 1, 0);
+	}
+
+	void Start_1_Interactable_Frame_Teddy (InteractableObject interactable) 
+	{
+		interactable.Disable ();
+		DialogueManager.instance.StartMonologue (playerAudioSource, "1_12", 1, 0);
+	}
+
+	void Start_1_Interactable_Light_Switch (AudioSource audioSource, InteractableObject interactable)
+	{
+		interactable.Disable ();
+		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 0, 0);
+
+		ToggleChildrensRoomDarkPhase ();
 	}
 
 
@@ -287,7 +374,7 @@ public class EventManager : MonoBehaviour
 
 	void ToggleChildrensRoomDarkPhase ()
 	{
-		GameObject ceilingParent = GameObject.Find ("CeilingLightGroup");
+		GameObject ceilingParent = GameObject.Find ("Ceiling_Lights_Childrens_Room");
 		for (int i = 0; i < ceilingParent.transform.childCount; i++) {
 			Transform lamp = ceilingParent.gameObject.transform.GetChild (i);
 			lamp.gameObject.SetActive (!lamp.gameObject.activeSelf);
@@ -317,13 +404,13 @@ public class EventManager : MonoBehaviour
 			cube.gameObject.SetActive (!cube.gameObject.activeSelf);
 		}
 
-		GameObject happyTrainTracks = GameObject.Find ("HappyTrainTracks");
+		GameObject happyTrainTracks = GameObject.Find ("Interactable_Wooden_Train_Happy");
 		for (int i = 0; i < happyTrainTracks.transform.childCount; i++) {
 			Transform trainTrackPiece = happyTrainTracks.gameObject.transform.GetChild (i);
 			trainTrackPiece.gameObject.SetActive (!trainTrackPiece.gameObject.activeSelf);
 		}
 
-		GameObject sadTrainTracks = GameObject.Find ("SadTrainTracks");
+		GameObject sadTrainTracks = GameObject.Find ("Wooden_Train_Sad");
 		for (int i = 0; i < sadTrainTracks.transform.childCount; i++) {
 			Transform trainTrackPiece = sadTrainTracks.gameObject.transform.GetChild (i);
 			trainTrackPiece.gameObject.SetActive (!trainTrackPiece.gameObject.activeSelf);

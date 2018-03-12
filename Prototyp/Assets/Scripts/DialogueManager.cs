@@ -75,16 +75,11 @@ public class DialogueManager : MonoBehaviour
 	public void StartMonologue (AudioSource source, string clipName, float volume, float delay)
 	{
 	
-		//1. Reset data
+		//1. Prepare AudioSources
 		audioSource = source;
 		audioSource.volume = volume;
-
 		audioSource.clip = audioClips [clipName];
 
-		subtitleTimings = new List<float> ();
-		subtitleText = new List<string> ();
-
-		nextSubtitle = 0;
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);
@@ -92,45 +87,66 @@ public class DialogueManager : MonoBehaviour
 		//3. Play Audio
 		audioSource.PlayDelayed (delay);
 
-
 	}
 
-	public void StartDialogue (AudioSource s, AudioSource v, string clipName, float volume, float delay)
+	public void StartDialogueBetweenSubjectAndTestManager (string clipName, float subjectVolume, float testManagerVolume, float delay)
 	{
-		//1. Reset data
-		audioSource = s;
-		audioSource.volume = volume;
-		audioSource.clip = audioClips [clipName + "_s"];
+		//1. Prepare AudioSources
+		playerAudioSource.volume = subjectVolume;
+		playerAudioSource.clip = audioClips [clipName + "_s"];
 
-		AudioSource additionalAudioSource = v;
-		additionalAudioSource.volume = volume;
-		additionalAudioSource.clip = audioClips [clipName + "_v"];
-
-		subtitleTimings = new List<float> ();
-		subtitleText = new List<string> ();
-
-		nextSubtitle = 0;
+		foreach (AudioSource source in speakerAudioSources) {
+			source.volume = testManagerVolume;
+			source.clip = audioClips [clipName + "_v"];
+		}
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);
 
 		//3. Play Audio
 		audioSource.PlayDelayed (delay);
-		additionalAudioSource.PlayDelayed (delay);
+		foreach (AudioSource source in speakerAudioSources) {
+			source.PlayDelayed (delay);
+		}
 	}
 
-	public void StartDialogueBetweenSAndA (string clipName, float volume, float delay)
+	public void StartDialogueBetweenSubjectAndTestManagerAlterEgo (string clipName, float subjectVolume, float testManagerAlterEgoVolume, float delay)
 	{
+		//1. Prepare AudioSources
+		playerAudioSource.volume = subjectVolume;
+		playerAudioSource.clip = audioClips [clipName + "_s"];
 
+		foreach (AudioSource source in speakerAudioSources) {
+			source.volume = testManagerAlterEgoVolume;
+			source.clip = audioClips [clipName + "_a"];
+		}
+
+		//2. Load subtitles from file
+		initSubtitles (clipName);
+
+		//3. Play Audio
+		audioSource.PlayDelayed (delay);
+		foreach (AudioSource source in speakerAudioSources) {
+			source.PlayDelayed (delay);
+		}
 	}
 
 
 
 	private void initSubtitles (string clipName)
 	{
-		TextAsset temp = Resources.Load ("Dialogues/" + clipName) as TextAsset;
-		string[] fileLines = temp.text.Split ('\n');
+		subtitleTimings = new List<float> ();
+		subtitleText = new List<string> ();
+		nextSubtitle = 0;
 
+		TextAsset temp = Resources.Load ("Dialogues/" + clipName) as TextAsset;
+
+		if (temp.text == null) {
+			print ("Error in reading subtitle File");
+			return;
+		}
+
+		string[] fileLines = temp.text.Split ('\n');
 
 		for (int i = 0; i < fileLines.Length; i++) {
 			string currentLine = fileLines [i];

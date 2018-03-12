@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractablePillFloor : Interactable {
+public class InteractableObject : Interactable {
 
 	private EventManager eventManager;
-
 	private AudioSource audioSource;
 
 	private void Start() {
 		GameObject go = GameObject.Find("EventManager");
 		eventManager = (EventManager) go.GetComponent(typeof(EventManager));
-		audioSource = GetComponent<AudioSource>();
+		if (GetComponent<AudioSource> () != null) {
+			audioSource = GetComponent<AudioSource> ();
+		} else {
+			audioSource = null;
+		}
 	}
+
 
 	public override void OnInteraction ()
 	{
-		eventManager.Start_1_05 (audioSource);
+		eventManager.OnInteractableClicked (gameObject.name, audioSource, gameObject.GetComponent<InteractableObject>());
 	}
-
 }
