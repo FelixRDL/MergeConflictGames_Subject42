@@ -163,9 +163,9 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Pen").GetComponent<InteractableObject> ().Enable ();
 	}
 
-	//---------------------
+	//----------------------------------
 	//Act 0 Interactables with Dialogue
-	//---------------------
+	//----------------------------------
 
 	void Start_0_Interactable_Window (InteractableObject interactable)
 	{

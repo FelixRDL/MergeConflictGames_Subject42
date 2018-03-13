@@ -16,8 +16,9 @@ public class DialogueManager : MonoBehaviour
 	private const float RATE = 44100.0f;
 
 	private AudioSource playerAudioSource;
-	private AudioSource testManagerAlterEgoAudioSource;
 	private AudioSource[] speakerAudioSources;
+	private AudioSource testManagerAlterEgoAudioSource;
+	private AudioSource friendAudioSource;
 
 	private AudioSource audioSource;
 
@@ -62,6 +63,8 @@ public class DialogueManager : MonoBehaviour
 		} else {
 			print ("No speakers linked with the DialogueManager!");
 		}
+
+		//friendAudioSource = ...
 	}
 
 	private void InitAudioClipDictionary ()
@@ -72,6 +75,10 @@ public class DialogueManager : MonoBehaviour
 			audioClips.Add (clip.name, clip);
 		}
 	}
+
+	//--------------------------
+	//Functions for Monologues
+	//--------------------------
 
 	public void StartSubjectMonologue (string clipName, float volume, float delay)
 	{
@@ -89,6 +96,7 @@ public class DialogueManager : MonoBehaviour
 		playerAudioSource.PlayDelayed (delay);
 
 	}
+		
 
 	public void StartTestManagerMonologue (string clipName, float volume, float delay)
 	{
@@ -107,6 +115,27 @@ public class DialogueManager : MonoBehaviour
 			source.PlayDelayed (delay);
 		}
 	}
+
+	public void StartFriendMonologue (string clipName, float volume, float delay)
+	{
+
+		//1. Prepare AudioSources
+		friendAudioSource.volume = volume;
+		friendAudioSource.clip = audioClips [clipName];
+
+		audioSource = friendAudioSource;
+
+		//2. Load subtitles from file
+		initSubtitles (clipName);
+
+		//3. Play Audio
+		friendAudioSource.PlayDelayed (delay);
+
+	}
+
+	//--------------------------
+	//Functions for Dialogues
+	//--------------------------
 
 	public void StartDialogueBetweenSubjectAndTestManager (string clipName, float subjectVolume, float testManagerVolume, float delay)
 	{
@@ -152,6 +181,25 @@ public class DialogueManager : MonoBehaviour
 		foreach (AudioSource source in speakerAudioSources) {
 			source.PlayDelayed (delay);
 		}
+	}
+
+	public void StartDialogueBetweenSubjectAndFriend (string clipName, float subjectVolume, float friendVolume, float delay)
+	{
+		//1. Prepare AudioSources
+		playerAudioSource.volume = subjectVolume;
+		playerAudioSource.clip = audioClips [clipName + "_s"];
+
+		friendAudioSource.volume = friendVolume;
+		friendAudioSource.clip = audioClips [clipName + "_f"];
+
+		audioSource = playerAudioSource;
+
+		//2. Load subtitles from file
+		initSubtitles (clipName);
+
+		//3. Play Audio
+		audioSource.PlayDelayed (delay);
+		friendAudioSource.PlayDelayed (delay);
 	}
 
 
