@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 public class EventManager : MonoBehaviour
 {
 
+	//Flags for Level 1
 	private int clickedObjectsInHospitalRoom;
 	private int clickedObjectsInChildrensRoom;
 	private bool floorEntered;
+
+	//Flags for Level 2
+	private bool playerHasPasscode;
 
 	//---------------------
 	//EventManager Init
@@ -16,23 +20,30 @@ public class EventManager : MonoBehaviour
 
 	void Start ()
 	{
+		if (SceneManager.GetActiveScene().name == "Level1") {
+			InitFlagsLevel1 ();
+			InitInteractablesLevel1 ();
 
-		InitFlags ();
-		InitInteractables ();
+			Start_0_01 ();
 
-		Start_0_01 ();
+			TEST_OPEN_DOORS_LEVEL1 ();
+		}
 
-		TEST_OPEN_DOORS ();
+		if (SceneManager.GetActiveScene().name == "Level2") {
+			
+		}
+
+
 	}
 
-	void InitFlags ()
+	void InitFlagsLevel1 ()
 	{
 		clickedObjectsInHospitalRoom = 0;
 		clickedObjectsInChildrensRoom = 0;
 		floorEntered = false;
 	}
 
-	void InitInteractables ()
+	void InitInteractablesLevel1 ()
 	{
 		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableObject> ().Disable ();
 		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableObject> ().Disable ();
@@ -40,9 +51,16 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Pen").GetComponent<InteractableObject> ().Disable ();
 	}
 
+	void InitFlagsLevel2 ()
+	{
+		playerHasPasscode = false;
+	}
+
+
+
 
 	//ONLY FOR TESTING
-	void TEST_OPEN_DOORS ()
+	void TEST_OPEN_DOORS_LEVEL1 ()
 	{
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
 	}
@@ -70,6 +88,7 @@ public class EventManager : MonoBehaviour
 	public void OnInteractableClicked (string nameOfInteractable, AudioSource audioSource, InteractableObject interactable)
 	{
 		switch (nameOfInteractable) {
+		//Level 1 Interactables:
 		case "Interactable_Window":
 			Start_0_Interactable_Window (interactable);
 			break;
@@ -136,12 +155,20 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Door_Childrens_Room_To_Garden":
 			Start_1_Interactable_Door_Childrens_Room_To_Garden (audioSource, interactable);
 			break;
-
+		//Level 2 Interactables:
+		case "Interactable_Keypad":
+			Start_2_Interactable_Keypad (interactable);
+			break;
+		case "Interactable_DJ_Console":
+			Start_2_Interactable_DJ_Console ();
+			break;
+		case "Interactable_Pill_Stage_01":
+			Start_2_04 (interactable);
+			break;
 		default:
 			break;
 		}
 	}
-
 
 
 	//---------------------
@@ -442,6 +469,119 @@ public class EventManager : MonoBehaviour
 		SceneManager.LoadScene ("Level2");
 	}
 
+
+	//---------------------
+	//Act 2 Main Dialogues
+	//---------------------
+
+	void Start_2_01 () {
+		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
+	}
+
+	void Start_2_04 (InteractableObject interactable) {
+		//Pille 1
+
+		//DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
+		interactable.Disable();
+
+		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0, 0);
+
+		CreateHoleInHoardings ();
+	}
+
+	void Start_2_08 () {
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1, 0);
+	}
+
+	void Start_2_11 () {
+		//Hier eigentlich Alter Ego am Reden -> Anpassen!
+		DialogueManager.instance.StartSubjectMonologue ("2_11", 1, 0);
+	}
+
+	void Start_2_12 () {
+		DialogueManager.instance.StartSubjectMonologue ("2_12", 1, 0);
+	}
+
+	void Start_2_13 () {
+		//Hier eigentlich Alter Ego am Reden -> Anpassen!
+		DialogueManager.instance.StartSubjectMonologue ("2_13", 1, 0);
+	}
+
+	void Start_2_14 () {
+		DialogueManager.instance.StartSubjectMonologue ("2_14", 1, 0);
+	}
+
+	void Start_2_15 () {
+		DialogueManager.instance.StartFriendMonologue ("2_15", 1, 0);
+	}
+
+	void Start_2_16 () {
+		DialogueManager.instance.StartSubjectMonologue ("2_16", 1, 0);
+	}
+
+	void Start_2_18 () {
+		//Wenn Spieler zu lange nicht die Pille nimmt.
+		DialogueManager.instance.StartTestManagerMonologue ("2_18", 1, 0);
+	}
+
+	void Start_2_19 () {
+		//Pille 2
+	}
+
+
+	//...
+
+
+	void Start_2_31 () {
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_31", 1, 1, 0);
+	}
+
+	//----------------------------------
+	//Act 2 Interactables with Dialogue
+	//----------------------------------
+
+	void Start_2_Interactable_Keypad (InteractableObject interactable) {
+		if (!playerHasPasscode) {
+			DialogueManager.instance.StartSubjectMonologue ("2_03", 1, 0);
+		} else {
+			Start_2_31 ();
+		}
+		interactable.Disable ();
+	}
+
+	void Start_2_Interactable_Lying_Junkies () {
+		DialogueManager.instance.StartSubjectMonologue ("2_06", 1, 0);
+	}
+
+	void Start_2_Dancing_People () {
+		DialogueManager.instance.StartSubjectMonologue ("2_07", 1, 0);
+	}
+
+	void Start_2_Interactable_DJ_Console () {
+		DialogueManager.instance.StartSubjectMonologue ("2_17", 1, 0);
+	}
+
+	void Start_2_Interactable_Note_Passcode () {
+		DialogueManager.instance.StartSubjectMonologue ("2_30", 1, 0);
+	}
+
+
+
+	//------------------------------------
+	//Act 2 Interactables without Dialogue
+	//------------------------------------
+
+
+
+
+
+	void CreateHoleInHoardings () {
+		GameObject hoardings = GameObject.Find ("Hoardings_Dynamic");
+		for (int i = 0; i < hoardings.transform.childCount; i++) {
+			Transform hoarding = hoardings.gameObject.transform.GetChild (i);
+			hoarding.gameObject.SetActive (!hoarding.gameObject.activeSelf);
+		}
+	}
 
 
 

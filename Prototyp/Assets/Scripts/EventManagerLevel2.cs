@@ -13,13 +13,10 @@ public class EventManagerLevel2 : MonoBehaviour {
 
 	void Start ()
 	{
-
 		InitFlags ();
 		InitInteractables ();
 
-
-
-
+		Start_2_01 ();
 	}
 
 	void InitFlags ()
@@ -49,7 +46,11 @@ public class EventManagerLevel2 : MonoBehaviour {
 	public void OnInteractableClicked (string nameOfInteractable, AudioSource audioSource, InteractableObject interactable)
 	{
 		switch (nameOfInteractable) {
-		case "A":
+		case "Interactable_Keypad":
+			Start_2_Interactable_Keypad ();
+			break;
+		case "Interactable_DJ_Console":
+			Start_2_Interactable_DJ_Console ();
 			break;
 		default:
 			break;
@@ -64,6 +65,7 @@ public class EventManagerLevel2 : MonoBehaviour {
 
 	void Start_2_01 () {
 		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
+		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0, 0);
 	}
 
 	void Start_2_04 () {
@@ -104,6 +106,10 @@ public class EventManagerLevel2 : MonoBehaviour {
 		//Wenn Spieler zu lange nicht die Pille nimmt.
 		DialogueManager.instance.StartTestManagerMonologue ("2_18", 1, 0);
 	}
+
+
+
+
 
 	void Start_2_31 () {
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_31", 1, 1, 0);
