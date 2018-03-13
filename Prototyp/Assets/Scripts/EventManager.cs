@@ -30,7 +30,9 @@ public class EventManager : MonoBehaviour
 		}
 
 		if (SceneManager.GetActiveScene().name == "Level2") {
-			
+
+			InitFlagsLevel2 ();
+			Start_2_01 ();
 		}
 
 
@@ -155,15 +157,25 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Door_Childrens_Room_To_Garden":
 			Start_1_Interactable_Door_Childrens_Room_To_Garden (audioSource, interactable);
 			break;
+
 		//Level 2 Interactables:
 		case "Interactable_Keypad":
 			Start_2_Interactable_Keypad (interactable);
 			break;
 		case "Interactable_DJ_Console":
-			Start_2_Interactable_DJ_Console ();
+			Start_2_Interactable_DJ_Console (interactable);
 			break;
-		case "Interactable_Pill_Stage_01":
+		case "Interactable_Pill_01":
 			Start_2_04 (interactable);
+			break;
+		case "Interactable_Dancer":
+			Start_2_Dancing_People (interactable);
+			break;
+		case "Interactable_Dancer_On_Floor":
+			Start_2_Interactable_Dancers_On_Floor (interactable);
+			break;
+		case "Interactable_Friend_Fence":
+			Start_2_08 (interactable);
 			break;
 		default:
 			break;
@@ -481,15 +493,16 @@ public class EventManager : MonoBehaviour
 	void Start_2_04 (InteractableObject interactable) {
 		//Pille 1
 
-		//DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
 		interactable.Disable();
 
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0, 0);
 
-		CreateHoleInHoardings ();
+		SwitchHoardings ();
+		SwitchRaveElements ();
 	}
 
-	void Start_2_08 () {
+	void Start_2_08 (InteractableObject interactable) {
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1, 0);
 	}
 
@@ -549,20 +562,24 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 	}
 
-	void Start_2_Interactable_Lying_Junkies () {
+	void Start_2_Interactable_Dancers_On_Floor (InteractableObject interactable) {
 		DialogueManager.instance.StartSubjectMonologue ("2_06", 1, 0);
+		interactable.Disable ();
 	}
 
-	void Start_2_Dancing_People () {
+	void Start_2_Dancing_People (InteractableObject interactable) {
 		DialogueManager.instance.StartSubjectMonologue ("2_07", 1, 0);
+		interactable.Disable ();
 	}
 
-	void Start_2_Interactable_DJ_Console () {
+	void Start_2_Interactable_DJ_Console (InteractableObject interactable) {
 		DialogueManager.instance.StartSubjectMonologue ("2_17", 1, 0);
+		interactable.Disable ();
 	}
 
-	void Start_2_Interactable_Note_Passcode () {
+	void Start_2_Interactable_Note_Passcode (InteractableObject interactable) {
 		DialogueManager.instance.StartSubjectMonologue ("2_30", 1, 0);
+		interactable.Disable ();
 	}
 
 
@@ -575,11 +592,19 @@ public class EventManager : MonoBehaviour
 
 
 
-	void CreateHoleInHoardings () {
+	void SwitchHoardings () {
 		GameObject hoardings = GameObject.Find ("Hoardings_Dynamic");
 		for (int i = 0; i < hoardings.transform.childCount; i++) {
 			Transform hoarding = hoardings.gameObject.transform.GetChild (i);
 			hoarding.gameObject.SetActive (!hoarding.gameObject.activeSelf);
+		}
+	}
+
+	void SwitchRaveElements () {
+		GameObject rave = GameObject.Find ("Rave");
+		for (int i = 0; i < rave.transform.childCount; i++) {
+			Transform raveElement = rave.gameObject.transform.GetChild (i);
+			raveElement.gameObject.SetActive (!raveElement.gameObject.activeSelf);
 		}
 	}
 

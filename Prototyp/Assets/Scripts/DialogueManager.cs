@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
 {
 
 	public GameObject[] speakers;
+	public GameObject[] friends;
 	public AudioClip[] audioSources;
 
 	private Dictionary<string, AudioClip> audioClips;
@@ -18,7 +19,7 @@ public class DialogueManager : MonoBehaviour
 	private AudioSource playerAudioSource;
 	private AudioSource[] speakerAudioSources;
 	private AudioSource testManagerAlterEgoAudioSource;
-	private AudioSource friendAudioSource;
+	private AudioSource[] friendAudioSources;
 
 	private AudioSource audioSource;
 
@@ -60,12 +61,16 @@ public class DialogueManager : MonoBehaviour
 			for (int i = 0; i < speakers.Length; i++) {
 				speakerAudioSources [i] = speakers [i].GetComponent<AudioSource> ();
 			} 
-		} else {
-			print ("No speakers linked with the DialogueManager!");
 		}
 
-		//friendAudioSource = ...
+		if (friends.Length > 0) {
+			friendAudioSources = new AudioSource[friends.Length];
+			for (int i = 0; i < friends.Length; i++) {
+				friendAudioSources [i] = friends [i].GetComponent<AudioSource> ();
+			} 
+		}
 	}
+
 
 	private void InitAudioClipDictionary ()
 	{
@@ -119,17 +124,20 @@ public class DialogueManager : MonoBehaviour
 	public void StartFriendMonologue (string clipName, float volume, float delay)
 	{
 
-		//1. Prepare AudioSources
-		friendAudioSource.volume = volume;
-		friendAudioSource.clip = audioClips [clipName];
+		foreach (AudioSource source in friendAudioSources) {
+			source.volume = volume;
+			source.clip = audioClips [clipName];
+		}
 
-		audioSource = friendAudioSource;
+		audioSource = friendAudioSources[0];
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);
 
 		//3. Play Audio
-		friendAudioSource.PlayDelayed (delay);
+		foreach (AudioSource source in friendAudioSources) {
+			source.PlayDelayed (delay);
+		}
 
 	}
 
@@ -189,8 +197,10 @@ public class DialogueManager : MonoBehaviour
 		playerAudioSource.volume = subjectVolume;
 		playerAudioSource.clip = audioClips [clipName + "_s"];
 
-		friendAudioSource.volume = friendVolume;
-		friendAudioSource.clip = audioClips [clipName + "_f"];
+		foreach (AudioSource source in friendAudioSources) {
+			source.volume = friendVolume;
+			source.clip = audioClips [clipName + "_f"];
+		}
 
 		audioSource = playerAudioSource;
 
@@ -199,7 +209,9 @@ public class DialogueManager : MonoBehaviour
 
 		//3. Play Audio
 		audioSource.PlayDelayed (delay);
-		friendAudioSource.PlayDelayed (delay);
+		foreach (AudioSource source in friendAudioSources) {
+			source.PlayDelayed (delay);
+		}
 	}
 
 
