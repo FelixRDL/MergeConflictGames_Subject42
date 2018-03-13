@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1300107768886314}
+  m_IsPrefabParent: 1
+--- !u!1 &1300107768886314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4236219801807660}
+  - component: {fileID: 95256454306591236}
+  m_Layer: 0
+  m_Name: trainHappy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1970702260967326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4812367363422000}
+  - component: {fileID: 33842013601269126}
+  - component: {fileID: 23093194471155542}
+  m_Layer: 0
+  m_Name: TrackFlatTurn_001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4236219801807660
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300107768886314}
+  m_LocalRotation: {x: -0.000000004596846, y: 0.3181128, z: -0.00000001032909, w: 0.94805294}
+  m_LocalPosition: {x: -0.9551115, y: -1.4251211, z: 2.7167363}
+  m_LocalScale: {x: 0.08571427, y: 0.08571427, z: 0.08571427}
+  m_Children:
+  - {fileID: 4812367363422000}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4812367363422000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970702260967326}
+  m_LocalRotation: {x: -0.6419161, y: 0.296553, z: -0.29655305, w: -0.64191616}
+  m_LocalPosition: {x: 12.38, y: -4.150001, z: -15.42}
+  m_LocalScale: {x: -0.8850341, y: -0.8850341, z: -0.8850341}
+  m_Children: []
+  m_Father: {fileID: 4236219801807660}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90.00001, y: 0, z: -310.408}
+--- !u!23 &23093194471155542
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970702260967326}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 6a9a3d9968ec89245a8a1853cc03a452, type: 2}
+  - {fileID: 2100000, guid: 6a9a3d9968ec89245a8a1853cc03a452, type: 2}
+  - {fileID: 2100000, guid: 6a9a3d9968ec89245a8a1853cc03a452, type: 2}
+  - {fileID: 2100000, guid: 6a9a3d9968ec89245a8a1853cc03a452, type: 2}
+  - {fileID: 2100008, guid: 43fde2e4b5347a9458caf96a438c3a18, type: 3}
+  - {fileID: 2100010, guid: 43fde2e4b5347a9458caf96a438c3a18, type: 3}
+  - {fileID: 2100012, guid: 43fde2e4b5347a9458caf96a438c3a18, type: 3}
+  - {fileID: 2100014, guid: 43fde2e4b5347a9458caf96a438c3a18, type: 3}
+  - {fileID: 2100000, guid: 6a9a3d9968ec89245a8a1853cc03a452, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &33842013601269126
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970702260967326}
+  m_Mesh: {fileID: 4300006, guid: 43fde2e4b5347a9458caf96a438c3a18, type: 3}
+--- !u!95 &95256454306591236
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300107768886314}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 43fde2e4b5347a9458caf96a438c3a18, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
