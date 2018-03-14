@@ -2109,7 +2109,7 @@ Prefab:
     - target: {fileID: 2300002, guid: 13756c1016e72ca44ae334c3465ca020, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 27c8a0d0f9b8891488463713a7657518, type: 2}
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
     - target: {fileID: 400004, guid: 13756c1016e72ca44ae334c3465ca020, type: 2}
       propertyPath: m_LocalScale.x
       value: 1
@@ -2138,6 +2138,10 @@ Prefab:
       propertyPath: m_Name
       value: Interactable_Mirror_Bath
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 13756c1016e72ca44ae334c3465ca020, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13756c1016e72ca44ae334c3465ca020, type: 2}
   m_IsPrefabParent: 0
@@ -20035,6 +20039,22 @@ Prefab:
       propertyPath: m_Name
       value: Shower
       objectReference: {fileID: 0}
+    - target: {fileID: 2300006, guid: f47c3332cc1e27e429e62f14a27f814d, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 56bff3853c73740da981a9b91fe146ab, type: 2}
+    - target: {fileID: 2300008, guid: f47c3332cc1e27e429e62f14a27f814d, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
+    - target: {fileID: 2300012, guid: f47c3332cc1e27e429e62f14a27f814d, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
+    - target: {fileID: 2300010, guid: f47c3332cc1e27e429e62f14a27f814d, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f47c3332cc1e27e429e62f14a27f814d, type: 2}
   m_IsPrefabParent: 0
@@ -33061,6 +33081,26 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: bd922f9f8a6f51542b37be6d70656405, type: 2}
+    - target: {fileID: 23000012811102610, guid: 5dc0bf2c666723042a34ac6d9e6f4bdd,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
+    - target: {fileID: 23000011033023150, guid: 5dc0bf2c666723042a34ac6d9e6f4bdd,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
+    - target: {fileID: 23000013504572268, guid: 5dc0bf2c666723042a34ac6d9e6f4bdd,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
+    - target: {fileID: 23000011845058778, guid: 5dc0bf2c666723042a34ac6d9e6f4bdd,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5dc0bf2c666723042a34ac6d9e6f4bdd, type: 2}
   m_IsPrefabParent: 0
