@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
 {
 
 	public GameObject[] speakers;
+	public GameObject[] friends;
 	public AudioClip[] audioSources;
 
 	private Dictionary<string, AudioClip> audioClips;
@@ -16,8 +17,9 @@ public class DialogueManager : MonoBehaviour
 	private const float RATE = 44100.0f;
 
 	private AudioSource playerAudioSource;
-	private AudioSource testManagerAlterEgoAudioSource;
 	private AudioSource[] speakerAudioSources;
+	private AudioSource testManagerAlterEgoAudioSource;
+	private AudioSource[] friendAudioSources;
 
 	private AudioSource audioSource;
 
@@ -59,10 +61,16 @@ public class DialogueManager : MonoBehaviour
 			for (int i = 0; i < speakers.Length; i++) {
 				speakerAudioSources [i] = speakers [i].GetComponent<AudioSource> ();
 			} 
-		} else {
-			print ("No speakers linked with the DialogueManager!");
+		}
+
+		if (friends.Length > 0) {
+			friendAudioSources = new AudioSource[friends.Length];
+			for (int i = 0; i < friends.Length; i++) {
+				friendAudioSources [i] = friends [i].GetComponent<AudioSource> ();
+			} 
 		}
 	}
+
 
 	private void InitAudioClipDictionary ()
 	{
@@ -72,6 +80,10 @@ public class DialogueManager : MonoBehaviour
 			audioClips.Add (clip.name, clip);
 		}
 	}
+
+	//--------------------------
+	//Functions for Monologues
+	//--------------------------
 
 	public void StartSubjectMonologue (string clipName, float volume, float delay)
 	{
@@ -90,6 +102,7 @@ public class DialogueManager : MonoBehaviour
 
 	}
 
+
 	public void StartTestManagerMonologue (string clipName, float volume, float delay)
 	{
 		foreach (AudioSource source in speakerAudioSources) {
@@ -97,7 +110,7 @@ public class DialogueManager : MonoBehaviour
 			source.clip = audioClips [clipName];
 		}
 
-		audioSource = speakerAudioSources[0];
+		audioSource = speakerAudioSources [0];
 			
 		//2. Load subtitles from file
 		initSubtitles (clipName);
@@ -107,6 +120,34 @@ public class DialogueManager : MonoBehaviour
 			source.PlayDelayed (delay);
 		}
 	}
+
+	public void StartFriendMonologue (string clipName, float volume, float delay)
+	{
+
+		foreach (AudioSource source in friendAudioSources) {
+			if (source != null) {
+				source.volume = volume;
+				source.clip = audioClips [clipName];
+			}
+		}
+
+		audioSource = friendAudioSources [0];
+
+		//2. Load subtitles from file
+		initSubtitles (clipName);
+
+		//3. Play Audio
+		foreach (AudioSource source in friendAudioSources) {
+			if (source != null) {
+				source.PlayDelayed (delay);
+			}
+		}
+
+	}
+
+	//--------------------------
+	//Functions for Dialogues
+	//--------------------------
 
 	public void StartDialogueBetweenSubjectAndTestManager (string clipName, float subjectVolume, float testManagerVolume, float delay)
 	{
@@ -151,6 +192,33 @@ public class DialogueManager : MonoBehaviour
 		audioSource.PlayDelayed (delay);
 		foreach (AudioSource source in speakerAudioSources) {
 			source.PlayDelayed (delay);
+		}
+	}
+
+	public void StartDialogueBetweenSubjectAndFriend (string clipName, float subjectVolume, float friendVolume, float delay)
+	{
+		//1. Prepare AudioSources
+		playerAudioSource.volume = subjectVolume;
+		playerAudioSource.clip = audioClips [clipName + "_s"];
+
+		foreach (AudioSource source in friendAudioSources) {
+			if (source != null) {
+				source.volume = friendVolume;
+				source.clip = audioClips [clipName + "_f"];
+			}
+		}
+
+		audioSource = playerAudioSource;
+
+		//2. Load subtitles from file
+		initSubtitles (clipName);
+
+		//3. Play Audio
+		audioSource.PlayDelayed (delay);
+		foreach (AudioSource source in friendAudioSources) {
+			if (source != null) {
+				source.PlayDelayed (delay);
+			}
 		}
 	}
 

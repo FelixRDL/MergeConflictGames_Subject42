@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractableObject : Interactable {
 
@@ -10,6 +11,7 @@ public class InteractableObject : Interactable {
 	private void Start() {
 		GameObject go = GameObject.Find("EventManager");
 		eventManager = (EventManager) go.GetComponent(typeof(EventManager));
+
 		if (GetComponent<AudioSource> () != null) {
 			audioSource = GetComponent<AudioSource> ();
 		} else {
