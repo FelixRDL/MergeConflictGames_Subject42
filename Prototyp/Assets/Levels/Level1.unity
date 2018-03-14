@@ -8578,11 +8578,8 @@ Transform:
   m_LocalPosition: {x: 7.785, y: -0.870415, z: 2.024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 852785291}
   - {fileID: 2102553271}
-  - {fileID: 834211926}
   - {fileID: 1929837123}
-  - {fileID: 1110800141}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11492,6 +11489,7 @@ Transform:
   - {fileID: 764807020}
   - {fileID: 138634665}
   - {fileID: 217400246}
+  - {fileID: 1110800141}
   m_Father: {fileID: 1392630968}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15152,7 +15150,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 834211925}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1149998, y: 1.8180001, z: 3.746}
+  m_LocalPosition: {x: 7.618, y: -2.012415, z: 9.937}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458457768}
@@ -15163,7 +15161,7 @@ Transform:
   - {fileID: 784352529}
   - {fileID: 1395331602}
   - {fileID: 169866391}
-  m_Father: {fileID: 479403196}
+  m_Father: {fileID: 1392630968}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840871987
@@ -15496,13 +15494,13 @@ Transform:
   m_PrefabParentObject: {fileID: 400004, guid: 60ce358767f66f842b973870c1e17ea6, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 852785293}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.49999976, w: 0.50000024}
-  m_LocalPosition: {x: -6.7779994, y: -0.669585, z: 3.299}
+  m_LocalRotation: {x: 0.00000017881393, y: -0.00000017881393, z: -0.707107, w: 0.70710665}
+  m_LocalPosition: {x: -7.955003, y: 9.990001, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 852785298}
   - {fileID: 979455931}
-  m_Father: {fileID: 479403196}
+  m_Father: {fileID: 790874767}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -89.99999, y: 0, z: -0.000015258789}
 --- !u!1 &852785292
@@ -20632,19 +20630,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 479403196}
+    m_TransformParent: {fileID: 646018076}
     m_Modifications:
     - target: {fileID: 4697089830771354, guid: 6e5dc22474664b54b87fef8610bf3c69, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.736
+      value: 4.993
       objectReference: {fileID: 0}
     - target: {fileID: 4697089830771354, guid: 6e5dc22474664b54b87fef8610bf3c69, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.9127
+      value: -1.917715
       objectReference: {fileID: 0}
     - target: {fileID: 4697089830771354, guid: 6e5dc22474664b54b87fef8610bf3c69, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.292
+      value: 7.481
       objectReference: {fileID: 0}
     - target: {fileID: 4697089830771354, guid: 6e5dc22474664b54b87fef8610bf3c69, type: 2}
       propertyPath: m_LocalRotation.x
@@ -20664,7 +20662,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4697089830771354, guid: 6e5dc22474664b54b87fef8610bf3c69, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1066459534857440, guid: 6e5dc22474664b54b87fef8610bf3c69, type: 2}
       propertyPath: m_Name
@@ -27080,6 +27078,7 @@ Transform:
   m_Children:
   - {fileID: 646018076}
   - {fileID: 1019851894}
+  - {fileID: 834211926}
   m_Father: {fileID: 264068912}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -36764,7 +36763,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 479403196}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1929837124
 BoxCollider:
@@ -40900,7 +40899,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f76cd0728fb4b44da3bf8c1494a183e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f76cd0728fb4b44da3bf8c1494a183e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
