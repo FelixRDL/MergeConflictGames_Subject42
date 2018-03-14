@@ -138,7 +138,9 @@ public class DialogueManager : MonoBehaviour
 
 		//3. Play Audio
 		foreach (AudioSource source in friendAudioSources) {
-			source.PlayDelayed (delay);
+			if (source != null) {
+				source.PlayDelayed (delay);
+			}
 		}
 
 	}
@@ -200,8 +202,10 @@ public class DialogueManager : MonoBehaviour
 		playerAudioSource.clip = audioClips [clipName + "_s"];
 
 		foreach (AudioSource source in friendAudioSources) {
-			source.volume = friendVolume;
-			source.clip = audioClips [clipName + "_f"];
+			if (source != null) {
+				source.volume = friendVolume;
+				source.clip = audioClips [clipName + "_f"];
+			}
 		}
 
 		audioSource = playerAudioSource;
@@ -212,7 +216,9 @@ public class DialogueManager : MonoBehaviour
 		//3. Play Audio
 		audioSource.PlayDelayed (delay);
 		foreach (AudioSource source in friendAudioSources) {
-			source.PlayDelayed (delay);
+			if (source != null) {
+				source.PlayDelayed (delay);
+			}
 		}
 	}
 

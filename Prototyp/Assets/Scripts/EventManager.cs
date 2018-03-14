@@ -529,7 +529,8 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0, 0);
 
 		SwitchHoardings ();
-		SwitchRaveElements ();
+		SwitchStaticRaveElements ();
+		SwitchDynamicRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Fence");
 	}
 
@@ -594,7 +595,11 @@ public class EventManager : MonoBehaviour
 		//Pille 2
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
 		DialogueManager.instance.StartSubjectMonologue ("2_19", 1, 0);
+
+		SwitchDynamicRaveElements ();
 		interactable.Destroy (0);
+
+		SoundManager.instance.StopBackgroundMusic (0);
 
 		//Schwarzblende
 
@@ -619,6 +624,8 @@ public class EventManager : MonoBehaviour
 	{
 		//Nach Aufwachen aus Blackout
 		//Garten ist wieder im Ausgangszustand, ohne Rave
+		SwitchHoardings();
+		SwitchStaticRaveElements ();
 
 		//Notiz mit Code Spawnen
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
@@ -702,9 +709,18 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void SwitchRaveElements ()
+	void SwitchStaticRaveElements ()
 	{
-		GameObject rave = GameObject.Find ("Rave");
+		GameObject rave = GameObject.Find ("Static_Rave_Elements");
+		for (int i = 0; i < rave.transform.childCount; i++) {
+			Transform raveElement = rave.gameObject.transform.GetChild (i);
+			raveElement.gameObject.SetActive (!raveElement.gameObject.activeSelf);
+		}
+	}
+
+	void SwitchDynamicRaveElements ()
+	{
+		GameObject rave = GameObject.Find ("Dynamic_Rave_Elements");
 		for (int i = 0; i < rave.transform.childCount; i++) {
 			Transform raveElement = rave.gameObject.transform.GetChild (i);
 			raveElement.gameObject.SetActive (!raveElement.gameObject.activeSelf);
