@@ -54,7 +54,6 @@ public class SoundManager : MonoBehaviour {
 
 	public void PlayBackgroundMusicLoop (string clipName, float delay, float fadeInTime)
 	{
-		print ("Start Playing " + clipName);
 		backgroundMusicSource.volume = BACKGROUND_MUSIC_VOLUME;
 		backgroundMusicSource.clip = backgroundMusicClips[clipName];
 		backgroundMusicSource.PlayDelayed (delay);

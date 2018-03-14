@@ -20,7 +20,7 @@ public class EventManager : MonoBehaviour
 
 	void Start ()
 	{
-		if (SceneManager.GetActiveScene().name == "Level1") {
+		if (SceneManager.GetActiveScene ().name == "Level1") {
 			InitFlagsLevel1 ();
 			InitInteractablesLevel1 ();
 
@@ -29,9 +29,10 @@ public class EventManager : MonoBehaviour
 			TEST_OPEN_DOORS_LEVEL1 ();
 		}
 
-		if (SceneManager.GetActiveScene().name == "Level2") {
+		if (SceneManager.GetActiveScene ().name == "Level2") {
 
 			InitFlagsLevel2 ();
+			InitInteractablesLevel2 ();
 			Start_2_01 ();
 		}
 
@@ -58,6 +59,11 @@ public class EventManager : MonoBehaviour
 		playerHasPasscode = false;
 	}
 
+	void InitInteractablesLevel2()
+	{
+		ToggleFriendOnMap ("Interactable_Friend_Dome");
+	}
+
 
 
 
@@ -75,12 +81,22 @@ public class EventManager : MonoBehaviour
 	{
 		switch (nameOfTriggerZone) {
 		case "Trigger_Zone_Floor":
-			print ("Reached Floor");
 			Start_1_01 ();
 			break;
 		case "Trigger_Zone_Childrens_Room":
-			print ("Reached Childrens Room");
 			Start_1_06 ();
+			break;
+		case "Trigger_Zone_Hole_In_Fence":
+			Start_2_12 ();
+			break;
+		case "Trigger_Zone_Follow_Friend_01":
+			Start_2_13 ();
+			break;
+		case "Trigger_Zone_Reached_Friend_01":
+			Start_2_Reached_Friend_01 ();
+			break;
+		case "Trigger_Zone_Reached_Friend_02":
+			Start_2_14 ();
 			break;
 		default:
 			break;
@@ -176,6 +192,18 @@ public class EventManager : MonoBehaviour
 			break;
 		case "Interactable_Friend_Fence":
 			Start_2_08 (interactable);
+			break;
+		case "Interactable_Pill_02":
+			Start_2_11 (interactable);
+			break;
+		case "Interactable_Friend_Dome":
+			Start_2_15 (interactable);
+			break;
+		case "Interactable_Pill_03":
+			Start_2_19 (interactable);
+			break;
+		case "Interactable_Friend_Dead":
+			Start_2_23 (interactable);
 			break;
 		default:
 			break;
@@ -486,74 +514,137 @@ public class EventManager : MonoBehaviour
 	//Act 2 Main Dialogues
 	//---------------------
 
-	void Start_2_01 () {
+	void Start_2_01 ()
+	{
 		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
 	}
 
-	void Start_2_04 (InteractableObject interactable) {
+	void Start_2_04 (InteractableObject interactable)
+	{
 		//Pille 1
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
-		interactable.Disable();
+		interactable.Disable ();
 
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0, 0);
 
 		SwitchHoardings ();
 		SwitchRaveElements ();
+		ToggleFriendOnMap ("Interactable_Friend_Fence");
 	}
 
-	void Start_2_08 (InteractableObject interactable) {
+	void Start_2_08 (InteractableObject interactable)
+	{
+		interactable.Disable ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1, 0);
 	}
 
-	void Start_2_11 () {
+	void Start_2_11 (InteractableObject interactable)
+	{
+		//Schwarzblende Starten
+
+		//SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1, 0);
+
+		interactable.Destroy (0);
+
+		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (10);
+
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
 		DialogueManager.instance.StartSubjectMonologue ("2_11", 1, 0);
 	}
 
-	void Start_2_12 () {
+	void Start_2_12 ()
+	{
 		DialogueManager.instance.StartSubjectMonologue ("2_12", 1, 0);
+		ToggleFriendOnMap ("Interactable_Friend_On_Way_01");
 	}
 
-	void Start_2_13 () {
+	void Start_2_13 ()
+	{
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
 		DialogueManager.instance.StartSubjectMonologue ("2_13", 1, 0);
 	}
 
-	void Start_2_14 () {
+	void Start_2_14 ()
+	{
 		DialogueManager.instance.StartSubjectMonologue ("2_14", 1, 0);
+		ToggleFriendOnMap ("Interactable_Friend_On_Way_02");
+		ToggleFriendOnMap ("Interactable_Friend_Dome");
 	}
 
-	void Start_2_15 () {
-		DialogueManager.instance.StartFriendMonologue ("2_15", 1, 0);
+	void Start_2_15 (InteractableObject interactable)
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15",1 , 1, 0);
+		interactable.Disable ();
 	}
 
-	void Start_2_16 () {
+	void Start_2_16 ()
+	{
 		DialogueManager.instance.StartSubjectMonologue ("2_16", 1, 0);
 	}
 
-	void Start_2_18 () {
+	void Start_2_18 ()
+	{
 		//Wenn Spieler zu lange nicht die Pille nimmt.
 		DialogueManager.instance.StartTestManagerMonologue ("2_18", 1, 0);
 	}
 
-	void Start_2_19 () {
+	void Start_2_19 (InteractableObject interactable)
+	{
 		//Pille 2
+		//Hier eigentlich Alter Ego am Reden -> Anpassen!
+		DialogueManager.instance.StartSubjectMonologue ("2_19", 1, 0);
+		interactable.Destroy (0);
+
+		//Schwarzblende
+
+		//Alle Personen hier verschwinden lassen
+		//Dome Neon entfernen und Licht anpassen
+		//Blaulicht erscheint
+
+		ToggleFriendOnMap ("Interactable_Friend_Dome");
+		ToggleFriendOnMap ("Interactable_Friend_Dead");
+	}
+
+	void Start_2_23 (InteractableObject interactable)
+	{
+		interactable.Disable ();
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_23", 1, 1, 0);
+
+		//Am Ende des Dialoges hier Blackout
+
+	}
+
+	void Start_2_28 ()
+	{
+		//Nach Aufwachen aus Blackout
+		//Garten ist wieder im Ausgangszustand, ohne Rave
+
+		//Notiz mit Code Spawnen
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
+
 	}
 
 
-	//...
-
-
-	void Start_2_31 () {
+	void Start_2_31 ()
+	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_31", 1, 1, 0);
+
+		//Am Ende des Dialogs hier Ende einleiten;
+	}
+
+	void Start_2_Reached_Friend_01 ()
+	{
+		ToggleFriendOnMap ("Interactable_Friend_On_Way_01");
+		ToggleFriendOnMap ("Interactable_Friend_On_Way_02");
 	}
 
 	//----------------------------------
 	//Act 2 Interactables with Dialogue
 	//----------------------------------
 
-	void Start_2_Interactable_Keypad (InteractableObject interactable) {
+	void Start_2_Interactable_Keypad (InteractableObject interactable)
+	{
 		if (!playerHasPasscode) {
 			DialogueManager.instance.StartSubjectMonologue ("2_03", 1, 0);
 		} else {
@@ -562,24 +653,32 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 	}
 
-	void Start_2_Interactable_Dancers_On_Floor (InteractableObject interactable) {
+	void Start_2_Interactable_Dancers_On_Floor (InteractableObject interactable)
+	{
 		DialogueManager.instance.StartSubjectMonologue ("2_06", 1, 0);
 		interactable.Disable ();
 	}
 
-	void Start_2_Dancing_People (InteractableObject interactable) {
+	void Start_2_Dancing_People (InteractableObject interactable)
+	{
 		DialogueManager.instance.StartSubjectMonologue ("2_07", 1, 0);
 		interactable.Disable ();
 	}
 
-	void Start_2_Interactable_DJ_Console (InteractableObject interactable) {
+	void Start_2_Interactable_DJ_Console (InteractableObject interactable)
+	{
 		DialogueManager.instance.StartSubjectMonologue ("2_17", 1, 0);
 		interactable.Disable ();
 	}
 
-	void Start_2_Interactable_Note_Passcode (InteractableObject interactable) {
+	void Start_2_Interactable_Note_Passcode (InteractableObject interactable)
+	{
 		DialogueManager.instance.StartSubjectMonologue ("2_30", 1, 0);
 		interactable.Disable ();
+
+		//Player now has Passcode and can interact with the Keypad again
+		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Enable ();
+		playerHasPasscode = true;
 	}
 
 
@@ -592,7 +691,10 @@ public class EventManager : MonoBehaviour
 
 
 
-	void SwitchHoardings () {
+
+
+	void SwitchHoardings ()
+	{
 		GameObject hoardings = GameObject.Find ("Hoardings_Dynamic");
 		for (int i = 0; i < hoardings.transform.childCount; i++) {
 			Transform hoarding = hoardings.gameObject.transform.GetChild (i);
@@ -600,11 +702,23 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void SwitchRaveElements () {
+	void SwitchRaveElements ()
+	{
 		GameObject rave = GameObject.Find ("Rave");
 		for (int i = 0; i < rave.transform.childCount; i++) {
 			Transform raveElement = rave.gameObject.transform.GetChild (i);
 			raveElement.gameObject.SetActive (!raveElement.gameObject.activeSelf);
+		}
+	}
+
+	void ToggleFriendOnMap (string friendName)
+	{
+		GameObject friendObject = GameObject.Find ("Friend");
+		for (int i = 0; i < friendObject.transform.childCount; i++) {
+			Transform friend = friendObject.gameObject.transform.GetChild (i);
+			if (friend.name == friendName) {
+				friend.gameObject.SetActive (!friend.gameObject.activeSelf);
+			}
 		}
 	}
 

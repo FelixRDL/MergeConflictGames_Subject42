@@ -86,6 +86,11 @@ public class Interactable : MonoBehaviour
 		}
 	}
 
+	public void Destroy(float delay){
+		OnDefocused ();
+		Destroy (gameObject, delay);
+	}
+
 	public void Enable ()
 	{
 		enabled = true;

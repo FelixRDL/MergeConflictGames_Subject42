@@ -101,7 +101,7 @@ public class DialogueManager : MonoBehaviour
 		playerAudioSource.PlayDelayed (delay);
 
 	}
-		
+
 
 	public void StartTestManagerMonologue (string clipName, float volume, float delay)
 	{
@@ -110,7 +110,7 @@ public class DialogueManager : MonoBehaviour
 			source.clip = audioClips [clipName];
 		}
 
-		audioSource = speakerAudioSources[0];
+		audioSource = speakerAudioSources [0];
 			
 		//2. Load subtitles from file
 		initSubtitles (clipName);
@@ -125,11 +125,13 @@ public class DialogueManager : MonoBehaviour
 	{
 
 		foreach (AudioSource source in friendAudioSources) {
-			source.volume = volume;
-			source.clip = audioClips [clipName];
+			if (source != null) {
+				source.volume = volume;
+				source.clip = audioClips [clipName];
+			}
 		}
 
-		audioSource = friendAudioSources[0];
+		audioSource = friendAudioSources [0];
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);
