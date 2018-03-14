@@ -22,7 +22,6 @@ public class EventManager : MonoBehaviour
 
 		Start_0_01 ();
 
-		TEST_OPEN_DOORS ();
 	}
 
 	void InitFlags ()
@@ -169,23 +168,20 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_Interactable_Window (InteractableObject interactable)
 	{
-		print ("Klicked on Window in Hospital");
 		DialogueManager.instance.StartSubjectMonologue ("0_02", 1, 0);
-		countClickedObjectsLevel0 ();
+		//countClickedObjectsLevel0 ();
 		interactable.Disable ();
 	}
 
 	void Start_0_Interactable_Medical_Devices (InteractableObject interactable)
 	{
-		print ("Klicked on Medical Devices in Hospital");
 		DialogueManager.instance.StartSubjectMonologue ("0_03", 1, 0);
-		countClickedObjectsLevel0 ();
+		//countClickedObjectsLevel0 ();
 		interactable.Disable ();
 	}
 
 	void Start_0_Interactable_Picture_Frame (InteractableObject interactable)
 	{
-		print ("Klicked on Picture Frame in Hospital");
 		DialogueManager.instance.StartSubjectMonologue ("0_04", 1, 0);
 		countClickedObjectsLevel0 ();
 		interactable.Disable ();
@@ -193,19 +189,16 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_Interactable_Bath_Mirror (InteractableObject interactable)
 	{
-		print ("Klicked on Mirror in Bath");
 		DialogueManager.instance.StartSubjectMonologue ("0_05", 1, 0);
-		countClickedObjectsLevel0 ();
+		//countClickedObjectsLevel0 ();
 		interactable.Disable ();
 	}
 
 	void Start_0_Interactable_Contracts (InteractableObject interactable)
 	{
-		print ("Klicked on Contracts in Hospital");
 		DialogueManager.instance.StartSubjectMonologue ("0_06", 1, 0);
 		countClickedObjectsLevel0 ();
 		interactable.Disable ();
-		//GameObject.Find ("Interactable_Contracts").GetComponent<InteractableContracts> ().Disable ();
 
 		//player.GetComponent<Player> ().CameraZoom ();
 	}
@@ -233,7 +226,6 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_Interactable_Pen (AudioSource audioSource, InteractableObject interactable)
 	{
-		print ("Klicked on Pen");
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
 
@@ -288,8 +280,8 @@ public class EventManager : MonoBehaviour
 	{
 		clickedObjectsInHospitalRoom++;
 		print (clickedObjectsInHospitalRoom);
-		if (clickedObjectsInHospitalRoom > 5) {
-			Invoke ("Start_0_08", 10);
+		if (clickedObjectsInHospitalRoom > 2) {
+			Invoke ("Start_0_08", 8);
 		}
 	}
 
@@ -394,7 +386,7 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 0, 0);
 
-		ToggleChildrensRoomDarkPhase ();
+		SwitchChildrooms ("Childroom_Sad","Childroom_Happy");
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_17", 1, 1, 0);
 
@@ -424,12 +416,15 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("1_23", 1, 0);
 	}
-
-
+		
 	void Start_1_Interactable_Wooden_Train_Sad (InteractableObject interactable)
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("1_24", 1, 0);
+	}
+
+	void Start_1_Interactable_Neutralizer () {
+		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
 	}
 
 	//------------------------------------
@@ -443,68 +438,18 @@ public class EventManager : MonoBehaviour
 	}
 
 
-
-
-
-
-
-
-
-
-	void ToggleChildrensRoomDarkPhase ()
-	{
-		GameObject ceilingParent = GameObject.Find ("Ceiling_Lights_Childrens_Room");
-		for (int i = 0; i < ceilingParent.transform.childCount; i++) {
-			Transform lamp = ceilingParent.gameObject.transform.GetChild (i);
-			lamp.gameObject.SetActive (!lamp.gameObject.activeSelf);
-		}
-
-		GameObject happyPaintings = GameObject.Find ("HappyPaintings");
-		for (int i = 0; i < happyPaintings.transform.childCount; i++) {
-			Transform painting = happyPaintings.gameObject.transform.GetChild (i);
-			painting.gameObject.SetActive (!painting.gameObject.activeSelf);
-		}
-
-		GameObject sadPaintings = GameObject.Find ("SadPaintings");
-		for (int i = 0; i < sadPaintings.transform.childCount; i++) {
-			Transform painting = sadPaintings.gameObject.transform.GetChild (i);
-			painting.gameObject.SetActive (!painting.gameObject.activeSelf);
-		}
-
-		GameObject happyCubes = GameObject.Find ("HappyCubes");
-		for (int i = 0; i < happyCubes.transform.childCount; i++) {
-			Transform cube = happyCubes.gameObject.transform.GetChild (i);
-			cube.gameObject.SetActive (!cube.gameObject.activeSelf);
-		}
-
-		GameObject sadCubes = GameObject.Find ("SadCubes");
-		for (int i = 0; i < sadCubes.transform.childCount; i++) {
-			Transform cube = sadCubes.gameObject.transform.GetChild (i);
-			cube.gameObject.SetActive (!cube.gameObject.activeSelf);
-		}
-
-		GameObject happyTrainTracks = GameObject.Find ("Interactable_Wooden_Train_Happy");
-		for (int i = 0; i < happyTrainTracks.transform.childCount; i++) {
-			Transform trainTrackPiece = happyTrainTracks.gameObject.transform.GetChild (i);
-			trainTrackPiece.gameObject.SetActive (!trainTrackPiece.gameObject.activeSelf);
-		}
-
-		GameObject sadTrainTracks = GameObject.Find ("Interactable_Wooden_Train_Sad");
-		for (int i = 0; i < sadTrainTracks.transform.childCount; i++) {
-			Transform trainTrackPiece = sadTrainTracks.gameObject.transform.GetChild (i);
-			trainTrackPiece.gameObject.SetActive (!trainTrackPiece.gameObject.activeSelf);
-		}
-
-		GameObject happyBottles = GameObject.Find ("HappyBottles");
-		for (int i = 0; i < happyBottles.transform.childCount; i++) {
-			Transform bottle = happyBottles.gameObject.transform.GetChild (i);
-			bottle.gameObject.SetActive (!bottle.gameObject.activeSelf);
-		}
-
-		GameObject sadBottles = GameObject.Find ("SadBottles");
-		for (int i = 0; i < sadBottles.transform.childCount; i++) {
-			Transform bottle = sadBottles.gameObject.transform.GetChild (i);
-			bottle.gameObject.SetActive (!bottle.gameObject.activeSelf);
+	void SwitchChildrooms(string roomToActivate, string RoomToDeactivate)  {
+		GameObject childrooms = GameObject.Find ("Childrooms");
+		for (int i = 0; i < childrooms.transform.childCount; i++) {
+			Transform childroom = childrooms.gameObject.transform.GetChild (i);
+			if (childroom.name == roomToActivate) {
+				childroom.gameObject.SetActive (true);
+			}
+			if (childroom.name == RoomToDeactivate) {
+				childroom.gameObject.SetActive (false);
+			}
 		}
 	}
+
+
 }
