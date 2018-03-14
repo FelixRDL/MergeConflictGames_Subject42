@@ -59,7 +59,7 @@ public class EventManager : MonoBehaviour
 		playerHasPasscode = false;
 	}
 
-	void InitInteractablesLevel2()
+	void InitInteractablesLevel2 ()
 	{
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 	}
@@ -97,6 +97,9 @@ public class EventManager : MonoBehaviour
 			break;
 		case "Trigger_Zone_Reached_Friend_02":
 			Start_2_14 ();
+			break;
+		case "Trigger_Zone_Emergency_Lights":
+			Start_2_20 ();
 			break;
 		default:
 			break;
@@ -538,6 +541,7 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1, 0);
+		TogglePillInLevel2 ("Interactable_Pill_02");
 	}
 
 	void Start_2_11 (InteractableObject interactable)
@@ -575,7 +579,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_15 (InteractableObject interactable)
 	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15",1 , 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", 1, 1, 0);
 		interactable.Disable ();
 	}
 
@@ -609,6 +613,13 @@ public class EventManager : MonoBehaviour
 
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
+
+		EnableTriggerZonesForWayBackToParkingLot ();
+	}
+
+	void Start_2_20 ()
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_20", 1, 1, 0);
 	}
 
 	void Start_2_23 (InteractableObject interactable)
@@ -624,7 +635,7 @@ public class EventManager : MonoBehaviour
 	{
 		//Nach Aufwachen aus Blackout
 		//Garten ist wieder im Ausgangszustand, ohne Rave
-		SwitchHoardings();
+		SwitchHoardings ();
 		SwitchStaticRaveElements ();
 
 		//Notiz mit Code Spawnen
@@ -734,6 +745,29 @@ public class EventManager : MonoBehaviour
 			Transform friend = friendObject.gameObject.transform.GetChild (i);
 			if (friend.name == friendName) {
 				friend.gameObject.SetActive (!friend.gameObject.activeSelf);
+			}
+		}
+	}
+
+	void TogglePillInLevel2 (string pillName)
+	{
+		GameObject pills = GameObject.Find ("Pills");
+		for (int i = 0; i < pills.transform.childCount; i++) {
+			Transform pill = pills.gameObject.transform.GetChild (i);
+			if (pill.name == pillName) {
+				pill.gameObject.SetActive (!pill.gameObject.activeSelf);
+			}
+		}
+	}
+
+	void EnableTriggerZonesForWayBackToParkingLot ()
+	{
+		GameObject triggerZones = GameObject.Find ("Trigger_Zones");
+
+		for (int i = 0; i < triggerZones.transform.childCount; i++) {
+			Transform triggerZone = triggerZones.gameObject.transform.GetChild (i);
+			if (triggerZone.name == "Trigger_Zone_Emergency_Lights") {
+				triggerZone.gameObject.SetActive (true);
 			}
 		}
 	}
