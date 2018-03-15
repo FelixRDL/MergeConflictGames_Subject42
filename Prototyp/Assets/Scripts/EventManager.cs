@@ -706,6 +706,7 @@ public class EventManager : MonoBehaviour
 	void Start_2_20 ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_20", 1, 1, 0);
+		ToggleEmergencyLight ();
 	}
 
 	void Start_2_23 (InteractableObject interactable)
@@ -726,6 +727,7 @@ public class EventManager : MonoBehaviour
 		SwitchHoardings ();
 		SwitchStaticRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
+		ToggleEmergencyLight ();
 
 		//Notiz mit Code Spawnen
 		SpawnNoteCodeForKeypad ();
@@ -869,6 +871,17 @@ public class EventManager : MonoBehaviour
 			Transform triggerZone = triggerZones.gameObject.transform.GetChild (i);
 			if (triggerZone.name == "Trigger_Zone_Emergency_Lights") {
 				triggerZone.gameObject.SetActive (true);
+			}
+		}
+	}
+
+	void ToggleEmergencyLight () {
+		GameObject lightEffects = GameObject.Find ("Light_Effects");
+
+		for (int i = 0; i < lightEffects.transform.childCount; i++) {
+			Transform emergencyLight = lightEffects.gameObject.transform.GetChild (i);
+			if (emergencyLight.name == "Emergency_Light") {
+				emergencyLight.gameObject.SetActive (!emergencyLight.gameObject.activeSelf);
 			}
 		}
 	}
