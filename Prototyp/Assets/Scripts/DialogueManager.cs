@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour
 			Destroy (gameObject);
 		}
 
-		DontDestroyOnLoad (gameObject);
+		//DontDestroyOnLoad (gameObject);
 	}
 
 	private void InitAudioSources ()

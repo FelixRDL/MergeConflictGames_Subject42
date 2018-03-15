@@ -27,7 +27,7 @@ public class EventManager : MonoBehaviour
 
 			Start_0_01 ();
 
-			TEST_OPEN_DOORS_LEVEL1 ();
+			//TEST_OPEN_DOORS_LEVEL1 ();
 		}
 
 		if (SceneManager.GetActiveScene ().name == "Level2") {
@@ -90,6 +90,7 @@ public class EventManager : MonoBehaviour
 			Start_1_06 ();
 			break;
 		case "Trigger_Zone_Childrens_Room_Sober":
+			print ("Trigger");
 			Start_1_30 ();
 			break;
 		
@@ -403,9 +404,7 @@ public class EventManager : MonoBehaviour
 
 		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 0, 4);
 
-
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1, 0);
-		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
+		Invoke ("OpenDoorFloorToChildrensRoom", 8);
 	}
 
 	void Start_1_06 ()
@@ -423,19 +422,14 @@ public class EventManager : MonoBehaviour
 	{
 		DialogueManager.instance.StartTestManagerMonologue ("1_25", 1, 0);
 
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1, 0);
-		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
+		Invoke ("OpenDoorFloorToChildrensRoom", 2);
 
 		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
 	}
 
-	void Start_1_27 ()
-	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_27", 1, 1, 0);
-	}
-
 	void Start_1_30 ()
 	{
+		print ("1_30");
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_30", 1, 1, 0);
 	}
 
@@ -533,9 +527,13 @@ public class EventManager : MonoBehaviour
 
 	void Start_1_Interactable_Neutralizer (InteractableObject interactable) {
 		interactable.Disable ();
+		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
 		SoundManager.instance.StopBackgroundMusic (0);
-		Start_1_27 ();
+		Invoke ("OpenDoorFloorToChildrensRoom", 13);
+
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_27", 1, 1, 0);
+
 	}
 
 	//------------------------------------
@@ -577,6 +575,13 @@ public class EventManager : MonoBehaviour
 		if (clickedObjectsInChildrensRoomSad == 3) {
 			Invoke ("Start_1_25", 8);
 		}
+	}
+
+
+	void OpenDoorFloorToChildrensRoom() {
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1, 0);
+		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
+		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
 	}
 
 
