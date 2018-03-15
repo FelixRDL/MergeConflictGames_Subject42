@@ -40,7 +40,9 @@ public class Interactable : MonoBehaviour
 			
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
-				showHint = true;
+				if (!DialogueManager.instance.IsDialoguePlaying ()) {
+					showHint = true;
+				}
 				crosshair.SetHighlight ();
 
 				//defaultMaterial = rend.material;
@@ -70,8 +72,13 @@ public class Interactable : MonoBehaviour
 		if (enabled) {
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
-				OnInteraction ();
+				if (!DialogueManager.instance.IsDialoguePlaying ()) {
+					OnInteraction ();
+				} else {
+					print ("Warte mit Interaktion, weil Dialog läuft!");
+				}
 			}
+			OnDefocused ();
 		}
 	}
 
@@ -86,7 +93,8 @@ public class Interactable : MonoBehaviour
 		}
 	}
 
-	public void Destroy(float delay){
+	public void Destroy (float delay)
+	{
 		OnDefocused ();
 		Destroy (gameObject, delay);
 	}

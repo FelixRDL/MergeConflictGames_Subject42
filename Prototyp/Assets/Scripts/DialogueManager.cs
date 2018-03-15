@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
 	private AudioSource testManagerAlterEgoAudioSource;
 	private AudioSource[] friendAudioSources;
 
+	//Main Audio Source for Control Purposes
 	private AudioSource audioSource;
 
 	private List<float> subtitleTimings = new List<float> ();
@@ -168,7 +169,9 @@ public class DialogueManager : MonoBehaviour
 		//3. Play Audio
 		audioSource.PlayDelayed (delay);
 		foreach (AudioSource source in speakerAudioSources) {
-			source.PlayDelayed (delay);
+			if (source.isActiveAndEnabled) {
+				source.PlayDelayed (delay);
+			}
 		}
 	}
 
@@ -283,6 +286,10 @@ public class DialogueManager : MonoBehaviour
 			}
 		}
 
+	}
+
+	public bool IsDialoguePlaying () {
+		return audioSource.isPlaying;
 	}
 
 }
