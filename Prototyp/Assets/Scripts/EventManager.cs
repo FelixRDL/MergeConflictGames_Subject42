@@ -13,6 +13,7 @@ public class EventManager : MonoBehaviour
 	private bool floorEntered;
 
 	//Flags for Level 2
+	private bool playerHasTakenPill03;
 	private bool playerHasPasscode;
 
 	//---------------------
@@ -58,6 +59,7 @@ public class EventManager : MonoBehaviour
 
 	void InitFlagsLevel2 ()
 	{
+		playerHasTakenPill03 = false;
 		playerHasPasscode = false;
 	}
 
@@ -224,6 +226,9 @@ public class EventManager : MonoBehaviour
 			break;
 		case "Interactable_Friend_Dead":
 			Start_2_23 (interactable);
+			break;
+		case "Interactable_Note_Code_For_Keypad":
+			Start_2_Interactable_Note_Code_For_Keypad (interactable);
 			break;
 		default:
 			break;
@@ -485,7 +490,7 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 0, 0);
 
-		SwitchChildrooms ("Childroom_Sad","Childroom_Happy");
+		SwitchChildrooms ("Childroom_Sad", "Childroom_Happy");
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_17", 1, 1, 0);
 	}
@@ -525,7 +530,8 @@ public class EventManager : MonoBehaviour
 		countClickedObjectsChildrensRoomSad ();
 	}
 
-	void Start_1_Interactable_Neutralizer (InteractableObject interactable) {
+	void Start_1_Interactable_Neutralizer (InteractableObject interactable)
+	{
 		interactable.Disable ();
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
@@ -578,7 +584,8 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	void OpenDoorFloorToChildrensRoom() {
+	void OpenDoorFloorToChildrensRoom ()
+	{
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1, 0);
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
@@ -614,7 +621,7 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1, 0);
-		TogglePillInLevel2 ("Interactable_Pill_02");
+		Invoke ("TogglePill02InLevel2", 5);
 	}
 
 	void Start_2_11 (InteractableObject interactable)
@@ -654,6 +661,8 @@ public class EventManager : MonoBehaviour
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", 1, 1, 0);
 		interactable.Disable ();
+
+		Invoke ("Start_2_18", 30);
 	}
 
 	void Start_2_16 ()
@@ -664,12 +673,16 @@ public class EventManager : MonoBehaviour
 	void Start_2_18 ()
 	{
 		//Wenn Spieler zu lange nicht die Pille nimmt.
-		DialogueManager.instance.StartTestManagerMonologue ("2_18", 1, 0);
+		if (!playerHasTakenPill03) {
+			DialogueManager.instance.StartTestManagerMonologue ("2_18", 1, 0);
+		}
 	}
 
 	void Start_2_19 (InteractableObject interactable)
 	{
-		//Pille 2
+		//Pille 3
+		playerHasTakenPill03 = true;
+
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
 		DialogueManager.instance.StartSubjectMonologue ("2_19", 1, 0);
 
@@ -702,18 +715,20 @@ public class EventManager : MonoBehaviour
 
 		//Am Ende des Dialoges hier Blackout
 
+		Invoke ("Start_2_23_While_Blackout", 23);
+
 	}
 
-	void Start_2_28 ()
+	void Start_2_23_While_Blackout ()
 	{
 		//Nach Aufwachen aus Blackout
 		//Garten ist wieder im Ausgangszustand, ohne Rave
 		SwitchHoardings ();
 		SwitchStaticRaveElements ();
+		ToggleFriendOnMap ("Interactable_Friend_Dead");
 
 		//Notiz mit Code Spawnen
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
-
+		SpawnNoteCodeForKeypad ();
 	}
 
 
@@ -722,6 +737,11 @@ public class EventManager : MonoBehaviour
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_31", 1, 1, 0);
 
 		//Am Ende des Dialogs hier Ende einleiten;
+		Invoke("TEST_KILL_GAME", 15);
+	}
+
+	void TEST_KILL_GAME () {
+		Application.Quit ();
 	}
 
 	void Start_2_Reached_Friend_01 ()
@@ -762,14 +782,22 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 	}
 
-	void Start_2_Interactable_Note_Passcode (InteractableObject interactable)
+	void Start_2_Interactable_Note_Code_For_Keypad (InteractableObject interactable)
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_30", 1, 0);
+
+		Invoke ("Start_2_Interactable_Note_Code_For_Keypad_Part_Two", 5);
+
 		interactable.Disable ();
 
 		//Player now has Passcode and can interact with the Keypad again
-		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Enable ();
 		playerHasPasscode = true;
+		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Enable ();
+	}
+
+	//TEMPORÄR, später Dialoge 28 und 30 zusammenlegen
+	void Start_2_Interactable_Note_Code_For_Keypad_Part_Two () {
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
 	}
 
 
@@ -822,12 +850,12 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void TogglePillInLevel2 (string pillName)
+	void TogglePill02InLevel2 ()
 	{
 		GameObject pills = GameObject.Find ("Pills");
 		for (int i = 0; i < pills.transform.childCount; i++) {
 			Transform pill = pills.gameObject.transform.GetChild (i);
-			if (pill.name == pillName) {
+			if (pill.name == "Interactable_Pill_02") {
 				pill.gameObject.SetActive (!pill.gameObject.activeSelf);
 			}
 		}
@@ -845,8 +873,21 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	void SpawnNoteCodeForKeypad ()
+	{
+		GameObject keypad = GameObject.Find ("Keypad");
 
-	void SwitchChildrooms(string roomToActivate, string RoomToDeactivate)  {
+		for (int i = 0; i < keypad.transform.childCount; i++) {
+			Transform noteWithCode = keypad.gameObject.transform.GetChild (i);
+			if (noteWithCode.name == "Interactable_Note_Code_For_Keypad") {
+				noteWithCode.gameObject.SetActive (true);
+			}
+		}
+	}
+
+
+	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
+	{
 		GameObject childrooms = GameObject.Find ("Childrooms");
 		for (int i = 0; i < childrooms.transform.childCount; i++) {
 			Transform childroom = childrooms.gameObject.transform.GetChild (i);
