@@ -8,9 +8,15 @@ ModelImporter:
     100000: //RootNode
     100002: WallModule
     100004: Window
+    100006: WallModule_001
+    100008: WallExterior
+    100010: WallInterior
     400000: //RootNode
     400002: WallModule
     400004: Window
+    400006: WallModule_001
+    400008: WallExterior
+    400010: WallInterior
     2100000: Wall_Grid_Metal__Untitled
     2100002: Wall_Window_Glass__Untitled
     2100004: Wall_Window_Wood__Untitled
@@ -21,12 +27,22 @@ ModelImporter:
     2300000: //RootNode
     2300002: WallModule
     2300004: Window
+    2300006: WallModule_001
+    2300008: WallExterior
+    2300010: WallInterior
     3300000: //RootNode
     3300002: WallModule
     3300004: Window
+    3300006: WallModule_001
+    3300008: WallExterior
+    3300010: WallInterior
     4300000: Plane_002
     4300002: Window
     4300004: WallModule
+    4300006: WallModule_001
+    4300008: WallModule_Window
+    4300010: WallExterior
+    4300012: WallInterior
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
