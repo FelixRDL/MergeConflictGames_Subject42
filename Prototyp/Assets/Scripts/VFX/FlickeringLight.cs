@@ -8,20 +8,35 @@ public class FlickeringLight : MonoBehaviour {
 	public List<GameObject> Children;
 	// whether the light currently is switched on or off
 	// 
-	private bool isOn = false;
+	private bool isOn = true;
+
+	public Material materialOn;
+	public Material materialOff;
+	public Material materialPlastic;
+
+	private AudioSource flickerOneShot;
+
+	private MeshRenderer meshRenderer;
+
 
 	// intervals between flickering (in millis)
-	public int[] flickerIntervals = {100, 400, 200, 400, 100, 1000};
+	public float[] flickerIntervals = {.1f, .4f, .2f, .4f, .1f, 1};
 	private int flickerIndex = 0;
 	// interval, that the light will be off (in millis)
-	public int offIntervall = 200;
+	public float offIntervall = .2f;
 
-	private float passedTime = Time.deltaTime;
+	private float passedTime = 0;
 
+	public void Start(){
+		meshRenderer = gameObject.GetComponent <MeshRenderer>();
+		flickerOneShot = gameObject.GetComponent<AudioSource> ();
+	}
 
 	public void Update(){
 		passedTime += Time.deltaTime;
-		if (isOn) {
+		//print ("passed time " + passedTime);
+
+		if (isOn == true) {
 			if (passedTime >= flickerIntervals [flickerIndex]) {
 				// reset passedTime
 				passedTime = passedTime % flickerIntervals [flickerIndex];
@@ -50,11 +65,19 @@ public class FlickeringLight : MonoBehaviour {
 
 
 	private void onSwitchOn(){
+		// TODO trigger sound
+		Material[] materials= GetComponent<Renderer>().materials;
+		materials [1] = materialOn;
+		GetComponent<Renderer> ().materials = materials;
 		toggleChildren ();
-		isOn = !isOn;		
+		isOn = !isOn;	
+		flickerOneShot.Play ();
 	}
 
 	private void onSwitchOff(){
+		Material[] materials= GetComponent<Renderer>().materials;
+		materials [1] = materialOff;
+		GetComponent<Renderer> ().materials = materials;
 		toggleChildren ();
 		isOn = !isOn;
 	}
