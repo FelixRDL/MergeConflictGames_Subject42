@@ -2147,7 +2147,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.505
+  m_Volume: 0.73
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7089,6 +7089,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300006, guid: 56f9cf56af47a5b4dbf89caae485e3f7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 74425ac177db3b3418caa5322d56f19f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56f9cf56af47a5b4dbf89caae485e3f7, type: 3}
   m_IsPrefabParent: 0
@@ -7120,6 +7124,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.5
+--- !u!82 &357880775
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357880769}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7fd2be5da9964bd43a543dd4144cf0ee, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.028
+  m_Pitch: 1.51
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.584
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &358532274
 Prefab:
   m_ObjectHideFlags: 0
@@ -9282,7 +9366,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.505
+  m_Volume: 0.73
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9351,6 +9435,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &435186349 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100008, guid: 56f9cf56af47a5b4dbf89caae485e3f7, type: 3}
+  m_PrefabInternal: {fileID: 357880768}
+--- !u!114 &435186353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 435186349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a50f6115bbbb34b95ad7428441c086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uvAnimationTileX: 2
+  uvAnimationTileY: 2
+  framesPerSecond: 20
 --- !u!1 &437641246
 GameObject:
   m_ObjectHideFlags: 0
@@ -15152,7 +15254,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c3fb256ca9d5a4d4daccffc02d70fc94, type: 2}
+  - {fileID: 2100000, guid: e82b6f41710e1084f90d74d990c251c6, type: 2}
   - {fileID: 2100000, guid: 7564e463b0daeba4fa7be9054f232006, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24707,7 +24809,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c3fb256ca9d5a4d4daccffc02d70fc94, type: 2}
+  - {fileID: 2100000, guid: e82b6f41710e1084f90d74d990c251c6, type: 2}
   - {fileID: 2100000, guid: 7564e463b0daeba4fa7be9054f232006, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -25902,7 +26004,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.853
+  m_Volume: 0.73
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -27752,7 +27854,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.853
+  m_Volume: 0.73
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -38533,7 +38635,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.853
+  m_Volume: 0.73
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -39571,7 +39673,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.853
+  m_Volume: 0.73
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -40038,7 +40140,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c3fb256ca9d5a4d4daccffc02d70fc94, type: 2}
+  - {fileID: 2100000, guid: e82b6f41710e1084f90d74d990c251c6, type: 2}
   - {fileID: 2100000, guid: 7564e463b0daeba4fa7be9054f232006, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -40819,7 +40921,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c3fb256ca9d5a4d4daccffc02d70fc94, type: 2}
+  - {fileID: 2100000, guid: e82b6f41710e1084f90d74d990c251c6, type: 2}
   - {fileID: 2100000, guid: 7564e463b0daeba4fa7be9054f232006, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -51260,7 +51362,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c3fb256ca9d5a4d4daccffc02d70fc94, type: 2}
+  - {fileID: 2100000, guid: e82b6f41710e1084f90d74d990c251c6, type: 2}
   - {fileID: 2100000, guid: 7564e463b0daeba4fa7be9054f232006, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -51550,7 +51652,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c3fb256ca9d5a4d4daccffc02d70fc94, type: 2}
+  - {fileID: 2100000, guid: e82b6f41710e1084f90d74d990c251c6, type: 2}
   - {fileID: 2100000, guid: 7564e463b0daeba4fa7be9054f232006, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
