@@ -14,7 +14,6 @@ public class EventManager : MonoBehaviour
 
 	//Flags for Level 2
 	private bool playerHasTakenPill03;
-	private bool playerHasPasscode;
 
 	//---------------------
 	//EventManager Init
@@ -60,7 +59,6 @@ public class EventManager : MonoBehaviour
 	void InitFlagsLevel2 ()
 	{
 		playerHasTakenPill03 = false;
-		playerHasPasscode = false;
 	}
 
 	void InitInteractablesLevel2 ()
@@ -77,10 +75,13 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
 	}
 
+	#region Level1 Act 0
+
 	//---------------------
 	// Main Game Functions
 	//---------------------
 
+	//Switch Statement for all Ingame Triggers.  
 	public void OnTriggerZoneEntered (string nameOfTriggerZone)
 	{
 		switch (nameOfTriggerZone) {
@@ -92,7 +93,6 @@ public class EventManager : MonoBehaviour
 			Start_1_06 ();
 			break;
 		case "Trigger_Zone_Childrens_Room_Sober":
-			print ("Trigger");
 			Start_1_30 ();
 			break;
 		
@@ -111,8 +111,6 @@ public class EventManager : MonoBehaviour
 			break;
 		case "Trigger_Zone_Emergency_Lights":
 			Start_2_20 ();
-			break;
-		default:
 			break;
 		}
 	}
@@ -196,6 +194,7 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Neutralizer":
 			Start_1_Interactable_Neutralizer (interactable);
 			break;
+
 		//Level 2 Interactables:
 		case "Interactable_Keypad":
 			Start_2_Interactable_Keypad (interactable);
@@ -230,8 +229,6 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Note_Code_For_Keypad":
 			Start_2_Interactable_Note_Code_For_Keypad (interactable);
 			break;
-		default:
-			break;
 		}
 	}
 
@@ -255,9 +252,9 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Pen").GetComponent<InteractableObject> ().Enable ();
 	}
 
-	//---------------------
+	//----------------------------------
 	//Act 0 Interactables with Dialogue
-	//---------------------
+	//----------------------------------
 
 	void Start_0_Interactable_Window (InteractableObject interactable)
 	{
@@ -293,6 +290,7 @@ public class EventManager : MonoBehaviour
 		countClickedObjectsLevel0 ();
 		interactable.Disable ();
 
+		//Maybe add possibility here of zooming in on a contract.
 		//player.GetComponent<Player> ().CameraZoom ();
 	}
 
@@ -363,9 +361,9 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (audioSource, clipName, 1, 0);
 	}
 
-	//---------------------
-	//Act 0 Control Variables
-	//---------------------
+	//---------------------------
+	//Act 0 Additional Functions
+	//---------------------------
 
 
 	//A certain number of Interactables in Level 0 need to be clicked in Order for the game to continue
@@ -378,8 +376,10 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	#endregion
 
 
+	#region Level1 Act1
 
 	//---------------------
 	//Act 1 Main Dialogues
@@ -392,8 +392,6 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().CloseDoor ();
 		floorEntered = true;
 		DialogueManager.instance.StartSubjectMonologue ("1_01", 1, 0);
-
-		//Disable Cameras in Hospital for improved performance.
 	}
 
 
@@ -559,9 +557,9 @@ public class EventManager : MonoBehaviour
 		SceneManager.LoadScene ("Level2");
 	}
 
-	//---------------------
-	//Act 1 Control Variables
-	//---------------------
+	//---------------------------
+	//Act 1 Additional Functions
+	//---------------------------
 
 	//A certain number of Interactables in Level 1 Childrens Room Happy need to be clicked in Order for the game to continue
 	void countClickedObjectsChildrensRoomHappy ()
@@ -591,6 +589,24 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
 	}
 
+	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
+	{
+		GameObject childrooms = GameObject.Find ("Childrooms");
+		for (int i = 0; i < childrooms.transform.childCount; i++) {
+			Transform childroom = childrooms.gameObject.transform.GetChild (i);
+			if (childroom.name == roomToActivate) {
+				childroom.gameObject.SetActive (true);
+			}
+			if (childroom.name == RoomToDeactivate) {
+				childroom.gameObject.SetActive (false);
+			}
+		}
+	}
+
+
+	#endregion
+
+	#region Level2 Act2
 
 
 	//---------------------
@@ -600,14 +616,28 @@ public class EventManager : MonoBehaviour
 	void Start_2_01 ()
 	{
 		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
+		StartCoroutine (TestCoroutine ());
+	}
+
+	IEnumerator TestCoroutine () {
+
+		//GameObject.Find ("MainCamera").GetComponent<CustomBlur> ();
+
+
+		int i = 0;
+		while (i <= 10) {
+			i += 1;
+			print (i);
+			yield return new WaitForSeconds (1);
+		}
 	}
 
 	void Start_2_04 (InteractableObject interactable)
 	{
 		//Pille 1
 
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
 		interactable.Disable ();
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
 
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0, 0);
 
@@ -659,8 +689,8 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_15 (InteractableObject interactable)
 	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", 1, 1, 0);
 		interactable.Disable ();
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", 1, 1, 0);
 
 		Invoke ("Start_2_18", 30);
 	}
@@ -681,32 +711,35 @@ public class EventManager : MonoBehaviour
 	void Start_2_19 (InteractableObject interactable)
 	{
 		//Pille 3
+		interactable.Destroy (0);
+
 		playerHasTakenPill03 = true;
 
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
 		DialogueManager.instance.StartSubjectMonologue ("2_19", 1, 0);
 
 		SwitchDynamicRaveElements ();
-		interactable.Destroy (0);
 
 		SoundManager.instance.StopBackgroundMusic (0);
 
 		//Schwarzblende
 
-		//Alle Personen hier verschwinden lassen
+
 		//Dome Neon entfernen und Licht anpassen
-		//Blaulicht erscheint
+		//Dunkle Personen hier togglen
+		//DJ Interactable deaktivieren.
 
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 
 		EnableTriggerZonesForWayBackToParkingLot ();
+
+		ToggleEmergencyLight ();
 	}
 
 	void Start_2_20 ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_20", 1, 1, 0);
-		ToggleEmergencyLight ();
 	}
 
 	void Start_2_23 (InteractableObject interactable)
@@ -733,19 +766,6 @@ public class EventManager : MonoBehaviour
 		SpawnNoteCodeForKeypad ();
 	}
 
-
-	void Start_2_31 ()
-	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_31", 1, 1, 0);
-
-		//Am Ende des Dialogs hier Ende einleiten;
-		Invoke("TEST_KILL_GAME", 15);
-	}
-
-	void TEST_KILL_GAME () {
-		Application.Quit ();
-	}
-
 	void Start_2_Reached_Friend_01 ()
 	{
 		ToggleFriendOnMap ("Interactable_Friend_On_Way_01");
@@ -758,48 +778,39 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_Interactable_Keypad (InteractableObject interactable)
 	{
-		if (!playerHasPasscode) {
-			DialogueManager.instance.StartSubjectMonologue ("2_03", 1, 0);
-		} else {
-			Start_2_31 ();
-		}
 		interactable.Disable ();
+		DialogueManager.instance.StartSubjectMonologue ("2_03", 1, 0);
 	}
 
 	void Start_2_Interactable_Dancers_On_Floor (InteractableObject interactable)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_06", 1, 0);
 		interactable.Disable ();
+		DialogueManager.instance.StartSubjectMonologue ("2_06", 1, 0);
 	}
 
 	void Start_2_Dancing_People (InteractableObject interactable)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_07", 1, 0);
 		interactable.Disable ();
+		DialogueManager.instance.StartSubjectMonologue ("2_07", 1, 0);
 	}
 
 	void Start_2_Interactable_DJ_Console (InteractableObject interactable)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_17", 1, 0);
 		interactable.Disable ();
+		DialogueManager.instance.StartSubjectMonologue ("2_17", 1, 0);
 	}
 
 	void Start_2_Interactable_Note_Code_For_Keypad (InteractableObject interactable)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_30", 1, 0);
-
-		Invoke ("Start_2_Interactable_Note_Code_For_Keypad_Part_Two", 5);
-
 		interactable.Disable ();
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
 
-		//Player now has Passcode and can interact with the Keypad again
-		playerHasPasscode = true;
-		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Enable ();
+		//Am Ende des Dialogs hier Ende einleiten; Später hier Endscreen und Abspann zeigen.
+		Invoke("TEST_KILL_GAME", 35);
 	}
 
-	//TEMPORÄR, später Dialoge 28 und 30 zusammenlegen
-	void Start_2_Interactable_Note_Code_For_Keypad_Part_Two () {
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
+	void TEST_KILL_GAME () {
+		Application.Quit ();
 	}
 
 
@@ -808,11 +819,11 @@ public class EventManager : MonoBehaviour
 	//Act 2 Interactables without Dialogue
 	//------------------------------------
 
+	//Put additional Interactables here.
 
-
-
-
-
+	//---------------------------
+	//Act 2 Additional Functions
+	//---------------------------
 
 	void SwitchHoardings ()
 	{
@@ -898,19 +909,6 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-
-	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
-	{
-		GameObject childrooms = GameObject.Find ("Childrooms");
-		for (int i = 0; i < childrooms.transform.childCount; i++) {
-			Transform childroom = childrooms.gameObject.transform.GetChild (i);
-			if (childroom.name == roomToActivate) {
-				childroom.gameObject.SetActive (true);
-			}
-			if (childroom.name == RoomToDeactivate) {
-				childroom.gameObject.SetActive (false);
-			}
-		}
-	}
+	#endregion
 
 }
