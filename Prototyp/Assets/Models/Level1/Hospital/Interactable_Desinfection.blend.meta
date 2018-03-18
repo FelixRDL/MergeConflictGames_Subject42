@@ -10,31 +10,47 @@ ModelImporter:
     100004: Cube_002
     100006: //RootNode
     100008: Handhold
+    100010: Dispenser_001
+    100012: Content
+    100014: Dispenser
     400000: Cube
     400002: Cube_001
     400004: Cube_002
     400006: //RootNode
     400008: Handhold
+    400010: Dispenser_001
+    400012: Content
+    400014: Dispenser
     2100000: metal
     2100002: Bottle
     2100004: plastic_outside
     2100006: Bottle__desinfection_png
     2100008: Bottle_Blank__desinfection_png
+    2100010: Bottle_Blank
+    2100012: Bottle_Liquid
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
     2300006: //RootNode
     2300008: Handhold
+    2300010: Dispenser_001
+    2300012: Content
+    2300014: Dispenser
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
     3300006: //RootNode
     3300008: Handhold
+    3300010: Dispenser_001
+    3300012: Content
+    3300014: Dispenser
     4300000: Cube_002
     4300002: Cube_001
     4300004: Cube
     4300006: Dispenser
     4300008: Handhold
+    4300010: Dispenser_001
+    4300012: Content
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
