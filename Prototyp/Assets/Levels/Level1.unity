@@ -90,7 +90,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112001074, guid: 21ad97062065a7147ad6ae58e6ee5d59,
+  m_LightingDataAsset: {fileID: 112001308, guid: 21ad97062065a7147ad6ae58e6ee5d59,
     type: 2}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -4342,7 +4342,7 @@ Prefab:
     - target: {fileID: 2300000, guid: a9ee59831e95749518e0afb245a83adc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 72f55fbe339939f469cc092999448574, type: 2}
+      objectReference: {fileID: 2100000, guid: 63861afcad7389b45bc8cccf995efb1c, type: 2}
     - target: {fileID: 2300000, guid: a9ee59831e95749518e0afb245a83adc, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -14577,7 +14577,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 660402379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -0.133}
+  m_LocalPosition: {x: 0, y: 0, z: 0.197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1531466299}
@@ -14591,10 +14591,10 @@ Light:
   m_GameObject: {fileID: 660402379}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 0
+  m_Type: 2
   m_Color: {r: 1, g: 0.9229209, b: 0.7205882, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 5.2
   m_SpotAngle: 162
   m_CookieSize: 10
   m_Shadows:
@@ -23865,7 +23865,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1042070704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.000000052154064, z: -0.1330001}
+  m_LocalPosition: {x: 0, y: -0.000000022351742, z: 0.19700009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1725915528}
@@ -23879,10 +23879,10 @@ Light:
   m_GameObject: {fileID: 1042070704}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 0
+  m_Type: 2
   m_Color: {r: 1, g: 0.9229209, b: 0.7205882, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 5.2
   m_SpotAngle: 162
   m_CookieSize: 10
   m_Shadows:
@@ -24480,8 +24480,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6ec29ccc7c1b1c744abb535f0659e944, type: 2}
-  - {fileID: 2100000, guid: 183c0f7fb5aeaad45a1df4855115fe3c, type: 2}
+  - {fileID: 2100000, guid: 4da94f77b1fe068419603c8b9435ea6e, type: 2}
+  - {fileID: 2100000, guid: 4da94f77b1fe068419603c8b9435ea6e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
