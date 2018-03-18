@@ -63,7 +63,7 @@ public class EventManager : MonoBehaviour
 
 	void InitInteractablesLevel2 ()
 	{
-		ToggleFriendOnMap ("Interactable_Friend_Dome");
+		//ToggleFriendOnMap ("Interactable_Friend_Dome");
 	}
 
 
@@ -111,6 +111,12 @@ public class EventManager : MonoBehaviour
 			break;
 		case "Trigger_Zone_Emergency_Lights":
 			Start_2_20 ();
+			break;
+		case "Trigger_Zone_Subject_Remembers":
+			Start_2_21 ();
+			break;
+		case "Trigger_Zone_See_Dead_Friend":
+			Start_2_22 ();
 			break;
 		}
 	}
@@ -711,6 +717,9 @@ public class EventManager : MonoBehaviour
 	void Start_2_19 (InteractableObject interactable)
 	{
 		//Pille 3
+
+		// Hier Schwarzblende
+
 		interactable.Destroy (0);
 
 		playerHasTakenPill03 = true;
@@ -722,24 +731,37 @@ public class EventManager : MonoBehaviour
 
 		SoundManager.instance.StopBackgroundMusic (0);
 
-		//Schwarzblende
-
+		GameObject.Find ("Interactable_DJ_Console").GetComponent<InteractableObject> ().Disable ();
+		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Disable ();
 
 		//Dome Neon entfernen und Licht anpassen
-		//Dunkle Personen hier togglen
-		//DJ Interactable deaktivieren.
+
+		SwitchAfterRaveElements();
+
 
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 
-		EnableTriggerZonesForWayBackToParkingLot ();
+		EnableTriggerZonesAfterRave ();
 
 		ToggleEmergencyLight ();
 	}
 
 	void Start_2_20 ()
 	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_20", 1, 1, 0);
+		//Hier eigentlich Alter Ego am Reden -> Anpassen!
+		DialogueManager.instance.StartSubjectMonologue ("2_20", 1, 0);
+	}
+
+	void Start_2_21 ()
+	{
+		DialogueManager.instance.StartSubjectMonologue ("2_21", 1, 0);
+	}
+
+	void Start_2_22 ()
+	{
+		//Hier eigentlich Alter Ego am Reden -> Anpassen!
+		DialogueManager.instance.StartSubjectMonologue ("2_22", 1, 0);
 	}
 
 	void Start_2_23 (InteractableObject interactable)
@@ -759,6 +781,7 @@ public class EventManager : MonoBehaviour
 		//Garten ist wieder im Ausgangszustand, ohne Rave
 		SwitchHoardings ();
 		SwitchStaticRaveElements ();
+		SwitchAfterRaveElements();
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 		ToggleEmergencyLight ();
 
@@ -852,6 +875,15 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	void SwitchAfterRaveElements ()
+	{
+		GameObject rave = GameObject.Find ("After_Rave_Elements");
+		for (int i = 0; i < rave.transform.childCount; i++) {
+			Transform raveElement = rave.gameObject.transform.GetChild (i);
+			raveElement.gameObject.SetActive (!raveElement.gameObject.activeSelf);
+		}
+	}
+
 	void ToggleFriendOnMap (string friendName)
 	{
 		GameObject friendObject = GameObject.Find ("Friend");
@@ -874,15 +906,13 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void EnableTriggerZonesForWayBackToParkingLot ()
+	void EnableTriggerZonesAfterRave ()
 	{
-		GameObject triggerZones = GameObject.Find ("Trigger_Zones");
+		GameObject triggerZones = GameObject.Find ("Trigger_Zones_After_Rave");
 
 		for (int i = 0; i < triggerZones.transform.childCount; i++) {
 			Transform triggerZone = triggerZones.gameObject.transform.GetChild (i);
-			if (triggerZone.name == "Trigger_Zone_Emergency_Lights") {
-				triggerZone.gameObject.SetActive (true);
-			}
+			triggerZone.gameObject.SetActive (true);
 		}
 	}
 

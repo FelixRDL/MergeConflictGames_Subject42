@@ -245,7 +245,7 @@ public class DialogueManager : MonoBehaviour
 		for (int i = 0; i < fileLines.Length; i++) {
 			string currentLine = fileLines [i];
 			if (currentLine.Length == 0 || !currentLine.Contains ("|")) {
-				print ("Untertiteldatei " + clipName + " falsch formatiert in Zeile: " + i + ". Enthält Zeile ein '|' ? -> " + currentLine.Contains ("|"));
+				print ("Untertiteldatei " + clipName + " falsch formatiert in Zeile: " + i + ". Enthält Zeile kein '|' oder handelt es sich um eine leere Zeile?");
 				break;
 			}
 
@@ -264,7 +264,7 @@ public class DialogueManager : MonoBehaviour
 	{
 
 		//Put subtitles over everything and position on screen.
-		GUI.depth = -1001;
+		GUI.depth = -1000;
 		subtitleStyle.fixedWidth = Screen.width / 1.5f;
 		subtitleStyle.wordWrap = true;
 		subtitleStyle.alignment = TextAnchor.MiddleCenter;
