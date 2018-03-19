@@ -297,13 +297,29 @@ public class EventManager : MonoBehaviour
 	void Start_0_Interactable_Contract_Three (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
-		ToggleContract ("Interactable_Contract_03");
-		ToggleContract ("Contract_04");
+		StartCoroutine(ContractThreeCoroutine(audioSource));
 
-		DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
+		/*
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
+		//DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
 
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
+		ToggleContract ("Interactable_Contract_03");
+		ToggleContract ("Contract_04");
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
+		*/
+
+	}
+
+	IEnumerator ContractThreeCoroutine (AudioSource audioSource)
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
+		yield return new WaitForSecondsRealtime(15);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
+		yield return new WaitForSecondsRealtime(3);
+		DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
+		yield return new WaitForSecondsRealtime(4);
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
 	}
