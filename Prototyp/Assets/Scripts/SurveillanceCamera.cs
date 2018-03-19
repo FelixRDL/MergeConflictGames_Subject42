@@ -2,28 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurveillanceCamera : MonoBehaviour {
+public class SurveillanceCamera : MonoBehaviour
+{
 
 	public float RotationSpeed = 1;
 	public float volume = 1;
-
 	public AudioClip cameraMovementSound;
 
 	private GameObject player;
-
 	private AudioSource audioSource;
-
 	private Quaternion lastLookRotation;
 
-	void Start () 
+	void Start ()
 	{
-		player = GameObject.FindWithTag("Player");
+		player = GameObject.FindWithTag ("Player");
 
-		audioSource = GetComponent<AudioSource>();
+		audioSource = GetComponent<AudioSource> ();
 		audioSource.clip = cameraMovementSound;
 	}
 
-	// TODO: Stop if player not in view
 	void Update ()
 	{
 		//The Vector between the player and the camera
@@ -40,9 +37,8 @@ public class SurveillanceCamera : MonoBehaviour {
 
 		//Rotate camera using the lookRotation and the RotationSpeed
 		transform.rotation = Quaternion.Slerp (transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
-
-
 	}
+
 
 
 }

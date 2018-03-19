@@ -6,10 +6,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class Player : MonoBehaviour
 {
 
-	Camera camera;
-
+	private Camera mainCamera;
 	private Interactable focusedObject;
-
 	private Animator animator;
 
 
@@ -20,9 +18,7 @@ public class Player : MonoBehaviour
 
 	void Start ()
 	{
-		camera = Camera.main;
-		//Lock Cursor in Window
-		//Cursor.lockState = CursorLockMode.Locked; 
+		mainCamera = Camera.main;
 
 		focusedObject = null;
 
@@ -33,7 +29,7 @@ public class Player : MonoBehaviour
 
 	void Update ()
 	{
-		Ray ray = camera.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0f));
+		Ray ray = mainCamera.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0f));
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit, 50)) {
 
@@ -70,9 +66,10 @@ public class Player : MonoBehaviour
 	public void CameraZoom () {
 
 		//Zoom 5 Units per frame
-		Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 5, Time.deltaTime * 5);
+		mainCamera.fieldOfView = Mathf.Lerp (mainCamera.fieldOfView, 5, Time.deltaTime * 5);
 	}
 
+	//TEST
 	public void PlayAnimationWakeUp() {
 		DisablePlayerControls ();
 		animator.SetTrigger("wakeUp");

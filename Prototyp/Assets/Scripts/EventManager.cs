@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
 	private int clickedObjectsInChildrensRoomHappy;
 	private int clickedObjectsInChildrensRoomSad;
 	private bool floorEntered;
+	private bool allowedToSignContract;
 
 	//Flags for Level 2
 	private bool playerHasTakenPill03;
@@ -22,17 +23,14 @@ public class EventManager : MonoBehaviour
 
 	void Start ()
 	{
-		if (SceneManager.GetActiveScene ().name == "Level1") {
+		if (SceneManager.GetActiveScene ().name == "Level1") 
+		{
 			InitFlagsLevel1 ();
-			InitInteractablesLevel1 ();
-
 			Start_0_01 ();
-
-			//TEST_OPEN_DOORS_LEVEL1 ();
 		}
 
-		if (SceneManager.GetActiveScene ().name == "Level2") {
-
+		if (SceneManager.GetActiveScene ().name == "Level2") 
+		{
 			InitFlagsLevel2 ();
 			Start_2_01 ();
 		}
@@ -46,22 +44,14 @@ public class EventManager : MonoBehaviour
 		clickedObjectsInChildrensRoomHappy = 0;
 		clickedObjectsInChildrensRoomSad = 0;
 		floorEntered = false;
-	}
-
-	void InitInteractablesLevel1 ()
-	{
-		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableObject> ().Disable ();
-		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableObject> ().Disable ();
-		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableObject> ().Disable ();
-		GameObject.Find ("Interactable_Pen").GetComponent<InteractableObject> ().Disable ();
+		allowedToSignContract = false;
 	}
 
 	void InitFlagsLevel2 ()
 	{
 		playerHasTakenPill03 = false;
 	}
-
-
+		
 
 	//ONLY FOR TESTING
 	void TEST_OPEN_DOORS_LEVEL1 ()
@@ -75,10 +65,11 @@ public class EventManager : MonoBehaviour
 	// Main Game Functions
 	//---------------------
 
-	//Switch Statement for all Ingame Triggers.
+	//Switch Statement for all Ingame TriggerZones.
 	public void OnTriggerZoneEntered (string nameOfTriggerZone)
 	{
 		switch (nameOfTriggerZone) {
+
 		//Trigger Zones for Level 1
 		case "Trigger_Zone_Floor":
 			Start_1_01 ();
@@ -115,9 +106,11 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	//Switch Statement for all Ingame Interactables.
 	public void OnInteractableClicked (string nameOfInteractable, AudioSource audioSource, InteractableObject interactable)
 	{
 		switch (nameOfInteractable) {
+
 		//Level 1 Interactables:
 		case "Interactable_Window":
 			Start_0_Interactable_Window (interactable);
@@ -131,20 +124,14 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Mirror_Bath":
 			Start_0_Interactable_Bath_Mirror (interactable);
 			break;
-		case "Interactable_Contracts":
-			Start_0_Interactable_Contracts (interactable);
-			break;
 		case "Interactable_Contract_01":
-			Start_0_Interactable_Contract_One (interactable);
+			Start_0_Interactable_Contract_One (audioSource, interactable);
 			break;
 		case "Interactable_Contract_02":
-			Start_0_Interactable_Contract_Two (interactable);
+			Start_0_Interactable_Contract_Two (audioSource, interactable);
 			break;
 		case "Interactable_Contract_03":
-			Start_0_Interactable_Contract_Three (interactable);
-			break;
-		case "Interactable_Pen":
-			Start_0_Interactable_Pen (audioSource, interactable);
+			Start_0_Interactable_Contract_Three (audioSource, interactable);
 			break;
 		case "Interactable_Rubber_Duck":
 			Start_0_Interactable_Rubber_Duck (audioSource);
@@ -246,10 +233,8 @@ public class EventManager : MonoBehaviour
 	void Start_0_08 ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08", 1, 1, 0);
-		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableObject> ().Enable ();
-		GameObject.Find ("Interactable_Contract_02").GetComponent<InteractableObject> ().Enable ();
-		GameObject.Find ("Interactable_Contract_03").GetComponent<InteractableObject> ().Enable ();
-		GameObject.Find ("Interactable_Pen").GetComponent<InteractableObject> ().Enable ();
+		EnableInteractableContractOneForSecondInteraction ();
+		allowedToSignContract = true;
 	}
 
 	//----------------------------------
@@ -258,72 +243,87 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_Interactable_Window (InteractableObject interactable)
 	{
+		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_02", 1, 0);
 		//countClickedObjectsLevel0 ();
-		interactable.Disable ();
 	}
 
 	void Start_0_Interactable_Medical_Devices (InteractableObject interactable)
 	{
+		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_03", 1, 0);
 		//countClickedObjectsLevel0 ();
-		interactable.Disable ();
 	}
 
 	void Start_0_Interactable_Picture_Frame (InteractableObject interactable)
 	{
+		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_04", 1, 0);
 		countClickedObjectsLevel0 ();
-		interactable.Disable ();
 	}
 
 	void Start_0_Interactable_Bath_Mirror (InteractableObject interactable)
 	{
+		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_05", 1, 0);
 		//countClickedObjectsLevel0 ();
-		interactable.Disable ();
 	}
 
-	void Start_0_Interactable_Contracts (InteractableObject interactable)
+	void Start_0_Interactable_Contract_One (AudioSource audioSource, InteractableObject interactable)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("0_06", 1, 0);
-		countClickedObjectsLevel0 ();
 		interactable.Disable ();
+
+		if (!allowedToSignContract) {
+			DialogueManager.instance.StartSubjectMonologue ("0_06", 1, 0);
+			countClickedObjectsLevel0 ();
+		} else {
+			DialogueManager.instance.StartSubjectMonologue ("0_13", 1, 0);
+			ToggleContract ("Interactable_Contract_01");
+			ToggleContract ("Interactable_Contract_02");
+		}
 
 		//Maybe add possibility here of zooming in on a contract.
 		//player.GetComponent<Player> ().CameraZoom ();
 	}
 
-	void Start_0_Interactable_Contract_One (InteractableObject interactable)
+	void Start_0_Interactable_Contract_Two (AudioSource audioSource, InteractableObject interactable)
 	{
-		print ("Klicked on Contract One");
-		DialogueManager.instance.StartSubjectMonologue ("0_13", 1, 0);
 		interactable.Disable ();
-	}
-
-	void Start_0_Interactable_Contract_Two (InteractableObject interactable)
-	{
-		print ("Klicked on Contract One");
 		DialogueManager.instance.StartSubjectMonologue ("0_14", 1, 0);
-		interactable.Disable ();
+		ToggleContract ("Interactable_Contract_02");
+		ToggleContract ("Interactable_Contract_03");
 	}
 
-	void Start_0_Interactable_Contract_Three (InteractableObject interactable)
+	void Start_0_Interactable_Contract_Three (AudioSource audioSource, InteractableObject interactable)
 	{
-		print ("Klicked on Contract One");
+		interactable.Disable ();
+		StartCoroutine(ContractThreeCoroutine(audioSource));
+
+		/*
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
-		interactable.Disable ();
-	}
-
-	void Start_0_Interactable_Pen (AudioSource audioSource, InteractableObject interactable)
-	{
-		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
+		//DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
 
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
+		ToggleContract ("Interactable_Contract_03");
+		ToggleContract ("Contract_04");
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
+		*/
+
+	}
+
+	IEnumerator ContractThreeCoroutine (AudioSource audioSource)
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
+		yield return new WaitForSecondsRealtime(15);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
+		yield return new WaitForSecondsRealtime(3);
+		DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
+		yield return new WaitForSecondsRealtime(4);
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
 	}
+		
 
 	public void Start_0_Interactable_Door_Floor (AudioSource audioSource)
 	{
@@ -374,6 +374,22 @@ public class EventManager : MonoBehaviour
 		if (clickedObjectsInHospitalRoom == 3) {
 			Invoke ("Start_0_08", 8);
 		}
+	}
+
+	void ToggleContract (string nameOfContract)
+	{
+		GameObject contractParent = GameObject.Find ("Contracts");
+		for (int i = 0; i < contractParent.transform.childCount; i++) {
+			Transform contract = contractParent.gameObject.transform.GetChild (i);
+			if (contract.name == nameOfContract) {
+				contract.gameObject.SetActive (!contract.gameObject.activeSelf);
+			}
+		}
+	}
+
+	void EnableInteractableContractOneForSecondInteraction ()
+	{
+		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableObject> ().Enable ();
 	}
 
 	#endregion
