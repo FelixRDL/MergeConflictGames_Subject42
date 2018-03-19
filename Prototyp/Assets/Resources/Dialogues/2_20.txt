@@ -1,1 +1,3 @@
-000.000|An Ambulance? Oh, hopefully nobody has been seriously injured!
+000.000|An Ambulance? Oh no!
+002.769|Hopefully nobody has been seriously injured!
+005.992|

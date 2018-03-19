@@ -1,6 +1,8 @@
 000.000|This must be the code for the lock...
-003.815|You performed very great so far, subject... just a few more tests and you are free to go.
-009.388|For now just enter the code at the door.
-011.976|What do you want from me, you sick fuck? Leave me alone with your stupid games!
-018.036|Are you ready for the next task? HA HA HA HA HA!
-027.505|Fuck you!
+003.748|You performed very great so far, subject. 
+006.833|Just a few more tests and you are free to go.
+009.566|For now just enter the code at the door.
+012.260|What do you want from me, you sick fuck? Leave me alone with your stupid games!
+018.000|Are you ready for the next task? HA HA HA HA HA!
+027.488|Fuck you!
+028.971|
