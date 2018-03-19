@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
 {
@@ -622,20 +623,23 @@ public class EventManager : MonoBehaviour
 	void Start_2_01 ()
 	{
 		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
-		StartCoroutine (TestCoroutine ());
 	}
 
-	IEnumerator TestCoroutine () {
-
-		//GameObject.Find ("MainCamera").GetComponent<CustomBlur> ();
-
-
-		int i = 0;
-		while (i <= 10) {
-			i += 1;
-			print (i);
-			yield return new WaitForSeconds (1);
+	private YieldInstruction fadeInstruction = new YieldInstruction();
+	IEnumerator FadeToBlack(float duration) {
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage>();
+		float elapsedTime = 0.0f;
+		Color c = black.color;
+		print ("Start");
+		while (elapsedTime < duration)
+		{
+			yield return fadeInstruction;
+			elapsedTime += Time.deltaTime ;
+			c.a = Mathf.Clamp01(elapsedTime / duration);
+			black.color = c;
 		}
+		print ("End");
+
 	}
 
 	void Start_2_04 (InteractableObject interactable)
@@ -827,6 +831,7 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
+		StartCoroutine(FadeToBlack(30f));
 
 		//Am Ende des Dialogs hier Ende einleiten; Später hier Endscreen und Abspann zeigen.
 		Invoke("TEST_KILL_GAME", 35);
