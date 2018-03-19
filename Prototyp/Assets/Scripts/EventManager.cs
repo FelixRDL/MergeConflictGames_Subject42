@@ -34,7 +34,6 @@ public class EventManager : MonoBehaviour
 		if (SceneManager.GetActiveScene ().name == "Level2") {
 
 			InitFlagsLevel2 ();
-			InitInteractablesLevel2 ();
 			Start_2_01 ();
 		}
 
@@ -62,12 +61,6 @@ public class EventManager : MonoBehaviour
 		playerHasTakenPill03 = false;
 	}
 
-	void InitInteractablesLevel2 ()
-	{
-		//ToggleFriendOnMap ("Interactable_Friend_Dome");
-	}
-
-
 
 
 	//ONLY FOR TESTING
@@ -82,7 +75,7 @@ public class EventManager : MonoBehaviour
 	// Main Game Functions
 	//---------------------
 
-	//Switch Statement for all Ingame Triggers.  
+	//Switch Statement for all Ingame Triggers.
 	public void OnTriggerZoneEntered (string nameOfTriggerZone)
 	{
 		switch (nameOfTriggerZone) {
@@ -625,23 +618,6 @@ public class EventManager : MonoBehaviour
 		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
 	}
 
-	private YieldInstruction fadeInstruction = new YieldInstruction();
-	IEnumerator FadeToBlack(float duration) {
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage>();
-		float elapsedTime = 0.0f;
-		Color c = black.color;
-		print ("Start");
-		while (elapsedTime < duration)
-		{
-			yield return fadeInstruction;
-			elapsedTime += Time.deltaTime ;
-			c.a = Mathf.Clamp01(elapsedTime / duration);
-			black.color = c;
-		}
-		print ("End");
-
-	}
-
 	void Start_2_04 (InteractableObject interactable)
 	{
 		//Pille 1
@@ -661,7 +637,7 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1, 0);
-		Invoke ("TogglePill02InLevel2", 5);
+		Invoke ("TogglePillsInLevel2", 14f);
 	}
 
 	void Start_2_11 (InteractableObject interactable)
@@ -672,7 +648,7 @@ public class EventManager : MonoBehaviour
 
 		interactable.Destroy (0);
 
-		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (10);
+		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (11);
 
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
 		DialogueManager.instance.StartSubjectMonologue ("2_11", 1, 0);
@@ -731,23 +707,19 @@ public class EventManager : MonoBehaviour
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
 		DialogueManager.instance.StartSubjectMonologue ("2_19", 1, 0);
 
-		SwitchDynamicRaveElements ();
-
 		SoundManager.instance.StopBackgroundMusic (0);
 
 		GameObject.Find ("Interactable_DJ_Console").GetComponent<InteractableObject> ().Disable ();
 		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Disable ();
 
-		//Dome Neon entfernen und Licht anpassen
-
-		SwitchAfterRaveElements();
-
+		//Hier noch Licht anpassen
 
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 
+		SwitchDynamicRaveElements ();
+		SwitchAfterRaveElements ();
 		EnableTriggerZonesAfterRave ();
-
 		ToggleEmergencyLight ();
 	}
 
@@ -785,7 +757,7 @@ public class EventManager : MonoBehaviour
 		//Garten ist wieder im Ausgangszustand, ohne Rave
 		SwitchHoardings ();
 		SwitchStaticRaveElements ();
-		SwitchAfterRaveElements();
+		SwitchAfterRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 		ToggleEmergencyLight ();
 
@@ -831,14 +803,33 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
-		StartCoroutine(FadeToBlack(30f));
+		StartCoroutine (FadeToBlack (30f));
 
-		//Am Ende des Dialogs hier Ende einleiten; Später hier Endscreen und Abspann zeigen.
-		Invoke("TEST_KILL_GAME", 35);
+		//Am Ende des Dialogs hier Ende einleiten; Hier Endscreen und Abspann starten.
+		Invoke ("TEST_KILL_GAME", 35);
 	}
 
-	void TEST_KILL_GAME () {
+	void TEST_KILL_GAME ()
+	{
 		Application.Quit ();
+	}
+
+	private YieldInstruction fadeInstruction = new YieldInstruction ();
+
+	IEnumerator FadeToBlack (float duration)
+	{
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		float elapsedTime = 0.0f;
+		Color c = black.color;
+		print ("Start");
+		while (elapsedTime < duration) {
+			yield return fadeInstruction;
+			elapsedTime += Time.deltaTime;
+			c.a = Mathf.Clamp01 (elapsedTime / duration);
+			black.color = c;
+		}
+		print ("End");
+
 	}
 
 
@@ -900,12 +891,12 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void TogglePill02InLevel2 ()
+	void TogglePillsInLevel2 ()
 	{
 		GameObject pills = GameObject.Find ("Pills");
 		for (int i = 0; i < pills.transform.childCount; i++) {
 			Transform pill = pills.gameObject.transform.GetChild (i);
-			if (pill.name == "Interactable_Pill_02") {
+			if (pill.name == "Interactable_Pill_02" || pill.name == "Interactable_Pill_03") {
 				pill.gameObject.SetActive (!pill.gameObject.activeSelf);
 			}
 		}
@@ -921,7 +912,8 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void ToggleEmergencyLight () {
+	void ToggleEmergencyLight ()
+	{
 		GameObject lightEffects = GameObject.Find ("Light_Effects");
 
 		for (int i = 0; i < lightEffects.transform.childCount; i++) {
