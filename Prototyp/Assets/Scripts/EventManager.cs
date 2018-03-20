@@ -129,6 +129,9 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Rubber_Duck":
 			Start_0_Interactable_Rubber_Duck (audioSource);
 			break;
+		case "Interactable_Desinfection":
+			Start_0_Interactable_Desinfection (audioSource, interactable);
+			break;
 		case "Interactable_Door_Floor_01":
 			Start_1_Interactable_Door_Floor_01 (audioSource, interactable);
 			break;
@@ -297,11 +300,11 @@ public class EventManager : MonoBehaviour
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
 		yield return new WaitForSecondsRealtime(15);
-		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
 		yield return new WaitForSecondsRealtime(3);
 		DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
 		yield return new WaitForSecondsRealtime(4);
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
 	}
 		
@@ -317,7 +320,7 @@ public class EventManager : MonoBehaviour
 			DialogueManager.instance.StartSubjectMonologue ("1_03", 1, 0);
 		}
 
-		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
 
 	}
@@ -329,7 +332,7 @@ public class EventManager : MonoBehaviour
 	public void Start_0_Interactable_Door_Bath (AudioSource audioSource)
 	{
 		print ("Klicked on Door to Bath");
-		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().OpenBathroomDoor ();
 		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().Disable ();
 	}
@@ -339,7 +342,13 @@ public class EventManager : MonoBehaviour
 		print ("Klicked on Rubber Duck");
 		System.Random random = new System.Random ();
 		string clipName = "quack0" + random.Next (1, 5);
-		SoundManager.instance.PlayEffect (audioSource, clipName, 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, clipName, 1);
+	}
+
+	void Start_0_Interactable_Desinfection (AudioSource audioSource, InteractableObject interactable)
+	{
+		interactable.Disable ();
+		SoundManager.instance.PlayEffect (audioSource, "quack04", 1);
 	}
 
 	//---------------------------
@@ -397,9 +406,9 @@ public class EventManager : MonoBehaviour
 		//Retromodine F - Recall Enhancer. Fair enough… what could possibly go wrong?! 	
 		DialogueManager.instance.StartSubjectMonologue ("1_05", 1, 0);
 
-		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1, 4);
+		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
 
-		SoundManager.instance.PlayEffect (audioSource, "gulp", 1, 6);
+		SoundManager.instance.PlayEffect (audioSource, "gulp", 1);
 		interactable.Disable ();
 
 		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 1, 5);
@@ -441,13 +450,13 @@ public class EventManager : MonoBehaviour
 
 	public void Start_1_Interactable_Door_Floor_01 (AudioSource audioSource, InteractableObject interactable)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "KnockOnDoor", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "KnockOnDoor", 1);
 		interactable.Disable ();
 	}
 
 	public void Start_1_Interactable_Door_Floor_02 (AudioSource audioSource, InteractableObject interactable)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "ScreamingMan", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "ScreamingMan", 1);
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("1_04", 1, 2);
 	}
@@ -543,14 +552,14 @@ public class EventManager : MonoBehaviour
 
 	public void Start_1_Interactable_Door_Floor_To_Childrens_Room (AudioSource audioSource, InteractableDoorFloorToChildrensRoom interactable)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
 		interactable.Disable ();
 
 	}
 
 	void Start_1_Interactable_Door_Childrens_Room_To_Garden (AudioSource audioSource, InteractableObject interactable)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1, 0);
+		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
 		SceneManager.LoadScene ("Level2");
 	}
 
@@ -581,7 +590,7 @@ public class EventManager : MonoBehaviour
 
 	void OpenDoorFloorToChildrensRoom ()
 	{
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1, 0);
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
 	}
@@ -626,7 +635,7 @@ public class EventManager : MonoBehaviour
 	}
 
 	IEnumerator Start_2_04_Coroutine () {
-		SoundManager.instance.PlayEffect(GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1, 0);
+		SoundManager.instance.PlayEffect(GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
 		yield return new WaitForSeconds (1f);
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (2f));
@@ -637,7 +646,7 @@ public class EventManager : MonoBehaviour
 		black.color = c;
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1, 0);
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
 		yield return new WaitForSeconds (3f);
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 1, 5);
 		SwitchHoardings ();
@@ -662,7 +671,7 @@ public class EventManager : MonoBehaviour
 	{
 		//Schwarzblende Starten
 
-		//SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1, 0);
+		//SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
 
 		interactable.Destroy (0);
 

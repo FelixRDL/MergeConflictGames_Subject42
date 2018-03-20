@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
 
 	//Fixed AudioSource for Background Music
 	private AudioSource backgroundMusicSource;
 
+	//Public Arrays for adding all Soundeffects and BackgroundMusic Files to the SoundManager directly from the Inspector
 	public AudioClip[] backgroundMusicSources;
 	public AudioClip[] soundeffectSources;
 
@@ -26,7 +28,7 @@ public class SoundManager : MonoBehaviour {
 
 		//DontDestroyOnLoad (gameObject);
 
-		backgroundMusicSource = GetComponent<AudioSource>();
+		backgroundMusicSource = GetComponent<AudioSource> ();
 		createBackgroundMusicDictionary ();
 		createSoundeffectDictionary ();
 	}
@@ -65,7 +67,8 @@ public class SoundManager : MonoBehaviour {
 
 	}
 
-	IEnumerator FadeIn (AudioSource audioSource, float maxVolume, float fadeInTime) {
+	IEnumerator FadeIn (AudioSource audioSource, float maxVolume, float fadeInTime)
+	{
 		while (audioSource.volume < maxVolume) {
 			audioSource.volume += Time.deltaTime / fadeInTime;
 			yield return null;
@@ -76,26 +79,15 @@ public class SoundManager : MonoBehaviour {
 	{
 		backgroundMusicSource.Stop ();
 	}
+		
 
-	/*
-	public bool GetBackgroundMusicPlaying ()
+	public void PlayEffect (AudioSource effectSource, string clipName, float volume)
 	{
-		if (backgroundMusicSource.isPlaying) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	*/
-
-
-
-	public void PlayEffect(AudioSource effectSource, string clipName, float volume, float delay) {
 		print ("Start Playing " + clipName);
 
 		AudioSource source = effectSource;
 		source.volume = volume;
-		source.clip = soundeffectClips[clipName];
-		source.PlayDelayed (delay);
+		source.clip = soundeffectClips [clipName];
+		source.Play ();
 	}
 }

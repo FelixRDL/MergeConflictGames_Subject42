@@ -17,7 +17,7 @@ public class Interactable : MonoBehaviour
 	private Crosshair crosshair;
 
 	private bool showHint = false;
-	private bool enabled = true;
+	private bool isEnabled = true;
 
 	private GUIStyle subtitleStyle = new GUIStyle ();
 
@@ -36,7 +36,7 @@ public class Interactable : MonoBehaviour
 	public void OnFocused (Transform player)
 	{
 		//Outline anzeigen
-		if (enabled) {
+		if (isEnabled) {
 			
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
@@ -69,7 +69,7 @@ public class Interactable : MonoBehaviour
 
 	public void OnClicked (Transform player)
 	{
-		if (enabled) {
+		if (isEnabled) {
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
 				if (!DialogueManager.instance.IsDialoguePlaying ()) {
@@ -85,7 +85,7 @@ public class Interactable : MonoBehaviour
 	public void Disable ()
 	{
 		OnDefocused ();
-		enabled = false;
+		isEnabled = false;
 
 		//If Box Collider is not only a trigger, but also used, e.g. a door, then don't disable it.
 		if (GetComponent<BoxCollider> ().isTrigger) {
@@ -101,7 +101,7 @@ public class Interactable : MonoBehaviour
 
 	public void Enable ()
 	{
-		enabled = true;
+		isEnabled = true;
 		GetComponent<BoxCollider> ().enabled = true;
 	}
 
