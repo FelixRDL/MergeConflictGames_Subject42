@@ -11,7 +11,8 @@ public class SurveillanceCamera : MonoBehaviour
 
 	private GameObject player;
 	private AudioSource audioSource;
-	private Quaternion lastLookRotation;
+
+	private Vector3 lastCameraRotation;
 
 	void Start ()
 	{
@@ -23,20 +24,47 @@ public class SurveillanceCamera : MonoBehaviour
 
 	void Update ()
 	{
+		RotateCameraTowardsPlayer ();
+		PlaySoundIfCameraMoving ();
+
+
+	}
+
+	private Quaternion CalculateLookRotation()
+	{
 		//The Vector between the player and the camera
 		Vector3 directionToLookAt = (player.transform.position - transform.position).normalized;
 
 		//Rotation
 		Quaternion lookRotation = Quaternion.LookRotation (directionToLookAt);
 
+		return lookRotation;
+
+	}
+
+	private void PlaySoundIfCameraMoving ()
+	{
 		//If Camera is rotating and the sound is not playing yet, play the sound
-		if (lookRotation != lastLookRotation && !audioSource.isPlaying) {
+		if (GetCameraMoving() && !audioSource.isPlaying) {
 			audioSource.Play ();
 		}
-		lastLookRotation = lookRotation;
+	}
 
+	private void RotateCameraTowardsPlayer() {
 		//Rotate camera using the lookRotation and the RotationSpeed
-		transform.rotation = Quaternion.Slerp (transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
+		transform.rotation = Quaternion.Lerp (transform.rotation, CalculateLookRotation(), Time.deltaTime * RotationSpeed);
+	}
+
+	private bool GetCameraMoving () {
+		Vector3 currentCameraRotation = transform.rotation.eulerAngles;
+
+		if ( (int) currentCameraRotation.x  == (int) lastCameraRotation.x && (int) currentCameraRotation.y  == (int) lastCameraRotation.y && (int) currentCameraRotation.z == (int) lastCameraRotation.z) {
+			lastCameraRotation = currentCameraRotation;
+			return false;
+		} else {
+			lastCameraRotation = currentCameraRotation;
+			return true;
+		}
 	}
 
 

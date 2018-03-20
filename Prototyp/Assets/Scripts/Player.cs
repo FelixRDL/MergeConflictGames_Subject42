@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 				focusedObject = newFocusedObject;
 				focusedObject.OnFocused (transform);
 
-				if (Input.GetKeyDown (KeyCode.E)) {
+				if (Input.GetKeyDown (KeyCode.E) || Input.GetMouseButtonDown(0)) {
 					focusedObject.OnClicked (transform);
 				}
 
@@ -48,10 +48,6 @@ public class Player : MonoBehaviour
 					focusedObject.OnDefocused ();
 				}
 			}
-		}
-
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			Application.Quit ();
 		}
 			
 		//Zoom test:

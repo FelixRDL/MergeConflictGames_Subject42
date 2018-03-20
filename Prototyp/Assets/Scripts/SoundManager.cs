@@ -14,8 +14,6 @@ public class SoundManager : MonoBehaviour {
 	private Dictionary<string, AudioClip> backgroundMusicClips;
 	private Dictionary<string, AudioClip> soundeffectClips;
 
-	private const float BACKGROUND_MUSIC_VOLUME = 0.4f;
-
 	public static SoundManager instance = null;
 
 	void Awake ()
@@ -52,11 +50,26 @@ public class SoundManager : MonoBehaviour {
 	}
 
 
-	public void PlayBackgroundMusicLoop (string clipName, float delay, float fadeInTime)
+	public void PlayBackgroundMusicLoop (string clipName, float maxVolume, float fadeInTime)
 	{
-		backgroundMusicSource.volume = BACKGROUND_MUSIC_VOLUME;
-		backgroundMusicSource.clip = backgroundMusicClips[clipName];
-		backgroundMusicSource.PlayDelayed (delay);
+		backgroundMusicSource.clip = backgroundMusicClips [clipName];
+		backgroundMusicSource.volume = 0;
+		backgroundMusicSource.Play ();
+
+		if (fadeInTime == 0) {
+			backgroundMusicSource.volume = maxVolume;
+		} else {
+			StartCoroutine (FadeIn (backgroundMusicSource, maxVolume, fadeInTime));
+		}
+
+
+	}
+
+	IEnumerator FadeIn (AudioSource audioSource, float maxVolume, float fadeInTime) {
+		while (audioSource.volume < maxVolume) {
+			audioSource.volume += Time.deltaTime / fadeInTime;
+			yield return null;
+		}
 	}
 
 	public void StopBackgroundMusic (float fadeOutTime)
@@ -64,6 +77,7 @@ public class SoundManager : MonoBehaviour {
 		backgroundMusicSource.Stop ();
 	}
 
+	/*
 	public bool GetBackgroundMusicPlaying ()
 	{
 		if (backgroundMusicSource.isPlaying) {
@@ -72,6 +86,7 @@ public class SoundManager : MonoBehaviour {
 			return false;
 		}
 	}
+	*/
 
 
 
@@ -79,7 +94,7 @@ public class SoundManager : MonoBehaviour {
 		print ("Start Playing " + clipName);
 
 		AudioSource source = effectSource;
-		source.volume = BACKGROUND_MUSIC_VOLUME;
+		source.volume = volume;
 		source.clip = soundeffectClips[clipName];
 		source.PlayDelayed (delay);
 	}
