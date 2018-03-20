@@ -263,8 +263,7 @@ public class DialogueManager : MonoBehaviour
 	void OnGUI ()
 	{
 
-		//Put subtitles over everything and position on screen.
-		GUI.depth = -1000;
+		//Position Subtitles on the Screen.
 		subtitleStyle.fixedWidth = Screen.width / 1.5f;
 		subtitleStyle.wordWrap = true;
 		subtitleStyle.alignment = TextAnchor.MiddleCenter;

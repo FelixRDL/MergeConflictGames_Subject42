@@ -614,6 +614,7 @@ public class EventManager : MonoBehaviour
 	{
 		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
 	}
+		
 
 	void Start_2_04 (InteractableObject interactable)
 	{
@@ -621,16 +622,33 @@ public class EventManager : MonoBehaviour
 
 		interactable.Disable ();
 
+		StartCoroutine (Start_2_04_Coroutine ());
+	}
+
+	IEnumerator Start_2_04_Coroutine () {
+		SoundManager.instance.PlayEffect(GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1, 0);
+		yield return new WaitForSeconds (1f);
 		//Schwarzblende hier
-
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
-
+		StartCoroutine (FadeToBlack (2f));
+		yield return new WaitForSeconds (3f);
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c.a = 0;
+		black.color = c;
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1, 0);
+		yield return new WaitForSeconds (3f);
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 1, 5);
-
 		SwitchHoardings ();
 		SwitchStaticRaveElements ();
 		SwitchDynamicRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Fence");
+		yield return new WaitForSeconds (2f);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
+		yield return new WaitForSeconds (2f);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 	}
 
 	void Start_2_08 (InteractableObject interactable)
