@@ -51,15 +51,8 @@ public class EventManager : MonoBehaviour
 	{
 		playerHasTakenPill03 = false;
 	}
-		
 
-	//ONLY FOR TESTING
-	void TEST_OPEN_DOORS_LEVEL1 ()
-	{
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
-	}
 
-	#region Level1 Act 0
 
 	//---------------------
 	// Main Game Functions
@@ -219,6 +212,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	#region Level1 Act 0
 
 	//---------------------
 	//Act 0 Main Dialogues
@@ -245,14 +239,12 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_02", 1, 0);
-		//countClickedObjectsLevel0 ();
 	}
 
 	void Start_0_Interactable_Medical_Devices (InteractableObject interactable)
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_03", 1, 0);
-		//countClickedObjectsLevel0 ();
 	}
 
 	void Start_0_Interactable_Picture_Frame (InteractableObject interactable)
@@ -266,7 +258,6 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_05", 1, 0);
-		//countClickedObjectsLevel0 ();
 	}
 
 	void Start_0_Interactable_Contract_One (AudioSource audioSource, InteractableObject interactable)
@@ -299,19 +290,9 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 		StartCoroutine(ContractThreeCoroutine(audioSource));
 
-		/*
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
-		//DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
-
-		SoundManager.instance.PlayEffect (audioSource, "signature", 1, 0);
-		ToggleContract ("Interactable_Contract_03");
-		ToggleContract ("Contract_04");
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1, 0);
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
-		*/
-
 	}
 
+	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
 	IEnumerator ContractThreeCoroutine (AudioSource audioSource)
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
@@ -421,7 +402,7 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (audioSource, "gulp", 1, 6);
 		interactable.Disable ();
 
-		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 0, 4);
+		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 1, 5);
 
 		Invoke ("OpenDoorFloorToChildrensRoom", 8);
 	}
@@ -502,7 +483,7 @@ public class EventManager : MonoBehaviour
 	void Start_1_Interactable_Light_Switch (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
-		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 0, 0);
+		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 1, 5);
 
 		SwitchChildrooms ("Childroom_Sad", "Childroom_Happy");
 
@@ -639,9 +620,12 @@ public class EventManager : MonoBehaviour
 		//Pille 1
 
 		interactable.Disable ();
+
+		//Schwarzblende hier
+
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
 
-		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0, 0);
+		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 1, 5);
 
 		SwitchHoardings ();
 		SwitchStaticRaveElements ();
