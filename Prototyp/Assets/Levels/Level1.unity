@@ -15701,6 +15701,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 29ae616b833c68640a82d3dd55d605e4, type: 2}
+    - target: {fileID: 1568744212224970, guid: f3123be601fde984ebdf8477738ece46, type: 2}
+      propertyPath: m_Name
+      value: Interactable_Rubber_Duck
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f3123be601fde984ebdf8477738ece46, type: 2}
   m_IsPrefabParent: 0
