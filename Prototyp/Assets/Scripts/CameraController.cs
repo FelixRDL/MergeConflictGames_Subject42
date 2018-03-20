@@ -20,6 +20,8 @@ public class CameraController : MonoBehaviour {
 		blur.enabled = !blur.enabled;
 	}
 
+
+	//TODO: Put this in another Class
 	public void TogglePlayerMovement() {
 		if (playerMovementEnabled) {
 			player.movementSettings.ForwardSpeed = 0;

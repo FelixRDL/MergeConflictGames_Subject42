@@ -68,7 +68,6 @@ public class SoundManager : MonoBehaviour {
 	IEnumerator FadeIn (AudioSource audioSource, float maxVolume, float fadeInTime) {
 		while (audioSource.volume < maxVolume) {
 			audioSource.volume += Time.deltaTime / fadeInTime;
-			print (audioSource.volume);
 			yield return null;
 		}
 	}
