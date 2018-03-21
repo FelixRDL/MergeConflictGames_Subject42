@@ -8,14 +8,14 @@ public class EventManager : MonoBehaviour
 {
 
 	//Flags for Level 1
-	private int clickedObjectsInHospitalRoom;
-	private int clickedObjectsInChildrensRoomHappy;
-	private int clickedObjectsInChildrensRoomSad;
-	private bool floorEntered;
-	private bool allowedToSignContract;
+	private int clickedObjectsInHospitalRoom = 0;
+	private int clickedObjectsInChildrensRoomHappy = 0;
+	private int clickedObjectsInChildrensRoomSad = 0;
+	private bool floorEntered = false;
+	private bool allowedToSignContract = false;
 
 	//Flags for Level 2
-	private bool playerHasTakenPill03;
+	private bool playerHasTakenPill03 = false;
 
 	//---------------------
 	//EventManager Init
@@ -25,31 +25,13 @@ public class EventManager : MonoBehaviour
 	{
 		if (SceneManager.GetActiveScene ().name == "Level1") 
 		{
-			InitFlagsLevel1 ();
 			Start_0_01 ();
 		}
 
 		if (SceneManager.GetActiveScene ().name == "Level2") 
 		{
-			InitFlagsLevel2 ();
 			Start_2_01 ();
 		}
-
-
-	}
-
-	void InitFlagsLevel1 ()
-	{
-		clickedObjectsInHospitalRoom = 0;
-		clickedObjectsInChildrensRoomHappy = 0;
-		clickedObjectsInChildrensRoomSad = 0;
-		floorEntered = false;
-		allowedToSignContract = false;
-	}
-
-	void InitFlagsLevel2 ()
-	{
-		playerHasTakenPill03 = false;
 	}
 
 
