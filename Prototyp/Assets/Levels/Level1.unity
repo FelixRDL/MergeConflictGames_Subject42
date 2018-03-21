@@ -90,7 +90,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112001298, guid: 21ad97062065a7147ad6ae58e6ee5d59,
+  m_LightingDataAsset: {fileID: 112001396, guid: 21ad97062065a7147ad6ae58e6ee5d59,
     type: 2}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -21383,7 +21383,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 852785293}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.49999976, w: 0.50000024}
-  m_LocalPosition: {x: 2.9550047, y: -4.500001, z: 9.566}
+  m_LocalPosition: {x: 3.044, y: -4.500001, z: 9.566}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 852785298}
@@ -28224,6 +28224,10 @@ Prefab:
     - target: {fileID: 100000, guid: 29c016018b46ca8428cedccf6dedfbe5, type: 3}
       propertyPath: m_Name
       value: ModuleStraight_Door02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 29c016018b46ca8428cedccf6dedfbe5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29c016018b46ca8428cedccf6dedfbe5, type: 3}
