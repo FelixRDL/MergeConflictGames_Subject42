@@ -223,13 +223,13 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_01 ()
 	{
-		DialogueManager.instance.StartSubjectMonologue ("0_01", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("0_01", 1);
 	}
 
 
 	void Start_0_08 ()
 	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08", 1, 1);
 		EnableInteractableContractOneForSecondInteraction ();
 		allowedToSignContract = true;
 	}
@@ -241,26 +241,26 @@ public class EventManager : MonoBehaviour
 	void Start_0_Interactable_Window (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("0_02", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("0_02", 1);
 	}
 
 	void Start_0_Interactable_Medical_Devices (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("0_03", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("0_03", 1);
 	}
 
 	void Start_0_Interactable_Picture_Frame (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("0_04", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("0_04", 1);
 		countClickedObjectsLevel0 ();
 	}
 
 	void Start_0_Interactable_Bath_Mirror (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("0_05", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("0_05", 1);
 	}
 
 	void Start_0_Interactable_Contract_One (AudioSource audioSource, InteractableObject interactable)
@@ -268,10 +268,10 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 
 		if (!allowedToSignContract) {
-			DialogueManager.instance.StartSubjectMonologue ("0_06", 1, 0);
+			DialogueManager.instance.StartSubjectMonologue ("0_06", 1);
 			countClickedObjectsLevel0 ();
 		} else {
-			DialogueManager.instance.StartSubjectMonologue ("0_13", 1, 0);
+			DialogueManager.instance.StartSubjectMonologue ("0_13", 1);
 			ToggleContract ("Interactable_Contract_01");
 			ToggleContract ("Interactable_Contract_02");
 		}
@@ -283,7 +283,7 @@ public class EventManager : MonoBehaviour
 	void Start_0_Interactable_Contract_Two (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("0_14", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("0_14", 1);
 		ToggleContract ("Interactable_Contract_02");
 		ToggleContract ("Interactable_Contract_03");
 	}
@@ -298,11 +298,11 @@ public class EventManager : MonoBehaviour
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
 	IEnumerator ContractThreeCoroutine (AudioSource audioSource)
 	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1);
 		yield return new WaitForSecondsRealtime(15);
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
 		yield return new WaitForSecondsRealtime(3);
-		DialogueManager.instance.StartSubjectMonologue ("0_17", 1, 0);
+		DialogueManager.instance.StartTestManagerMonologue ("0_17", 1);
 		yield return new WaitForSecondsRealtime(4);
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
@@ -314,10 +314,10 @@ public class EventManager : MonoBehaviour
 		print ("Klicked on Door to Floor");
 
 		if (!floorEntered) {
-			DialogueManager.instance.StartSubjectMonologue ("0_07", 1, 0);
+			DialogueManager.instance.StartSubjectMonologue ("0_07", 1);
 			countClickedObjectsLevel0 ();
 		} else {
-			DialogueManager.instance.StartSubjectMonologue ("1_03", 1, 0);
+			DialogueManager.instance.StartSubjectMonologue ("1_03", 1);
 		}
 
 		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
@@ -397,14 +397,14 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Enable ();
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().CloseDoor ();
 		floorEntered = true;
-		DialogueManager.instance.StartSubjectMonologue ("1_01", 1, 0);
+		DialogueManager.instance.StartTestManagerMonologue ("1_01", 1);
 	}
 
 
 	void Start_1_05_Interactable_Pill_Floor (AudioSource audioSource, InteractableObject interactable)
 	{
 		//Retromodine F - Recall Enhancer. Fair enough… what could possibly go wrong?! 	
-		DialogueManager.instance.StartSubjectMonologue ("1_05", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("1_05", 1);
 
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
 
@@ -419,17 +419,17 @@ public class EventManager : MonoBehaviour
 	void Start_1_06 ()
 	{
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_06", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_06", 1, 1);
 	}
 
 	void Start_1_16 ()
 	{
-		DialogueManager.instance.StartTestManagerMonologue ("1_16", 1, 0);
+		DialogueManager.instance.StartTestManagerMonologue ("1_16", 1);
 	}
 
 	void Start_1_25 ()
 	{
-		DialogueManager.instance.StartTestManagerMonologue ("1_25", 1, 0);
+		DialogueManager.instance.StartTestManagerMonologue ("1_25", 1);
 
 		Invoke ("OpenDoorFloorToChildrensRoom", 2);
 
@@ -439,7 +439,7 @@ public class EventManager : MonoBehaviour
 	void Start_1_30 ()
 	{
 		print ("1_30");
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_30", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_30", 1, 1);
 	}
 
 
@@ -456,36 +456,37 @@ public class EventManager : MonoBehaviour
 
 	public void Start_1_Interactable_Door_Floor_02 (AudioSource audioSource, InteractableObject interactable)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "ScreamingMan", 1);
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_04", 1, 2);
+		SoundManager.instance.PlayEffect (audioSource, "ScreamingMan", 1);
+		//Hier Coroutine mit kleinem Delay für Antwort
+		DialogueManager.instance.StartSubjectMonologue ("1_04", 1);
 	}
 
 	void Start_1_Interactable_Wooden_Train_Happy (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_09", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("1_09", 1);
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
 	void Start_1_Interactable_Frame_Family (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_10", 1, 0);
+		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("1_10", 1);
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
 	void Start_1_Interactable_Frame_Dog (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_11", 1, 0);
+		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("1_11", 1);
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
 	void Start_1_Interactable_Teddy_Happy (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_12", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("1_12", 1);
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
@@ -496,54 +497,61 @@ public class EventManager : MonoBehaviour
 
 		SwitchChildrooms ("Childroom_Sad", "Childroom_Happy");
 
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_17", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_17", 1, 1);
 	}
 
 	void Start_1_Interactable_Beer_Bottles (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_20", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("1_20", 1);
 		countClickedObjectsChildrensRoomSad ();
 	}
 
 	void Start_1_Interactable_Cubes_Sad (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_21", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("1_21", 1);
 		countClickedObjectsChildrensRoomSad ();
 	}
 
 	void Start_1_Interactable_Frame_Friend (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_22", 1, 0);
+		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("1_22", 1);
 		countClickedObjectsChildrensRoomSad ();
 	}
 
 	void Start_1_Interactable_Teddy_Sad (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_23", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("1_23", 1);
 		countClickedObjectsChildrensRoomSad ();
 	}
 
 	void Start_1_Interactable_Wooden_Train_Sad (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("1_24", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("1_24", 1);
 		countClickedObjectsChildrensRoomSad ();
 	}
 
 	void Start_1_Interactable_Neutralizer (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
+
+		//Hier Coroutine!
+
+		CloseDoorFloorToChildrensRoom ();
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
 		SoundManager.instance.StopBackgroundMusic (0);
 		Invoke ("OpenDoorFloorToChildrensRoom", 13);
 
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_27", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_27", 1, 1);
 
+	}
+
+	IEnumerator Start_1_Interactable_Neutralizer_Coroutine () {
+		yield return null;
 	}
 
 	//------------------------------------
@@ -595,6 +603,12 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
 	}
 
+	void CloseDoorFloorToChildrensRoom()
+	{
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "doorclose", 1);
+		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
+	}
+
 	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
 	{
 		GameObject childrooms = GameObject.Find ("Childrooms");
@@ -621,7 +635,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_01 ()
 	{
-		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1, 0);
+		DialogueManager.instance.StartTestManagerMonologue ("2_01", 1);
 	}
 		
 
@@ -654,7 +668,7 @@ public class EventManager : MonoBehaviour
 		SwitchDynamicRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Fence");
 		yield return new WaitForSeconds (2f);
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", 1, 1);
 		yield return new WaitForSeconds (2f);
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
@@ -663,7 +677,7 @@ public class EventManager : MonoBehaviour
 	void Start_2_08 (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", 1, 1);
 		Invoke ("TogglePillsInLevel2", 14f);
 	}
 
@@ -678,24 +692,24 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (11);
 
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_11", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_11", 1);
 	}
 
 	void Start_2_12 ()
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_12", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_12", 1);
 		ToggleFriendOnMap ("Interactable_Friend_On_Way_01");
 	}
 
 	void Start_2_13 ()
 	{
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_13", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_13", 1);
 	}
 
 	void Start_2_14 ()
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_14", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_14", 1);
 		ToggleFriendOnMap ("Interactable_Friend_On_Way_02");
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 	}
@@ -703,21 +717,21 @@ public class EventManager : MonoBehaviour
 	void Start_2_15 (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", 1, 1);
 
 		Invoke ("Start_2_18", 30);
 	}
 
 	void Start_2_16 ()
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_16", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_16", 1);
 	}
 
 	void Start_2_18 ()
 	{
 		//Wenn Spieler zu lange nicht die Pille nimmt.
 		if (!playerHasTakenPill03) {
-			DialogueManager.instance.StartTestManagerMonologue ("2_18", 1, 0);
+			DialogueManager.instance.StartTestManagerMonologue ("2_18", 1);
 		}
 	}
 
@@ -732,7 +746,7 @@ public class EventManager : MonoBehaviour
 		playerHasTakenPill03 = true;
 
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_19", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_19", 1);
 
 		SoundManager.instance.StopBackgroundMusic (0);
 
@@ -753,24 +767,24 @@ public class EventManager : MonoBehaviour
 	void Start_2_20 ()
 	{
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_20", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_20", 1);
 	}
 
 	void Start_2_21 ()
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_21", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_21", 1);
 	}
 
 	void Start_2_22 ()
 	{
 		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_22", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_22", 1);
 	}
 
 	void Start_2_23 (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_23", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_23", 1, 1);
 
 		//Am Ende des Dialoges hier Blackout
 
@@ -805,31 +819,31 @@ public class EventManager : MonoBehaviour
 	void Start_2_Interactable_Keypad (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("2_03", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_03", 1);
 	}
 
 	void Start_2_Interactable_Dancers_On_Floor (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("2_06", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_06", 1);
 	}
 
 	void Start_2_Dancing_People (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("2_07", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_07", 1);
 	}
 
 	void Start_2_Interactable_DJ_Console (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartSubjectMonologue ("2_17", 1, 0);
+		DialogueManager.instance.StartSubjectMonologue ("2_17", 1);
 	}
 
 	void Start_2_Interactable_Note_Code_For_Keypad (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1, 0);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", 1, 1);
 		StartCoroutine (FadeToBlack (30f));
 
 		//Am Ende des Dialogs hier Ende einleiten; Hier Endscreen und Abspann starten.
