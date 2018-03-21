@@ -8,12 +8,6 @@ public class Interactable : MonoBehaviour
 	//Change the radius of the the distance that allows interaction
 	public float radius = 1.5f;
 
-	private Material outline;
-	private Shader outlineShader;
-
-	private Renderer rend;
-	private Material defaultMaterial;
-
 	private Crosshair crosshair;
 
 	private bool showHint = false;
@@ -23,12 +17,6 @@ public class Interactable : MonoBehaviour
 
 	void Awake ()
 	{
-		//rend = GetComponent<Renderer> ();
-		//rend.enabled = true;
-
-		//outline = Resources.Load ("Custom_Outline", typeof(Material)) as Material;
-		//outlineShader = Shader.Find ("Custom/Outline");
-
 		crosshair = GameObject.Find ("Crosshair").GetComponent<Crosshair> ();
 
 	}
@@ -44,12 +32,6 @@ public class Interactable : MonoBehaviour
 					showHint = true;
 				}
 				crosshair.SetHighlight ();
-
-				//defaultMaterial = rend.material;
-				//rend.material = outline;
-				//rend.material.color = Color.blue; 
-
-				//rend.material.shader = outlineShader;
 			} else {
 				OnDefocused ();
 			}	
@@ -58,13 +40,8 @@ public class Interactable : MonoBehaviour
 
 	public void OnDefocused ()
 	{
-		//Outline entfernen
-
 		showHint = false;
 		crosshair.RemoveHighlight ();
-
-		//rend.material = defaultMaterial;
-
 	}
 
 	public void OnClicked (Transform player)

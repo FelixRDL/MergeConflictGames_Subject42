@@ -271,19 +271,38 @@ public class EventManager : MonoBehaviour
 			DialogueManager.instance.StartSubjectMonologue ("0_06", 1);
 			countClickedObjectsLevel0 ();
 		} else {
-			DialogueManager.instance.StartSubjectMonologue ("0_13", 1);
-			ToggleContract ("Interactable_Contract_01");
-			ToggleContract ("Interactable_Contract_02");
+			StartCoroutine (Start_0_Interactable_Contract_One_Coroutine (audioSource));
 		}
+	}
+
+	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
+	IEnumerator Start_0_Interactable_Contract_One_Coroutine(AudioSource audioSource)
+	{
 
 		//Maybe add possibility here of zooming in on a contract.
-		//player.GetComponent<Player> ().CameraZoom ();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ZoomIn ();
+
+		DialogueManager.instance.StartSubjectMonologue ("0_13", 1);
+		yield return new WaitForSecondsRealtime(2.5f);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
+		yield return new WaitForSecondsRealtime(3);
+		ToggleContract ("Interactable_Contract_01");
+		ToggleContract ("Interactable_Contract_02");
 	}
 
 	void Start_0_Interactable_Contract_Two (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
+		StartCoroutine (Start_0_Interactable_Contract_Two_Coroutine (audioSource));
+	}
+
+	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
+	IEnumerator Start_0_Interactable_Contract_Two_Coroutine(AudioSource audioSource)
+	{
 		DialogueManager.instance.StartSubjectMonologue ("0_14", 1);
+		yield return new WaitForSecondsRealtime(6);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
+		yield return new WaitForSecondsRealtime(3);
 		ToggleContract ("Interactable_Contract_02");
 		ToggleContract ("Interactable_Contract_03");
 	}
@@ -291,12 +310,12 @@ public class EventManager : MonoBehaviour
 	void Start_0_Interactable_Contract_Three (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
-		StartCoroutine(ContractThreeCoroutine(audioSource));
+		StartCoroutine(Start_0_Interactable_Contract_Three_Coroutine(audioSource));
 
 	}
 
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
-	IEnumerator ContractThreeCoroutine (AudioSource audioSource)
+	IEnumerator Start_0_Interactable_Contract_Three_Coroutine (AudioSource audioSource)
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", 1, 1);
 		yield return new WaitForSecondsRealtime(15);

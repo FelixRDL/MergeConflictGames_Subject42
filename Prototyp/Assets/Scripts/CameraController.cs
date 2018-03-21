@@ -20,6 +20,12 @@ public class CameraController : MonoBehaviour {
 		blur.enabled = !blur.enabled;
 	}
 
+	public void ZoomIn()
+	{
+		float fov = Camera.main.fieldOfView;
+		Camera.main.fieldOfView = 30;
+	}
+
 
 	//TODO: Put this in another Class
 	public void TogglePlayerMovement() {
