@@ -14,6 +14,7 @@ ModelImporter:
     100012: HoardingFoot2
     100014: Hoarding
     100016: Textile
+    100018: Textile_001
     400000: All_mods
     400002: Circle
     400004: Circle_003
@@ -23,6 +24,7 @@ ModelImporter:
     400012: HoardingFoot2
     400014: Hoarding
     400016: Textile
+    400018: Textile_001
     2100000: Hoarding_StoneFoot
     2100002: unnamed
     2100004: Hoarding_Metal
@@ -37,6 +39,7 @@ ModelImporter:
     2300010: HoardingFoot2
     2300012: Hoarding
     2300014: Textile
+    2300016: Textile_001
     3300000: All_mods
     3300002: Circle
     3300004: Circle_003
@@ -45,6 +48,7 @@ ModelImporter:
     3300010: HoardingFoot2
     3300012: Hoarding
     3300014: Textile
+    3300016: Textile_001
     4300000: HoardingFoot2
     4300002: HoardingFoot
     4300004: All_mods
@@ -53,6 +57,7 @@ ModelImporter:
     4300010: Circle
     4300012: Textile
     4300014: Hoarding
+    4300016: Textile_001
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
