@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4211305061084352}
   m_Layer: 0
-  m_Name: Contracts 1
+  m_Name: Contracts+Klemmbrett
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

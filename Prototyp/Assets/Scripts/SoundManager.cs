@@ -63,8 +63,6 @@ public class SoundManager : MonoBehaviour
 		} else {
 			StartCoroutine (FadeIn (backgroundMusicSource, maxVolume, fadeInTime));
 		}
-
-
 	}
 
 	IEnumerator FadeIn (AudioSource audioSource, float maxVolume, float fadeInTime)
@@ -75,9 +73,25 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
+	IEnumerator FadeOut (AudioSource audioSource, float fadeInTime)
+	{
+		while (audioSource.volume > 0) {
+			audioSource.volume -= Time.deltaTime / fadeInTime;
+			yield return null;
+		}
+		backgroundMusicSource.Stop ();
+	}
+
 	public void StopBackgroundMusic (float fadeOutTime)
 	{
-		backgroundMusicSource.Stop ();
+		if (fadeOutTime == 0) {
+			backgroundMusicSource.Stop ();
+		} else {
+			StartCoroutine (FadeOut (backgroundMusicSource, fadeOutTime));
+		}
+
+
+
 	}
 		
 

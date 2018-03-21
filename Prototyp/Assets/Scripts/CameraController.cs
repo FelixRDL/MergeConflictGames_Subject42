@@ -26,7 +26,15 @@ public class CameraController : MonoBehaviour {
 	public void ZoomIn()
 	{
 		float fov = Camera.main.fieldOfView;
-		Camera.main.fieldOfView = 30;
+		Camera.main.fieldOfView = 70;
+		//Camera.main.fieldOfView = Mathf.Lerp (30, 5, Time.deltaTime * 5);
+	}
+
+	public void ZoomOut()
+	{
+		float fov = Camera.main.fieldOfView;
+		Camera.main.fieldOfView = 75;
+		//Camera.main.fieldOfView = Mathf.Lerp (75, 5, Time.deltaTime * 5);
 	}
 
 
