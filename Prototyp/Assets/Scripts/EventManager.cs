@@ -691,8 +691,7 @@ public class EventManager : MonoBehaviour
 
 		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (11);
 
-		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_11", 1);
+		DialogueManager.instance.StartTestManagerMonologue ("2_11", 1);
 	}
 
 	void Start_2_12 ()
@@ -703,8 +702,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_13 ()
 	{
-		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_13", 1);
+		DialogueManager.instance.StartTestManagerMonologue ("2_13", 1);
 	}
 
 	void Start_2_14 ()
@@ -745,8 +743,7 @@ public class EventManager : MonoBehaviour
 
 		playerHasTakenPill03 = true;
 
-		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_19", 1);
+		DialogueManager.instance.StartTestManagerMonologue ("2_19", 1);
 
 		SoundManager.instance.StopBackgroundMusic (0);
 
@@ -766,8 +763,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_20 ()
 	{
-		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_20", 1);
+		DialogueManager.instance.StartTestManagerMonologue ("2_20", 1);
 	}
 
 	void Start_2_21 ()
@@ -777,8 +773,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_22 ()
 	{
-		//Hier eigentlich Alter Ego am Reden -> Anpassen!
-		DialogueManager.instance.StartSubjectMonologue ("2_22", 1);
+		DialogueManager.instance.StartTestManagerMonologue ("2_22", 1);
 	}
 
 	void Start_2_23 (InteractableObject interactable)
