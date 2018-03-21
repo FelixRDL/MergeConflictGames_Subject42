@@ -538,13 +538,20 @@ public class EventManager : MonoBehaviour
 	void Start_1_Interactable_Neutralizer (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
+
+		//Hier Coroutine!
+
+		CloseDoorFloorToChildrensRoom ();
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
 		SoundManager.instance.StopBackgroundMusic (0);
 		Invoke ("OpenDoorFloorToChildrensRoom", 13);
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_27", 1, 1);
 
+	}
+
+	IEnumerator Start_1_Interactable_Neutralizer_Coroutine () {
+		yield return null;
 	}
 
 	//------------------------------------
@@ -594,6 +601,12 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
+	}
+
+	void CloseDoorFloorToChildrensRoom()
+	{
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "doorclose", 1);
+		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
 	}
 
 	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
