@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour
 {
+	//Constants for Dialogue Volumes
+	private const float SUBJECT_DEFAULT_VOLUME = 1.0f;
+	private const float TEST_MANAGER_DEFAULT_VOLUME = 1.0f;
+	private const float TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME = 1.0f;
+	private const float FRIEND_DEFAULT_VOLUME = 1.0f;
 
 	//Flags for Level 1
 	private int clickedObjectsInHospitalRoom = 0;
@@ -13,11 +18,6 @@ public class EventManager : MonoBehaviour
 	private int clickedObjectsInChildrensRoomSad = 0;
 	private bool floorEntered = false;
 	private bool allowedToSignContract = false;
-
-	private const float SUBJECT_DEFAULT_VOLUME = 1.0f;
-	private const float TEST_MANAGER_DEFAULT_VOLUME = 1.0f;
-	private const float TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME = 1.0f;
-	private const float FRIEND_DEFAULT_VOLUME = 1.0f;
 
 	//Flags for Level 2
 	private bool playerHasTakenPill03 = false;
@@ -213,14 +213,6 @@ public class EventManager : MonoBehaviour
 		DialogueManager.instance.StartSubjectMonologue ("0_01", SUBJECT_DEFAULT_VOLUME);
 	}
 
-
-	void Start_0_08 ()
-	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08",SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
-		EnableInteractableContractOneForSecondInteraction ();
-		allowedToSignContract = true;
-	}
-
 	//----------------------------------
 	//Act 0 Interactables with Dialogue
 	//----------------------------------
@@ -262,58 +254,18 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
-	IEnumerator Start_0_Interactable_Contract_One_Coroutine(AudioSource audioSource)
-	{
-
-		//Maybe add possibility here of zooming in on a contract.
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ZoomIn ();
-
-		DialogueManager.instance.StartSubjectMonologue ("0_13", SUBJECT_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(2.5f);
-		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
-		yield return new WaitForSecondsRealtime(3);
-		ToggleContract ("Interactable_Contract_01");
-		ToggleContract ("Interactable_Contract_02");
-	}
-
 	void Start_0_Interactable_Contract_Two (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
 		StartCoroutine (Start_0_Interactable_Contract_Two_Coroutine (audioSource));
 	}
 
-	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
-	IEnumerator Start_0_Interactable_Contract_Two_Coroutine(AudioSource audioSource)
-	{
-		DialogueManager.instance.StartSubjectMonologue ("0_14", SUBJECT_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(6);
-		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
-		yield return new WaitForSecondsRealtime(3);
-		ToggleContract ("Interactable_Contract_02");
-		ToggleContract ("Interactable_Contract_03");
-	}
 
 	void Start_0_Interactable_Contract_Three (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
 		StartCoroutine(Start_0_Interactable_Contract_Three_Coroutine(audioSource));
-
 	}
-
-	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
-	IEnumerator Start_0_Interactable_Contract_Three_Coroutine (AudioSource audioSource)
-	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(15);
-		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
-		yield return new WaitForSecondsRealtime(3);
-		DialogueManager.instance.StartTestManagerMonologue ("0_17", TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(4);
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1);
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
-	}
-		
 
 	public void Start_0_Interactable_Door_Floor (AudioSource audioSource)
 	{
@@ -327,7 +279,6 @@ public class EventManager : MonoBehaviour
 
 		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
-
 	}
 
 	//------------------------------------
@@ -336,9 +287,7 @@ public class EventManager : MonoBehaviour
 
 	public void Start_0_Interactable_Door_Bath (AudioSource audioSource)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
-		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().OpenBathroomDoor ();
-		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().Disable ();
+		OpenBathroomDoor (audioSource);
 	}
 
 	void Start_0_Interactable_Rubber_Duck (AudioSource audioSource)
@@ -355,6 +304,63 @@ public class EventManager : MonoBehaviour
 	}
 
 	//---------------------------
+	//Act 0 Coroutines 
+	//---------------------------
+
+	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
+	IEnumerator Start_0_Interactable_Contract_One_Coroutine(AudioSource audioSource)
+	{
+		//Maybe add possibility here of zooming in on a contract.
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ZoomIn ();
+
+		DialogueManager.instance.StartSubjectMonologue ("0_13", SUBJECT_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime(2.5f);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
+		yield return new WaitForSecondsRealtime(3);
+		ToggleContract ("Interactable_Contract_01");
+		ToggleContract ("Interactable_Contract_02");
+	}
+
+	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
+	IEnumerator Start_0_Interactable_Contract_Two_Coroutine(AudioSource audioSource)
+	{
+		DialogueManager.instance.StartSubjectMonologue ("0_14", SUBJECT_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime(6);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
+		yield return new WaitForSecondsRealtime(3);
+		ToggleContract ("Interactable_Contract_02");
+		ToggleContract ("Interactable_Contract_03");
+	}
+
+	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
+	IEnumerator Start_0_Interactable_Contract_Three_Coroutine (AudioSource audioSource)
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime(15);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
+		yield return new WaitForSecondsRealtime(3);
+		DialogueManager.instance.StartTestManagerMonologue ("0_17", TEST_MANAGER_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime(4);
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1);
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
+	}
+
+	IEnumerator Start_0_08_Coroutine ()
+	{
+		print ("Warte 7 Sekunden");
+		yield return new WaitForSecondsRealtime (7);
+		while (DialogueManager.instance.IsDialoguePlaying()) {
+			print ("Waiting");
+			yield return null;
+
+		}
+		print ("Done Waiting");
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08",SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
+		EnableInteractableContractOneForSecondInteraction ();
+		allowedToSignContract = true;
+	}
+
+	//---------------------------
 	//Act 0 Additional Functions
 	//---------------------------
 
@@ -364,7 +370,7 @@ public class EventManager : MonoBehaviour
 	{
 		clickedObjectsInHospitalRoom++;
 		if (clickedObjectsInHospitalRoom == 3) {
-			Invoke ("Start_0_08", 8);
+			StartCoroutine(Start_0_08_Coroutine());
 		}
 	}
 
@@ -377,6 +383,13 @@ public class EventManager : MonoBehaviour
 				contract.gameObject.SetActive (!contract.gameObject.activeSelf);
 			}
 		}
+	}
+
+	void OpenBathroomDoor(AudioSource audioSource) 
+	{
+		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
+		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().OpenBathroomDoor ();
+		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().Disable ();
 	}
 
 	void EnableInteractableContractOneForSecondInteraction ()

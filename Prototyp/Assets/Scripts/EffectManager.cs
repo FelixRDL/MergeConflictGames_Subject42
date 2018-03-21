@@ -41,7 +41,7 @@ public class EffectManager : MonoBehaviour {
 	public void CameraZoom () {
 
 		//Zoom 5 Units per frame
-		Camera.mainCamera.fieldOfView = Mathf.Lerp (Camera.mainCamera.fieldOfView, 5, Time.deltaTime * 5);
+		Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 5, Time.deltaTime * 5);
 	}
 
 

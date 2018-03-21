@@ -27865,7 +27865,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1341688773}
   - component: {fileID: 1100468866}
-  - component: {fileID: 1100468861}
   - component: {fileID: 1100468863}
   - component: {fileID: 1100468865}
   - component: {fileID: 1100468862}
@@ -27877,23 +27876,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &1100468861
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1100468860}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2f2d18c711944374ba1b629320b926c9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &1100468862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29611,7 +29593,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 412390, guid: 22f5407fceb4bb74b930f5f2b49aa876, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9.901
+      value: 9.9456
       objectReference: {fileID: 0}
     - target: {fileID: 412390, guid: 22f5407fceb4bb74b930f5f2b49aa876, type: 2}
       propertyPath: m_LocalPosition.y
@@ -33902,6 +33884,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0479cbe5bf2433e48ac7f040ffda8396, type: 3}
   - {fileID: 8300000, guid: b1293df8f0053a4458053f4e26bc9e09, type: 3}
   - {fileID: 8300000, guid: 6d10e359206826e499ed4d35ac613f08, type: 3}
+  - {fileID: 8300000, guid: ff746f13df04cb947be01c987c29d809, type: 3}
 --- !u!4 &1320716259
 Transform:
   m_ObjectHideFlags: 0
@@ -34764,7 +34747,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341688774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80c65260b681d134ea959aa0a25a4717, type: 3}
   m_Name: 
@@ -34777,7 +34760,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341688774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fc6bde01469c7b4badee5362f191d96, type: 3}
   m_Name: 
