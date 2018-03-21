@@ -347,8 +347,6 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_0_08_Coroutine ()
 	{
-		print ("Warte 7 Sekunden");
-		yield return new WaitForSecondsRealtime (7);
 		while (DialogueManager.instance.IsDialoguePlaying()) {
 			print ("Waiting");
 			yield return null;
@@ -400,6 +398,10 @@ public class EventManager : MonoBehaviour
 	#endregion
 
 
+
+
+
+
 	#region Level1 Act1
 
 	//---------------------
@@ -409,9 +411,8 @@ public class EventManager : MonoBehaviour
 
 	void Start_1_01 ()
 	{
+		CloseDoorToHospitalRoom ();
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Enable ();
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().CloseDoor ();
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "doorclose", 1);
 		floorEntered = true;
 		DialogueManager.instance.StartTestManagerMonologue ("1_01", TEST_MANAGER_DEFAULT_VOLUME);
 	}
@@ -427,22 +428,6 @@ public class EventManager : MonoBehaviour
 	{
 		CloseDoorFloorToChildrensRoom ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_06", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
-	}
-
-	void Start_1_16 ()
-	{
-		DialogueManager.instance.StartTestManagerMonologue ("1_16", TEST_MANAGER_DEFAULT_VOLUME);
-	}
-
-	void Start_1_25 ()
-	{
-		DialogueManager.instance.StartTestManagerMonologue ("1_25", TEST_MANAGER_DEFAULT_VOLUME);
-
-		//Prevent Player from Getting Crushed here!
-
-		Invoke ("OpenDoorFloorToChildrensRoom", 2);
-
-		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
 	}
 
 	void Start_1_30 ()
@@ -553,15 +538,15 @@ public class EventManager : MonoBehaviour
 
 	public void Start_1_Interactable_Door_Floor_To_Childrens_Room (AudioSource audioSource, InteractableDoorFloorToChildrensRoom interactable)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
 		interactable.Disable ();
+		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
 
 	}
 
 	void Start_1_Interactable_Door_Childrens_Room_To_Garden (AudioSource audioSource, InteractableObject interactable)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
-		SceneManager.LoadScene ("Level2");
+		LoadLevelTwo ();
 	}
 
 	//---------------------------
@@ -587,6 +572,27 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (1);
 		OpenDoorFloorToChildrensRoom ();
 	}
+
+	IEnumerator Start_1_16_Coroutine ()
+	{
+		while (DialogueManager.instance.IsDialoguePlaying()) {
+			yield return null;
+		}
+		DialogueManager.instance.StartTestManagerMonologue ("1_16", TEST_MANAGER_DEFAULT_VOLUME);
+	}
+
+	IEnumerator Start_1_25_Coroutine ()
+	{
+		while (DialogueManager.instance.IsDialoguePlaying()) {
+			yield return null;
+		}
+		DialogueManager.instance.StartTestManagerMonologue ("1_25", TEST_MANAGER_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime(2);
+		//Prevent Player from Getting Crushed here!
+		OpenDoorFloorToChildrensRoom ();
+		yield return new WaitForSecondsRealtime(2);
+		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
+	}
 		
 	IEnumerator Start_1_Interactable_Neutralizer_Coroutine () {
 		CloseDoorFloorToChildrensRoom ();
@@ -610,7 +616,7 @@ public class EventManager : MonoBehaviour
 	{
 		clickedObjectsInChildrensRoomHappy++;
 		if (clickedObjectsInChildrensRoomHappy == 3) {
-			Invoke ("Start_1_16", 8);
+			StartCoroutine (Start_1_16_Coroutine ());
 		}
 	}
 
@@ -619,8 +625,14 @@ public class EventManager : MonoBehaviour
 	{
 		clickedObjectsInChildrensRoomSad++;
 		if (clickedObjectsInChildrensRoomSad == 3) {
-			Invoke ("Start_1_25", 8);
+			StartCoroutine(Start_1_25_Coroutine ());
 		}
+	}
+
+	void CloseDoorToHospitalRoom()
+	{
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().CloseDoor ();
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "doorclose", 1);
 	}
 
 
@@ -651,11 +663,23 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	void LoadLevelTwo()
+	{
 
+		//Start a Loading Screen here!
+
+		SceneManager.LoadScene ("Level2");
+	}
+		
 	#endregion
 
-	#region Level2 Act2
 
+
+
+
+
+
+	#region Level2 Act2
 
 	//---------------------
 	//Act 2 Main Dialogues
@@ -669,10 +693,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_2_04 (InteractableObject interactable)
 	{
-		//Pille 1
-
 		interactable.Disable ();
-
 		StartCoroutine (Start_2_04_Coroutine ());
 	}
 
