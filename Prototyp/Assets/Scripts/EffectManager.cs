@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 using UnityStandardAssets.Characters.FirstPerson;
 
-//DELETE THIS CLASS! CONTENT NOW IN EFFECTMANAGER
-
-
-public class CameraController : MonoBehaviour {
+public class EffectManager : MonoBehaviour {
 
 	public BlurOptimized blur;
 	public RigidbodyFirstPersonController player;
 
 	private bool playerMovementEnabled = true;
+
+	float minFov = 15f;
+	float maxFov = 90f;
+	float sensitivity = 20f;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,20 @@ public class CameraController : MonoBehaviour {
 	{
 		float fov = Camera.main.fieldOfView;
 		Camera.main.fieldOfView = 30;
+
+		//Zoom test:
+		/*
+		float fov = camera.fieldOfView;
+		fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
+		fov = Mathf.Clamp(fov, minFov, maxFov);
+		Camera.main.fieldOfView = fov;
+		*/
+	}
+
+	public void CameraZoom () {
+
+		//Zoom 5 Units per frame
+		Camera.mainCamera.fieldOfView = Mathf.Lerp (Camera.mainCamera.fieldOfView, 5, Time.deltaTime * 5);
 	}
 
 
@@ -43,5 +58,4 @@ public class CameraController : MonoBehaviour {
 		}
 		playerMovementEnabled = !playerMovementEnabled;
 	}
-
 }

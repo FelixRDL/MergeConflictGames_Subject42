@@ -26,8 +26,6 @@ public class SurveillanceCamera : MonoBehaviour
 	{
 		RotateCameraTowardsPlayer ();
 		PlaySoundIfCameraMoving ();
-
-
 	}
 
 	private Quaternion CalculateLookRotation()
