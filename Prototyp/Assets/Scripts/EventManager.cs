@@ -28,13 +28,11 @@ public class EventManager : MonoBehaviour
 
 	void Start ()
 	{
-		if (SceneManager.GetActiveScene ().name == "Level1") 
-		{
+		if (SceneManager.GetActiveScene ().name == "Level1") {
 			Start_0_01 ();
 		}
 
-		if (SceneManager.GetActiveScene ().name == "Level2") 
-		{
+		if (SceneManager.GetActiveScene ().name == "Level2") {
 			Start_2_01 ();
 		}
 	}
@@ -264,7 +262,7 @@ public class EventManager : MonoBehaviour
 	void Start_0_Interactable_Contract_Three (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
-		StartCoroutine(Start_0_Interactable_Contract_Three_Coroutine(audioSource));
+		StartCoroutine (Start_0_Interactable_Contract_Three_Coroutine (audioSource));
 	}
 
 	public void Start_0_Interactable_Door_Floor (AudioSource audioSource)
@@ -304,30 +302,30 @@ public class EventManager : MonoBehaviour
 	}
 
 	//---------------------------
-	//Act 0 Coroutines 
+	//Act 0 Coroutines
 	//---------------------------
 
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
-	IEnumerator Start_0_Interactable_Contract_One_Coroutine(AudioSource audioSource)
+	IEnumerator Start_0_Interactable_Contract_One_Coroutine (AudioSource audioSource)
 	{
 		//Maybe add possibility here of zooming in on a contract.
 		//GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ZoomIn ();
 
 		DialogueManager.instance.StartSubjectMonologue ("0_13", SUBJECT_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(2.5f);
+		yield return new WaitForSecondsRealtime (2.5f);
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
-		yield return new WaitForSecondsRealtime(3);
+		yield return new WaitForSecondsRealtime (3);
 		ToggleContract ("Interactable_Contract_01");
 		ToggleContract ("Interactable_Contract_02");
 	}
 
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
-	IEnumerator Start_0_Interactable_Contract_Two_Coroutine(AudioSource audioSource)
+	IEnumerator Start_0_Interactable_Contract_Two_Coroutine (AudioSource audioSource)
 	{
 		DialogueManager.instance.StartSubjectMonologue ("0_14", SUBJECT_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(6);
+		yield return new WaitForSecondsRealtime (6);
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
-		yield return new WaitForSecondsRealtime(3);
+		yield return new WaitForSecondsRealtime (3);
 		ToggleContract ("Interactable_Contract_02");
 		ToggleContract ("Interactable_Contract_03");
 	}
@@ -336,24 +334,24 @@ public class EventManager : MonoBehaviour
 	IEnumerator Start_0_Interactable_Contract_Three_Coroutine (AudioSource audioSource)
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(15);
+		yield return new WaitForSecondsRealtime (15);
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
-		yield return new WaitForSecondsRealtime(3);
+		yield return new WaitForSecondsRealtime (3);
 		DialogueManager.instance.StartTestManagerMonologue ("0_17", TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(4);
+		yield return new WaitForSecondsRealtime (4);
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
 	}
 
 	IEnumerator Start_0_08_Coroutine ()
 	{
-		while (DialogueManager.instance.IsDialoguePlaying()) {
+		while (DialogueManager.instance.IsDialoguePlaying ()) {
 			print ("Waiting");
 			yield return null;
 
 		}
 		print ("Done Waiting");
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08",SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
 		EnableInteractableContractOneForSecondInteraction ();
 		allowedToSignContract = true;
 	}
@@ -368,7 +366,7 @@ public class EventManager : MonoBehaviour
 	{
 		clickedObjectsInHospitalRoom++;
 		if (clickedObjectsInHospitalRoom == 3) {
-			StartCoroutine(Start_0_08_Coroutine());
+			StartCoroutine (Start_0_08_Coroutine ());
 		}
 	}
 
@@ -383,7 +381,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void OpenBathroomDoor(AudioSource audioSource) 
+	void OpenBathroomDoor (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().OpenBathroomDoor ();
@@ -411,10 +409,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_1_01 ()
 	{
-		CloseDoorToHospitalRoom ();
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Enable ();
-		floorEntered = true;
-		DialogueManager.instance.StartTestManagerMonologue ("1_01", TEST_MANAGER_DEFAULT_VOLUME);
+		StartCoroutine (Start_1_01_Coroutine ());
 	}
 
 
@@ -432,7 +427,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_1_30 ()
 	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_30",SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_30", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
 	}
 
 
@@ -484,6 +479,7 @@ public class EventManager : MonoBehaviour
 	void Start_1_Interactable_Light_Switch (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
+		SoundManager.instance.PlayEffect (audioSource, "lightswitch", 1);
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_17", SUBJECT_DEFAULT_VOLUME, 1);
 		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 1, 5);
 		SwitchChildrooms ("Childroom_Sad", "Childroom_Happy");
@@ -527,7 +523,7 @@ public class EventManager : MonoBehaviour
 	void Start_1_Interactable_Neutralizer (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		StartCoroutine (Start_1_Interactable_Neutralizer_Coroutine());
+		StartCoroutine (Start_1_Interactable_Neutralizer_Coroutine ());
 	}
 
 
@@ -550,32 +546,97 @@ public class EventManager : MonoBehaviour
 	}
 
 	//---------------------------
-	//Act 1 Coroutines 
+	//Act 1 Coroutines
 	//---------------------------
 
-	IEnumerator Start_1_Interactable_Door_Floor_02_Coroutine(AudioSource audioSource)
+	IEnumerator Start_1_01_Coroutine ()
+	{
+		CloseDoorToHospitalRoom ();
+		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Enable ();
+		floorEntered = true;
+		DialogueManager.instance.StartTestManagerMonologue ("1_01", TEST_MANAGER_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime (6);
+		GameObject.Find ("Interactable_Pill_Floor").GetComponent<Rigidbody> ().isKinematic = false;
+		//Play DropSound here
+	}
+
+	IEnumerator Start_1_Interactable_Door_Floor_02_Coroutine (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "ScreamingMan", 1);
 		yield return new WaitForSecondsRealtime (3);
-		DialogueManager.instance.StartSubjectMonologue ("1_04",SUBJECT_DEFAULT_VOLUME);
+		DialogueManager.instance.StartSubjectMonologue ("1_04", SUBJECT_DEFAULT_VOLUME);
 	}
 
-	IEnumerator Start_1_05_Coroutine(AudioSource audioSource) 
+	IEnumerator Start_1_05_Coroutine (AudioSource audioSource)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("1_05",SUBJECT_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime (3);
+		DialogueManager.instance.StartSubjectMonologue ("1_05", SUBJECT_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime (9);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
 		yield return new WaitForSecondsRealtime (1);
 		SoundManager.instance.PlayEffect (audioSource, "gulp", 1);
 		yield return new WaitForSecondsRealtime (1);
+		//Start Trip here
+
+		//Hier besser als BackgroundMusic abspielen...
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (4f);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		StartCoroutine (TrippyFOVChanges (10f));
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c.a = 0;
+		black.color = c;
+		yield return new WaitForSecondsRealtime (10f);
 		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 1, 5);
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSeconds (4f);
+		c = black.color;
+		c.a = 0;
+		black.color = c;
+	
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 		yield return new WaitForSecondsRealtime (1);
 		OpenDoorFloorToChildrensRoom ();
 	}
 
+	private YieldInstruction fovInstruction = new YieldInstruction ();
+	IEnumerator TrippyFOVChanges(float duration) {
+		float elapsedTime = 0.0f;
+		while (elapsedTime < duration) {
+			yield return fovInstruction;
+			elapsedTime += Time.deltaTime;
+			Camera.main.fieldOfView = Mathf.Lerp (Random.Range(30, 90), 5, Time.deltaTime * 5);
+		}
+		Camera.main.fieldOfView = 75;
+	}
+
+	private YieldInstruction fadeInstruction = new YieldInstruction ();
+
+	IEnumerator FadeToBlack (float duration)
+	{
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		float elapsedTime = 0.0f;
+		Color c = black.color;
+		print ("Start");
+		while (elapsedTime < duration) {
+			yield return fadeInstruction;
+			elapsedTime += Time.deltaTime;
+			c.a = Mathf.Clamp01 (elapsedTime / duration);
+			black.color = c;
+		}
+		print ("End");
+
+	}
+
 	IEnumerator Start_1_16_Coroutine ()
 	{
-		while (DialogueManager.instance.IsDialoguePlaying()) {
+		while (DialogueManager.instance.IsDialoguePlaying ()) {
 			yield return null;
 		}
 		DialogueManager.instance.StartTestManagerMonologue ("1_16", TEST_MANAGER_DEFAULT_VOLUME);
@@ -583,18 +644,19 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_1_25_Coroutine ()
 	{
-		while (DialogueManager.instance.IsDialoguePlaying()) {
+		while (DialogueManager.instance.IsDialoguePlaying ()) {
 			yield return null;
 		}
 		DialogueManager.instance.StartTestManagerMonologue ("1_25", TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime(2);
+		yield return new WaitForSecondsRealtime (2);
 		//Prevent Player from Getting Crushed here!
 		OpenDoorFloorToChildrensRoom ();
-		yield return new WaitForSecondsRealtime(2);
+		yield return new WaitForSecondsRealtime (2);
 		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
 	}
-		
-	IEnumerator Start_1_Interactable_Neutralizer_Coroutine () {
+
+	IEnumerator Start_1_Interactable_Neutralizer_Coroutine ()
+	{
 		CloseDoorFloorToChildrensRoom ();
 		yield return new WaitForSecondsRealtime (3);
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
@@ -625,11 +687,11 @@ public class EventManager : MonoBehaviour
 	{
 		clickedObjectsInChildrensRoomSad++;
 		if (clickedObjectsInChildrensRoomSad == 3) {
-			StartCoroutine(Start_1_25_Coroutine ());
+			StartCoroutine (Start_1_25_Coroutine ());
 		}
 	}
 
-	void CloseDoorToHospitalRoom()
+	void CloseDoorToHospitalRoom ()
 	{
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().CloseDoor ();
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "doorclose", 1);
@@ -643,7 +705,7 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
 	}
 
-	void CloseDoorFloorToChildrensRoom()
+	void CloseDoorFloorToChildrensRoom ()
 	{
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "doorclose", 1);
 		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
@@ -663,14 +725,14 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void LoadLevelTwo()
+	void LoadLevelTwo ()
 	{
 
 		//Start a Loading Screen here!
 
 		SceneManager.LoadScene ("Level2");
 	}
-		
+
 	#endregion
 
 
@@ -689,7 +751,7 @@ public class EventManager : MonoBehaviour
 	{
 		DialogueManager.instance.StartTestManagerMonologue ("2_01", TEST_MANAGER_DEFAULT_VOLUME);
 	}
-		
+
 
 	void Start_2_04 (InteractableObject interactable)
 	{
@@ -697,9 +759,11 @@ public class EventManager : MonoBehaviour
 		StartCoroutine (Start_2_04_Coroutine ());
 	}
 
-	IEnumerator Start_2_04_Coroutine () {
-		SoundManager.instance.PlayEffect(GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
+	IEnumerator Start_2_04_Coroutine ()
+	{
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
 		yield return new WaitForSeconds (1f);
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (2f));
 		yield return new WaitForSeconds (3f);
@@ -707,9 +771,8 @@ public class EventManager : MonoBehaviour
 		Color c = black.color;
 		c.a = 0;
 		black.color = c;
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
 		yield return new WaitForSeconds (3f);
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 1, 5);
 		SwitchHoardings ();
@@ -719,7 +782,7 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (2f);
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
 		yield return new WaitForSeconds (2f);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 	}
 
@@ -897,26 +960,6 @@ public class EventManager : MonoBehaviour
 	{
 		Application.Quit ();
 	}
-
-	private YieldInstruction fadeInstruction = new YieldInstruction ();
-
-	IEnumerator FadeToBlack (float duration)
-	{
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		float elapsedTime = 0.0f;
-		Color c = black.color;
-		print ("Start");
-		while (elapsedTime < duration) {
-			yield return fadeInstruction;
-			elapsedTime += Time.deltaTime;
-			c.a = Mathf.Clamp01 (elapsedTime / duration);
-			black.color = c;
-		}
-		print ("End");
-
-	}
-
-
 
 	//------------------------------------
 	//Act 2 Interactables without Dialogue
