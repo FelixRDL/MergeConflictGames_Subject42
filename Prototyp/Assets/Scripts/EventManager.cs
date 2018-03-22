@@ -186,7 +186,7 @@ public class EventManager : MonoBehaviour
 			Start_2_11 (audioSource, interactable);
 			break;
 		case "Interactable_Friend_Dome":
-			Start_2_15 (interactable);
+			Start_2_16 (interactable);
 			break;
 		case "Interactable_Pill_03":
 			Start_2_19 (audioSource, interactable);
@@ -827,15 +827,15 @@ public class EventManager : MonoBehaviour
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 	}
 
-	void Start_2_15 (InteractableObject interactable)
+	void Start_2_15 ()
 	{
-		interactable.Disable ();
-		StartCoroutine (Start_2_15_Coroutine ());
+		DialogueManager.instance.StartSubjectMonologue ("2_15", SUBJECT_DEFAULT_VOLUME);
 	}
 
-	void Start_2_16 ()
+	void Start_2_16 (InteractableObject interactable)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("2_16", SUBJECT_DEFAULT_VOLUME);
+		interactable.Disable ();
+		StartCoroutine (Start_2_16_Coroutine ());
 	}
 		
 
@@ -1012,8 +1012,8 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	IEnumerator Start_2_15_Coroutine () {
-		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", SUBJECT_DEFAULT_VOLUME, FRIEND_DEFAULT_VOLUME);
+	IEnumerator Start_2_16_Coroutine () {
+		DialogueManager.instance.StartFriendMonologue ("2_16", FRIEND_DEFAULT_VOLUME);
 		yield return new WaitForSecondsRealtime (10f);
 		DialogueManager.instance.StartTestManagerMonologue ("2_18", SUBJECT_DEFAULT_VOLUME);
 	}

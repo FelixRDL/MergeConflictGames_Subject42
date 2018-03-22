@@ -1,4 +1,2 @@
-000.000|Dude, where have you been? I have been worried you might miss all the fun... 
-005.950|This place is awesome!
-009.200|Shit... nearly lost him.
-011.740|
+000.000|Shit... nearly lost him.
+003.125|
