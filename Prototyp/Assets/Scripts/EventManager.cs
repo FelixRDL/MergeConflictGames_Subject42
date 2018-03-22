@@ -171,7 +171,7 @@ public class EventManager : MonoBehaviour
 			Start_2_Interactable_DJ_Console (interactable);
 			break;
 		case "Interactable_Pill_01":
-			Start_2_04 (interactable);
+			Start_2_04 (audioSource, interactable);
 			break;
 		case "Interactable_Dancer":
 			Start_2_Dancing_People (interactable);
@@ -183,13 +183,13 @@ public class EventManager : MonoBehaviour
 			Start_2_08 (interactable);
 			break;
 		case "Interactable_Pill_02":
-			Start_2_11 (interactable);
+			Start_2_11 (audioSource, interactable);
 			break;
 		case "Interactable_Friend_Dome":
 			Start_2_15 (interactable);
 			break;
 		case "Interactable_Pill_03":
-			Start_2_19 (interactable);
+			Start_2_19 (audioSource, interactable);
 			break;
 		case "Interactable_Friend_Dead":
 			Start_2_23 (interactable);
@@ -791,57 +791,22 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	void Start_2_04 (InteractableObject interactable)
+	void Start_2_04 (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
-		StartCoroutine (Start_2_04_Coroutine ());
+		StartCoroutine (Start_2_04_Coroutine (audioSource));
 	}
-
-	IEnumerator Start_2_04_Coroutine ()
-	{
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
-		yield return new WaitForSeconds (1f);
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
-		//Schwarzblende hier
-		StartCoroutine (FadeToBlack (2f));
-		yield return new WaitForSeconds (3f);
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		Color c = black.color;
-		c.a = 0;
-		black.color = c;
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
-		yield return new WaitForSeconds (3f);
-		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 1, 5);
-		SwitchHoardings ();
-		SwitchStaticRaveElements ();
-		SwitchDynamicRaveElements ();
-		ToggleFriendOnMap ("Interactable_Friend_Fence");
-		yield return new WaitForSeconds (2f);
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSeconds (2f);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
-	}
-
+		
 	void Start_2_08 (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", SUBJECT_DEFAULT_VOLUME, FRIEND_DEFAULT_VOLUME);
-		Invoke ("TogglePillsInLevel2", 14f);
+		StartCoroutine (Start_2_08_Coroutine ());
 	}
 
-	void Start_2_11 (InteractableObject interactable)
+	void Start_2_11 (AudioSource audioSource, InteractableObject interactable)
 	{
-		//Schwarzblende Starten
-
-		//SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
-
 		interactable.Destroy (0);
-
-		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (11);
-
-		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_11", TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
+		StartCoroutine (Start_2_11_Coroutine(audioSource));
 	}
 
 	void Start_2_12 ()
@@ -865,50 +830,25 @@ public class EventManager : MonoBehaviour
 	void Start_2_15 (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", SUBJECT_DEFAULT_VOLUME, FRIEND_DEFAULT_VOLUME);
-
-		Invoke ("Start_2_18", 30);
+		StartCoroutine (Start_2_15_Coroutine ());
 	}
 
 	void Start_2_16 ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_16", SUBJECT_DEFAULT_VOLUME);
 	}
+		
 
-	void Start_2_18 ()
-	{
-		//Wenn Spieler zu lange nicht die Pille nimmt.
-		if (!playerHasTakenPill03) {
-			DialogueManager.instance.StartTestManagerMonologue ("2_18", SUBJECT_DEFAULT_VOLUME);
-		}
-	}
-
-	void Start_2_19 (InteractableObject interactable)
+	void Start_2_19 (AudioSource audioSource, InteractableObject interactable)
 	{
 		//Pille 3
 
-		// Hier Schwarzblende
-
 		interactable.Destroy (0);
-
 		playerHasTakenPill03 = true;
-
-		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_19", TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
-
-		SoundManager.instance.StopBackgroundMusic (0);
-
 		GameObject.Find ("Interactable_DJ_Console").GetComponent<InteractableObject> ().Disable ();
 		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Disable ();
 
-		//Hier noch Licht anpassen
-
-		ToggleFriendOnMap ("Interactable_Friend_Dome");
-		ToggleFriendOnMap ("Interactable_Friend_Dead");
-
-		SwitchDynamicRaveElements ();
-		SwitchAfterRaveElements ();
-		EnableTriggerZonesAfterRave ();
-		ToggleEmergencyLight ();
+		StartCoroutine (Start_2_19_Coroutine (audioSource));
 	}
 
 	void Start_2_20 ()
@@ -930,24 +870,6 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		StartCoroutine (Start_2_23_Coroutine ());
-	}
-
-	IEnumerator Start_2_23_Coroutine ()
-	{
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_23", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
-		//Am Ende des Dialoges hier Blackout
-
-		yield return new WaitForSecondsRealtime (23);
-		//Nach Aufwachen aus Blackout
-		//Garten ist wieder im Ausgangszustand, ohne Rave
-		SwitchHoardings ();
-		SwitchStaticRaveElements ();
-		SwitchAfterRaveElements ();
-		ToggleFriendOnMap ("Interactable_Friend_Dead");
-		ToggleEmergencyLight ();
-
-		//Notiz mit Code Spawnen
-		SpawnNoteCodeForKeypad ();
 	}
 
 	void Start_2_Reached_Friend_01 ()
@@ -987,16 +909,7 @@ public class EventManager : MonoBehaviour
 	void Start_2_Interactable_Note_Code_For_Keypad (InteractableObject interactable)
 	{
 		interactable.Disable ();
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
-		StartCoroutine (FadeToBlack (30f));
-
-		//Am Ende des Dialogs hier Ende einleiten; Hier Endscreen und Abspann starten.
-		Invoke ("TEST_KILL_GAME", 35);
-	}
-
-	void TEST_KILL_GAME ()
-	{
-		Application.Quit ();
+		StartCoroutine (Start_2_Interactable_Note_Code_For_Keypad_Coroutine ());
 	}
 
 	//------------------------------------
@@ -1004,6 +917,187 @@ public class EventManager : MonoBehaviour
 	//------------------------------------
 
 	//Put additional Interactables here.
+
+
+	//---------------------------
+	//Act 2 Coroutines
+	//---------------------------
+
+	IEnumerator Start_2_04_Coroutine (AudioSource audioSource)
+	{
+
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
+		yield return new WaitForSecondsRealtime (1);
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
+		yield return new WaitForSecondsRealtime (1);
+		//Start Trip here
+
+		//Hier besser als BackgroundMusic abspielen...
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (4f);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		StartCoroutine (TrippyFOVChanges (10f));
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c.a = 0;
+		black.color = c;
+		yield return new WaitForSecondsRealtime (2f);
+		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 1, 10);
+		SwitchHoardings ();
+		yield return new WaitForSecondsRealtime (4f);
+		SwitchStaticRaveElements ();
+		yield return new WaitForSecondsRealtime (4f);
+		SwitchDynamicRaveElements ();
+		ToggleFriendOnMap ("Interactable_Friend_Fence");
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSeconds (4f);
+		c = black.color;
+		c.a = 0;
+		black.color = c;
+
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+
+		yield return new WaitForSeconds (2f);
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
+	}
+
+
+	IEnumerator Start_2_08_Coroutine()
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", SUBJECT_DEFAULT_VOLUME, FRIEND_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime (16f);
+		TogglePillsInLevel2 ();
+	}
+
+	IEnumerator Start_2_11_Coroutine(AudioSource audioSource) 
+	{
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
+		yield return new WaitForSecondsRealtime (1);
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
+		yield return new WaitForSecondsRealtime (1);
+		//Start Trip here
+
+		//Hier besser als BackgroundMusic abspielen...
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (4f);
+		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_11", TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		StartCoroutine (TrippyFOVChanges (10f));
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c.a = 0;
+		black.color = c;
+		yield return new WaitForSecondsRealtime (10f);
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSeconds (4f);
+		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (0);
+		c = black.color;
+		c.a = 0;
+		black.color = c;
+
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+	}
+
+
+	IEnumerator Start_2_15_Coroutine () {
+		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_15", SUBJECT_DEFAULT_VOLUME, FRIEND_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime (10f);
+		DialogueManager.instance.StartTestManagerMonologue ("2_18", SUBJECT_DEFAULT_VOLUME);
+	}
+
+
+	IEnumerator Start_2_19_Coroutine(AudioSource audioSource)
+	{
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
+		yield return new WaitForSecondsRealtime (1);
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
+		yield return new WaitForSecondsRealtime (1);
+		//Start Trip here
+
+		//Hier besser als BackgroundMusic abspielen...
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (4f);
+		SoundManager.instance.StopBackgroundMusic (10f);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		StartCoroutine (TrippyFOVChanges (10f));
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c.a = 0;
+		black.color = c;
+		yield return new WaitForSecondsRealtime (2f);
+
+		ToggleFriendOnMap ("Interactable_Friend_Dome");
+		ToggleFriendOnMap ("Interactable_Friend_Dead");
+
+		SwitchDynamicRaveElements ();
+		SwitchAfterRaveElements ();
+		yield return new WaitForSecondsRealtime (4f);
+		EnableTriggerZonesAfterRave ();
+		ToggleEmergencyLight ();
+		yield return new WaitForSecondsRealtime (4f);
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSeconds (4f);
+		c = black.color;
+		c.a = 0;
+		black.color = c;
+
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+
+		yield return new WaitForSeconds (2f);
+		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_19", TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
+	}
+
+
+	IEnumerator Start_2_23_Coroutine ()
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_23", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
+		//Am Ende des Dialoges hier Blackout
+
+		yield return new WaitForSecondsRealtime (23);
+		//Nach Aufwachen aus Blackout
+		//Garten ist wieder im Ausgangszustand, ohne Rave
+		SwitchHoardings ();
+		SwitchStaticRaveElements ();
+		SwitchAfterRaveElements ();
+		ToggleFriendOnMap ("Interactable_Friend_Dead");
+		ToggleEmergencyLight ();
+
+		//Notiz mit Code Spawnen
+		SpawnNoteCodeForKeypad ();
+	}
+
+
+
+	IEnumerator Start_2_Interactable_Note_Code_For_Keypad_Coroutine () 
+	{
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime (10f);
+		StartCoroutine (FadeToBlack (20f));
+		yield return new WaitForSecondsRealtime (25f);
+
+		//Am Ende des Dialogs hier Ende einleiten; Hier Endscreen und Abspann starten.
+		Application.Quit ();
+	}
 
 	//---------------------------
 	//Act 2 Additional Functions
