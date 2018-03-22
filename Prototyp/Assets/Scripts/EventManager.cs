@@ -338,7 +338,7 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
 		yield return new WaitForSecondsRealtime (3);
 		DialogueManager.instance.StartTestManagerMonologue ("0_17", TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime (4);
+		yield return new WaitForSecondsRealtime (6);
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1);
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
 	}
@@ -351,6 +351,7 @@ public class EventManager : MonoBehaviour
 
 		}
 		print ("Done Waiting");
+		yield return new WaitForSecondsRealtime (1f);
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
 		EnableInteractableContractOneForSecondInteraction ();
 		allowedToSignContract = true;
@@ -639,6 +640,7 @@ public class EventManager : MonoBehaviour
 		while (DialogueManager.instance.IsDialoguePlaying ()) {
 			yield return null;
 		}
+		yield return new WaitForSecondsRealtime (2f);
 		DialogueManager.instance.StartTestManagerMonologue ("1_16", TEST_MANAGER_DEFAULT_VOLUME);
 	}
 
