@@ -208,7 +208,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_01 ()
 	{
-		DialogueManager.instance.StartSubjectMonologue ("0_01", SUBJECT_DEFAULT_VOLUME);
+		StartCoroutine (Start_0_01_Coroutine ());
 	}
 
 	//----------------------------------
@@ -304,6 +304,56 @@ public class EventManager : MonoBehaviour
 	//---------------------------
 	//Act 0 Coroutines
 	//---------------------------
+
+	IEnumerator Start_0_01_Coroutine ()
+	{
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+
+		Image warning = GameObject.Find ("Warning").GetComponent<Image> ();
+		StartCoroutine (FadeImage (warning, 3f));
+		Color warningColor = warning.color;
+
+		yield return new WaitForSecondsRealtime (10f);
+		warningColor.a = 0;
+		warning.color = warningColor;
+
+		Image logo = GameObject.Find ("Logo").GetComponent<Image> ();
+		StartCoroutine (FadeImage (logo, 3f));
+		Color logoColor = logo.color;
+
+		yield return new WaitForSecondsRealtime (5f);
+		logoColor.a = 0;
+		logo.color = logoColor;
+
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c.a = 0;
+		black.color = c;
+		yield return new WaitForSecondsRealtime (1f);
+
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		DialogueManager.instance.StartSubjectMonologue ("0_01", SUBJECT_DEFAULT_VOLUME);
+
+	}
+
+
+	private YieldInstruction fadeImageInstruction = new YieldInstruction ();
+
+	IEnumerator FadeImage (Image image, float duration)
+	{
+		float elapsedTime = 0.0f;
+		Color c = image.color;
+		print ("Start");
+		while (elapsedTime < duration) {
+			yield return fadeImageInstruction;
+			elapsedTime += Time.deltaTime;
+			c.a = Mathf.Clamp01 (elapsedTime / duration);
+			image.color = c;
+		}
+		print ("End");
+
+	}
+
 
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
 	IEnumerator Start_0_Interactable_Contract_One_Coroutine (AudioSource audioSource)

@@ -330,7 +330,11 @@ public class DialogueManager : MonoBehaviour
 	}
 
 	public bool IsDialoguePlaying () {
-		return audioSource.isPlaying;
+		if (audioSource != null) {
+			return audioSource.isPlaying;
+		} else {
+			return false;
+		}
 	}
 
 }
