@@ -8,22 +8,11 @@ public class Player : MonoBehaviour
 
 	private Camera mainCamera;
 	private Interactable focusedObject;
-	private Animator animator;
-
-
-	float minFov = 15f;
-	float maxFov = 90f;
-	float sensitivity = 20f;
-
 
 	void Start ()
 	{
 		mainCamera = Camera.main;
-
 		focusedObject = null;
-
-		animator = GetComponent<Animator> ();
-		animator.enabled = false;
 	}
 
 
@@ -49,27 +38,6 @@ public class Player : MonoBehaviour
 				}
 			}
 		}
-			
-		//Zoom test:
-		/*
-		float fov = camera.fieldOfView;
-		fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
-		fov = Mathf.Clamp(fov, minFov, maxFov);
-		Camera.main.fieldOfView = fov;
-		*/
-	}
-
-	public void CameraZoom () {
-
-		//Zoom 5 Units per frame
-		mainCamera.fieldOfView = Mathf.Lerp (mainCamera.fieldOfView, 5, Time.deltaTime * 5);
-	}
-
-	//TEST
-	public void PlayAnimationWakeUp() {
-		DisablePlayerControls ();
-		animator.SetTrigger("wakeUp");
-		EnablePlayerControls ();
 	}
 
 	//Player will not be able to move at all. For Cutscenes.

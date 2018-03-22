@@ -1,2 +1,3 @@
-000.000|This looks like some kind of contract. Wow, that sure is a lot of fine-prints. 
-005.585|
+000.000|This looks like some kind of contract. 
+002.855|Wow, that sure is a lot of fine-prints. 
+005.850|

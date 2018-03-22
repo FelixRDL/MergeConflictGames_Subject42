@@ -18,7 +18,6 @@ public class Interactable : MonoBehaviour
 	void Awake ()
 	{
 		crosshair = GameObject.Find ("Crosshair").GetComponent<Crosshair> ();
-
 	}
 
 	public void OnFocused (Transform player)
