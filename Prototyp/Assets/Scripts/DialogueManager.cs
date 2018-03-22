@@ -167,7 +167,12 @@ public class DialogueManager : MonoBehaviour
 			}
 		}
 
-		audioSource = friendAudioSources [0];
+		if (friendAudioSources [0] != null) {
+			audioSource = friendAudioSources [0];
+		} else if (friendAudioSources [1] != null) {
+			audioSource = friendAudioSources [1];
+		}
+
 
 		//2. Load subtitles from file
 		initSubtitles (clipName);

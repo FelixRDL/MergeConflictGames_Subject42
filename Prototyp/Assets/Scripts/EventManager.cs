@@ -946,7 +946,7 @@ public class EventManager : MonoBehaviour
 		c.a = 0;
 		black.color = c;
 		yield return new WaitForSecondsRealtime (2f);
-		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 1, 10);
+		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0.4f, 10);
 		SwitchHoardings ();
 		yield return new WaitForSecondsRealtime (4f);
 		SwitchStaticRaveElements ();
@@ -1016,7 +1016,7 @@ public class EventManager : MonoBehaviour
 	IEnumerator Start_2_16_Coroutine ()
 	{
 		DialogueManager.instance.StartFriendMonologue ("2_16", FRIEND_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime (10f);
+		yield return new WaitForSecondsRealtime (13f);
 		DialogueManager.instance.StartTestManagerMonologue ("2_18", SUBJECT_DEFAULT_VOLUME);
 	}
 

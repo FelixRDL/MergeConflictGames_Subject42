@@ -72,7 +72,7 @@ public class SoundManager : MonoBehaviour
 
 	IEnumerator ReduceBackgroundMusicWhileDrugTripCoroutine ()
 	{
-		StartCoroutine (FadeOut (backgroundMusicSource, 0.1f, 3f));
+		StartCoroutine (FadeOut (backgroundMusicSource, 0.1f, 3f, false));
 		yield return new WaitForSecondsRealtime (10f);
 		StartCoroutine (FadeIn (backgroundMusicSource, 1f, 3f));
 	}
@@ -86,13 +86,15 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator FadeOut (AudioSource audioSource, float minVolume, float fadeOutTime)
+	IEnumerator FadeOut (AudioSource audioSource, float minVolume, float fadeOutTime, bool stopAtEnd)
 	{
 		while (audioSource.volume > minVolume) {
 			audioSource.volume -= Time.deltaTime / fadeOutTime;
 			yield return null;
 		}
-		backgroundMusicSource.Stop ();
+		if (stopAtEnd) {
+			backgroundMusicSource.Stop ();
+		}
 	}
 
 	public void StopBackgroundMusic (float fadeOutTime)
@@ -100,7 +102,7 @@ public class SoundManager : MonoBehaviour
 		if (fadeOutTime == 0) {
 			backgroundMusicSource.Stop ();
 		} else {
-			StartCoroutine (FadeOut (backgroundMusicSource, 0, fadeOutTime));
+			StartCoroutine (FadeOut (backgroundMusicSource, 0, fadeOutTime, true));
 		}
 
 
