@@ -705,10 +705,10 @@ public class EventManager : MonoBehaviour
 	//---------------------------
 
 	//To improve Performance, the Cameras in the Hospital Room can be deactivated here after the door is closed.
-	void DeactivateCamerasInHospitalRoom()
+	void DeactivateCamerasInHospitalRoom ()
 	{
-		Destroy(GameObject.Find ("Surveillance_Camera_Hospital_01"));
-		Destroy(GameObject.Find ("Surveillance_Camera_Hospital_02"));
+		Destroy (GameObject.Find ("Surveillance_Camera_Hospital_01"));
+		Destroy (GameObject.Find ("Surveillance_Camera_Hospital_02"));
 	}
 
 	//A certain number of Interactables in Level 1 Childrens Room Happy need to be clicked in Order for the game to continue
@@ -796,7 +796,7 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 		StartCoroutine (Start_2_04_Coroutine (audioSource));
 	}
-		
+
 	void Start_2_08 (InteractableObject interactable)
 	{
 		interactable.Disable ();
@@ -806,7 +806,7 @@ public class EventManager : MonoBehaviour
 	void Start_2_11 (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Destroy (0);
-		StartCoroutine (Start_2_11_Coroutine(audioSource));
+		StartCoroutine (Start_2_11_Coroutine (audioSource));
 	}
 
 	void Start_2_12 ()
@@ -837,13 +837,13 @@ public class EventManager : MonoBehaviour
 		interactable.Disable ();
 		StartCoroutine (Start_2_16_Coroutine ());
 	}
-		
+
 
 	void Start_2_19 (AudioSource audioSource, InteractableObject interactable)
 	{
 		//Pille 3
 
-		interactable.Destroy (0);
+		interactable.Disable ();
 		playerHasTakenPill03 = true;
 		GameObject.Find ("Interactable_DJ_Console").GetComponent<InteractableObject> ().Disable ();
 		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Disable ();
@@ -968,14 +968,14 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	IEnumerator Start_2_08_Coroutine()
+	IEnumerator Start_2_08_Coroutine ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08", SUBJECT_DEFAULT_VOLUME, FRIEND_DEFAULT_VOLUME);
 		yield return new WaitForSecondsRealtime (16f);
 		TogglePillsInLevel2 ();
 	}
 
-	IEnumerator Start_2_11_Coroutine(AudioSource audioSource) 
+	IEnumerator Start_2_11_Coroutine (AudioSource audioSource)
 	{
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
@@ -983,6 +983,7 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
 		yield return new WaitForSecondsRealtime (1);
 		//Start Trip here
+		SoundManager.instance.ReduceBackgroundMusicWhileDrugTrip ();
 
 		//Hier besser als BackgroundMusic abspielen...
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
@@ -1012,14 +1013,15 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	IEnumerator Start_2_16_Coroutine () {
+	IEnumerator Start_2_16_Coroutine ()
+	{
 		DialogueManager.instance.StartFriendMonologue ("2_16", FRIEND_DEFAULT_VOLUME);
 		yield return new WaitForSecondsRealtime (10f);
 		DialogueManager.instance.StartTestManagerMonologue ("2_18", SUBJECT_DEFAULT_VOLUME);
 	}
 
 
-	IEnumerator Start_2_19_Coroutine(AudioSource audioSource)
+	IEnumerator Start_2_19_Coroutine (AudioSource audioSource)
 	{
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
@@ -1041,17 +1043,16 @@ public class EventManager : MonoBehaviour
 		Color c = black.color;
 		c.a = 0;
 		black.color = c;
-		yield return new WaitForSecondsRealtime (2f);
+		yield return new WaitForSecondsRealtime (6f);
 
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 
 		SwitchDynamicRaveElements ();
 		SwitchAfterRaveElements ();
-		yield return new WaitForSecondsRealtime (4f);
 		EnableTriggerZonesAfterRave ();
-		ToggleEmergencyLight ();
 		yield return new WaitForSecondsRealtime (4f);
+		ToggleEmergencyLight ();
 
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
@@ -1073,7 +1074,9 @@ public class EventManager : MonoBehaviour
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_23", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_ALTER_EGO_DEFAULT_VOLUME);
 		//Am Ende des Dialoges hier Blackout
 
-		yield return new WaitForSecondsRealtime (23);
+		yield return new WaitForSecondsRealtime (20f);
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSeconds (4f);
 		//Nach Aufwachen aus Blackout
 		//Garten ist wieder im Ausgangszustand, ohne Rave
 		SwitchHoardings ();
@@ -1081,19 +1084,25 @@ public class EventManager : MonoBehaviour
 		SwitchAfterRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 		ToggleEmergencyLight ();
-
 		//Notiz mit Code Spawnen
 		SpawnNoteCodeForKeypad ();
+		yield return new WaitForSeconds (4f);
+
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c = black.color;
+		c.a = 0;
+		black.color = c;
 	}
 
 
 
-	IEnumerator Start_2_Interactable_Note_Code_For_Keypad_Coroutine () 
+	IEnumerator Start_2_Interactable_Note_Code_For_Keypad_Coroutine ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
-		yield return new WaitForSecondsRealtime (10f);
-		StartCoroutine (FadeToBlack (20f));
-		yield return new WaitForSecondsRealtime (25f);
+		yield return new WaitForSecondsRealtime (15f);
+		StartCoroutine (FadeToBlack (15f));
+		yield return new WaitForSecondsRealtime (16f);
 
 		//Am Ende des Dialogs hier Ende einleiten; Hier Endscreen und Abspann starten.
 		Application.Quit ();

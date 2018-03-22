@@ -65,6 +65,19 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
+	public void ReduceBackgroundMusicWhileDrugTrip ()
+	{
+		StartCoroutine (ReduceBackgroundMusicWhileDrugTripCoroutine ());
+	}
+
+	IEnumerator ReduceBackgroundMusicWhileDrugTripCoroutine ()
+	{
+		StartCoroutine (FadeOut (backgroundMusicSource, 0.1f, 3f));
+		yield return new WaitForSecondsRealtime (10f);
+		StartCoroutine (FadeIn (backgroundMusicSource, 1f, 3f));
+	}
+
+
 	IEnumerator FadeIn (AudioSource audioSource, float maxVolume, float fadeInTime)
 	{
 		while (audioSource.volume < maxVolume) {
@@ -73,10 +86,10 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator FadeOut (AudioSource audioSource, float fadeInTime)
+	IEnumerator FadeOut (AudioSource audioSource, float minVolume, float fadeOutTime)
 	{
-		while (audioSource.volume > 0) {
-			audioSource.volume -= Time.deltaTime / fadeInTime;
+		while (audioSource.volume > minVolume) {
+			audioSource.volume -= Time.deltaTime / fadeOutTime;
 			yield return null;
 		}
 		backgroundMusicSource.Stop ();
@@ -87,13 +100,13 @@ public class SoundManager : MonoBehaviour
 		if (fadeOutTime == 0) {
 			backgroundMusicSource.Stop ();
 		} else {
-			StartCoroutine (FadeOut (backgroundMusicSource, fadeOutTime));
+			StartCoroutine (FadeOut (backgroundMusicSource, 0, fadeOutTime));
 		}
 
 
 
 	}
-		
+
 
 	public void PlayEffect (AudioSource effectSource, string clipName, float volume)
 	{
