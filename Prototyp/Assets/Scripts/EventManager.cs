@@ -481,9 +481,9 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		SoundManager.instance.PlayEffect (audioSource, "lightswitch", 1);
+		SwitchChildrooms ("Childroom_Sad", "Childroom_Happy");
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_17", SUBJECT_DEFAULT_VOLUME, 1);
 		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 1, 5);
-		SwitchChildrooms ("Childroom_Sad", "Childroom_Happy");
 	}
 
 	void Start_1_Interactable_Beer_Bottles (InteractableObject interactable)
@@ -553,6 +553,7 @@ public class EventManager : MonoBehaviour
 	IEnumerator Start_1_01_Coroutine ()
 	{
 		CloseDoorToHospitalRoom ();
+		DeactivateCamerasInHospitalRoom ();
 		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Enable ();
 		floorEntered = true;
 		DialogueManager.instance.StartTestManagerMonologue ("1_01", TEST_MANAGER_DEFAULT_VOLUME);
@@ -575,7 +576,7 @@ public class EventManager : MonoBehaviour
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill", 1);
 		yield return new WaitForSecondsRealtime (1);
-		SoundManager.instance.PlayEffect (audioSource, "gulp", 1);
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
 		yield return new WaitForSecondsRealtime (1);
 		//Start Trip here
 
@@ -607,12 +608,14 @@ public class EventManager : MonoBehaviour
 	}
 
 	private YieldInstruction fovInstruction = new YieldInstruction ();
-	IEnumerator TrippyFOVChanges(float duration) {
+
+	IEnumerator TrippyFOVChanges (float duration)
+	{
 		float elapsedTime = 0.0f;
 		while (elapsedTime < duration) {
 			yield return fovInstruction;
 			elapsedTime += Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Lerp (Random.Range(30, 90), 5, Time.deltaTime * 5);
+			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (30, 90), 5, Time.deltaTime * 5);
 		}
 		Camera.main.fieldOfView = 75;
 	}
@@ -660,20 +663,53 @@ public class EventManager : MonoBehaviour
 	IEnumerator Start_1_Interactable_Neutralizer_Coroutine ()
 	{
 		CloseDoorFloorToChildrensRoom ();
-		yield return new WaitForSecondsRealtime (3);
-		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
+		yield return new WaitForSecondsRealtime (1);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp", 1);
+		yield return new WaitForSecondsRealtime (1);
 		SoundManager.instance.StopBackgroundMusic (5);
+		//Start Trip here
 
-		//Effect Trip hier
+		//Hier besser als BackgroundMusic abspielen...
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip", 1);
 
-		yield return new WaitForSecondsRealtime (13);
-		OpenDoorFloorToChildrensRoom ();
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (4f);
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		StartCoroutine (TrippyFOVChanges (10f));
+		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
+		Color c = black.color;
+		c.a = 0;
+		black.color = c;
+		yield return new WaitForSecondsRealtime (10f);
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
+		yield return new WaitForSeconds (4f);
+		c = black.color;
+		c.a = 0;
+		black.color = c;
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+
+		yield return new WaitForSecondsRealtime (1f);
+
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_27", SUBJECT_DEFAULT_VOLUME, TEST_MANAGER_DEFAULT_VOLUME);
+		yield return new WaitForSecondsRealtime (14f);
+		OpenDoorFloorToChildrensRoom ();
 	}
 
 	//---------------------------
 	//Act 1 Additional Functions
 	//---------------------------
+
+	//To improve Performance, the Cameras in the Hospital Room can be deactivated here after the door is closed.
+	void DeactivateCamerasInHospitalRoom()
+	{
+		Destroy(GameObject.Find ("Surveillance_Camera_Hospital_01"));
+		Destroy(GameObject.Find ("Surveillance_Camera_Hospital_02"));
+	}
 
 	//A certain number of Interactables in Level 1 Childrens Room Happy need to be clicked in Order for the game to continue
 	void countClickedObjectsChildrensRoomHappy ()
