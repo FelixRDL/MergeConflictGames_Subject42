@@ -13,6 +13,7 @@ ModelImporter:
     400004: //RootNode
     2100000: unnamed
     2100002: slice
+    2100004: Material
     2300000: bear
     2300002: bear_001
     3300000: bear
@@ -59,7 +60,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4383543429128170}
   - component: {fileID: 95275162759571244}
+  - component: {fileID: 65958203273057474}
   m_Layer: 0
   m_Name: bearWithoutHead
   m_TagString: Untagged
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515142607532194}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.437, y: -0.14337435, z: -1.467}
+  m_LocalPosition: {x: -0.412, y: -1.16, z: 0.22}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 4383543429128170}
@@ -80,15 +81,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1258242171508586}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 88.331, y: 0.616, z: 187.9434}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.91413856, z: -0, w: 0.40540197}
+  m_LocalPosition: {x: 3.182223, y: -1.09, z: 5.778}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 4405389954105432}
   - {fileID: 4184591958885680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 132.167, z: 0}
 --- !u!4 &4405389954105432
 Transform:
   m_ObjectHideFlags: 1
@@ -150,7 +151,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f2b33c356d09d0e47b2432b94e9f4e5d, type: 2}
+  - {fileID: 2100000, guid: f2b44ae8a4a38484b9837902ed438ffa, type: 2}
+  - {fileID: 2100002, guid: f5b183be154f714478ddc3dc64477743, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,6 +186,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515142607532194}
   m_Mesh: {fileID: 4300000, guid: f5b183be154f714478ddc3dc64477743, type: 3}
+--- !u!65 &65958203273057474
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258242171508586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95275162759571244
 Animator:
   serializedVersion: 3

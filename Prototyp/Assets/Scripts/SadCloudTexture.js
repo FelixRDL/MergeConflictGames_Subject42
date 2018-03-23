@@ -17,5 +17,5 @@ function Update () {
     //print(size.toString());
 
     GetComponent.<Renderer>().material.SetTextureOffset ("_MainTex", offset);
-    GetComponent.<Renderer>().material.SetTextureScale ("_MainTex", size);
+    //GetComponent.<Renderer>().material.SetTextureScale ("_MainTex", size);
 }
