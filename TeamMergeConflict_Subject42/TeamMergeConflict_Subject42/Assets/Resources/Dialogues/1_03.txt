@@ -1,0 +1,2 @@
+000.000|The experiment procedure does not require you to return to the previous room at this moment. 
+005.425|

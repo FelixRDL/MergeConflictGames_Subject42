@@ -1,0 +1,211 @@
+fileFormatVersion: 2
+guid: a252801bc6c69144495cdb564f1006c9
+timeCreated: 1518637369
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Cylinder
+    100004: Cylinder_001
+    100006: Floor
+    100008: Grundriss_Rough
+    100010: Modules_AllModifiers
+    100012: ModulesPlain
+    100014: ModulesPlain_001
+    100016: ModulesPlain_002
+    100018: Plane_000
+    100020: Plane_003
+    100022: Plane_004
+    100024: Plane_005
+    100026: Plane_001
+    100028: Plane
+    100030: Plane_002
+    100032: Plane_006
+    100034: Plane_007
+    100036: ModulesPlain_003
+    100038: Stucco
+    100040: Stucco_001
+    400000: //RootNode
+    400002: Cylinder
+    400004: Cylinder_001
+    400006: Floor
+    400008: Grundriss_Rough
+    400010: Modules_AllModifiers
+    400012: ModulesPlain
+    400014: ModulesPlain_001
+    400016: ModulesPlain_002
+    400018: Plane_000
+    400020: Plane_003
+    400022: Plane_004
+    400024: Plane_005
+    400026: Plane_001
+    400028: Plane
+    400030: Plane_002
+    400032: Plane_006
+    400034: Plane_007
+    400036: ModulesPlain_003
+    400038: Stucco
+    400040: Stucco_001
+    2100000: Wall_Bricks__Wall_Bricks_tile_png
+    2100002: Wall_Stucco__TexturesCom_3x3_Concrete6_1024_normal_tif
+    2100004: Roof_metal__TexturesCom_3x3_Concrete6_1024_normal_tif
+    2100006: Wall_Grid_Metal
+    2100008: Wall_Bricks
+    2100010: Wall_Window_Glass
+    2100012: Wall_Window_Wood__TexturesCom_RoughWood_1024_normal_tif
+    2100014: Wall_Stucco
+    2100016: Roof_metal__TexturesCom_RustedPlates_1024_normal_tif
+    2100018: unnamed
+    2100020: Wire
+    2100022: Wire__TexturesCom_3x3_Concrete6_1024_normal_tif
+    2100024: Door_Material
+    2100026: Door_Keyhole
+    2100028: Door_Metal
+    2100030: Wall_Window_Wood
+    2100032: Spotlight_Black_Plastic
+    2100034: Spotlight_Diffusor
+    2100036: Wall_Stucco__Scan_20171212__2__jpg
+    2100038: Window_lit
+    2300000: Cylinder
+    2300002: Cylinder_001
+    2300004: Floor
+    2300006: Grundriss_Rough
+    2300008: Modules_AllModifiers
+    2300010: ModulesPlain
+    2300012: ModulesPlain_001
+    2300014: ModulesPlain_002
+    2300016: Plane_000
+    2300018: Plane_003
+    2300020: Plane_004
+    2300022: Plane_005
+    2300024: Plane_001
+    2300026: Plane
+    2300028: Plane_002
+    2300030: Plane_006
+    2300032: Plane_007
+    2300034: ModulesPlain_003
+    2300036: Stucco
+    2300038: Stucco_001
+    3300000: Cylinder
+    3300002: Cylinder_001
+    3300004: Floor
+    3300006: Grundriss_Rough
+    3300008: Modules_AllModifiers
+    3300010: ModulesPlain
+    3300012: ModulesPlain_001
+    3300014: ModulesPlain_002
+    3300016: Plane_000
+    3300018: Plane_003
+    3300020: Plane_004
+    3300022: Plane_005
+    3300024: Plane_001
+    3300026: Plane
+    3300028: Plane_002
+    3300030: Plane_006
+    3300032: Plane_007
+    3300034: ModulesPlain_003
+    3300036: Stucco
+    3300038: Stucco_001
+    4300000: ModulesPlain_002
+    4300002: ModulesPlain_001
+    4300004: Plane_000
+    4300006: Cylinder_001
+    4300008: Modules_AllModifiers
+    4300010: Plane_005
+    4300012: Plane_004
+    4300014: ModulesPlain
+    4300016: Plane_003
+    4300018: Floor
+    4300020: Cylinder
+    4300022: Grundriss_Rough
+    4300024: Plane_001
+    4300026: Plane
+    4300028: Plane_002
+    4300030: Plane_007
+    4300032: Plane_006
+    4300034: ModulesPlain_003
+    4300036: Stucco
+    4300038: Stucco_001
+    7400000: Default Take
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

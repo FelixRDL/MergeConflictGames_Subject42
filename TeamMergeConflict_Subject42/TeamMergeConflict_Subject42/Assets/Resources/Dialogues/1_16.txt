@@ -1,0 +1,3 @@
+000.000|Excellent! We are getting very good readings. 
+002.963|Please continue the procedure by pressing the lightswitch in one of the corners of the room. 
+007.500|
