@@ -4937,6 +4937,7 @@ GameObject:
   - component: {fileID: 4114699268568578}
   - component: {fileID: 95906182418474288}
   - component: {fileID: 205176442556145450}
+  - component: {fileID: 114391203317413178}
   m_Layer: 0
   m_Name: dance_3_LOD
   m_TagString: Untagged
@@ -13799,6 +13800,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114391203317413178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972236815043504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c947e15fb1e797c4f81f3bd5052125ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114646576153976036
 MonoBehaviour:
   m_ObjectHideFlags: 1
