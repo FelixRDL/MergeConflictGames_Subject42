@@ -2064,6 +2064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4505663408778896}
   - component: {fileID: 137204432000999386}
+  - component: {fileID: 114207839836495132}
   m_Layer: 0
   m_Name: Body_reduced
   m_TagString: Untagged
@@ -3555,6 +3556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4184374934633694}
   - component: {fileID: 137725164084141150}
+  - component: {fileID: 114284284274372786}
   m_Layer: 0
   m_Name: Cube_001
   m_TagString: Untagged
@@ -13808,6 +13810,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c947e15fb1e797c4f81f3bd5052125ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114207839836495132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1379227517911556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a50f6115bbbb34b95ad7428441c086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uvAnimationTileX: 2
+  uvAnimationTileY: 2
+  framesPerSecond: 20
+--- !u!114 &114284284274372786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1708465983131712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a50f6115bbbb34b95ad7428441c086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uvAnimationTileX: 2
+  uvAnimationTileY: 2
+  framesPerSecond: 20
 --- !u!137 &137204432000999386
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -14147,7 +14177,7 @@ LODGroup:
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LODs:
-  - screenRelativeHeight: 0.32531324
+  - screenRelativeHeight: 0.6739793
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 137725164084141150}
