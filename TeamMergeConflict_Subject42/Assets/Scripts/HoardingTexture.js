@@ -2,13 +2,21 @@
 
 var speed = 0.5;
 
-var scaleAmplitude = 4;
+var scaleAmplitude = 1.2;
+
+function Start(){
+	var startOffsetX = Random.Range(2,30);
+ 	var startOffsetY = Random.Range(2,50);
+ 	var offset = Vector2 (-Time.time*speed/startOffsetX, startOffsetY);
+ 	GetComponent.<Renderer>().material.SetTextureOffset ("_MainTex", offset);
+}
+
 
 function Update () {
 
     // build offset
     // v coordinate is the ind of the image in opengl so we need to invert.
-    var offset = Vector2 (-Time.time*speed/4, 0);
+    var offset = Vector2 (-Time.time*speed/4, Mathf.Sin(-Time.time*speed/8));
 
     // size offset 
     var size = Vector2(1,Mathf.Sin(-Time.time*speed/8));
@@ -17,5 +25,5 @@ function Update () {
     //print(size.toString());
 
     GetComponent.<Renderer>().material.SetTextureOffset ("_MainTex", offset);
-    GetComponent.<Renderer>().material.SetTextureScale ("_MainTex", size);
+    //GetComponent.<Renderer>().material.SetTextureScale ("_MainTex", size);
 }

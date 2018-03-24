@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33031914632466984}
   - component: {fileID: 23066643806080898}
   - component: {fileID: 95748349097896116}
+  - component: {fileID: 64245067882860534}
   m_Layer: 0
   m_Name: lampinon (1) 1
   m_TagString: Untagged
@@ -89,6 +90,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1050705025575468}
+  m_Mesh: {fileID: 4300000, guid: a0dc04bea6a5527498324fb39bb3b2cf, type: 3}
+--- !u!64 &64245067882860534
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050705025575468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: a0dc04bea6a5527498324fb39bb3b2cf, type: 3}
 --- !u!95 &95748349097896116
 Animator:
