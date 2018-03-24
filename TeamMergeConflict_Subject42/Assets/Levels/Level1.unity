@@ -11032,7 +11032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &476998705
 Transform:
   m_ObjectHideFlags: 0
@@ -13995,7 +13995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &592287099
 Transform:
   m_ObjectHideFlags: 0
@@ -17844,7 +17844,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.8514676
+      value: 3.622
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalPosition.y
@@ -17852,7 +17852,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.5575728
+      value: 10.104
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -17860,7 +17860,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.66736966
+      value: -0.97588146
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalRotation.z
@@ -17868,7 +17868,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.74472666
+      value: -0.21830118
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_RootOrder
@@ -17892,7 +17892,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -83.729004
+      value: -205.219
       objectReference: {fileID: 0}
     - target: {fileID: 23294782515065052, guid: 922da614eedbedf408227d4ef113b86f,
         type: 2}
