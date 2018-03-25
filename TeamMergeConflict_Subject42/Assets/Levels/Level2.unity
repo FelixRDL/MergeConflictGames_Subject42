@@ -15675,6 +15675,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198705232573440972, guid: cd030efe90991fc408f30183b24a7346,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd030efe90991fc408f30183b24a7346, type: 2}
   m_IsPrefabParent: 0
@@ -38816,6 +38821,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7e71db0a30aa0a248a5876775060b00e, type: 2}
+    - target: {fileID: 205866863932968224, guid: bbf8f53b57f29ef49b12988c23eaf06f,
+        type: 2}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.020981088
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbf8f53b57f29ef49b12988c23eaf06f, type: 2}
   m_IsPrefabParent: 0
@@ -44837,6 +44847,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7e71db0a30aa0a248a5876775060b00e, type: 2}
+    - target: {fileID: 205866863932968224, guid: bbf8f53b57f29ef49b12988c23eaf06f,
+        type: 2}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.033626396
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbf8f53b57f29ef49b12988c23eaf06f, type: 2}
   m_IsPrefabParent: 0
@@ -57705,6 +57720,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7e71db0a30aa0a248a5876775060b00e, type: 2}
+    - target: {fileID: 205866863932968224, guid: bbf8f53b57f29ef49b12988c23eaf06f,
+        type: 2}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.040712345
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbf8f53b57f29ef49b12988c23eaf06f, type: 2}
   m_IsPrefabParent: 0
@@ -60478,6 +60498,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4f664b98384fe0e46adc020900a8b809, type: 2}
+    - target: {fileID: 205866863932968224, guid: bbf8f53b57f29ef49b12988c23eaf06f,
+        type: 2}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.03649877
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbf8f53b57f29ef49b12988c23eaf06f, type: 2}
   m_IsPrefabParent: 0
