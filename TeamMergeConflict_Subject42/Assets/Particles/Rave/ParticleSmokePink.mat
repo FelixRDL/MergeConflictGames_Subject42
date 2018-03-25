@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ParticleSmokeBlue
+  m_Name: ParticleSmokePink
   m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -26,7 +26,7 @@ Material:
     - _InvFade: 0.8275
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 0.33823532, g: 0.3975661, b: 1, a: 0.75686276}
+    - _TintColor: {r: 1, g: 0.2794118, b: 0.9503047, a: 0.75686276}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6
