@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
 	}
 
 	private void InitPlayerAudioSource () {
-		playerAudioSource = GameObject.FindGameObjectWithTag ("Player").GetComponent<AudioSource> ();
+		playerAudioSource = GameObject.Find("PlayerAudioSource").GetComponent<AudioSource> ();
 	}
 
 	private void InitTestManagerAudioSources () {
