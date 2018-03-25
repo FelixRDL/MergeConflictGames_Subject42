@@ -26,8 +26,6 @@ public class SoundManager : MonoBehaviour
 			Destroy (gameObject);
 		}
 
-		//DontDestroyOnLoad (gameObject);
-
 		backgroundMusicSource = GetComponent<AudioSource> ();
 		createBackgroundMusicDictionary ();
 		createSoundeffectDictionary ();
@@ -104,9 +102,6 @@ public class SoundManager : MonoBehaviour
 		} else {
 			StartCoroutine (FadeOut (backgroundMusicSource, 0, fadeOutTime, true));
 		}
-
-
-
 	}
 
 
