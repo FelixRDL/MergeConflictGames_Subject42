@@ -2560,7 +2560,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 13756c1016e72ca44ae334c3465ca020, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
+      objectReference: {fileID: 2100000, guid: 158a3af2bf016b54489821b512e92290, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13756c1016e72ca44ae334c3465ca020, type: 2}
   m_IsPrefabParent: 0
@@ -25078,6 +25078,10 @@ Prefab:
       propertyPath: m_Name
       value: Towel_Rack
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 5c5d675157a1a8c4bb3a499600b460f8, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59601cb733330f543952d0301ddd09d0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c5d675157a1a8c4bb3a499600b460f8, type: 2}
   m_IsPrefabParent: 0
