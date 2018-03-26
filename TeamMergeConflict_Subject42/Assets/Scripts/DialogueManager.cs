@@ -100,12 +100,11 @@ public class DialogueManager : MonoBehaviour
 	//Functions for Monologues
 	//--------------------------
 
-	public void StartSubjectMonologue (string clipName, float volume)
+	public void StartSubjectMonologue (string clipName)
 	{
-		print("AudioSource: Subject. Clip: " + clipName + ". Volume: " + volume); 
+		print("AudioSource: Subject. Clip: " + clipName); 
 
 		//1. Prepare AudioSources
-		playerAudioSource.volume = volume;
 		playerAudioSource.clip = audioClips [clipName];
 
 		audioSource = playerAudioSource;
@@ -119,12 +118,11 @@ public class DialogueManager : MonoBehaviour
 	}
 
 
-	public void StartTestManagerMonologue (string clipName, float volume)
+	public void StartTestManagerMonologue (string clipName)
 	{
-		print("AudioSource: Speakers. Clip: " + clipName + ". Volume: " + volume); 
+		print("AudioSource: Speakers. Clip: " + clipName); 
 
 		foreach (AudioSource source in speakerAudioSources) {
-			source.volume = volume;
 			source.clip = audioClips [clipName];
 		}
 
@@ -139,12 +137,11 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	public void StartTestManagerAlterEgoMonologue (string clipName, float volume) 
+	public void StartTestManagerAlterEgoMonologue (string clipName) 
 	{
-		print("AudioSource: Alter Ego. Clip: " + clipName + ". Volume: " + volume); 
+		print("AudioSource: Alter Ego. Clip: " + clipName); 
 
 		//1. Prepare AudioSources
-		testManagerAlterEgoAudioSource.volume = volume;
 		testManagerAlterEgoAudioSource.clip = audioClips [clipName];
 
 		audioSource = testManagerAlterEgoAudioSource;
@@ -156,13 +153,12 @@ public class DialogueManager : MonoBehaviour
 		testManagerAlterEgoAudioSource.Play ();
 	}
 
-	public void StartFriendMonologue (string clipName, float volume)
+	public void StartFriendMonologue (string clipName)
 	{
-		print("AudioSource: Friend. Clip: " + clipName + ". Volume: " + volume); 
+		print("AudioSource: Friend. Clip: " + clipName); 
 
 		foreach (AudioSource source in friendAudioSources) {
 			if (source != null) {
-				source.volume = volume;
 				source.clip = audioClips [clipName];
 			}
 		}
@@ -190,16 +186,14 @@ public class DialogueManager : MonoBehaviour
 	//Functions for Dialogues
 	//--------------------------
 
-	public void StartDialogueBetweenSubjectAndTestManager (string clipName, float subjectVolume, float testManagerVolume)
+	public void StartDialogueBetweenSubjectAndTestManager (string clipName)
 	{
-		print("AudioSources: Subject and Speaker. Clip: " + clipName + ". Volume Subject: " + subjectVolume + ". Volume Speakers: " + testManagerVolume); 
+		print("AudioSources: Subject and Speaker. Clip: " + clipName); 
 
 		//1. Prepare AudioSources
-		playerAudioSource.volume = subjectVolume;
 		playerAudioSource.clip = audioClips [clipName + "_s"];
 
 		foreach (AudioSource source in speakerAudioSources) {
-			source.volume = testManagerVolume;
 			source.clip = audioClips [clipName + "_v"];
 		}
 
@@ -217,15 +211,13 @@ public class DialogueManager : MonoBehaviour
 		}
 	}
 
-	public void StartDialogueBetweenSubjectAndTestManagerAlterEgo (string clipName, float subjectVolume, float testManagerAlterEgoVolume)
+	public void StartDialogueBetweenSubjectAndTestManagerAlterEgo (string clipName)
 	{
-		print("AudioSources: Subject and Alter Ego. Clip: " + clipName + ". Volume Subject: " + subjectVolume + ". Volume Alter Ego: " + testManagerAlterEgoVolume); 
+		print("AudioSources: Subject and Alter Ego. Clip: " + clipName); 
 
 		//1. Prepare AudioSources
-		playerAudioSource.volume = subjectVolume;
 		playerAudioSource.clip = audioClips [clipName + "_s"];
 
-		testManagerAlterEgoAudioSource.volume = testManagerAlterEgoVolume;
 		testManagerAlterEgoAudioSource.clip = audioClips [clipName + "_a"];
 
 		audioSource = playerAudioSource;
@@ -238,17 +230,15 @@ public class DialogueManager : MonoBehaviour
 		testManagerAlterEgoAudioSource.Play ();
 	}
 
-	public void StartDialogueBetweenSubjectAndFriend (string clipName, float subjectVolume, float friendVolume)
+	public void StartDialogueBetweenSubjectAndFriend (string clipName)
 	{
-		print("AudioSourcse: Subject and Friend. Clip: " + clipName + ". Volume Subject: " + subjectVolume + ". Volume Friend: " + friendVolume); 
+		print("AudioSourcse: Subject and Friend. Clip: " + clipName); 
 
 		//1. Prepare AudioSources
-		playerAudioSource.volume = subjectVolume;
 		playerAudioSource.clip = audioClips [clipName + "_s"];
 
 		foreach (AudioSource source in friendAudioSources) {
 			if (source != null) {
-				source.volume = friendVolume;
 				source.clip = audioClips [clipName + "_f"];
 			}
 		}
