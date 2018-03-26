@@ -1,17 +1,25 @@
 fileFormatVersion: 2
-guid: bae7435b7a0f7b84aa8d51d0086e6fa3
-timeCreated: 1522056560
+guid: 6a9567df6c0e7cf4cb4a17567e5c6fbb
+timeCreated: 1522070935
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: bark__BarkDecidious0026_S_jpg
-    2100002: side__TexturesCom_WoodEnds0083_1_S_jpg
+    2100000: BaumstammRinde
+    2100002: BaumstammRinde__BarkDecidious0026_S_jpg_001
+    2100004: BaumstammQuerschnitt__WoodPlanksClean0086_2_S_jpg
+    2100006: BaumstammFl_che__WoodEnds0022_1_S_jpg
+    2100008: BaumstammQuerschnitt__WoodFine0020_S_jpg
+    2100010: bark
+    2100012: bark__BarkDecidious0026_S_jpg_001
+    2100014: side_02__WoodPlanksClean0086_2_S_jpg
+    2100016: side_001__WoodEnds0022_1_S_jpg
+    2100018: side_02__WoodFine0020_S_jpg
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder
+    4300000: Firewood
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
