@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
 	private int nextSubtitle = 0;
 	private string currentSubtitle;
 
-	private GUIStyle subtitleStyle = new GUIStyle ();
+	private GUIStyle subtitleGUIStyle = new GUIStyle ();
 
 	//Singleton property
 	public static DialogueManager instance = null;
@@ -43,6 +43,7 @@ public class DialogueManager : MonoBehaviour
 		InitSingleton ();
 		InitAudioSources ();
 		InitAudioClipDictionary ();
+		InitSubtitleGUIStile ();
 	}
 
 	private void InitSingleton ()
@@ -52,8 +53,6 @@ public class DialogueManager : MonoBehaviour
 		} else if (instance != this) {
 			Destroy (gameObject);
 		}
-
-		//DontDestroyOnLoad (gameObject);
 	}
 
 	private void InitAudioSources ()
@@ -300,32 +299,29 @@ public class DialogueManager : MonoBehaviour
 	//The code for positioning the subtitles has been mostly taken from the tutorial linked above.
 	void OnGUI ()
 	{
-		InitSubtitleGuiStile ();
-
 		DrawCurrentSubtitleOnScreen ();
-
 		CheckSubtitleTiming ();
 	}
 
-	private void InitSubtitleGuiStile ()
+	private void InitSubtitleGUIStile ()
 	{
 		//Position Subtitles on the Screen.
-		subtitleStyle.fixedWidth = Screen.width / 1.5f;
-		subtitleStyle.wordWrap = true;
-		subtitleStyle.alignment = TextAnchor.MiddleCenter;
-		subtitleStyle.normal.textColor = Color.white;
-		subtitleStyle.fontSize = Mathf.FloorToInt (Screen.height * 0.0225f);
+		subtitleGUIStyle.fixedWidth = Screen.width / 1.5f;
+		subtitleGUIStyle.wordWrap = true;
+		subtitleGUIStyle.alignment = TextAnchor.MiddleCenter;
+		subtitleGUIStyle.normal.textColor = Color.white;
+		subtitleGUIStyle.fontSize = Mathf.FloorToInt (Screen.height * 0.0225f);
 	}
 
 	private void DrawCurrentSubtitleOnScreen ()
 	{
-		Vector2 size = subtitleStyle.CalcSize (new GUIContent ());
+		Vector2 size = subtitleGUIStyle.CalcSize (new GUIContent ());
 
 		//Draw the Text in black with 1 Pixel white offset.
 		GUI.contentColor = Color.black;
-		GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.2f - size.y + 1, size.x, size.y), currentSubtitle, subtitleStyle);
+		GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.2f - size.y + 1, size.x, size.y), currentSubtitle, subtitleGUIStyle);
 		GUI.contentColor = Color.white;
-		GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.2f - size.y, size.x, size.y), currentSubtitle, subtitleStyle);
+		GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.2f - size.y, size.x, size.y), currentSubtitle, subtitleGUIStyle);
 	}
 
 	//Compares the timeSamples of the current playing audioSource using its Sample Rate to the Timestamp defined in the subtitle file.
