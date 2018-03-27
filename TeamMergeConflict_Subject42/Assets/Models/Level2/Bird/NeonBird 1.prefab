@@ -389,6 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4697722395881428}
   - component: {fileID: 95190701980247082}
+  - component: {fileID: 65581110639880124}
   m_Layer: 0
   m_Name: NeonBird 1
   m_TagString: Untagged
@@ -993,6 +994,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436166777213790}
   m_Mesh: {fileID: 4300016, guid: be637e35642d0784cb4a6da4dc003e7b, type: 3}
+--- !u!65 &65581110639880124
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883107159143182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 7}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95190701980247082
 Animator:
   serializedVersion: 3
