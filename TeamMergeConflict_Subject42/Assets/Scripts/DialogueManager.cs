@@ -10,12 +10,15 @@ public class DialogueManager : MonoBehaviour
 
 	public GameObject[] speakers;
 	public GameObject[] friends;
+
+	//All AudioClips to be played in the current Level are collected in this Array.
 	public AudioClip[] audioSources;
 
 	private Dictionary<string, AudioClip> audioClips;
 
 	private const float RATE = 44100.0f;
 
+	//All AudioSources of the different Roles:
 	private AudioSource playerAudioSource;
 	private AudioSource[] speakerAudioSources;
 	private AudioSource testManagerAlterEgoAudioSource;
@@ -294,24 +297,41 @@ public class DialogueManager : MonoBehaviour
 	}
 
 	//Catches all GUI Events, displays current subtitle line on screen.
+	//The code for positioning the subtitles has been mostly taken from the tutorial linked above.
 	void OnGUI ()
 	{
+		InitSubtitleGuiStile ();
 
+		DrawCurrentSubtitleOnScreen ();
+
+		CheckSubtitleTiming ();
+	}
+
+	private void InitSubtitleGuiStile ()
+	{
 		//Position Subtitles on the Screen.
 		subtitleStyle.fixedWidth = Screen.width / 1.5f;
 		subtitleStyle.wordWrap = true;
 		subtitleStyle.alignment = TextAnchor.MiddleCenter;
 		subtitleStyle.normal.textColor = Color.white;
 		subtitleStyle.fontSize = Mathf.FloorToInt (Screen.height * 0.0225f);
+	}
 
+	private void DrawCurrentSubtitleOnScreen ()
+	{
 		Vector2 size = subtitleStyle.CalcSize (new GUIContent ());
 
-		//Draw with 1px white offset.
+		//Draw the Text in black with 1 Pixel white offset.
 		GUI.contentColor = Color.black;
 		GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.2f - size.y + 1, size.x, size.y), currentSubtitle, subtitleStyle);
 		GUI.contentColor = Color.white;
 		GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.2f - size.y, size.x, size.y), currentSubtitle, subtitleStyle);
+	}
 
+	//Compares the timeSamples of the current playing audioSource using its Sample Rate to the Timestamp defined in the subtitle file.
+	//If the progress is larger than the current time stamp, the next subtitle is loaded.
+	private void CheckSubtitleTiming ()
+	{
 		if (nextSubtitle < subtitleText.Count) {
 			if (audioSource.timeSamples / RATE > subtitleTimings [nextSubtitle]) {
 				currentSubtitle = subtitleText [nextSubtitle];
@@ -321,6 +341,7 @@ public class DialogueManager : MonoBehaviour
 
 	}
 
+	//Returns true or false, depending if a dialogue is currently playing
 	public bool IsDialoguePlaying () {
 		if (audioSource != null) {
 			return audioSource.isPlaying;

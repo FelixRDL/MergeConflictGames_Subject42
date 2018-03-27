@@ -12,6 +12,7 @@ public class TriggerZone : MonoBehaviour {
 		eventManager = (EventManager) go.GetComponent(typeof(EventManager));
 	}
 
+	//When the Player enters the TriggerZone, the name of the TriggerZone gets passed to the EventManager
 	void OnTriggerEnter ()
 	{
 		eventManager.OnTriggerZoneEntered (gameObject.name);
