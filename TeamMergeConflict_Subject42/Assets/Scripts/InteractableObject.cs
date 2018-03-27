@@ -8,6 +8,8 @@ public class InteractableObject : Interactable {
 	private EventManager eventManager;
 	private AudioSource audioSource;
 
+	private Animator animator;
+
 	private void Start() {
 		GameObject go = GameObject.Find("EventManager");
 		eventManager = (EventManager) go.GetComponent(typeof(EventManager));
@@ -17,11 +19,18 @@ public class InteractableObject : Interactable {
 		} else {
 			audioSource = null;
 		}
+
+		if (GetComponent<Animator> () != null) {
+			animator = GetComponent<Animator> ();
+		} else {
+			animator = null;
+		}
 	}
 
 
 	public override void OnInteraction ()
 	{
-		eventManager.OnInteractableClicked (gameObject.name, audioSource, gameObject.GetComponent<InteractableObject>());
+		eventManager.OnInteractableClicked (gameObject.name, audioSource, gameObject.GetComponent<InteractableObject>(), animator);
 	}
+
 }

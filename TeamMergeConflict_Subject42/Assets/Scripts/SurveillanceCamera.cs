@@ -5,8 +5,7 @@ using UnityEngine;
 public class SurveillanceCamera : MonoBehaviour
 {
 
-	public float RotationSpeed = 1;
-	public float volume = 1;
+	public float rotationSpeed = 1;
 	public AudioClip cameraMovementSound;
 
 	private GameObject player;
@@ -50,7 +49,7 @@ public class SurveillanceCamera : MonoBehaviour
 
 	private void RotateCameraTowardsPlayer() {
 		//Rotate camera using the lookRotation and the RotationSpeed
-		transform.rotation = Quaternion.Lerp (transform.rotation, CalculateLookRotation(), Time.deltaTime * RotationSpeed);
+		transform.rotation = Quaternion.Lerp (transform.rotation, CalculateLookRotation(), Time.deltaTime * rotationSpeed);
 	}
 
 	private bool GetCameraMoving () {

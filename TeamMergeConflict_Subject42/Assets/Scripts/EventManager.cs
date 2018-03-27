@@ -80,7 +80,7 @@ public class EventManager : MonoBehaviour
 	}
 
 	//Switch Statement for all Ingame Interactables.
-	public void OnInteractableClicked (string nameOfInteractable, AudioSource audioSource, InteractableObject interactable)
+	public void OnInteractableClicked (string nameOfInteractable, AudioSource audioSource, InteractableObject interactable, Animator animator)
 	{
 		switch (nameOfInteractable) {
 
@@ -112,6 +112,12 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Desinfection":
 			Start_0_Interactable_Desinfection (audioSource, interactable);
 			break;
+		case "Interactable_Door_Hospital_To_Floor":
+			Start_0_Interactable_Door_Hospital_To_Floor (audioSource, interactable);
+			break;
+		case "Interactable_Door_Bathroom":
+			Start_0_Interactable_Door_Bathroom (audioSource, interactable, animator);
+			break;
 		case "Interactable_Door_Floor_01":
 			Start_1_Interactable_Door_Floor_01 (audioSource, interactable);
 			break;
@@ -120,6 +126,9 @@ public class EventManager : MonoBehaviour
 			break;
 		case "Interactable_Pill_Floor":
 			Start_1_05 (audioSource, interactable);
+			break;
+		case "Interactable_Door_Floor_To_Childrens_Room":
+			Start_1_Interactable_Door_Floor_To_Childrens_Room (audioSource, interactable);
 			break;
 		case "Interactable_Wooden_Train_Happy":
 			Start_1_Interactable_Wooden_Train_Happy (interactable);
@@ -226,7 +235,7 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		DialogueManager.instance.StartSubjectMonologue ("0_04");
-		countClickedObjectsLevel0 ();
+		CountClickedObjectsInHospitalRoom ();
 	}
 
 	void Start_0_Interactable_Bath_Mirror (InteractableObject interactable)
@@ -241,7 +250,7 @@ public class EventManager : MonoBehaviour
 
 		if (!allowedToSignContract) {
 			DialogueManager.instance.StartSubjectMonologue ("0_06");
-			countClickedObjectsLevel0 ();
+			CountClickedObjectsInHospitalRoom ();
 		} else {
 			StartCoroutine (Start_0_Interactable_Contract_One_Coroutine (audioSource));
 		}
@@ -260,26 +269,29 @@ public class EventManager : MonoBehaviour
 		StartCoroutine (Start_0_Interactable_Contract_Three_Coroutine (audioSource));
 	}
 
-	public void Start_0_Interactable_Door_Floor (AudioSource audioSource)
+	public void Start_0_Interactable_Door_Hospital_To_Floor (AudioSource audioSource, InteractableObject interactable)
 	{
+		interactable.Disable ();
+		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
+
 		if (!floorEntered) {
 			DialogueManager.instance.StartSubjectMonologue ("0_07");
-			countClickedObjectsLevel0 ();
+			CountClickedObjectsInHospitalRoom ();
 		} else {
 			DialogueManager.instance.StartTestManagerMonologue ("1_03");
 		}
 
-		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Disable ();
 	}
 
 	//------------------------------------
 	//Act 0 Interactables without Dialogue
 	//------------------------------------
 
-	public void Start_0_Interactable_Door_Bath (AudioSource audioSource)
+	public void Start_0_Interactable_Door_Bathroom (AudioSource audioSource, InteractableObject interactable, Animator animator)
 	{
-		OpenBathroomDoor (audioSource);
+		interactable.Disable ();
+		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
+		animator.SetTrigger("doorBathOpen");
 	}
 
 	void Start_0_Interactable_Rubber_Duck (AudioSource audioSource)
@@ -303,9 +315,6 @@ public class EventManager : MonoBehaviour
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
 	IEnumerator Start_0_Interactable_Contract_One_Coroutine (AudioSource audioSource)
 	{
-		//Maybe add possibility here of zooming in on a contract.
-		//GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ZoomIn ();
-
 		DialogueManager.instance.StartSubjectMonologue ("0_13");
 		yield return new WaitForSecondsRealtime (2.5f);
 		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
@@ -334,20 +343,23 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (3);
 		DialogueManager.instance.StartTestManagerMonologue ("0_17");
 		yield return new WaitForSecondsRealtime (6);
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "dooropen", 1);
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().OpenDoor ();
+
+		OpenDoorHospitalToFloor ();
 	}
 
 	IEnumerator Start_0_08_Coroutine ()
 	{
+		//If another Dialogue is currently running, we wait here until that dialogue is finished.
 		while (DialogueManager.instance.IsDialoguePlaying ()) {
-			print ("Waiting");
 			yield return null;
 
 		}
-		print ("Done Waiting");
+
+		//After all previous dialogues finished, we wait another second, before the current dialogue starts.
 		yield return new WaitForSecondsRealtime (1f);
+
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08");
+
 		EnableInteractableContractOneForSecondInteraction ();
 		allowedToSignContract = true;
 	}
@@ -357,8 +369,8 @@ public class EventManager : MonoBehaviour
 	//---------------------------
 
 
-	//A certain number of Interactables in Level 0 need to be clicked in Order for the game to continue
-	void countClickedObjectsLevel0 ()
+	//A certain number of Interactables in the Hospital Room need to be clicked in order for the game to continue
+	void CountClickedObjectsInHospitalRoom ()
 	{
 		clickedObjectsInHospitalRoom++;
 		if (clickedObjectsInHospitalRoom == 3) {
@@ -377,11 +389,11 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void OpenBathroomDoor (AudioSource audioSource)
+	void OpenDoorHospitalToFloor ()
 	{
-		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
-		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().OpenBathroomDoor ();
-		GameObject.Find ("Interactable_Door_Hospital_Bath").GetComponent<InteractableDoorHospitalToBath> ().Disable ();
+		GameObject doorHospitalToFloor = GameObject.Find ("Interactable_Door_Hospital_To_Floor");
+		SoundManager.instance.PlayEffect (doorHospitalToFloor.GetComponent<AudioSource> (), "dooropen", 1);
+		doorHospitalToFloor.GetComponent<Animator> ().SetTrigger("doorOpen");
 	}
 
 	void EnableInteractableContractOneForSecondInteraction ()
@@ -528,15 +540,15 @@ public class EventManager : MonoBehaviour
 	//Act 1 Interactables without Dialogue
 	//------------------------------------
 
-	public void Start_1_Interactable_Door_Floor_To_Childrens_Room (AudioSource audioSource, InteractableDoorFloorToChildrensRoom interactable)
+	void Start_1_Interactable_Door_Floor_To_Childrens_Room (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
 		SoundManager.instance.PlayEffect (audioSource, "doorlocked", 1);
-
 	}
 
 	void Start_1_Interactable_Door_Childrens_Room_To_Garden (AudioSource audioSource, InteractableObject interactable)
 	{
+		interactable.Disable ();
 		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
 		LoadLevelTwo ();
 	}
@@ -547,9 +559,9 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_1_01_Coroutine ()
 	{
-		CloseDoorToHospitalRoom ();
+		CloseDoorHospitalToFloor ();
 		DeactivateCamerasInHospitalRoom ();
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().Enable ();
+		GameObject.Find ("Interactable_Door_Hospital_To_Floor").GetComponent<InteractableObject> ().Enable ();
 		floorEntered = true;
 		DialogueManager.instance.StartTestManagerMonologue ("1_01");
 		yield return new WaitForSecondsRealtime (6);
@@ -610,7 +622,7 @@ public class EventManager : MonoBehaviour
 		while (elapsedTime < duration) {
 			yield return fovInstruction;
 			elapsedTime += Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (30, 90), 5, Time.deltaTime * 5);
+			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (40, 80), 5, Time.deltaTime * 5);
 		}
 		Camera.main.fieldOfView = 75;
 	}
@@ -724,24 +736,29 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void CloseDoorToHospitalRoom ()
+	void CloseDoorHospitalToFloor ()
 	{
-		GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<InteractableDoorHospitalToFloor> ().CloseDoor ();
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Hospital_Floor").GetComponent<AudioSource> (), "doorclose", 1);
+		GameObject doorHospitalToFloor = GameObject.Find ("Interactable_Door_Hospital_To_Floor");
+
+		SoundManager.instance.PlayEffect (doorHospitalToFloor.GetComponent<AudioSource> (), "doorclose", 1);
+		doorHospitalToFloor.GetComponent<Animator> ().SetTrigger("doorClose");
 	}
 
 
 	void OpenDoorFloorToChildrensRoom ()
 	{
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "dooropen", 1);
-		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().OpenDoor ();
-		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().Disable ();
+		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
+
+		SoundManager.instance.PlayEffect (doorFloorToChildrensRoom.GetComponent<AudioSource> (), "dooropen", 1);
+		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger("doorOpen");
 	}
 
 	void CloseDoorFloorToChildrensRoom ()
 	{
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<AudioSource> (), "doorclose", 1);
-		GameObject.Find ("Interactable_Door_Floor_Childrens_Room").GetComponent<InteractableDoorFloorToChildrensRoom> ().CloseDoor ();
+		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
+
+		SoundManager.instance.PlayEffect (doorFloorToChildrensRoom.GetComponent<AudioSource> (), "doorclose", 1);
+		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger("doorClose");
 	}
 
 	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
