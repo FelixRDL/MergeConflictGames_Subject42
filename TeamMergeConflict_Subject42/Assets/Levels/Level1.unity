@@ -5396,6 +5396,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 255fd935c5138e24aa693eee5d12f028, type: 2}
   m_IsPrefabParent: 0
@@ -10862,7 +10867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &476998705
 Transform:
   m_ObjectHideFlags: 0
@@ -14043,7 +14048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &592287099
 Transform:
   m_ObjectHideFlags: 0
@@ -18155,7 +18160,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 10.104
+      value: 10.119
       objectReference: {fileID: 0}
     - target: {fileID: 4388969065085754, guid: 922da614eedbedf408227d4ef113b86f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -42386,11 +42391,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4749730629652246, guid: da4a5f19bbd3c084eb782cbbd0574ecd, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.70710677
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4749730629652246, guid: da4a5f19bbd3c084eb782cbbd0574ecd, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.70710677
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4749730629652246, guid: da4a5f19bbd3c084eb782cbbd0574ecd, type: 2}
       propertyPath: m_LocalRotation.w
