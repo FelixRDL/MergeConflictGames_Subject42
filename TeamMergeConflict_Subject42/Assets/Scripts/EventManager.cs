@@ -97,6 +97,9 @@ public class EventManager : MonoBehaviour
 		case "Interactable_Mirror_Bath":
 			Start_0_Interactable_Bath_Mirror (interactable);
 			break;
+		case "Interactable_Contract":
+			Start_0_Interactable_Contract (audioSource, interactable);
+			break;
 		case "Interactable_Contract_01":
 			Start_0_Interactable_Contract_One (audioSource, interactable);
 			break;
@@ -244,6 +247,18 @@ public class EventManager : MonoBehaviour
 		DialogueManager.instance.StartSubjectMonologue ("0_05");
 	}
 
+	void Start_0_Interactable_Contract (AudioSource audioSource, InteractableObject interactable)
+	{
+		interactable.Disable ();
+
+		if (!allowedToSignContract) {
+			DialogueManager.instance.StartSubjectMonologue ("0_06");
+			CountClickedObjectsInHospitalRoom ();
+		} else {
+			StartCoroutine (Start_0_Interactable_Contract_Coroutine (audioSource));
+		}
+	}
+
 	void Start_0_Interactable_Contract_One (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Disable ();
@@ -311,6 +326,23 @@ public class EventManager : MonoBehaviour
 	//Act 0 Coroutines
 	//---------------------------
 
+	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
+	IEnumerator Start_0_Interactable_Contract_Coroutine (AudioSource audioSource)
+	{
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15");
+		yield return new WaitForSecondsRealtime (15);
+		SoundManager.instance.PlayEffect (audioSource, "signature", 1);
+		yield return new WaitForSecondsRealtime (3);
+
+		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+
+		DialogueManager.instance.StartTestManagerMonologue ("0_17");
+		yield return new WaitForSecondsRealtime (6);
+		OpenDoorHospitalToFloor ();
+	}
+
 
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
 	IEnumerator Start_0_Interactable_Contract_One_Coroutine (AudioSource audioSource)
@@ -360,7 +392,7 @@ public class EventManager : MonoBehaviour
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_08");
 
-		EnableInteractableContractOneForSecondInteraction ();
+		EnableInteractableContractForSecondInteraction ();
 		allowedToSignContract = true;
 	}
 
@@ -396,10 +428,12 @@ public class EventManager : MonoBehaviour
 		doorHospitalToFloor.GetComponent<Animator> ().SetTrigger("doorOpen");
 	}
 
-	void EnableInteractableContractOneForSecondInteraction ()
+	void EnableInteractableContractForSecondInteraction ()
 	{
-		GameObject.Find ("Interactable_Contract_01").GetComponent<InteractableObject> ().Enable ();
+		GameObject.Find ("Interactable_Contract").GetComponent<InteractableObject> ().Enable ();
 	}
+
+
 
 	#endregion
 
