@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
 
 	//Change the radius of the the distance that allows interaction
 	public float radius = 1.5f;
+	public bool interactionAllowedDuringDialogue = false;
 
 	private Crosshair crosshair;
 
@@ -27,7 +28,7 @@ public class Interactable : MonoBehaviour
 			
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
-				if (!DialogueManager.instance.IsDialoguePlaying ()) {
+				if (!DialogueManager.instance.IsDialoguePlaying () || interactionAllowedDuringDialogue) {
 					showHint = true;
 				}
 				crosshair.SetHighlight ();
@@ -48,10 +49,8 @@ public class Interactable : MonoBehaviour
 		if (isEnabled) {
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
-				if (!DialogueManager.instance.IsDialoguePlaying ()) {
+				if (!DialogueManager.instance.IsDialoguePlaying ()|| interactionAllowedDuringDialogue) {
 					OnInteraction ();
-				} else {
-					print ("Warte mit Interaktion, weil Dialog läuft!");
 				}
 			}
 			OnDefocused ();
