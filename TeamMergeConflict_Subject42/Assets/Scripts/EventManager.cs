@@ -550,7 +550,7 @@ public class EventManager : MonoBehaviour
 	{
 		interactable.Disable ();
 		SoundManager.instance.PlayEffect (audioSource, "dooropen", 1);
-		LoadLevelTwo ();
+		StartCoroutine(LoadLevelTwo ());
 	}
 
 	//---------------------------
@@ -707,6 +707,35 @@ public class EventManager : MonoBehaviour
 		OpenDoorFloorToChildrensRoom ();
 	}
 
+	IEnumerator LoadLevelTwo ()
+	{
+		//Disable all Movements here
+
+		Slider slider = null;
+
+		GameObject canvas = GameObject.Find ("Canvas");
+		for (int i = 0; i < canvas.transform.childCount; i++) {
+			Transform canvasElement = canvas.gameObject.transform.GetChild (i);
+			if (canvasElement.name == "LoadingBar") {
+				canvasElement.gameObject.SetActive (true);
+				slider = canvasElement.GetComponent<Slider>();
+				break;
+			}
+		}
+
+
+		StartCoroutine (FadeToBlack (0.5f));
+		AsyncOperation loadLevelTwoAsync = SceneManager.LoadSceneAsync ("Level2");
+		while (!loadLevelTwoAsync.isDone) {
+			print ("Progress:" + Mathf.Clamp01 (loadLevelTwoAsync.progress / 0.9f) * 100f + "%");
+			float progress = Mathf.Clamp01(loadLevelTwoAsync.progress / 0.9f);
+			slider.value = progress;
+			//loadingText.text = progress * 100f + "%";
+			yield return null;
+		}
+			
+	}
+
 	//---------------------------
 	//Act 1 Additional Functions
 	//---------------------------
@@ -774,14 +803,7 @@ public class EventManager : MonoBehaviour
 			}
 		}
 	}
-
-	void LoadLevelTwo ()
-	{
-
-		//Start a Loading Screen here!
-
-		SceneManager.LoadScene ("Level2");
-	}
+		
 
 	#endregion
 

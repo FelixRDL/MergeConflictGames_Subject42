@@ -75,17 +75,6 @@ public class MainMenu : MonoBehaviour
 			print ("Progress:" + Mathf.Clamp01 (loadLevelOneAsync.progress / 0.9f) * 100f + "%");
 			yield return null;
 		}
-
-		/*
-		 while (!async.isDone)
-        {
-            float progress = Mathf.Clamp01(async.progress / 0.9f);
-            sliderBar.value = progress;
-            loadingText.text = progress * 100f + "%";
-            yield return null;
-
-        }
-		 */
 	}
 
 	IEnumerator FadeInImage (Image image, float duration)
