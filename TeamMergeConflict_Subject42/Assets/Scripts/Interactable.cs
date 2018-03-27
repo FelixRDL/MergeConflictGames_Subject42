@@ -62,7 +62,7 @@ public class Interactable : MonoBehaviour
 		if (isEnabled) {
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
-				if (GetInterActionAllowed()) {
+				if (GetInteractionAllowed ()) {
 					OnInteraction ();
 				}
 			}
@@ -103,7 +103,7 @@ public class Interactable : MonoBehaviour
 	{
 	}
 
-	private bool GetInterActionAllowed()
+	private bool GetInteractionAllowed ()
 	{
 		if (!DialogueManager.instance.IsDialoguePlaying () || interactionAllowedDuringDialogue) {
 			return true;
@@ -120,8 +120,8 @@ public class Interactable : MonoBehaviour
 
 			string hint = "";
 
-			if (GetInterActionAllowed()) {
-				hint = "<b>[E] to interact</b>";
+			if (GetInteractionAllowed ()) {
+				hint = "<b>[E]: " + GetHintForCurrentInteractable () + "</b>";
 			} else {
 				hint = "...";
 			}
@@ -133,6 +133,90 @@ public class Interactable : MonoBehaviour
 			GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.1f - size.y + 1, size.x, size.y), hint, hintGUIStyle);
 			GUI.contentColor = Color.white;
 			GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.1f - size.y, size.x, size.y), hint, hintGUIStyle);
+		}
+	}
+
+	private string GetHintForCurrentInteractable ()
+	{
+		switch (gameObject.name) {
+
+		//Level 1 Interactables:
+		case "Interactable_Window":
+			return "Look out of Window";
+		case "Interactable_Medical_Devices":
+			return "Look at Medical Devices";
+		case "Interactable_Picture_Frame_Hospital":
+			return "Look at Picture";
+		case "Interactable_Mirror_Bath":
+			return "Look at Mirror";
+		case "Interactable_Contract":
+			return "Look at Contract";
+		case "Interactable_Rubber_Duck":
+			return "Look at Rubber Duck";
+		case "Interactable_Desinfection":
+			return "Look at Disinfectant Dispenser";
+		case "Interactable_Door_Hospital_To_Floor":
+			return "Look at Door";
+		case "Interactable_Door_Bathroom":
+			return "Open Door";
+		case "Interactable_Door_Floor_01":
+			return "Open Door";
+		case "Interactable_Door_Floor_02":
+			return "Open Door";
+		case "Interactable_Pill_Floor":
+			return "Eat Pill from Packet";
+		case "Interactable_Door_Floor_To_Childrens_Room":
+			return "Open Door";
+		case "Interactable_Wooden_Train_Happy":
+			return "Look at Wooden Train";
+		case "Interactable_Frame_Family":
+			return "Look at Painting";
+		case "Interactable_Frame_Dog":
+			return "Look at Painting";
+		case "Interactable_Teddy":
+			return "Look at Teddy";
+		case "Interactable_Light_Switch":
+			return "Press Lightswitch";
+		case "Interactable_Beer_Bottle":
+			return "Look at Beer Bottles";
+		case "Interactable_Cubes_Sad":
+			return "Look at Toy Cubes";
+		case "Interactable_Frame_Friend_Sad":
+			return "Look at Painting";
+		case "Interactable_Teddy_Sad":
+			return "Look at Teddy";
+		case "Interactable_Wooden_Train_Sad":
+			return "Look at Wooden Train";
+		case "Interactable_Door_Childrens_Room_To_Garden":
+			return "Go through Door";
+		case "Interactable_Neutralizer":
+			return "Drink Neutralizer";
+
+		//Level 2 Interactables:
+		case "Interactable_Keypad":
+			return "Look at Keypad";
+		case "Interactable_DJ_Console":
+			return "Talk with DJ";
+		case "Interactable_Pill_01":
+			return "Eat Pill from Packet";
+		case "Interactable_Dancer":
+			return "Look at Dancers";
+		case "Interactable_Dancer_On_Floor":
+			return "Look at People on Floor";
+		case "Interactable_Friend_Fence":
+			return "Talk with Friend";
+		case "Interactable_Pill_02":
+			return "Eat Pill from Packet";
+		case "Interactable_Friend_Dome":
+			return "Talk with Friend";
+		case "Interactable_Pill_03":
+			return "Eat Pill from Packet";
+		case "Interactable_Friend_Dead":
+			return "Look at Friend";
+		case "Interactable_Note_Code_For_Keypad":
+			return "Look at Note";
+		default:
+			return "To Interact";
 		}
 	}
 }
