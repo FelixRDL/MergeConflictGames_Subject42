@@ -13,12 +13,21 @@ public class EffectManager : MonoBehaviour {
 
 	private bool playerMovementEnabled = true;
 
+	private const float DEFAULT_FOV = 75f;
+
+	private AudioSource playerAudioSource;
+
+	private Image blackBackground;
+
 	//Singleton property
 	public static EffectManager instance = null;
 
 	void Start () {
 		InitSingleton ();
+
 		blur.enabled = false;
+		playerAudioSource = GameObject.FindWithTag ("Player").GetComponent<AudioSource> ();
+		blackBackground = GameObject.Find ("Black").GetComponent<Image> ();
 	}
 
 	private void InitSingleton ()
@@ -47,35 +56,65 @@ public class EffectManager : MonoBehaviour {
 		playerMovementEnabled = !playerMovementEnabled;
 	}
 
+	public void StartFirstPartOfTrip (AudioSource audioSource)
+	{
+		StartCoroutine (StartFirstPartOfTripCoroutine (audioSource));
+	}
 
-	//Additional Functions for Trip
+	public void StartLastPartOfTrip ()
+	{
+		StartCoroutine (StartLastPartOfTripCoroutine ());
+	}
 
-	private YieldInstruction fovInstruction = new YieldInstruction ();
+	//Functions for Trip
+
+	IEnumerator StartFirstPartOfTripCoroutine (AudioSource audioSource)
+	{
+		TogglePlayerMovement ();
+		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
+		yield return new WaitForSecondsRealtime (1f);
+		SoundManager.instance.PlayEffect (playerAudioSource, "gulp");
+		yield return new WaitForSecondsRealtime (1f);
+		SoundManager.instance.PlayEffect (playerAudioSource, "trip");
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (4f);
+		HideImage (blackBackground);
+		ToggleBlur ();
+		StartCoroutine (TrippyFOVChanges (10f));
+		yield return new WaitForSecondsRealtime (2f);
+	}
+
+	IEnumerator StartLastPartOfTripCoroutine ()
+	{
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSeconds (4f);
+		HideImage (blackBackground);
+		EffectManager.instance.ToggleBlur ();
+		EffectManager.instance.TogglePlayerMovement ();
+	}
 
 	IEnumerator TrippyFOVChanges (float duration)
 	{
 		float elapsedTime = 0.0f;
 		while (elapsedTime < duration) {
-			yield return fovInstruction;
 			elapsedTime += Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (40, 80), 5, Time.deltaTime * 5);
+			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (60, 90), 5, Time.deltaTime * 5);
+			yield return null;
 		}
-		Camera.main.fieldOfView = 75;
+		Camera.main.fieldOfView = DEFAULT_FOV;
 	}
-
-	private YieldInstruction fadeInstruction = new YieldInstruction ();
+		
 
 	IEnumerator FadeToBlack (float duration)
 	{
-		Image black = GameObject.Find ("Black").GetComponent<Image> ();
 		float elapsedTime = 0.0f;
-		Color c = black.color;
+		Color c = blackBackground.color;
 		print ("Start");
 		while (elapsedTime < duration) {
-			yield return fadeInstruction;
 			elapsedTime += Time.deltaTime;
 			c.a = Mathf.Clamp01 (elapsedTime / duration);
-			black.color = c;
+			blackBackground.color = c;
+			yield return null;
 		}
 		print ("End");
 

@@ -551,35 +551,15 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_1_05_Coroutine (AudioSource audioSource)
 	{
-		DialogueManager.instance.StartSubjectMonologue ("1_05");
-		yield return new WaitForSecondsRealtime (9);
-		EffectManager.instance.TogglePlayerMovement ();
-		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
-		yield return new WaitForSecondsRealtime (1);
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
-		yield return new WaitForSecondsRealtime (1);
-		//Start Trip here
+		EffectManager.instance.StartFirstPartOfTrip (audioSource);
 
-		//Hier besser als BackgroundMusic abspielen...
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
-
-		//Schwarzblende hier
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSecondsRealtime (4f);
-		EffectManager.instance.ToggleBlur ();
-		StartCoroutine (TrippyFOVChanges (10f));
-		Image black = GameObject.Find ("Black").GetComponent<Image> ();
-		HideImage (black);
 		yield return new WaitForSecondsRealtime (10f);
+
 		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 1, 5);
-		//Schwarzblende hier
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSeconds (4f);
-		HideImage (black);
-	
-		EffectManager.instance.ToggleBlur ();
-		EffectManager.instance.TogglePlayerMovement ();
-		yield return new WaitForSecondsRealtime (1);
+
+		EffectManager.instance.StartLastPartOfTrip ();
+		yield return new WaitForSecondsRealtime (6f);
+
 		OpenDoorFloorToChildrensRoom ();
 	}
 
@@ -755,7 +735,7 @@ public class EventManager : MonoBehaviour
 	//The initial Dialogue for Level 2. Gets played when the scene is loaded.
 	void Start_2_01 ()
 	{
-		DialogueManager.instance.StartTestManagerMonologue ("2_01");
+		//DialogueManager.instance.StartTestManagerMonologue ("2_01");
 	}
 
 
@@ -880,20 +860,11 @@ public class EventManager : MonoBehaviour
 	IEnumerator Start_2_04_Coroutine (AudioSource audioSource)
 	{
 
-		EffectManager.instance.TogglePlayerMovement ();
+		EffectManager.instance.StartFirstPartOfTrip (audioSource);
+		yield return new WaitForSecondsRealtime (8f);
 
-		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
-		yield return new WaitForSecondsRealtime (1);
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
-		yield return new WaitForSecondsRealtime (1);
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSecondsRealtime (4f);
-		Image black = GameObject.Find ("Black").GetComponent<Image> ();
-		HideImage (black);
-		EffectManager.instance.ToggleBlur ();
-		StartCoroutine (TrippyFOVChanges (10f));
-		yield return new WaitForSecondsRealtime (2f);
+
+
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0.4f, 10);
 		SwitchHoardings ();
 		yield return new WaitForSecondsRealtime (4f);
@@ -902,14 +873,9 @@ public class EventManager : MonoBehaviour
 		SwitchDynamicRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Fence");
 
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSeconds (4f);
-		HideImage (black);
+		EffectManager.instance.StartLastPartOfTrip ();
 
-		EffectManager.instance.ToggleBlur ();
-		EffectManager.instance.TogglePlayerMovement ();
-
-		yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (6f);
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04");
 	}
 
@@ -925,34 +891,16 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_2_11_Coroutine (AudioSource audioSource)
 	{
-		EffectManager.instance.TogglePlayerMovement ();
-		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
-		yield return new WaitForSecondsRealtime (1);
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
-		yield return new WaitForSecondsRealtime (1);
-		//Start Trip here
-		SoundManager.instance.ReduceBackgroundMusicWhileDrugTrip ();
+		EffectManager.instance.StartFirstPartOfTrip (audioSource);
+		yield return new WaitForSecondsRealtime (6f);
 
-		//Hier besser als BackgroundMusic abspielen...
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
-
-		//Schwarzblende hier
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSecondsRealtime (4f);
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_11");
-		EffectManager.instance.ToggleBlur ();
-		StartCoroutine (TrippyFOVChanges (10f));
-		Image black = GameObject.Find ("Black").GetComponent<Image> ();
-		HideImage (black);
+
 		yield return new WaitForSecondsRealtime (10f);
 
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSeconds (4f);
-		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (0);
-		HideImage (black);
+		EffectManager.instance.StartLastPartOfTrip ();
 
-		EffectManager.instance.ToggleBlur ();
-		EffectManager.instance.TogglePlayerMovement ();
+		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (0);
 	}
 
 
@@ -966,25 +914,12 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_2_19_Coroutine (AudioSource audioSource)
 	{
-		EffectManager.instance.TogglePlayerMovement ();
-		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
-		yield return new WaitForSecondsRealtime (1);
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
-		yield return new WaitForSecondsRealtime (1);
-		//Start Trip here
-
-		//Hier besser als BackgroundMusic abspielen...
-		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
-
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSecondsRealtime (4f);
-		SoundManager.instance.StopBackgroundMusic (10f);
-		EffectManager.instance.ToggleBlur ();
-		StartCoroutine (TrippyFOVChanges (10f));
-		Image black = GameObject.Find ("Black").GetComponent<Image> ();
-		HideImage (black);
-
+		EffectManager.instance.StartFirstPartOfTrip (audioSource);
 		yield return new WaitForSecondsRealtime (6f);
+
+
+		//SoundManager.instance.StopBackgroundMusic (10f);
+
 
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
@@ -995,15 +930,10 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (4f);
 		ToggleEmergencyLight ();
 
-		//Schwarzblende hier
-		StartCoroutine (FadeToBlack (3f));
-		yield return new WaitForSeconds (4f);
-		HideImage (black);
+		EffectManager.instance.StartLastPartOfTrip ();
 
-		EffectManager.instance.ToggleBlur ();
-		EffectManager.instance.TogglePlayerMovement ();
+		yield return new WaitForSeconds (6f);
 
-		yield return new WaitForSeconds (2f);
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_19");
 	}
 
@@ -1144,33 +1074,17 @@ public class EventManager : MonoBehaviour
 	#endregion
 
 
-
-
-
-
-
-
-
-
-
-
-
-	//Additional Functions for Trip
-
-	private YieldInstruction fovInstruction = new YieldInstruction ();
-
 	IEnumerator TrippyFOVChanges (float duration)
 	{
 		float elapsedTime = 0.0f;
 		while (elapsedTime < duration) {
-			yield return fovInstruction;
 			elapsedTime += Time.deltaTime;
 			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (40, 80), 5, Time.deltaTime * 5);
+			yield return null;
 		}
 		Camera.main.fieldOfView = 75;
 	}
 
-	private YieldInstruction fadeInstruction = new YieldInstruction ();
 
 	IEnumerator FadeToBlack (float duration)
 	{
@@ -1179,10 +1093,10 @@ public class EventManager : MonoBehaviour
 		Color c = black.color;
 		print ("Start");
 		while (elapsedTime < duration) {
-			yield return fadeInstruction;
 			elapsedTime += Time.deltaTime;
 			c.a = Mathf.Clamp01 (elapsedTime / duration);
 			black.color = c;
+			yield return null;
 		}
 		print ("End");
 
@@ -1195,5 +1109,8 @@ public class EventManager : MonoBehaviour
 		imageColor.a = 0;
 		image.color = imageColor;
 	}
+
+
+
 
 }
