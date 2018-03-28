@@ -16,7 +16,7 @@ public class FlickeringLight : MonoBehaviour {
 
 	private AudioSource flickerOneShot;
 
-	private MeshRenderer meshRenderer;
+	//private MeshRenderer meshRenderer;
 
 
 	// intervals between flickering (in millis)
@@ -28,7 +28,7 @@ public class FlickeringLight : MonoBehaviour {
 	private float passedTime = 0;
 
 	public void Start(){
-		meshRenderer = gameObject.GetComponent <MeshRenderer>();
+		//meshRenderer = gameObject.GetComponent <MeshRenderer>();
 		flickerOneShot = gameObject.GetComponent<AudioSource> ();
 	}
 
@@ -56,7 +56,7 @@ public class FlickeringLight : MonoBehaviour {
 		foreach (Transform child in transform)
 		{
 			// toggle state 
-			child.gameObject.active = !child.gameObject.active;
+			child.gameObject.SetActive(!child.gameObject.activeSelf);
 		}
 	}
 	

@@ -105,13 +105,9 @@ public class SoundManager : MonoBehaviour
 	}
 
 
-	public void PlayEffect (AudioSource effectSource, string clipName, float volume)
+	public void PlayEffect (AudioSource effectSource, string clipName)
 	{
-		print ("Start Playing " + clipName);
-
-		AudioSource source = effectSource;
-		source.volume = volume;
-		source.clip = soundeffectClips [clipName];
-		source.Play ();
+		effectSource.clip = soundeffectClips [clipName];
+		effectSource.Play ();
 	}
 }
