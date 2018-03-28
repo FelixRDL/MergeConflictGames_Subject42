@@ -66,6 +66,11 @@ public class EffectManager : MonoBehaviour {
 		StartCoroutine (StartLastPartOfTripCoroutine ());
 	}
 
+	public void StartNeutralizerTrip()
+	{
+
+	}
+
 	//Functions for Trip
 
 	IEnumerator StartFirstPartOfTripCoroutine (AudioSource audioSource)
@@ -92,6 +97,32 @@ public class EffectManager : MonoBehaviour {
 		EffectManager.instance.ToggleBlur ();
 		EffectManager.instance.TogglePlayerMovement ();
 	}
+
+	IEnumerator StartNeutralizerTripCoroutine ()
+	{
+		EffectManager.instance.TogglePlayerMovement ();
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
+		yield return new WaitForSecondsRealtime (1f);
+
+		SoundManager.instance.StopBackgroundMusic (5);
+		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (4f);
+		EffectManager.instance.ToggleBlur ();
+		StartCoroutine (TrippyFOVChanges (10f));
+
+		HideImage (blackBackground);
+		yield return new WaitForSecondsRealtime (10f);
+		StartCoroutine (FadeToBlack (3f));
+
+		yield return new WaitForSeconds (4f);
+		HideImage (blackBackground);
+		EffectManager.instance.ToggleBlur ();
+		EffectManager.instance.TogglePlayerMovement ();
+	}
+
 
 	IEnumerator TrippyFOVChanges (float duration)
 	{
