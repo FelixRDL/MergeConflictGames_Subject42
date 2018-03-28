@@ -284,14 +284,14 @@ public class EventManager : MonoBehaviour
 	//Because there are multiple timed Events happening on Interaction with the Contract, we need a Coroutine here.
 	IEnumerator Start_0_Interactable_Contract_Coroutine (AudioSource audioSource)
 	{
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.TogglePlayerMovement ();
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15");
 		yield return new WaitForSecondsRealtime (15);
 		SoundManager.instance.PlayEffect (audioSource, "signature");
 		yield return new WaitForSecondsRealtime (3);
 
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.TogglePlayerMovement ();
 
 		DialogueManager.instance.StartTestManagerMonologue ("0_17");
 		yield return new WaitForSecondsRealtime (6);
@@ -553,7 +553,7 @@ public class EventManager : MonoBehaviour
 	{
 		DialogueManager.instance.StartSubjectMonologue ("1_05");
 		yield return new WaitForSecondsRealtime (9);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
 		yield return new WaitForSecondsRealtime (1);
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
@@ -566,7 +566,7 @@ public class EventManager : MonoBehaviour
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (4f);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		EffectManager.instance.ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
 		Image black = GameObject.Find ("Black").GetComponent<Image> ();
 		HideImage (black);
@@ -577,8 +577,8 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (4f);
 		HideImage (black);
 	
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.ToggleBlur ();
+		EffectManager.instance.TogglePlayerMovement ();
 		yield return new WaitForSecondsRealtime (1);
 		OpenDoorFloorToChildrensRoom ();
 	}
@@ -609,7 +609,7 @@ public class EventManager : MonoBehaviour
 	{
 		CloseDoorFloorToChildrensRoom ();
 		yield return new WaitForSecondsRealtime (1);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
 		yield return new WaitForSecondsRealtime (1);
 		SoundManager.instance.StopBackgroundMusic (5);
@@ -621,7 +621,7 @@ public class EventManager : MonoBehaviour
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (4f);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		EffectManager.instance.ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
 		Image black = GameObject.Find ("Black").GetComponent<Image> ();
 		HideImage (black);
@@ -631,8 +631,8 @@ public class EventManager : MonoBehaviour
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
 		yield return new WaitForSeconds (4f);
 		HideImage (black);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.ToggleBlur ();
+		EffectManager.instance.TogglePlayerMovement ();
 
 		yield return new WaitForSecondsRealtime (1f);
 
@@ -880,7 +880,7 @@ public class EventManager : MonoBehaviour
 	IEnumerator Start_2_04_Coroutine (AudioSource audioSource)
 	{
 
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.TogglePlayerMovement ();
 
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
 		yield return new WaitForSecondsRealtime (1);
@@ -891,7 +891,7 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (4f);
 		Image black = GameObject.Find ("Black").GetComponent<Image> ();
 		HideImage (black);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		EffectManager.instance.ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
 		yield return new WaitForSecondsRealtime (2f);
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0.4f, 10);
@@ -906,8 +906,8 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (4f);
 		HideImage (black);
 
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.ToggleBlur ();
+		EffectManager.instance.TogglePlayerMovement ();
 
 		yield return new WaitForSeconds (2f);
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04");
@@ -925,7 +925,7 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_2_11_Coroutine (AudioSource audioSource)
 	{
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
 		yield return new WaitForSecondsRealtime (1);
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
@@ -940,7 +940,7 @@ public class EventManager : MonoBehaviour
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (4f);
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_11");
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		EffectManager.instance.ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
 		Image black = GameObject.Find ("Black").GetComponent<Image> ();
 		HideImage (black);
@@ -951,8 +951,8 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (0);
 		HideImage (black);
 
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.ToggleBlur ();
+		EffectManager.instance.TogglePlayerMovement ();
 	}
 
 
@@ -966,7 +966,7 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_2_19_Coroutine (AudioSource audioSource)
 	{
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.TogglePlayerMovement ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
 		yield return new WaitForSecondsRealtime (1);
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
@@ -979,7 +979,7 @@ public class EventManager : MonoBehaviour
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (4f);
 		SoundManager.instance.StopBackgroundMusic (10f);
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
+		EffectManager.instance.ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
 		Image black = GameObject.Find ("Black").GetComponent<Image> ();
 		HideImage (black);
@@ -1000,8 +1000,8 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (4f);
 		HideImage (black);
 
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
-		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+		EffectManager.instance.ToggleBlur ();
+		EffectManager.instance.TogglePlayerMovement ();
 
 		yield return new WaitForSeconds (2f);
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_19");
