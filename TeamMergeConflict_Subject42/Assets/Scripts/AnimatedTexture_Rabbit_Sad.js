@@ -1,5 +1,4 @@
 //	Code used from http://wiki.unity3d.com/index.php?title=Animating_Tiled_texture", Courtesy to Joachim Ante (16.2.18)
-// and from https://unity3d.com/de/learn/tutorials/topics/scripting/coroutines
 
 var uvAnimationTileX = 2; //Here you can place the number of columns of your sheet.
                            //The above sheet has 24
@@ -8,47 +7,50 @@ var uvAnimationTileY = 1; //Here you can place the number of rows of your sheet.
                           //The above sheet has 1
 var framesPerSecondEyeOpen : float = 4.0f;
 var framesPerSecondEyeClosed : float = 0.2f;
-var framesPerSecond : float = 5.0f;
+var speed : float = 4.0f;
 var isOpen = true;
+var index = 0;
+var passedTime = 0.0f;
+var openOffset = Vector2 (0.0, 0.0);
+var closeOffset = Vector2 (0.5, 0.0);
 
 function Start () 
 {
-	framesPerSecond = framesPerSecondEyeOpen;
+	speed = framesPerSecondEyeOpen;
 	isOpen = true;
-    MyCoroutine();
+    //MyCoroutine();
+    var size = Vector2 (1.0 / uvAnimationTileX, 1.0 / uvAnimationTileY);
 }
 
-function MyCoroutine ()
-{
-    while(true)
-    {
-        if(isOpen == true){
-			framesPerSecond = framesPerSecondEyeOpen;
-			isOpen = false;
+
+function Update(){
+	passedTime += Time.deltaTime;
+		if(isOpen == true){
+			speed = framesPerSecondEyeOpen;
+			print("if");
+			if (passedTime >= framesPerSecondEyeOpen) {
+				// reset passedTime
+				passedTime = passedTime % framesPerSecondEyeOpen;
+				closeEye ();
+			}
 		}else{
-			framesPerSecond = framesPerSecondEyeClosed;
-			isOpen = true;
+			speed = framesPerSecondEyeClosed;
+			print("else");
+			if (passedTime >= framesPerSecondEyeClosed) {
+				passedTime = passedTime % framesPerSecondEyeClosed;
+				openEye ();
+			}
 		}
-		print(isOpen);
-		print("FPS");
-		print(framesPerSecond);
-		// Calculate index
-		var index : int = Time.time * framesPerSecond;
-		// repeat when exhausting all frames
-		index = index % (uvAnimationTileX * uvAnimationTileY);
-		// Size of every tile
-		var size = Vector2 (1.0 / uvAnimationTileX, 1.0 / uvAnimationTileY);
-		// split into horizontal and vertical index
-		var uIndex = index % uvAnimationTileX;
-		// build offset
-		// v coordinate is the bottom of the image in opengl so we need to invert.
-		var offset = Vector2 (uIndex * size.x, 0.0);
-		GetComponent.<Renderer>().material.SetTextureOffset ("_MainTex", offset);
-        yield WaitForSeconds(framesPerSecond);
-    }
-    
-    print("Reached the target.");
-    print("MyCoroutine is now finished.");
 }
 
 
+function closeEye(){
+	GetComponent.<Renderer>().material.SetTextureOffset ("_MainTex", closeOffset);
+	isOpen = false;
+}
+
+function openEye(){
+// Calculate index
+	GetComponent.<Renderer>().material.SetTextureOffset ("_MainTex", openOffset);
+	isOpen = true;
+}
