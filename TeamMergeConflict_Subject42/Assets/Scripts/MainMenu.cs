@@ -27,7 +27,12 @@ public class MainMenu : MonoBehaviour
 		gameStarted = false;
 	}
 
-	private void InitImages()
+	void Start ()
+	{
+		SoundManager.instance.PlayBackgroundMusicLoop ("menusong", 1f, 0);
+	}
+
+	private void InitImages ()
 	{
 		warning = GameObject.Find ("Warning").GetComponent<Image> ();
 		logo = GameObject.Find ("Logo").GetComponent<Image> ();
@@ -53,6 +58,10 @@ public class MainMenu : MonoBehaviour
 	//Coroutine for the Game Intro
 	IEnumerator StartGameIntro ()
 	{
+
+		Cursor.lockState = CursorLockMode.Locked;
+		SoundManager.instance.StopBackgroundMusic (3f);
+
 		//Display a black Screen as overlay over the Menu
 		black.gameObject.SetActive (true);
 
@@ -60,7 +69,8 @@ public class MainMenu : MonoBehaviour
 		yield return new WaitForSecondsRealtime (warningScreenDisplayTime);
 		HideImage (warning);
 
-		StartCoroutine (FadeInImage (logo,logoScreenFadeInTime));
+		SoundManager.instance.PlayEffect (GetComponent<AudioSource> (), "introsound");
+		StartCoroutine (FadeInImage (logo, logoScreenFadeInTime));
 		yield return new WaitForSecondsRealtime (logoScreenDisplayTime);
 
 		StartCoroutine (LoadLevelOne ());
