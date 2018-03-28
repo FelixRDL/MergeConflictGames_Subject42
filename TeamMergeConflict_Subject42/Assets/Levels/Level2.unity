@@ -4186,6 +4186,16 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198705232573440972, guid: cd030efe90991fc408f30183b24a7346,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198705232573440972, guid: cd030efe90991fc408f30183b24a7346,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd030efe90991fc408f30183b24a7346, type: 2}
   m_IsPrefabParent: 0
@@ -8241,115 +8251,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 149185195}
   m_Mesh: {fileID: 4300004, guid: 000e268602069ee41b503cc210240ef7, type: 3}
---- !u!1 &150258754
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 150258755}
-  - component: {fileID: 150258756}
-  m_Layer: 0
-  m_Name: PlayerAudioSource
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &150258755
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 150258754}
-  m_LocalRotation: {x: 0.0000019073486, y: 0.5661956, z: -0.00000043213367, w: 0.82427096}
-  m_LocalPosition: {x: 0.25596222, y: -0.34857985, z: -0.57127184}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 880169044}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &150258756
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 150258754}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!1001 &151788357
 Prefab:
   m_ObjectHideFlags: 0
@@ -13464,6 +13365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!65 &244388556
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14578,6 +14480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!65 &269115793
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22375,6 +22278,16 @@ Prefab:
     - target: {fileID: 1959894685926762, guid: cd030efe90991fc408f30183b24a7346, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198705232573440972, guid: cd030efe90991fc408f30183b24a7346,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198705232573440972, guid: cd030efe90991fc408f30183b24a7346,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198705232573440972, guid: cd030efe90991fc408f30183b24a7346,
         type: 2}
@@ -35704,6 +35617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.5
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!4 &688355856 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4546454232311656, guid: e9de87b691f2ad54e83f893ef7a5aa0e,
@@ -38730,6 +38644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.5
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!65 &750295032
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40883,6 +40798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.5
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!65 &797811252
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44321,6 +44237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2.5
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!65 &874293882
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44607,11 +44524,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 88.836975
+      value: 88.659
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 77.01099
+      value: 77.224
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: m_LocalRotation.x
@@ -44932,7 +44849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blur: {fileID: 880169050}
-  player: {fileID: 0}
+  player: {fileID: 880169058}
 --- !u!114 &880169050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45067,6 +44984,12 @@ MonoBehaviour:
   separableBlurShader: {fileID: 4800000, guid: e97c14fbb5ea04c3a902cc533d7fc5d1, type: 3}
   chromAberrationShader: {fileID: 4800000, guid: 2b4f29398d9484ccfa9fd220449f5eee,
     type: 3}
+--- !u!114 &880169058 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11400004, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+    type: 2}
+  m_PrefabInternal: {fileID: 880169042}
+  m_Script: {fileID: 11500000, guid: 81c9795a96c094f4cbde4d65546aa9b2, type: 3}
 --- !u!1001 &880562049
 Prefab:
   m_ObjectHideFlags: 0
@@ -52579,7 +52502,7 @@ GameObject:
   - component: {fileID: 1073174456}
   - component: {fileID: 1073174457}
   m_Layer: 0
-  m_Name: Interactable_Friend_On_Way_01
+  m_Name: Friend_On_Way_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59654,7 +59577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blur: {fileID: 1221858826}
-  player: {fileID: 1250823670}
+  player: {fileID: 0}
 --- !u!114 &1221858825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64711,6 +64634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.5
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!82 &1341193101
 AudioSource:
   m_ObjectHideFlags: 0
@@ -69580,6 +69504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.5
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!1 &1452035780
 GameObject:
   m_ObjectHideFlags: 0
@@ -73139,6 +73064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!95 &1544527721
 Animator:
   serializedVersion: 3
@@ -75655,7 +75581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419135554}
   m_Layer: 0
-  m_Name: Interactable_Friend_On_Way_02
+  m_Name: Friend_On_Way_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80057,7 +79983,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 880169044}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1674955640
 AudioSource:
@@ -90095,6 +90021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.5
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!82 &1909983306
 AudioSource:
   m_ObjectHideFlags: 0
@@ -91840,6 +91767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2.7
   interactionAllowedDuringDialogue: 0
+  disableAfterInteraction: 0
 --- !u!65 &1939378164
 BoxCollider:
   m_ObjectHideFlags: 0
