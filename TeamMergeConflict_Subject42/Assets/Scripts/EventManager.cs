@@ -568,54 +568,19 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (4f);
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		Color c = black.color;
-		c.a = 0;
-		black.color = c;
+		Image black = GameObject.Find ("Black").GetComponent<Image> ();
+		HideImage (black);
 		yield return new WaitForSecondsRealtime (10f);
 		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 1, 5);
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSeconds (4f);
-		c = black.color;
-		c.a = 0;
-		black.color = c;
+		HideImage (black);
 	
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 		yield return new WaitForSecondsRealtime (1);
 		OpenDoorFloorToChildrensRoom ();
-	}
-
-	private YieldInstruction fovInstruction = new YieldInstruction ();
-
-	IEnumerator TrippyFOVChanges (float duration)
-	{
-		float elapsedTime = 0.0f;
-		while (elapsedTime < duration) {
-			yield return fovInstruction;
-			elapsedTime += Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (40, 80), 5, Time.deltaTime * 5);
-		}
-		Camera.main.fieldOfView = 75;
-	}
-
-	private YieldInstruction fadeInstruction = new YieldInstruction ();
-
-	IEnumerator FadeToBlack (float duration)
-	{
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		float elapsedTime = 0.0f;
-		Color c = black.color;
-		print ("Start");
-		while (elapsedTime < duration) {
-			yield return fadeInstruction;
-			elapsedTime += Time.deltaTime;
-			c.a = Mathf.Clamp01 (elapsedTime / duration);
-			black.color = c;
-		}
-		print ("End");
-
 	}
 
 	IEnumerator Start_1_16_Coroutine ()
@@ -658,18 +623,14 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (4f);
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		Color c = black.color;
-		c.a = 0;
-		black.color = c;
+		Image black = GameObject.Find ("Black").GetComponent<Image> ();
+		HideImage (black);
 		yield return new WaitForSecondsRealtime (10f);
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
 		yield return new WaitForSeconds (4f);
-		c = black.color;
-		c.a = 0;
-		black.color = c;
+		HideImage (black);
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
 
@@ -703,7 +664,6 @@ public class EventManager : MonoBehaviour
 			print ("Progress:" + Mathf.Clamp01 (loadLevelTwoAsync.progress / 0.9f) * 100f + "%");
 			float progress = Mathf.Clamp01(loadLevelTwoAsync.progress / 0.9f);
 			slider.value = progress;
-			//loadingText.text = progress * 100f + "%";
 			yield return null;
 		}
 			
@@ -921,24 +881,18 @@ public class EventManager : MonoBehaviour
 	{
 
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
+
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
 		yield return new WaitForSecondsRealtime (1);
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
 		yield return new WaitForSecondsRealtime (1);
-		//Start Trip here
-
-		//Hier besser als BackgroundMusic abspielen...
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
-
-		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (4f);
+		Image black = GameObject.Find ("Black").GetComponent<Image> ();
+		HideImage (black);
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		Color c = black.color;
-		c.a = 0;
-		black.color = c;
 		yield return new WaitForSecondsRealtime (2f);
 		SoundManager.instance.PlayBackgroundMusicLoop ("Synapsis_-_04_-_psy_experiment", 0.4f, 10);
 		SwitchHoardings ();
@@ -947,12 +901,10 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (4f);
 		SwitchDynamicRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Fence");
-		//Schwarzblende hier
+
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSeconds (4f);
-		c = black.color;
-		c.a = 0;
-		black.color = c;
+		HideImage (black);
 
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
@@ -960,6 +912,8 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (2f);
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04");
 	}
+
+
 
 
 	IEnumerator Start_2_08_Coroutine ()
@@ -988,19 +942,14 @@ public class EventManager : MonoBehaviour
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_11");
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		Color c = black.color;
-		c.a = 0;
-		black.color = c;
+		Image black = GameObject.Find ("Black").GetComponent<Image> ();
+		HideImage (black);
 		yield return new WaitForSecondsRealtime (10f);
 
-		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSeconds (4f);
 		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (0);
-		c = black.color;
-		c.a = 0;
-		black.color = c;
+		HideImage (black);
 
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
@@ -1027,16 +976,14 @@ public class EventManager : MonoBehaviour
 		//Hier besser als BackgroundMusic abspielen...
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
 
-		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (4f);
 		SoundManager.instance.StopBackgroundMusic (10f);
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		StartCoroutine (TrippyFOVChanges (10f));
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		Color c = black.color;
-		c.a = 0;
-		black.color = c;
+		Image black = GameObject.Find ("Black").GetComponent<Image> ();
+		HideImage (black);
+
 		yield return new WaitForSecondsRealtime (6f);
 
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
@@ -1051,9 +998,7 @@ public class EventManager : MonoBehaviour
 		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSeconds (4f);
-		c = black.color;
-		c.a = 0;
-		black.color = c;
+		HideImage (black);
 
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().ToggleBlur ();
 		GameObject.FindWithTag ("MainCamera").GetComponent<CameraController> ().TogglePlayerMovement ();
@@ -1066,27 +1011,22 @@ public class EventManager : MonoBehaviour
 	IEnumerator Start_2_23_Coroutine ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_23");
-		//Am Ende des Dialoges hier Blackout
 
 		yield return new WaitForSecondsRealtime (20f);
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSeconds (4f);
-		//Nach Aufwachen aus Blackout
-		//Garten ist wieder im Ausgangszustand, ohne Rave
 		SwitchHoardings ();
 		SwitchStaticRaveElements ();
 		SwitchAfterRaveElements ();
 		ToggleFriendOnMap ("Interactable_Friend_Dead");
 		ToggleEmergencyLight ();
-		//Notiz mit Code Spawnen
+
+		//Spawn Note with Code to Keypad
 		SpawnNoteCodeForKeypad ();
 		yield return new WaitForSeconds (4f);
 
-		RawImage black = GameObject.Find ("Black").GetComponent<RawImage> ();
-		Color c = black.color;
-		c = black.color;
-		c.a = 0;
-		black.color = c;
+		Image black = GameObject.Find ("Black").GetComponent<Image> ();
+		HideImage (black);
 	}
 
 
@@ -1202,5 +1142,58 @@ public class EventManager : MonoBehaviour
 	}
 
 	#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//Additional Functions for Trip
+
+	private YieldInstruction fovInstruction = new YieldInstruction ();
+
+	IEnumerator TrippyFOVChanges (float duration)
+	{
+		float elapsedTime = 0.0f;
+		while (elapsedTime < duration) {
+			yield return fovInstruction;
+			elapsedTime += Time.deltaTime;
+			Camera.main.fieldOfView = Mathf.Lerp (Random.Range (40, 80), 5, Time.deltaTime * 5);
+		}
+		Camera.main.fieldOfView = 75;
+	}
+
+	private YieldInstruction fadeInstruction = new YieldInstruction ();
+
+	IEnumerator FadeToBlack (float duration)
+	{
+		Image black = GameObject.Find ("Black").GetComponent<Image> ();
+		float elapsedTime = 0.0f;
+		Color c = black.color;
+		print ("Start");
+		while (elapsedTime < duration) {
+			yield return fadeInstruction;
+			elapsedTime += Time.deltaTime;
+			c.a = Mathf.Clamp01 (elapsedTime / duration);
+			black.color = c;
+		}
+		print ("End");
+
+	}
+
+
+	private void HideImage (Image image)
+	{
+		Color imageColor = image.color;
+		imageColor.a = 0;
+		image.color = imageColor;
+	}
 
 }
