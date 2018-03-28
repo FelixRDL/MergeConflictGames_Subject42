@@ -10,6 +10,8 @@ public class Interactable : MonoBehaviour
 	//If set to true, the GameObject can also be interacted with while a dialogue is running.
 	public bool interactionAllowedDuringDialogue = false;
 
+	public bool disableAfterFirstInteraction = true;
+
 	private Crosshair crosshair;
 
 	private bool showHint = false;

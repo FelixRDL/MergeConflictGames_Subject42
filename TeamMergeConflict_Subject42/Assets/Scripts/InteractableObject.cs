@@ -31,6 +31,9 @@ public class InteractableObject : Interactable {
 	public override void OnInteraction ()
 	{
 		eventManager.OnInteractableClicked (gameObject.name, audioSource, gameObject.GetComponent<InteractableObject>(), animator);
+		if (disableAfterFirstInteraction) {
+			Disable ();
+		}
 	}
 
 }

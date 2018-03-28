@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
 	private Image logo;
 	private Image black;
 
+
+
 	//Bool set to true, if Play Button has been pressed. Prevents a second press.
 	private bool gameStarted;
 
