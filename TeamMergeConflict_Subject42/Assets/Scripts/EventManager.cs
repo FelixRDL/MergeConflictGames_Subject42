@@ -864,6 +864,8 @@ public class EventManager : MonoBehaviour
 		SwitchDynamicRaveElements ();
 		SwitchAfterRaveElements ();
 		EnableTriggerZonesAfterRave ();
+		SoundManager.instance.StopBackgroundMusic (5f);
+
 		yield return new WaitForSecondsRealtime (4f);
 		ToggleEmergencyLight ();
 
