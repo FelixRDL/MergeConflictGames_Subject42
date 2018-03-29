@@ -99,7 +99,7 @@ public class EventManager : MonoBehaviour
 			Start_0_Interactable_Rubber_Duck (audioSource);
 			break;
 		case "Interactable_Desinfection":
-			Start_0_Interactable_Desinfection (audioSource);
+			Start_0_Interactable_Desinfection (audioSource, animator);
 			break;
 		case "Interactable_Door_Hospital_To_Floor":
 			Start_0_Interactable_Door_Hospital_To_Floor (audioSource);
@@ -269,9 +269,10 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayEffect (audioSource, clipName);
 	}
 
-	void Start_0_Interactable_Desinfection (AudioSource audioSource)
+	void Start_0_Interactable_Desinfection (AudioSource audioSource, Animator animator)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "desinfectant1");
+		animator.SetTrigger("Pressed");
 	}
 
 	//---------------------------

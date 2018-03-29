@@ -6295,6 +6295,26 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 255fd935c5138e24aa693eee5d12f028, type: 2}
   m_IsPrefabParent: 0
@@ -40544,7 +40564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.5
   interactionAllowedDuringDialogue: 1
-  disableAfterFirstInteraction: 1
+  disableAfterFirstInteraction: 0
 --- !u!65 &1460660270
 BoxCollider:
   m_ObjectHideFlags: 0
