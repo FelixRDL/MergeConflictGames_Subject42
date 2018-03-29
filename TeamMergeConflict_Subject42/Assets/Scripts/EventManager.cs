@@ -285,14 +285,16 @@ public class EventManager : MonoBehaviour
 		EffectManager.instance.TogglePlayerMovement ();
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("0_15");
-		yield return new WaitForSecondsRealtime (15);
+		yield return new WaitForSecondsRealtime (15f);
 		SoundManager.instance.PlayEffect (audioSource, "signature");
-		yield return new WaitForSecondsRealtime (3);
+		yield return new WaitForSecondsRealtime (1.5f);
+		ToggleContracts ();
+		yield return new WaitForSecondsRealtime (1.5f);
 
 		EffectManager.instance.TogglePlayerMovement ();
 
 		DialogueManager.instance.StartTestManagerMonologue ("0_17");
-		yield return new WaitForSecondsRealtime (6);
+		yield return new WaitForSecondsRealtime (8f);
 		OpenDoorHospitalToFloor ();
 	}
 
@@ -339,6 +341,15 @@ public class EventManager : MonoBehaviour
 	{
 		allowedToSignContract = true;
 		GameObject.Find ("Interactable_Contract").GetComponent<InteractableObject> ().Enable ();
+	}
+
+	void ToggleContracts ()
+	{
+		GameObject contractParent = GameObject.Find ("Contracts");
+		for (int i = 0; i < contractParent.transform.childCount; i++) {
+			Transform contract = contractParent.gameObject.transform.GetChild (i);
+			contract.gameObject.SetActive (!contract.gameObject.activeSelf);
+		}
 	}
 
 
@@ -490,28 +501,30 @@ public class EventManager : MonoBehaviour
 		GameObject.Find ("Interactable_Door_Hospital_To_Floor").GetComponent<InteractableObject> ().Enable ();
 		floorEntered = true;
 		DialogueManager.instance.StartTestManagerMonologue ("1_01");
-		yield return new WaitForSecondsRealtime (6);
+		yield return new WaitForSecondsRealtime (6f);
 
-		DropNeutralizerInTray ();
+		DropPillInTray ();
 	}
 
 	IEnumerator Start_1_Interactable_Door_Floor_02_Coroutine (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "ScreamingMan");
-		yield return new WaitForSecondsRealtime (3);
+		yield return new WaitForSecondsRealtime (3f);
 		DialogueManager.instance.StartSubjectMonologue ("1_04");
 	}
 
 	IEnumerator Start_1_05_Coroutine (AudioSource audioSource)
 	{
+
 		EffectManager.instance.StartFirstPartOfTrip (audioSource);
 
-		yield return new WaitForSecondsRealtime (10f);
+		yield return new WaitForSecondsRealtime (8f);
 
 		SoundManager.instance.PlayBackgroundMusicLoop ("DarnParadise_Level1_0", 1, 5);
+		yield return new WaitForSecondsRealtime (8f);
 
 		EffectManager.instance.StartLastPartOfTrip ();
-		yield return new WaitForSecondsRealtime (6f);
+		yield return new WaitForSecondsRealtime (3f);
 
 		OpenDoorFloorToChildrensRoom ();
 	}
@@ -531,22 +544,23 @@ public class EventManager : MonoBehaviour
 			yield return null;
 		}
 		DialogueManager.instance.StartTestManagerMonologue ("1_25");
-		yield return new WaitForSecondsRealtime (2);
+		yield return new WaitForSecondsRealtime (5f);
 		//Prevent Player from Getting Crushed here!
 		OpenDoorFloorToChildrensRoom ();
-		yield return new WaitForSecondsRealtime (2);
-		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
+		yield return new WaitForSecondsRealtime (4f);
+		DropNeutralizerInTray ();
 	}
 
 	//When the Player interacts with the Neutralizer
 	IEnumerator Start_1_Interactable_Neutralizer_Coroutine ()
 	{
+		EffectManager.instance.StartNeutralizerTrip ();
+
 		CloseDoorFloorToChildrensRoom ();
-		yield return new WaitForSecondsRealtime (1f);
+		yield return new WaitForSecondsRealtime (2f);
 		SwitchChildrooms ("Childroom_Sober", "Childroom_Sad");
 
-		EffectManager.instance.StartNeutralizerTrip ();
-		yield return new WaitForSecondsRealtime (15f);
+		yield return new WaitForSecondsRealtime (17f);
 
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_27");
 		yield return new WaitForSecondsRealtime (14f);
@@ -622,15 +636,17 @@ public class EventManager : MonoBehaviour
 	void OpenDoorFloorToChildrensRoom ()
 	{
 		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
-
 		SoundManager.instance.PlayEffect (doorFloorToChildrensRoom.GetComponent<AudioSource> (), "dooropen");
+		doorFloorToChildrensRoom.GetComponent<BoxCollider> ().enabled = false;
 		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger("doorOpen");
+
+		//Here Enable Box Collider again!
 	}
 
 	void CloseDoorFloorToChildrensRoom ()
 	{
 		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
-
+		doorFloorToChildrensRoom.GetComponent<BoxCollider> ().enabled = true;
 		SoundManager.instance.PlayEffect (doorFloorToChildrensRoom.GetComponent<AudioSource> (), "doorclose");
 		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger("doorClose");
 	}
@@ -649,10 +665,16 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void DropNeutralizerInTray () 
+	void DropPillInTray() 
 	{
 		GameObject.Find ("Interactable_Pill_Floor").GetComponent<Rigidbody> ().isKinematic = false;
-		//Play DropSound here
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Pill_Floor").GetComponent<AudioSource> (),"dropPills");
+	}
+
+	void DropNeutralizerInTray () 
+	{
+		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Neutralizer").GetComponent<AudioSource> (),"dropWaterBottle");
 	}
 		
 

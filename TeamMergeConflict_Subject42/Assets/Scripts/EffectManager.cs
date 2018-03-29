@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.ImageEffects;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class EffectManager : MonoBehaviour {
+public class EffectManager : MonoBehaviour
+{
 
 	public RigidbodyFirstPersonController player;
 
@@ -19,10 +21,19 @@ public class EffectManager : MonoBehaviour {
 
 	private Image blackBackground;
 
+	private const float PLAYER_FORWARD_SPEED_LEVEL_1 = 1f;
+	private const float PLAYER_BACKWARD_SPEED_LEVEL_1 = 0.5f;
+	private const float PLAYER_STRAFE_SPEED_LEVEL_1 = 1f;
+
+	private const float PLAYER_FORWARD_SPEED_LEVEL_2 = 1.75f;
+	private const float PLAYER_BACKWARD_SPEED_LEVEL_2 = 1f;
+	private const float PLAYER_STRAFE_SPEED_LEVEL_2 = 1.75f;
+
 	//Singleton property
 	public static EffectManager instance = null;
 
-	void Start () {
+	void Start ()
+	{
 		InitSingleton ();
 
 		blur.enabled = false;
@@ -39,19 +50,30 @@ public class EffectManager : MonoBehaviour {
 		}
 	}
 
-	public void ToggleBlur() {
+	public void ToggleBlur ()
+	{
 		blur.enabled = !blur.enabled;
 	}
-		
-	public void TogglePlayerMovement() {
+
+	public void TogglePlayerMovement ()
+	{
 		if (playerMovementEnabled) {
 			player.movementSettings.ForwardSpeed = 0;
 			player.movementSettings.BackwardSpeed = 0;
 			player.movementSettings.StrafeSpeed = 0;
 		} else {
-			player.movementSettings.ForwardSpeed = 1.75f;
-			player.movementSettings.BackwardSpeed = 1f;
-			player.movementSettings.StrafeSpeed = 1.75f;
+			
+			if (SceneManager.GetActiveScene ().name == "Level1") {
+				
+				player.movementSettings.ForwardSpeed = PLAYER_FORWARD_SPEED_LEVEL_1;
+				player.movementSettings.BackwardSpeed = PLAYER_BACKWARD_SPEED_LEVEL_1;
+				player.movementSettings.StrafeSpeed = PLAYER_STRAFE_SPEED_LEVEL_1;
+
+			} else {
+				player.movementSettings.ForwardSpeed = PLAYER_FORWARD_SPEED_LEVEL_2;
+				player.movementSettings.BackwardSpeed = PLAYER_BACKWARD_SPEED_LEVEL_2;
+				player.movementSettings.StrafeSpeed = PLAYER_STRAFE_SPEED_LEVEL_2;
+			}
 		}
 		playerMovementEnabled = !playerMovementEnabled;
 	}
@@ -66,9 +88,9 @@ public class EffectManager : MonoBehaviour {
 		StartCoroutine (StartLastPartOfTripCoroutine ());
 	}
 
-	public void StartNeutralizerTrip()
+	public void StartNeutralizerTrip ()
 	{
-
+		StartCoroutine (StartNeutralizerTripCoroutine ());
 	}
 
 	//Functions for Trip
@@ -76,6 +98,7 @@ public class EffectManager : MonoBehaviour {
 	IEnumerator StartFirstPartOfTripCoroutine (AudioSource audioSource)
 	{
 		TogglePlayerMovement ();
+		GameObject.Find ("Crosshair").GetComponent<Crosshair> ().HideCrosshair ();
 		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
 		yield return new WaitForSecondsRealtime (1f);
 		SoundManager.instance.PlayEffect (playerAudioSource, "gulp");
@@ -96,11 +119,13 @@ public class EffectManager : MonoBehaviour {
 		HideImage (blackBackground);
 		EffectManager.instance.ToggleBlur ();
 		EffectManager.instance.TogglePlayerMovement ();
+		GameObject.Find ("Crosshair").GetComponent<Crosshair> ().ShowCrosshair ();
 	}
 
 	IEnumerator StartNeutralizerTripCoroutine ()
 	{
 		EffectManager.instance.TogglePlayerMovement ();
+		GameObject.Find ("Crosshair").GetComponent<Crosshair> ().HideCrosshair ();
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "gulp");
 		yield return new WaitForSecondsRealtime (1f);
 
@@ -120,6 +145,7 @@ public class EffectManager : MonoBehaviour {
 		yield return new WaitForSeconds (4f);
 		HideImage (blackBackground);
 		EffectManager.instance.ToggleBlur ();
+		GameObject.Find ("Crosshair").GetComponent<Crosshair> ().ShowCrosshair ();
 		EffectManager.instance.TogglePlayerMovement ();
 	}
 
@@ -134,21 +160,18 @@ public class EffectManager : MonoBehaviour {
 		}
 		Camera.main.fieldOfView = DEFAULT_FOV;
 	}
-		
+
 
 	IEnumerator FadeToBlack (float duration)
 	{
 		float elapsedTime = 0.0f;
 		Color c = blackBackground.color;
-		print ("Start");
 		while (elapsedTime < duration) {
 			elapsedTime += Time.deltaTime;
 			c.a = Mathf.Clamp01 (elapsedTime / duration);
 			blackBackground.color = c;
 			yield return null;
 		}
-		print ("End");
-
 	}
 
 

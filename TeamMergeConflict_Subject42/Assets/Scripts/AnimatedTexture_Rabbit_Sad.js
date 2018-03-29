@@ -27,7 +27,6 @@ function Update(){
 	passedTime += Time.deltaTime;
 		if(isOpen == true){
 			speed = framesPerSecondEyeOpen;
-			print("if");
 			if (passedTime >= framesPerSecondEyeOpen) {
 				// reset passedTime
 				passedTime = passedTime % framesPerSecondEyeOpen;
