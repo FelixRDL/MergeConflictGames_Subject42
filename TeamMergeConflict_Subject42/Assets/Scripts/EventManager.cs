@@ -351,9 +351,7 @@ public class EventManager : MonoBehaviour
 			contract.gameObject.SetActive (!contract.gameObject.activeSelf);
 		}
 	}
-
-
-
+		
 	#endregion
 
 
@@ -515,6 +513,8 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_1_05_Coroutine (AudioSource audioSource)
 	{
+		DialogueManager.instance.StartSubjectMonologue ("1_05");
+		yield return new WaitForSecondsRealtime (8f);
 
 		EffectManager.instance.StartFirstPartOfTrip (audioSource);
 
