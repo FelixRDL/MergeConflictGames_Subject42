@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
 
 	void Start ()
 	{
-		SoundManager.instance.PlayBackgroundMusicLoop ("menusong", 1f, 0);
+		SoundManager.instance.PlayBackgroundMusicLoop ("MenuSong", 1f, 0);
 	}
 
 	private void InitImages ()
@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
 	{
 
 		Cursor.lockState = CursorLockMode.Locked;
-		SoundManager.instance.StopBackgroundMusic (3f);
+		SoundManager.instance.StopBackgroundMusic (10f);
 
 		//Display a black Screen as overlay over the Menu
 		black.gameObject.SetActive (true);
