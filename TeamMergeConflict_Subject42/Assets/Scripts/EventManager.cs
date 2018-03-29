@@ -271,7 +271,7 @@ public class EventManager : MonoBehaviour
 
 	void Start_0_Interactable_Desinfection (AudioSource audioSource)
 	{
-		SoundManager.instance.PlayEffect (audioSource, "quack04");
+		SoundManager.instance.PlayEffect (audioSource, "desinfectant1");
 	}
 
 	//---------------------------
