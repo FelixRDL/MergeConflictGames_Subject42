@@ -815,7 +815,7 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (6f);
 
 		//After Trip Ending
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_04");
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo("2_04");
 	}
 		
 	IEnumerator Start_2_08_Coroutine ()
