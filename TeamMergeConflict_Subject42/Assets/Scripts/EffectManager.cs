@@ -93,6 +93,11 @@ public class EffectManager : MonoBehaviour
 		StartCoroutine (StartNeutralizerTripCoroutine ());
 	}
 
+	public void StartPill02InLevel2 (AudioSource audioSource) 
+	{
+		StartCoroutine (StartPill02InLevel2Coroutine (audioSource));
+	}
+
 	//Functions for Trip
 
 	IEnumerator StartFirstPartOfTripCoroutine (AudioSource audioSource)
@@ -119,6 +124,24 @@ public class EffectManager : MonoBehaviour
 		HideImage (blackBackground);
 		EffectManager.instance.ToggleBlur ();
 		EffectManager.instance.TogglePlayerMovement ();
+		GameObject.Find ("Crosshair").GetComponent<Crosshair> ().ShowCrosshair ();
+	}
+
+	IEnumerator StartPill02InLevel2Coroutine (AudioSource audioSource)
+	{
+		TogglePlayerMovement ();
+		GameObject.Find ("Crosshair").GetComponent<Crosshair> ().HideCrosshair ();
+		SoundManager.instance.PlayEffect (audioSource, "eat_pill");
+		yield return new WaitForSecondsRealtime (1f);
+		SoundManager.instance.PlayEffect (playerAudioSource, "gulp");
+		yield return new WaitForSecondsRealtime (1f);
+		SoundManager.instance.PlayEffect (playerAudioSource, "trip");
+
+		//Schwarzblende hier
+		StartCoroutine (FadeToBlack (3f));
+		yield return new WaitForSecondsRealtime (16f);
+		HideImage (blackBackground);
+		TogglePlayerMovement ();
 		GameObject.Find ("Crosshair").GetComponent<Crosshair> ().ShowCrosshair ();
 	}
 

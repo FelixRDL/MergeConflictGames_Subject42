@@ -850,20 +850,12 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator Start_2_11_Coroutine (AudioSource audioSource)
 	{
-		//Beginning of Trip
-		EffectManager.instance.StartFirstPartOfTrip (audioSource);
+		EffectManager.instance.StartPill02InLevel2 (audioSource);
 		yield return new WaitForSecondsRealtime (6f);
 
-		//During Trip
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_11");
-		yield return new WaitForSecondsRealtime (10f);
-
-		//End of Trip
-		EffectManager.instance.StartLastPartOfTrip ();
-		yield return new WaitForSecondsRealtime (6f);
-
-		//After Trip Ending
 		GameObject.Find ("Interactable_Friend_Fence").GetComponent<InteractableObject> ().Destroy (0);
+		yield return new WaitForSecondsRealtime (13f);
 	}
 
 
@@ -879,7 +871,7 @@ public class EventManager : MonoBehaviour
 	{
 		//Beginning of Trip
 		EffectManager.instance.StartFirstPartOfTrip (audioSource);
-		yield return new WaitForSecondsRealtime (6f);
+		yield return new WaitForSecondsRealtime (8f);
 
 		//During Trip
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
@@ -889,7 +881,7 @@ public class EventManager : MonoBehaviour
 		EnableTriggerZonesAfterRave ();
 		SoundManager.instance.StopBackgroundMusic (5f);
 
-		yield return new WaitForSecondsRealtime (4f);
+		yield return new WaitForSecondsRealtime (8f);
 		ToggleEmergencyLight ();
 
 		//End of Trip
