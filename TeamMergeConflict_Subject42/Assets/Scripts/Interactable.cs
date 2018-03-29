@@ -162,13 +162,13 @@ public class Interactable : MonoBehaviour
 		case "Interactable_Door_Bathroom":
 			return "Open Door";
 		case "Interactable_Door_Floor_01":
-			return "Open Door";
+			return "Look at Door";
 		case "Interactable_Door_Floor_02":
-			return "Open Door";
+			return "Look at Door";
 		case "Interactable_Pill_Floor":
 			return "Eat Pill from Packet";
 		case "Interactable_Door_Floor_To_Childrens_Room":
-			return "Open Door";
+			return "Look at Door";
 		case "Interactable_Wooden_Train_Happy":
 			return "Look at Wooden Train";
 		case "Interactable_Frame_Family":
@@ -190,7 +190,7 @@ public class Interactable : MonoBehaviour
 		case "Interactable_Wooden_Train_Sad":
 			return "Look at Wooden Train";
 		case "Interactable_Door_Childrens_Room_To_Garden":
-			return "Go through Door";
+			return "Open Door";
 		case "Interactable_Neutralizer":
 			return "Drink Neutralizer";
 
