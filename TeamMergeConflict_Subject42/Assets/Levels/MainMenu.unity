@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundMusicSources:
-  - {fileID: 8300000, guid: 05a5e433fe200c54b88d5c6a0520d527, type: 3}
+  - {fileID: 8300000, guid: 291f4c29bffbcc94c8250f9684171ebb, type: 3}
   soundeffectSources:
   - {fileID: 8300000, guid: 4646ef58a88dacb48b2e8fdada828d77, type: 3}
 --- !u!224 &28364038
@@ -636,7 +636,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -760,7 +760,7 @@ RectTransform:
   m_GameObject: {fileID: 574681221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 1091301367}
   m_RootOrder: 2
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.547}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -914,7 +914,7 @@ RectTransform:
   m_GameObject: {fileID: 640893977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 1091301367}
   m_RootOrder: 1
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.447}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

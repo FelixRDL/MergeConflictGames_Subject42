@@ -6380,6 +6380,16 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 255fd935c5138e24aa693eee5d12f028, type: 2}
   m_IsPrefabParent: 0
@@ -9033,7 +9043,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4f6299b74d4d59c439f5a09b34a74abc, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.169
+  m_Volume: 0.072
   m_Pitch: 1
   Loop: 1
   Mute: 0
