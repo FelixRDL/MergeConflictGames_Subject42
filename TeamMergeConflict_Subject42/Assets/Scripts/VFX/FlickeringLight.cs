@@ -2,39 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// This script triggers a flickering animation by enabling and disabling children Elements with an activated and deactivated lamp.
-
-public class FlickeringLight : MonoBehaviour {
+//This Class triggers a flickering animation
+public class FlickeringLight : MonoBehaviour
+{
 	public List<GameObject> Children;
-	// whether the light currently is switched on or off
-	// 
-	private bool isOn = true;
 
 	public Material materialOn;
 	public Material materialOff;
 	public Material materialPlastic;
 
-	private AudioSource flickerOneShot;
+	//Intervals between flickering (in millis)
+	public float[] flickerIntervals = { 0.1f, 0.4f, 0.2f, 0.4f, 0.1f, 1f };
+	//Interval, that the light will be off (in millis)
+	public float offIntervall = 0.2f;
 
-	//private MeshRenderer meshRenderer;
+	//This boolean saves the current state of the lights
+	private bool isOn = true;
 
-
-	// intervals between flickering (in millis)
-	public float[] flickerIntervals = {.1f, .4f, .2f, .4f, .1f, 1};
+	//Current pos in the flickerIntervals[] Array
 	private int flickerIndex = 0;
-	// interval, that the light will be off (in millis)
-	public float offIntervall = .2f;
 
+	private AudioSource flickerOneShot;
 	private float passedTime = 0;
 
-	public void Start(){
-		//meshRenderer = gameObject.GetComponent <MeshRenderer>();
+
+	public void Start ()
+	{
 		flickerOneShot = gameObject.GetComponent<AudioSource> ();
 	}
 
-	public void Update(){
+	public void Update ()
+	{
 		passedTime += Time.deltaTime;
-		//print ("passed time " + passedTime);
 
 		if (isOn == true) {
 			if (passedTime >= flickerIntervals [flickerIndex]) {
@@ -52,21 +51,16 @@ public class FlickeringLight : MonoBehaviour {
 		}
 	}
 
-	private void toggleChildren(){
-		foreach (Transform child in transform)
-		{
-			// toggle state 
-			child.gameObject.SetActive(!child.gameObject.activeSelf);
+	private void toggleChildren ()
+	{
+		foreach (Transform child in transform) {
+			child.gameObject.SetActive (!child.gameObject.activeSelf);
 		}
 	}
-	
-	
 
-
-
-	private void onSwitchOn(){
-		// TODO trigger sound
-		Material[] materials= GetComponent<Renderer>().materials;
+	private void onSwitchOn ()
+	{
+		Material[] materials = GetComponent<Renderer> ().materials;
 		materials [1] = materialOn;
 		GetComponent<Renderer> ().materials = materials;
 		toggleChildren ();
@@ -74,8 +68,9 @@ public class FlickeringLight : MonoBehaviour {
 		flickerOneShot.Play ();
 	}
 
-	private void onSwitchOff(){
-		Material[] materials= GetComponent<Renderer>().materials;
+	private void onSwitchOff ()
+	{
+		Material[] materials = GetComponent<Renderer> ().materials;
 		materials [1] = materialOff;
 		GetComponent<Renderer> ().materials = materials;
 		toggleChildren ();

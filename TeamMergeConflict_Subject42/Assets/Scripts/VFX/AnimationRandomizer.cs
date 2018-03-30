@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class startAnimationOnRandomFrame : MonoBehaviour {
+public class AnimationRandomizer : MonoBehaviour {
 
 	void Start () {
 		Animator anim = GetComponent<Animator> ();

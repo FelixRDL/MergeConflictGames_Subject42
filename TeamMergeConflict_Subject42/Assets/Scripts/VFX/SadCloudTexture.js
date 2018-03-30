@@ -1,7 +1,6 @@
 //    Code used from http://wiki.unity3d.com/index.php?title=Animating_Tiled_texture“, Courtesy to Joachim Ante (16.2.18)
 
 var speed = 2;
-
 var scaleAmplitude = 2;
 
 function Update () {
@@ -13,9 +12,5 @@ function Update () {
     // size offset 
     var size = Vector2(1,Mathf.Sin(-Time.time*speed/8));
 
-
-    //print(size.toString());
-
     GetComponent.<Renderer>().material.SetTextureOffset ("_MainTex", offset);
-    //GetComponent.<Renderer>().material.SetTextureScale ("_MainTex", size);
 }
