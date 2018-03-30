@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level2.unity
     guid: e38d4616c109bb449aa9e91aa7036629
+  - enabled: 1
+    path: Assets/Levels/EndCredits.unity
+    guid: d94ae41a7c440e14ba0a7da65a45cdaf

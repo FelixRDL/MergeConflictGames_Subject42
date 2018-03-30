@@ -194,7 +194,7 @@ public class DialogueManager : MonoBehaviour
 
 		//3. Play Audio
 		foreach (AudioSource source in friendAudioSources) {
-			if (source != null) {
+			if (source.isActiveAndEnabled) {
 				source.Play ();
 			}
 		}
@@ -265,7 +265,7 @@ public class DialogueManager : MonoBehaviour
 		//3. Play Audio
 		audioSource.Play ();
 		foreach (AudioSource source in friendAudioSources) {
-			if (source != null) {
+			if (source.isActiveAndEnabled) {
 				source.Play ();
 			}
 		}

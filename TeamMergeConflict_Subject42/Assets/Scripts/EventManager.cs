@@ -18,6 +18,7 @@ public class EventManager : MonoBehaviour
 	//EventManager Init
 	//---------------------
 
+	//Loads starting Dialogue for each Level
 	void Start ()
 	{
 		if (SceneManager.GetActiveScene ().name == "Level1") {
@@ -199,6 +200,7 @@ public class EventManager : MonoBehaviour
 	//Act 0 Main Dialogues
 	//---------------------
 
+	//Start Dialouge for Level 1
 	void Start_0_01 ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("0_01");
@@ -259,7 +261,7 @@ public class EventManager : MonoBehaviour
 	void Start_0_Interactable_Door_Bathroom (AudioSource audioSource, Animator animator)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "dooropen");
-		animator.SetTrigger("doorBathOpen");
+		animator.SetTrigger ("doorBathOpen");
 	}
 
 	void Start_0_Interactable_Rubber_Duck (AudioSource audioSource)
@@ -272,7 +274,7 @@ public class EventManager : MonoBehaviour
 	void Start_0_Interactable_Desinfection (AudioSource audioSource, Animator animator)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "desinfectant1");
-		animator.SetTrigger("Pressed");
+		animator.SetTrigger ("Pressed");
 	}
 
 	//---------------------------
@@ -333,7 +335,7 @@ public class EventManager : MonoBehaviour
 	{
 		GameObject doorHospitalToFloor = GameObject.Find ("Interactable_Door_Hospital_To_Floor");
 		SoundManager.instance.PlayEffect (doorHospitalToFloor.GetComponent<AudioSource> (), "dooropen");
-		doorHospitalToFloor.GetComponent<Animator> ().SetTrigger("doorOpen");
+		doorHospitalToFloor.GetComponent<Animator> ().SetTrigger ("doorOpen");
 	}
 
 	//After the Testmanager talks to the Subject, Interaction with the Contract needs to be activated again
@@ -351,7 +353,7 @@ public class EventManager : MonoBehaviour
 			contract.gameObject.SetActive (!contract.gameObject.activeSelf);
 		}
 	}
-		
+
 	#endregion
 
 
@@ -485,7 +487,7 @@ public class EventManager : MonoBehaviour
 	void Start_1_Interactable_Door_Childrens_Room_To_Garden (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "dooropen");
-		StartCoroutine(LoadLevelTwo ());
+		StartCoroutine (LoadLevelTwo ());
 	}
 
 	//---------------------------
@@ -569,16 +571,16 @@ public class EventManager : MonoBehaviour
 
 	IEnumerator LoadLevelTwo ()
 	{
-		//Disable all Movements here
+		EffectManager.instance.TogglePlayerMovement ();
 
 		Slider slider = null;
-
 		GameObject canvas = GameObject.Find ("Canvas");
+
 		for (int i = 0; i < canvas.transform.childCount; i++) {
 			Transform canvasElement = canvas.gameObject.transform.GetChild (i);
 			if (canvasElement.name == "LoadingBar") {
 				canvasElement.gameObject.SetActive (true);
-				slider = canvasElement.GetComponent<Slider>();
+				slider = canvasElement.GetComponent<Slider> ();
 				break;
 			}
 		}
@@ -588,7 +590,7 @@ public class EventManager : MonoBehaviour
 		AsyncOperation loadLevelTwoAsync = SceneManager.LoadSceneAsync ("Level2");
 		while (!loadLevelTwoAsync.isDone) {
 			print ("Progress:" + Mathf.Clamp01 (loadLevelTwoAsync.progress / 0.9f) * 100f + "%");
-			float progress = Mathf.Clamp01(loadLevelTwoAsync.progress / 0.9f);
+			float progress = Mathf.Clamp01 (loadLevelTwoAsync.progress / 0.9f);
 			slider.value = progress;
 			yield return null;
 		}
@@ -629,7 +631,7 @@ public class EventManager : MonoBehaviour
 		GameObject doorHospitalToFloor = GameObject.Find ("Interactable_Door_Hospital_To_Floor");
 
 		SoundManager.instance.PlayEffect (doorHospitalToFloor.GetComponent<AudioSource> (), "doorclose");
-		doorHospitalToFloor.GetComponent<Animator> ().SetTrigger("doorClose");
+		doorHospitalToFloor.GetComponent<Animator> ().SetTrigger ("doorClose");
 	}
 
 
@@ -638,7 +640,7 @@ public class EventManager : MonoBehaviour
 		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
 		SoundManager.instance.PlayEffect (doorFloorToChildrensRoom.GetComponent<AudioSource> (), "dooropen");
 		doorFloorToChildrensRoom.GetComponent<BoxCollider> ().enabled = false;
-		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger("doorOpen");
+		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger ("doorOpen");
 
 		//Here Enable Box Collider again!
 	}
@@ -648,7 +650,7 @@ public class EventManager : MonoBehaviour
 		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
 		doorFloorToChildrensRoom.GetComponent<BoxCollider> ().enabled = true;
 		SoundManager.instance.PlayEffect (doorFloorToChildrensRoom.GetComponent<AudioSource> (), "doorclose");
-		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger("doorClose");
+		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger ("doorClose");
 	}
 
 	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
@@ -665,18 +667,18 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void DropPillInTray() 
+	void DropPillInTray ()
 	{
 		GameObject.Find ("Interactable_Pill_Floor").GetComponent<Rigidbody> ().isKinematic = false;
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Pill_Floor").GetComponent<AudioSource> (),"dropPills");
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Pill_Floor").GetComponent<AudioSource> (), "dropPills");
 	}
 
-	void DropNeutralizerInTray () 
+	void DropNeutralizerInTray ()
 	{
 		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
-		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Neutralizer").GetComponent<AudioSource> (),"dropWaterBottle");
+		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Neutralizer").GetComponent<AudioSource> (), "dropWaterBottle");
 	}
-		
+
 
 	#endregion
 
@@ -838,9 +840,9 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (6f);
 
 		//After Trip Ending
-		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo("2_04");
+		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("2_04");
 	}
-		
+
 	IEnumerator Start_2_08_Coroutine ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndFriend ("2_08");
@@ -924,8 +926,7 @@ public class EventManager : MonoBehaviour
 		StartCoroutine (FadeToBlack (15f));
 		yield return new WaitForSecondsRealtime (16f);
 
-		//Am Ende des Dialogs hier Ende einleiten; Hier Endscreen und Abspann starten.
-		Application.Quit ();
+		LoadCredits ();
 	}
 
 	//---------------------------
@@ -1001,7 +1002,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void DisableInteractablesOnRaveEnding()
+	void DisableInteractablesOnRaveEnding ()
 	{
 		GameObject.Find ("Interactable_DJ_Console").GetComponent<InteractableObject> ().Disable ();
 		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Disable ();
@@ -1033,17 +1034,13 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	#endregion
+	//Loads the Credits
+	private void LoadCredits ()
+	{
+		AsyncOperation loadCreditsAsync = SceneManager.LoadSceneAsync ("EndCredits");
+	}
 
-
-
-
-
-
-
-
-
-
+	//Fades the screen to black
 	IEnumerator FadeToBlack (float duration)
 	{
 		Image black = GameObject.Find ("Black").GetComponent<Image> ();
@@ -1060,7 +1057,7 @@ public class EventManager : MonoBehaviour
 
 	}
 
-
+	//Hides an image on the canvas
 	private void HideImage (Image image)
 	{
 		Color imageColor = image.color;
@@ -1068,7 +1065,6 @@ public class EventManager : MonoBehaviour
 		image.color = imageColor;
 	}
 
-
-
+	#endregion
 
 }
