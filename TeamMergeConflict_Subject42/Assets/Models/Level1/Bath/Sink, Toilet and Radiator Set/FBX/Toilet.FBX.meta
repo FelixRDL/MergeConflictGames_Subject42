@@ -128,9 +128,9 @@ ModelImporter:
     preserveHierarchy: 0
     indexFormat: 1
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
-    secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 4
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 142
+    secondaryUVPackMargin: 21
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
