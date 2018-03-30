@@ -6,28 +6,35 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.ImageEffects;
 using UnityStandardAssets.Characters.FirstPerson;
 
+
+//The Effect Manager takes care of all Effects happening to or with the player
+//E.g Blur, Drug Trips, FadeToBlack
 public class EffectManager : MonoBehaviour
 {
-
+	//The Player
 	public RigidbodyFirstPersonController player;
 
+	//The Blur Script attached to the MainCamera
 	public BlurOptimized blur;
 
-	private bool playerMovementEnabled = true;
-
-	private const float DEFAULT_FOV = 75f;
-
+	//The main AudioSource of the Player
 	private AudioSource playerAudioSource;
 
+	//A black Canvas Image used for FadeToBlack
 	private Image blackBackground;
 
+	//The default Field of View of the game
+	private const float DEFAULT_FOV = 75f;
+
+	//The default movement speeds of the player for each level
 	private const float PLAYER_FORWARD_SPEED_LEVEL_1 = 1f;
 	private const float PLAYER_BACKWARD_SPEED_LEVEL_1 = 0.5f;
 	private const float PLAYER_STRAFE_SPEED_LEVEL_1 = 1f;
-
 	private const float PLAYER_FORWARD_SPEED_LEVEL_2 = 1.75f;
 	private const float PLAYER_BACKWARD_SPEED_LEVEL_2 = 1f;
 	private const float PLAYER_STRAFE_SPEED_LEVEL_2 = 1.75f;
+
+	private bool playerMovementEnabled = true;
 
 	//Singleton property
 	public static EffectManager instance = null;
@@ -41,6 +48,7 @@ public class EffectManager : MonoBehaviour
 		blackBackground = GameObject.Find ("Black").GetComponent<Image> ();
 	}
 
+	//Create an Instance of the Singleton
 	private void InitSingleton ()
 	{
 		if (instance == null) {
@@ -50,11 +58,13 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 
-	public void ToggleBlur ()
+	//Enable of disable the Blur Effect
+	private void ToggleBlur ()
 	{
 		blur.enabled = !blur.enabled;
 	}
 
+	//Enables or disables the movement of the player
 	public void TogglePlayerMovement ()
 	{
 		if (playerMovementEnabled) {
@@ -78,27 +88,35 @@ public class EffectManager : MonoBehaviour
 		playerMovementEnabled = !playerMovementEnabled;
 	}
 
+	//Starts the first part of a drug trip
+	//A drug trip is split in to parts. Like that, it's easier to time all the events,
+	//that are happening during the drug trip
 	public void StartFirstPartOfTrip (AudioSource audioSource)
 	{
 		StartCoroutine (StartFirstPartOfTripCoroutine (audioSource));
 	}
 
+	//Starts the last part of a drug trip
 	public void StartLastPartOfTrip ()
 	{
 		StartCoroutine (StartLastPartOfTripCoroutine ());
 	}
 
+	//Starts the trip after the player has taken the neutralizer
 	public void StartNeutralizerTrip ()
 	{
 		StartCoroutine (StartNeutralizerTripCoroutine ());
 	}
 
-	public void StartPill02InLevel2 (AudioSource audioSource) 
+	//There is a special drug trip for pill 2 in Level 2
+	public void StartPill02InLevel2 (AudioSource audioSource)
 	{
 		StartCoroutine (StartPill02InLevel2Coroutine (audioSource));
 	}
 
-	//Functions for Trip
+	//---------------------------------
+	//Coroutines for the drug trips
+	//---------------------------------
 
 	IEnumerator StartFirstPartOfTripCoroutine (AudioSource audioSource)
 	{
@@ -121,6 +139,7 @@ public class EffectManager : MonoBehaviour
 	{
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSeconds (4f);
+
 		HideImage (blackBackground);
 		EffectManager.instance.ToggleBlur ();
 		EffectManager.instance.TogglePlayerMovement ();
@@ -137,7 +156,6 @@ public class EffectManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (1f);
 		SoundManager.instance.PlayEffect (playerAudioSource, "trip");
 
-		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (16f);
 		HideImage (blackBackground);
@@ -155,7 +173,6 @@ public class EffectManager : MonoBehaviour
 		SoundManager.instance.StopBackgroundMusic (5);
 		SoundManager.instance.PlayEffect (GameObject.FindWithTag ("Player").GetComponent<AudioSource> (), "trip");
 
-		//Schwarzblende hier
 		StartCoroutine (FadeToBlack (3f));
 		yield return new WaitForSecondsRealtime (4f);
 		EffectManager.instance.ToggleBlur ();
@@ -172,7 +189,12 @@ public class EffectManager : MonoBehaviour
 		EffectManager.instance.TogglePlayerMovement ();
 	}
 
+	//---------------------------------
+	//Functions for Additional Effects
+	//---------------------------------
 
+	//This Coroutine randomly changes the FOV for a certain duration.
+	//This creates a trippy effect
 	IEnumerator TrippyFOVChanges (float duration)
 	{
 		float elapsedTime = 0.0f;
@@ -184,7 +206,7 @@ public class EffectManager : MonoBehaviour
 		Camera.main.fieldOfView = DEFAULT_FOV;
 	}
 
-
+	//This Coroutine Fades the screen to black for a certain duration
 	IEnumerator FadeToBlack (float duration)
 	{
 		float elapsedTime = 0.0f;
@@ -197,7 +219,7 @@ public class EffectManager : MonoBehaviour
 		}
 	}
 
-
+	//Hides an Image on the canvas, e.g. the black overlay
 	private void HideImage (Image image)
 	{
 		Color imageColor = image.color;

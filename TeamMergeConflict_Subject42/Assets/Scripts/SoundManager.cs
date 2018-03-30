@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class is responsible for playing all Soundeffects and the Background Music
 public class SoundManager : MonoBehaviour
 {
 
@@ -12,26 +13,39 @@ public class SoundManager : MonoBehaviour
 	public AudioClip[] backgroundMusicSources;
 	public AudioClip[] soundeffectSources;
 
-
+	//Dictionaries containing all Soundeffects and BackgroundMusic Files and their names
 	private Dictionary<string, AudioClip> backgroundMusicClips;
 	private Dictionary<string, AudioClip> soundeffectClips;
 
+	//Singleton property
 	public static SoundManager instance = null;
 
 	void Awake ()
+	{
+		InitSingleton ();
+		InitAudioSources ();
+		CreateBackgroundMusicDictionary ();
+		CreateSoundeffectDictionary ();
+	}
+
+	//Create an Instance of the Singleton
+	private void InitSingleton ()
 	{
 		if (instance == null) {
 			instance = this;
 		} else if (instance != this) {
 			Destroy (gameObject);
 		}
-
-		backgroundMusicSource = GetComponent<AudioSource> ();
-		createBackgroundMusicDictionary ();
-		createSoundeffectDictionary ();
 	}
 
-	private void createBackgroundMusicDictionary ()
+	//Init the AudioSources needed by the SoundManager
+	private void InitAudioSources ()
+	{
+		backgroundMusicSource = GetComponent<AudioSource> ();
+	}
+
+	//Create a dictionary containing all Background Music files and their name as a key
+	private void CreateBackgroundMusicDictionary ()
 	{
 		backgroundMusicClips = new Dictionary<string, AudioClip> ();
 
@@ -40,7 +54,8 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	private void createSoundeffectDictionary ()
+	//Create a dictionary containing all Soundeffect files and their name as a key
+	private void CreateSoundeffectDictionary ()
 	{
 		soundeffectClips = new Dictionary<string, AudioClip> ();
 
@@ -49,13 +64,15 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-
+	//Play a Background Music clip in a loop. Can be faded in by providing a fadeInTime
 	public void PlayBackgroundMusicLoop (string clipName, float maxVolume, float fadeInTime)
 	{
+		//1. Preprare the AudioSource
 		backgroundMusicSource.clip = backgroundMusicClips [clipName];
 		backgroundMusicSource.volume = 0;
 		backgroundMusicSource.Play ();
 
+		//FadeIn or directly play the AudioClip
 		if (fadeInTime == 0) {
 			backgroundMusicSource.volume = maxVolume;
 		} else {
@@ -63,19 +80,7 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	public void ReduceBackgroundMusicWhileDrugTrip ()
-	{
-		StartCoroutine (ReduceBackgroundMusicWhileDrugTripCoroutine ());
-	}
-
-	IEnumerator ReduceBackgroundMusicWhileDrugTripCoroutine ()
-	{
-		StartCoroutine (FadeOut (backgroundMusicSource, 0.1f, 3f, false));
-		yield return new WaitForSecondsRealtime (10f);
-		StartCoroutine (FadeIn (backgroundMusicSource, 1f, 3f));
-	}
-
-
+	//A Corourtine that allows an AudioClip to be faded in
 	IEnumerator FadeIn (AudioSource audioSource, float maxVolume, float fadeInTime)
 	{
 		while (audioSource.volume < maxVolume) {
@@ -84,6 +89,7 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
+	//A Corourtine that allows an AudioClip to be faded out
 	IEnumerator FadeOut (AudioSource audioSource, float minVolume, float fadeOutTime, bool stopAtEnd)
 	{
 		while (audioSource.volume > minVolume) {
@@ -95,6 +101,7 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
+	//Stops/FadesOut the currently playing Background music
 	public void StopBackgroundMusic (float fadeOutTime)
 	{
 		if (fadeOutTime == 0) {
@@ -104,7 +111,7 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-
+	//Plays an Effect sound using the provided AudioSource (the GameObject that should make a sound)
 	public void PlayEffect (AudioSource effectSource, string clipName)
 	{
 		effectSource.clip = soundeffectClips [clipName];
