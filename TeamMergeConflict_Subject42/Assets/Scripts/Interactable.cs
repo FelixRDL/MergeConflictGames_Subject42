@@ -1,22 +1,29 @@
 ﻿using UnityEngine;
 
+//The Main Class for all Objects that allow Interaction
 public class Interactable : MonoBehaviour
 {
-	//Important: Every clickable object needs a box collider in order to be a raycast goal.
+	//Important: Every clickable object needs a box collider in order to be a raycast target.
 
-	//The Radius of the the distance that allows interaction
+	//The Radius of the the distance between the player and the Object within that interaction is allowed
 	public float radius = 1.5f;
 
 	//If set to true, the GameObject can also be interacted with while a dialogue is running.
 	public bool interactionAllowedDuringDialogue = false;
 
+	//Defines wether Interaction is only possible once or multiple times. 
 	public bool disableAfterFirstInteraction = true;
 
+	//the Crosshair of the game.
 	private Crosshair crosshair;
 
+	//Defines wether a hint for interaction, e.g "[E] to interact" should be displayed.
 	private bool showHint = false;
+
+	//Defines if the Interactable Object is enabled or not
 	private bool isEnabled = true;
 
+	//This GUIStyle holds the definition for the appearance of the Interaction Hints on sceen
 	private GUIStyle hintGUIStyle = new GUIStyle ();
 
 	void Awake ()
@@ -25,9 +32,10 @@ public class Interactable : MonoBehaviour
 		InitHintGUIStile ();
 	}
 
+	//Defines the appearance of the hints displayed on screen
 	private void InitHintGUIStile ()
 	{
-		//Values for GUIStile taken from the following tutorial: https://www.youtube.com/watch?v=1NW0BYn5KfE
+		//Values for GUIStile taken mostly from the following tutorial: https://www.youtube.com/watch?v=1NW0BYn5KfE
 		hintGUIStyle.fixedWidth = Screen.width / 1.5f;
 		hintGUIStyle.wordWrap = true;
 		hintGUIStyle.alignment = TextAnchor.MiddleCenter;
@@ -35,13 +43,14 @@ public class Interactable : MonoBehaviour
 		hintGUIStyle.fontSize = Mathf.FloorToInt (Screen.height * 0.0225f);
 	}
 
+	//This function gets called, if an Interactable Object is in Focus
 	public void OnFocused (Transform player)
 	{
-
 		if (isEnabled) {
-			
+			//Calculate distance between player and the Interactable Object
 			float distance = Vector3.Distance (player.position, transform.position);
 
+			//Checks if the distance is smaller than the radius within Interaction is allowed
 			if (distance <= radius) {
 				showHint = true;
 				crosshair.SetHighlight ();
@@ -58,10 +67,11 @@ public class Interactable : MonoBehaviour
 		crosshair.RemoveHighlight ();
 	}
 
-	//If the GameObject gets clicked the distance to the player gets checked and if he is within radius, OnInteraction() gets called.
+	//This function gets called, if an Interactable Object gets clicked
 	public void OnClicked (Transform player)
 	{
 		if (isEnabled) {
+			//The distance to the player gets checked and if he is within radius, OnInteraction() gets called.
 			float distance = Vector3.Distance (player.position, transform.position);
 			if (distance <= radius) {
 				if (GetInteractionAllowed ()) {
@@ -87,13 +97,14 @@ public class Interactable : MonoBehaviour
 		isEnabled = false;
 	}
 
-	//Destroys the GameObject. But first, the Crosshair Highlight gets removed.
+	//Destroys the GameObject. But first, OnFocused () gets called to remove the Crosshair Highlight.
 	public void Destroy (float delay)
 	{
 		OnDefocused ();
 		Destroy (gameObject, delay);
 	}
 
+	//Displays a yellow Sphere that highlights the radius within Interaction is allowed
 	void OnDrawGizmosSelected ()
 	{
 		Gizmos.color = Color.yellow;
@@ -105,6 +116,7 @@ public class Interactable : MonoBehaviour
 	{
 	}
 
+	//Checks, if Interaction with the GameObject currently is allowed
 	private bool GetInteractionAllowed ()
 	{
 		if (!DialogueManager.instance.IsDialoguePlaying () || interactionAllowedDuringDialogue) {
@@ -114,10 +126,9 @@ public class Interactable : MonoBehaviour
 		}
 	}
 
+	//If Object is focused and interaction is allowed, a hint is displayed on screen
 	void OnGUI ()
 	{
-		//If Object is focused and interaction is allowed, show hint to press "E".
-
 		if (showHint) {
 
 			string hint = "";
@@ -128,16 +139,23 @@ public class Interactable : MonoBehaviour
 				hint = "...";
 			}
 
-			Vector2 size = hintGUIStyle.CalcSize (new GUIContent ());
-
-			//Draw the Hint with 1px white offset.
-			GUI.contentColor = Color.black;
-			GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.1f - size.y + 1, size.x, size.y), hint, hintGUIStyle);
-			GUI.contentColor = Color.white;
-			GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.1f - size.y, size.x, size.y), hint, hintGUIStyle);
+			DrawHintOnScreen (hint);
 		}
 	}
 
+	//Displays the hint on the screen
+	private void DrawHintOnScreen (string hint)
+	{
+		Vector2 size = hintGUIStyle.CalcSize (new GUIContent ());
+
+		//Draw the Hint with 1px white offset.
+		GUI.contentColor = Color.black;
+		GUI.Label (new Rect (Screen.width / 2 - size.x / 2 + 1, Screen.height / 1.1f - size.y + 1, size.x, size.y), hint, hintGUIStyle);
+		GUI.contentColor = Color.white;
+		GUI.Label (new Rect (Screen.width / 2 - size.x / 2, Screen.height / 1.1f - size.y, size.x, size.y), hint, hintGUIStyle);
+	}
+
+	//This switch statement contains all Interactables in the game and defines a custom hint for each one
 	private string GetHintForCurrentInteractable ()
 	{
 		switch (gameObject.name) {
