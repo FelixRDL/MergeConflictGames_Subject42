@@ -17,8 +17,10 @@ ModelImporter:
     2100006: Chrome
     2300000: Handle
     2300002: Toilet
+    2300004: //RootNode
     3300000: Handle
     3300002: Toilet
+    3300004: //RootNode
     4300000: Toilet
     4300002: Handle
     7400000: Default Take
