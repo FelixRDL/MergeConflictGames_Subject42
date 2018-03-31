@@ -88,6 +88,12 @@ public class EffectManager : MonoBehaviour
 		playerMovementEnabled = !playerMovementEnabled;
 	}
 
+	//Disable the players ability to sprint
+	public void DisablePlayerRunning ()
+	{
+		player.movementSettings.RunMultiplier = 1f;
+	}
+
 	//Starts the first part of a drug trip
 	//A drug trip is split in to parts. Like that, it's easier to time all the events,
 	//that are happening during the drug trip

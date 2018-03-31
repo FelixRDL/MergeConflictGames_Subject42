@@ -12,15 +12,13 @@ public class AnimatedRabbit : MonoBehaviour
 	private Vector2 OFFSET_OPEN = new Vector2 (0.0f, 0.0f);
 	private Vector2 OFFSET_CLOSED = new Vector2 (0.5f, 0.0f);
 
-	private bool isOpen = true;
-	private float passedTime = 0.0f;
 
 	void Start ()
 	{
 		StartCoroutine (BlinkEyeCoroutine ());
 	}
 
-
+	//Blinks the Eye of the Rabbit
 	IEnumerator BlinkEyeCoroutine ()
 	{
 		while (true) {
@@ -35,17 +33,16 @@ public class AnimatedRabbit : MonoBehaviour
 		}
 	}
 
-
+	//Offset the Texture to make the Eye appear closed
 	private void closeEye ()
 	{
 		GetComponent<Renderer> ().material.SetTextureOffset ("_MainTex", OFFSET_CLOSED);
-		isOpen = false;
 	}
 
+	//Offset the Texture to make the Eye appear open
 	private void openEye ()
 	{
 		GetComponent<Renderer> ().material.SetTextureOffset ("_MainTex", OFFSET_OPEN);
-		isOpen = true;
 	}
 
 }

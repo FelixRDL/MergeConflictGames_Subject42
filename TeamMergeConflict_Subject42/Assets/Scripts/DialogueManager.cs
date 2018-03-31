@@ -194,7 +194,7 @@ public class DialogueManager : MonoBehaviour
 
 		//3. Play Audio
 		foreach (AudioSource source in friendAudioSources) {
-			if (source.isActiveAndEnabled) {
+			if (source != null) {
 				source.Play ();
 			}
 		}
