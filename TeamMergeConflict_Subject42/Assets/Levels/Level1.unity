@@ -91,7 +91,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 112001584, guid: 21ad97062065a7147ad6ae58e6ee5d59,
+  m_LightingDataAsset: {fileID: 112001580, guid: 21ad97062065a7147ad6ae58e6ee5d59,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -7173,6 +7173,16 @@ Prefab:
         type: 2}
       propertyPath: useUnscaledTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
         type: 2}
