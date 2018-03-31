@@ -889,6 +889,7 @@ public class EventManager : MonoBehaviour
 		yield return new WaitForSeconds (6f);
 
 		//After Trip Ending
+		EffectManager.instance.DisablePlayerRunning ();
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_19");
 	}
 
@@ -1037,7 +1038,7 @@ public class EventManager : MonoBehaviour
 	//Loads the Credits
 	private void LoadCredits ()
 	{
-		AsyncOperation loadCreditsAsync = SceneManager.LoadSceneAsync ("EndCredits");
+		SceneManager.LoadSceneAsync ("EndCredits");
 	}
 
 	//Fades the screen to black

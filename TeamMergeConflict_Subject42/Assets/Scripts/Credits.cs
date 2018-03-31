@@ -14,7 +14,7 @@ public class Credits : MonoBehaviour {
 	//Loads the Main Menu
 	private void LoadMainMenu ()
 	{
-		AsyncOperation loadMainMenuAsync = SceneManager.LoadSceneAsync ("MainMenu");
+		SceneManager.LoadSceneAsync ("MainMenu");
 	}
 
 }
