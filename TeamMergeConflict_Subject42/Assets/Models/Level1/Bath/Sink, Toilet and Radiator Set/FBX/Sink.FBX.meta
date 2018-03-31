@@ -122,7 +122,7 @@ ModelImporter:
     addColliders: 0
     importVisibility: 0
     importBlendShapes: 1
-    importCameras: 0
+    importCameras: 1
     importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 1
@@ -132,10 +132,10 @@ ModelImporter:
     weldVertices: 1
     preserveHierarchy: 0
     indexFormat: 1
-    secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
-    secondaryUVHardAngle: 88
-    secondaryUVPackMargin: 4
+    secondaryUVAngleDistortion: 1
+    secondaryUVAreaDistortion: 1
+    secondaryUVHardAngle: 128
+    secondaryUVPackMargin: 16
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
