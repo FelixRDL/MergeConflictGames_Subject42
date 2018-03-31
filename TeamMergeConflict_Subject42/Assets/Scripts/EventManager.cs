@@ -201,7 +201,7 @@ public class EventManager : MonoBehaviour
 	//---------------------
 
 	//Start Dialouge for Level 1
-	void Start_0_01 ()
+	private void Start_0_01 ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("0_01");
 	}
@@ -210,28 +210,28 @@ public class EventManager : MonoBehaviour
 	//Act 0 Interactables with Dialogue
 	//----------------------------------
 
-	void Start_0_Interactable_Window ()
+	private void Start_0_Interactable_Window ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("0_02");
 	}
 
-	void Start_0_Interactable_Medical_Devices ()
+	private void Start_0_Interactable_Medical_Devices ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("0_03");
 	}
 
-	void Start_0_Interactable_Picture_Frame ()
+	private void Start_0_Interactable_Picture_Frame ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("0_04");
 		CountClickedObjectsInHospitalRoom ();
 	}
 
-	void Start_0_Interactable_Bath_Mirror ()
+	private void Start_0_Interactable_Bath_Mirror ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("0_05");
 	}
 
-	void Start_0_Interactable_Contract (AudioSource audioSource)
+	private void Start_0_Interactable_Contract (AudioSource audioSource)
 	{
 		if (!allowedToSignContract) {
 			DialogueManager.instance.StartSubjectMonologue ("0_06");
@@ -241,7 +241,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void Start_0_Interactable_Door_Hospital_To_Floor (AudioSource audioSource)
+	private void Start_0_Interactable_Door_Hospital_To_Floor (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "doorlocked");
 
@@ -258,20 +258,20 @@ public class EventManager : MonoBehaviour
 	//Act 0 Interactables without Dialogue
 	//------------------------------------
 
-	void Start_0_Interactable_Door_Bathroom (AudioSource audioSource, Animator animator)
+	private void Start_0_Interactable_Door_Bathroom (AudioSource audioSource, Animator animator)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "dooropen");
 		animator.SetTrigger ("doorBathOpen");
 	}
 
-	void Start_0_Interactable_Rubber_Duck (AudioSource audioSource)
+	private void Start_0_Interactable_Rubber_Duck (AudioSource audioSource)
 	{
 		System.Random random = new System.Random ();
 		string clipName = "quack0" + random.Next (1, 5);
 		SoundManager.instance.PlayEffect (audioSource, clipName);
 	}
 
-	void Start_0_Interactable_Desinfection (AudioSource audioSource, Animator animator)
+	private void Start_0_Interactable_Desinfection (AudioSource audioSource, Animator animator)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "desinfectant1");
 		animator.SetTrigger ("Pressed");
@@ -322,7 +322,7 @@ public class EventManager : MonoBehaviour
 
 
 	//A certain number of Interactables in the Hospital Room need to be clicked in order for the game to continue
-	void CountClickedObjectsInHospitalRoom ()
+	private void CountClickedObjectsInHospitalRoom ()
 	{
 		clickedObjectsInHospitalRoom++;
 		if (clickedObjectsInHospitalRoom == 3) {
@@ -331,7 +331,7 @@ public class EventManager : MonoBehaviour
 	}
 
 	//Open the Door that connects the Hospital Room and the floor
-	void OpenDoorHospitalToFloor ()
+	private void OpenDoorHospitalToFloor ()
 	{
 		GameObject doorHospitalToFloor = GameObject.Find ("Interactable_Door_Hospital_To_Floor");
 		SoundManager.instance.PlayEffect (doorHospitalToFloor.GetComponent<AudioSource> (), "dooropen");
@@ -339,13 +339,14 @@ public class EventManager : MonoBehaviour
 	}
 
 	//After the Testmanager talks to the Subject, Interaction with the Contract needs to be activated again
-	void EnableInteractableContractForSecondInteraction ()
+	private void EnableInteractableContractForSecondInteraction ()
 	{
 		allowedToSignContract = true;
 		GameObject.Find ("Interactable_Contract").GetComponent<InteractableObject> ().Enable ();
 	}
 
-	void ToggleContracts ()
+	//Switch the Contract from the unsigned Version to the signed one
+	private void ToggleContracts ()
 	{
 		GameObject contractParent = GameObject.Find ("Contracts");
 		for (int i = 0; i < contractParent.transform.childCount; i++) {
@@ -368,24 +369,24 @@ public class EventManager : MonoBehaviour
 	//---------------------
 
 	//Initial Dialogue when player enters the Floor
-	void Start_1_01 ()
+	private void Start_1_01 ()
 	{
 		StartCoroutine (Start_1_01_Coroutine ());
 	}
 
 
-	void Start_1_05 (AudioSource audioSource)
+	private void Start_1_05 (AudioSource audioSource)
 	{
 		StartCoroutine (Start_1_05_Coroutine (audioSource));
 	}
 
-	void Start_1_06 ()
+	private void Start_1_06 ()
 	{
 		CloseDoorFloorToChildrensRoom ();
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManagerAlterEgo ("1_06");
 	}
 
-	void Start_1_30 ()
+	private void Start_1_30 ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("1_30");
 	}
@@ -396,41 +397,41 @@ public class EventManager : MonoBehaviour
 	//------------------------------------
 
 
-	void Start_1_Interactable_Door_Floor_01 (AudioSource audioSource)
+	private void Start_1_Interactable_Door_Floor_01 (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "KnockOnDoor");
 	}
 
-	void Start_1_Interactable_Door_Floor_02 (AudioSource audioSource)
+	private void Start_1_Interactable_Door_Floor_02 (AudioSource audioSource)
 	{
 		StartCoroutine (Start_1_Interactable_Door_Floor_02_Coroutine (audioSource));
 	}
 
-	void Start_1_Interactable_Wooden_Train_Happy ()
+	private void Start_1_Interactable_Wooden_Train_Happy ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("1_09");
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
-	void Start_1_Interactable_Frame_Family ()
+	private void Start_1_Interactable_Frame_Family ()
 	{
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("1_10");
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
-	void Start_1_Interactable_Frame_Dog ()
+	private void Start_1_Interactable_Frame_Dog ()
 	{
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("1_11");
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
-	void Start_1_Interactable_Teddy_Happy ()
+	private void Start_1_Interactable_Teddy_Happy ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("1_12");
 		countClickedObjectsChildrensRoomHappy ();
 	}
 
-	void Start_1_Interactable_Light_Switch (AudioSource audioSource)
+	private void Start_1_Interactable_Light_Switch (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "lightswitch");
 		SwitchChildrooms ("Childroom_Sad", "Childroom_Happy");
@@ -438,37 +439,37 @@ public class EventManager : MonoBehaviour
 		SoundManager.instance.PlayBackgroundMusicLoop ("OrWasIt_Level1_1_provisionally", 1, 5);
 	}
 
-	void Start_1_Interactable_Beer_Bottles ()
+	private void Start_1_Interactable_Beer_Bottles ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("1_20");
 		countClickedObjectsChildrensRoomSad ();
 	}
 
-	void Start_1_Interactable_Cubes_Sad ()
+	private void Start_1_Interactable_Cubes_Sad ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("1_21");
 		countClickedObjectsChildrensRoomSad ();
 	}
 
-	void Start_1_Interactable_Frame_Friend ()
+	private void Start_1_Interactable_Frame_Friend ()
 	{
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("1_22");
 		countClickedObjectsChildrensRoomSad ();
 	}
 
-	void Start_1_Interactable_Teddy_Sad ()
+	private void Start_1_Interactable_Teddy_Sad ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("1_23");
 		countClickedObjectsChildrensRoomSad ();
 	}
 
-	void Start_1_Interactable_Wooden_Train_Sad ()
+	private void Start_1_Interactable_Wooden_Train_Sad ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("1_24");
 		countClickedObjectsChildrensRoomSad ();
 	}
 
-	void Start_1_Interactable_Neutralizer ()
+	private void Start_1_Interactable_Neutralizer ()
 	{
 		StartCoroutine (Start_1_Interactable_Neutralizer_Coroutine ());
 	}
@@ -479,12 +480,12 @@ public class EventManager : MonoBehaviour
 	//Act 1 Interactables without Dialogue
 	//------------------------------------
 
-	void Start_1_Interactable_Door_Floor_To_Childrens_Room (AudioSource audioSource)
+	private void Start_1_Interactable_Door_Floor_To_Childrens_Room (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "doorlocked");
 	}
 
-	void Start_1_Interactable_Door_Childrens_Room_To_Garden (AudioSource audioSource)
+	private void Start_1_Interactable_Door_Childrens_Room_To_Garden (AudioSource audioSource)
 	{
 		SoundManager.instance.PlayEffect (audioSource, "dooropen");
 		StartCoroutine (LoadLevelTwo ());
@@ -602,14 +603,14 @@ public class EventManager : MonoBehaviour
 	//---------------------------
 
 	//To improve Performance, the Cameras in the Hospital Room can be deactivated here after the door is closed.
-	void DeactivateCamerasInHospitalRoom ()
+	private void DeactivateCamerasInHospitalRoom ()
 	{
 		Destroy (GameObject.Find ("Surveillance_Camera_Hospital_01"));
 		Destroy (GameObject.Find ("Surveillance_Camera_Hospital_02"));
 	}
 
 	//A certain number of Interactables in Level 1 Childrens Room Happy need to be clicked in Order for the game to continue
-	void countClickedObjectsChildrensRoomHappy ()
+	private void countClickedObjectsChildrensRoomHappy ()
 	{
 		clickedObjectsInChildrensRoomHappy++;
 		if (clickedObjectsInChildrensRoomHappy == 3) {
@@ -618,7 +619,7 @@ public class EventManager : MonoBehaviour
 	}
 
 	//A certain number of Interactables in Level 1 Childrens Room Sad need to be clicked in Order for the game to continue
-	void countClickedObjectsChildrensRoomSad ()
+	private void countClickedObjectsChildrensRoomSad ()
 	{
 		clickedObjectsInChildrensRoomSad++;
 		if (clickedObjectsInChildrensRoomSad == 3) {
@@ -626,7 +627,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void CloseDoorHospitalToFloor ()
+	private void CloseDoorHospitalToFloor ()
 	{
 		GameObject doorHospitalToFloor = GameObject.Find ("Interactable_Door_Hospital_To_Floor");
 
@@ -635,17 +636,15 @@ public class EventManager : MonoBehaviour
 	}
 
 
-	void OpenDoorFloorToChildrensRoom ()
+	private void OpenDoorFloorToChildrensRoom ()
 	{
 		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
 		SoundManager.instance.PlayEffect (doorFloorToChildrensRoom.GetComponent<AudioSource> (), "dooropen");
 		doorFloorToChildrensRoom.GetComponent<BoxCollider> ().enabled = false;
 		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger ("doorOpen");
-
-		//Here Enable Box Collider again!
 	}
 
-	void CloseDoorFloorToChildrensRoom ()
+	private void CloseDoorFloorToChildrensRoom ()
 	{
 		GameObject doorFloorToChildrensRoom = GameObject.Find ("Interactable_Door_Floor_To_Childrens_Room");
 		doorFloorToChildrensRoom.GetComponent<BoxCollider> ().enabled = true;
@@ -653,7 +652,7 @@ public class EventManager : MonoBehaviour
 		doorFloorToChildrensRoom.GetComponent<Animator> ().SetTrigger ("doorClose");
 	}
 
-	void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
+	private void SwitchChildrooms (string roomToActivate, string RoomToDeactivate)
 	{
 		GameObject childrooms = GameObject.Find ("Childrooms");
 		for (int i = 0; i < childrooms.transform.childCount; i++) {
@@ -667,13 +666,13 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void DropPillInTray ()
+	private void DropPillInTray ()
 	{
 		GameObject.Find ("Interactable_Pill_Floor").GetComponent<Rigidbody> ().isKinematic = false;
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Pill_Floor").GetComponent<AudioSource> (), "dropPills");
 	}
 
-	void DropNeutralizerInTray ()
+	private void DropNeutralizerInTray ()
 	{
 		GameObject.Find ("Interactable_Neutralizer").GetComponent<Rigidbody> ().isKinematic = false;
 		SoundManager.instance.PlayEffect (GameObject.Find ("Interactable_Neutralizer").GetComponent<AudioSource> (), "dropWaterBottle");
@@ -695,86 +694,85 @@ public class EventManager : MonoBehaviour
 	//---------------------
 
 	//The initial Dialogue for Level 2. Gets played when the scene is loaded.
-	void Start_2_01 ()
+	private void Start_2_01 ()
 	{
 		DialogueManager.instance.StartTestManagerMonologue ("2_01");
 	}
 
 
-	void Start_2_04 (AudioSource audioSource)
+	private void Start_2_04 (AudioSource audioSource)
 	{
 		StartCoroutine (Start_2_04_Coroutine (audioSource));
 	}
 
-	void Start_2_08 (InteractableObject interactable)
+	private void Start_2_08 (InteractableObject interactable)
 	{
 		StartCoroutine (Start_2_08_Coroutine ());
 	}
 
-	void Start_2_11 (AudioSource audioSource, InteractableObject interactable)
+	private void Start_2_11 (AudioSource audioSource, InteractableObject interactable)
 	{
 		interactable.Destroy (0);
 		StartCoroutine (Start_2_11_Coroutine (audioSource));
 	}
 
-	void Start_2_12 ()
+	private void Start_2_12 ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_12");
 		ToggleFriendOnMap ("Friend_On_Way_01");
 	}
 
-	void Start_2_13 ()
+	private void Start_2_13 ()
 	{
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_13");
 	}
 
-	void Start_2_14 ()
+	private void Start_2_14 ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_14");
 		ToggleFriendOnMap ("Friend_On_Way_02");
 		ToggleFriendOnMap ("Interactable_Friend_Dome");
 	}
 
-	void Start_2_15 ()
+	private void Start_2_15 ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_15");
 	}
 
-	void Start_2_16 ()
+	private void Start_2_16 ()
 	{
 		StartCoroutine (Start_2_16_Coroutine ());
 	}
 
 
-	//Pille 3
-	void Start_2_19 (AudioSource audioSource)
+	//Pill 3
+	private void Start_2_19 (AudioSource audioSource)
 	{
 		DisableInteractablesOnRaveEnding ();
-
 		StartCoroutine (Start_2_19_Coroutine (audioSource));
 	}
 
-	void Start_2_20 ()
+	private void Start_2_20 ()
 	{
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_20");
 	}
 
-	void Start_2_21 ()
+	private void Start_2_21 ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_21");
 	}
 
-	void Start_2_22 ()
+	private void Start_2_22 ()
 	{
 		DialogueManager.instance.StartTestManagerAlterEgoMonologue ("2_22");
 	}
 
-	void Start_2_23 ()
+	private void Start_2_23 ()
 	{
 		StartCoroutine (Start_2_23_Coroutine ());
 	}
 
-	void Start_2_Reached_Friend_01 ()
+	private void Start_2_Reached_Friend_01 ()
 	{
 		ToggleFriendOnMap ("Friend_On_Way_01");
 		ToggleFriendOnMap ("Friend_On_Way_02");
@@ -785,31 +783,31 @@ public class EventManager : MonoBehaviour
 	//----------------------------------
 
 	//When the player interacts with the keypad at the door
-	void Start_2_Interactable_Keypad ()
+	private void Start_2_Interactable_Keypad ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_03");
 	}
 
 	//When the player looks at the group of passed out people on the floor in the parking lot
-	void Start_2_Interactable_Dancers_On_Floor ()
+	private void Start_2_Interactable_Dancers_On_Floor ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_06");
 	}
 
 	//When the player looks at the group of dancers in the parking lot
-	void Start_2_Dancing_People ()
+	private void Start_2_Dancing_People ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_07");
 	}
 
 	//When the player talks to the DJ
-	void Start_2_Interactable_DJ_Console ()
+	private void Start_2_Interactable_DJ_Console ()
 	{
 		DialogueManager.instance.StartSubjectMonologue ("2_17");
 	}
 
 	//When the player interacts with the Note that contains the Code for the Lock
-	void Start_2_Interactable_Note_Code_For_Keypad ()
+	private void Start_2_Interactable_Note_Code_For_Keypad ()
 	{
 		StartCoroutine (Start_2_Interactable_Note_Code_For_Keypad_Coroutine ());
 	}
@@ -918,7 +916,6 @@ public class EventManager : MonoBehaviour
 	}
 
 
-
 	IEnumerator Start_2_Interactable_Note_Code_For_Keypad_Coroutine ()
 	{
 		DialogueManager.instance.StartDialogueBetweenSubjectAndTestManager ("2_28");
@@ -933,7 +930,7 @@ public class EventManager : MonoBehaviour
 	//Act 2 Additional Functions
 	//---------------------------
 
-	void SwitchHoardings ()
+	private void SwitchHoardings ()
 	{
 		GameObject hoardings = GameObject.Find ("Hoardings_Dynamic");
 		for (int i = 0; i < hoardings.transform.childCount; i++) {
@@ -942,7 +939,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void SwitchStaticRaveElements ()
+	private void SwitchStaticRaveElements ()
 	{
 		GameObject rave = GameObject.Find ("Static_Rave_Elements");
 		for (int i = 0; i < rave.transform.childCount; i++) {
@@ -951,7 +948,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void SwitchDynamicRaveElements ()
+	private void SwitchDynamicRaveElements ()
 	{
 		GameObject rave = GameObject.Find ("Dynamic_Rave_Elements");
 		for (int i = 0; i < rave.transform.childCount; i++) {
@@ -960,7 +957,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void SwitchAfterRaveElements ()
+	private void SwitchAfterRaveElements ()
 	{
 		GameObject rave = GameObject.Find ("After_Rave_Elements");
 		for (int i = 0; i < rave.transform.childCount; i++) {
@@ -969,7 +966,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void ToggleFriendOnMap (string friendName)
+	private void ToggleFriendOnMap (string friendName)
 	{
 		GameObject friendObject = GameObject.Find ("Friend");
 		for (int i = 0; i < friendObject.transform.childCount; i++) {
@@ -980,7 +977,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void TogglePillsInLevel2 ()
+	private void TogglePillsInLevel2 ()
 	{
 		GameObject pills = GameObject.Find ("Pills");
 		for (int i = 0; i < pills.transform.childCount; i++) {
@@ -992,7 +989,8 @@ public class EventManager : MonoBehaviour
 	}
 
 	//There are additional Trigger Zones in Level 2 that are only needed for the way back to the parking lot, after the rave has ended
-	void EnableTriggerZonesAfterRave ()
+	//They are enabled here:
+	private void EnableTriggerZonesAfterRave ()
 	{
 		GameObject triggerZones = GameObject.Find ("Trigger_Zones_After_Rave");
 
@@ -1002,14 +1000,16 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	void DisableInteractablesOnRaveEnding ()
+	//After the Rave has ended, the player should not be able to interact with certain Interactables again.
+	//They are disabled here.
+	private void DisableInteractablesOnRaveEnding ()
 	{
 		GameObject.Find ("Interactable_DJ_Console").GetComponent<InteractableObject> ().Disable ();
 		GameObject.Find ("Interactable_Keypad").GetComponent<InteractableObject> ().Disable ();
 	}
 
 	//Activate/Deactivate the Siren at the parking lot
-	void ToggleEmergencyLight ()
+	private void ToggleEmergencyLight ()
 	{
 		GameObject lightEffects = GameObject.Find ("Light_Effects");
 
@@ -1022,7 +1022,7 @@ public class EventManager : MonoBehaviour
 	}
 
 	//Enable the Note that contains the code for the Keypad that is needed at the end of the game.
-	void SpawnNoteCodeForKeypad ()
+	private void SpawnNoteCodeForKeypad ()
 	{
 		GameObject keypad = GameObject.Find ("Keypad");
 
@@ -1046,15 +1046,12 @@ public class EventManager : MonoBehaviour
 		Image black = GameObject.Find ("Black").GetComponent<Image> ();
 		float elapsedTime = 0.0f;
 		Color c = black.color;
-		print ("Start");
 		while (elapsedTime < duration) {
 			elapsedTime += Time.deltaTime;
 			c.a = Mathf.Clamp01 (elapsedTime / duration);
 			black.color = c;
 			yield return null;
 		}
-		print ("End");
-
 	}
 
 	//Hides an image on the canvas

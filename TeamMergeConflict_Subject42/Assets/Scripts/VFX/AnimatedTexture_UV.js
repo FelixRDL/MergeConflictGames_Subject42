@@ -1,4 +1,4 @@
-//	Code used from http://wiki.unity3d.com/index.php?title=Animating_Tiled_texture", Courtesy to Joachim Ante (16.2.18)
+//Code used from http://wiki.unity3d.com/index.php?title=Animating_Tiled_texture", Courtesy to Joachim Ante (16.2.18)
 
 var uvAnimationTileX = 2;
 var uvAnimationTileY = 2;
