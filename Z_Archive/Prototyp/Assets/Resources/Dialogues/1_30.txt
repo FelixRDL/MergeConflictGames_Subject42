@@ -1,3 +1,0 @@
-000.000|Huh, now it's empty... Weird stuff, man...
-005.995|Please leave the room through the door at the other side.
-010.000|

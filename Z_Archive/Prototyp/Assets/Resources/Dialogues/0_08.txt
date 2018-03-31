@@ -1,7 +1,0 @@
-000.000|Ah, you’re awake already!
-002.394|Our warmest welcome in the name of Lazarus Psychomedical Solutions at testing facility Three Alpha.
-009.085|You have been selected as a voluntary testing subject for next-generation psychotropics.
-015.405|To confirm your participation, please sign the documents placed on the table.
-020.412|Voluntary? Participation? 
-023.904|Damn, I can’t remember a fucking thing...
-026.550|
