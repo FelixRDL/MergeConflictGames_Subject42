@@ -7803,6 +7803,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198808211452119876, guid: 255fd935c5138e24aa693eee5d12f028,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 255fd935c5138e24aa693eee5d12f028, type: 2}
   m_IsPrefabParent: 0
@@ -47600,6 +47605,22 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: a1c3564f85c31da4e8a002731e7d1963, type: 3}
   m_PrefabInternal: {fileID: 1481772775}
+--- !u!1 &1481772777 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100004, guid: a1c3564f85c31da4e8a002731e7d1963, type: 3}
+  m_PrefabInternal: {fileID: 1481772775}
+--- !u!65 &1481772778
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1481772777}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 22.98985, y: 36.915417, z: 39.36579}
+  m_Center: {x: -0.0025191307, y: -3.0123754, z: 19.684814}
 --- !u!1001 &1484277891
 Prefab:
   m_ObjectHideFlags: 0
